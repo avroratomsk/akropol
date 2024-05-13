@@ -1,0 +1,57 @@
+{% load static %}
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <img src="{% static 'theme/mb/images/logo-footer.svg' %}" alt="" />
+      </div>
+      <div class="footer__menu">
+        <ul class="footer__list">
+          <li class="footer__item--first">Памятники</li>
+          {% if category_menu %} {% for category in category_menu %}
+          <li class="footer__item"><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+          {% endfor %} {% endif %}
+        </ul>
+        <ul class="footer__list">
+          <li class="footer__item--first">Услуги</li>
+          <li class="footer__item"><a href="">Доставка</a></li>
+          <li class="footer__item"><a href="">Установка</a></li>
+          <li class="footer__item"><a href="">Гравировка</a></li>
+        </ul>
+        <ul class="footer__list">
+          <li class="footer__item--first">Меню</li>
+          <li class="footer__item"><a href="">Каталог</a></li>
+          <li class="footer__item"><a href="">О нас</a></li>
+          <li class="footer__item"><a href="">Наши работы</a></li>
+          <li class="footer__item"><a href="">Оплата</a></li>
+          <li class="footer__item"><a href="">Услуги</a></li>
+          <li class="footer__item"><a href="">Контакты</a></li>
+          <li class="footer__item"><a href="">Гравировка</a></li>
+          <li class="footer__item"><a href="">Избраное </a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <p class="footer__title">Контакты</p>
+        <div class="footer__contact-list">
+          <a href="tel:+73822210915">+7(3822) 210-915</a>
+          <a href="tel:+79009210915">+7-900-921-09-15</a>
+          <button type="button">Обратный звонок</button>
+        </div>
+        <div class="footer__contact-list">
+          <p class="footer__contact-city">г.Томск</p>
+          <p class="footer__contact-address">Яковлева, 41а</p>
+          <p class="footer__contact-address">Ново-Трактовая улица, 15</p>
+          <p class="footer__contact-address">Демьяна Бедного, 16а ст1</p>
+        </div>
+        <div class="footer__contact-list">
+          <p class="footer__contact-city">Время работы:</p>
+          <p class="footer__contact-address">Пн-Вт: 09:00-18:00</p>
+          <p class="footer__contact-address">Сб-Вс: 10:00-17:00</p>
+        </div>
+        <div class="footer__contact-list">
+          <a href="mailto:Zakaz.2024@yandex.ru" class="footer__contact-email">Zakaz.2024@yandex.ru</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

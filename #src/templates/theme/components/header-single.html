@@ -1,0 +1,74 @@
+{% load static %}{% load carts_tag %}{% user_carts request as carts %}
+<div class="header-under">
+  <div class="header-under__container">
+    <div class="header-under__inner">
+      <a href="/" class="header-under__logo">
+        <img src="{% static 'theme/mb/images/logo.png' %}" alt="" />
+      </a>
+      <div class="header-under__address">
+        <p class="header-under__address-title">Адрес:</p>
+        <div class="header-under__address-row">
+          <div class="header-under__address-col">
+            <p>Яковлева, 41а</p>
+            <p>Пн-Пт: 09:00 – 18:00</p>
+            <a href="tel:+73822210915">
+              +7(3822)-210-915
+              <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+            </a>
+          </div>
+          <div class="header-under__address-col">
+            <p>Демьяна Бедного, 16а ст1</p>
+            <p>Пн-Пт: 09:00 – 18:00</p>
+            <a href="tel:+73822224018">
+              +7(3822)-224-018
+              <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header-under__action">
+        <!-- <p>Томск</p> -->
+        <button type="button">
+          Заказать звонок
+          <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+        </button>
+        <button type="button" class="top-main__callback" id="show-cart">
+          Корзина
+          <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="header header--single">
+  <div class="header__container">
+    <div class="header__inner">
+      <button type="button" class="header__callback">
+        Заказать звонок
+        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+      </button>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="{% url 'category' %}">Каталог</a>
+            {% if category_menu %}
+            <ul class="nav__submenu submenu">
+              {% for category in category_menu %}
+              <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
+          </li>
+          <li class="nav__item"><a href="#">Услуги</a> {% comment %} <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> {% endcomment %}</li>
+          <li class="nav__item"><a href="#">Гравировка</a></li>
+          <li class="nav__item"><a href="#">Установка</a></li>
+          <li class="nav__item"><a href="#">Оплата</a></li>
+          <li class="nav__item"><a href="#">Наши работы</a></li>
+          <li class="nav__item"><a href="#">О нас</a></li>
+          <li class="nav__item"><a href="#">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

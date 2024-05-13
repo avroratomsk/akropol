@@ -1,0 +1,45 @@
+{% extends 'admin_base.html' %} {% load shop_tags %} {% load thumbnail %} {% load static %} {% block body %}
+
+<div class="page">
+  <div class="page__inner">
+    <div class="page__add">
+      <h1 class="page__title">Промокоды</h1>
+      <a href="{% url 'promo_add' %}" class="page__add-btn">
+        <img src="{% static 'theme/mb/images/admin/add.svg' %}" alt="" />
+        Добавить
+      </a>
+    </div>
+    <div class="table-5">
+      <div class="head-table table-5__head">
+        <div class="head-table__image">Код</div>
+        <div class="head-table__name">Дата начала</div>
+        <div class="head-table__price">Дата окончания</div>
+        <div class="head-table__price">Скидка %</div>
+        <div class="head-table__price">Статус</div>
+      </div>
+      <div class="body-table table-5__body">
+        {% for code in coupons %}
+        <div class="body-table__row">
+          <div class="body-table__image">
+            <p class="">{{ code.code }}</p>
+          </div>
+          <div class="body-table__name">
+            <p class="">{{ code.valid_from }}</p>
+          </div>
+          <div class="body-table__price">
+            <span>{{ code.valid_to }}</span>
+          </div>
+          <div class="body-table__price">
+            <span>{{ code.discount }}</span>
+          </div>
+          <div class="body-table__price">
+            <span>{{ code.active }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

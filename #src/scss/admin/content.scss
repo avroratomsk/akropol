@@ -1,0 +1,12 @@
+.content {
+  display: flex;
+  background-color: #f4f6fa;
+
+  // .content__inner
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px;
+  }
+}

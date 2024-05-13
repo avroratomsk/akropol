@@ -124,7 +124,7 @@ def product(request, slug):
   
   # print(chars_list_name_noduble)
   
-  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
+  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).values('char_value').distinct()
   
   context = {
     "title": "Название продукта",

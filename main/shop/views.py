@@ -5,6 +5,7 @@ from django.db.models import Q
 import itertools
 from .services import *
 
+from django.db.models import Count
 
 from .models import *
 
@@ -36,7 +37,7 @@ def category(request):
     if li.char_value not in chars_list_name_noduble:
       chars_list_name_noduble.append(li.char_value)
   
-  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).values('char_value').distinct()
+  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
   
   chars_list_name_noduble_a = ProductChar.objects.filter(parent__in=products_all).distinct().values_list('char_value', flat=True).distinct()
   # print(chars_list_name_noduble_a)
@@ -124,7 +125,8 @@ def product(request, slug):
   
   # print(chars_list_name_noduble)
   
-  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).values('char_value').distinct()
+  # chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
+  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).values('char_value').annotate(count=Count('char_value')).filter(count=1)
   
   context = {
     "title": "Название продукта",

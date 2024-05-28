@@ -7,13 +7,15 @@
         <div class="top-main__left">
           <div class="top-main__item">
             <div class="top-main__address">Яковлева, 41а</div>
-            <a href="tel:+73822210915" class="top-main__phone">+7(3822)-210-915
+            <a href="tel:+73822210915" class="top-main__phone"
+              >+7(3822)-210-915
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
           <div class="top-main__item">
             <div class="top-main__address">Демьяна Бедного, 16а ст1</div>
-            <a href="tel:+73822224018" class="top-main__phone">+7(3822)-224-018
+            <a href="tel:+73822224018" class="top-main__phone"
+              >+7(3822)-224-018
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
@@ -25,8 +27,7 @@
           </a>
         </div>
         <div class="top-main__right">
-          <div class="top-main__right-row">Томск <img src="{% static 'theme/mb/images/icon/chevron-down.svg' %}"
-              alt="" /></div>
+          <div class="top-main__right-row">Томск <img src="{% static 'theme/mb/images/icon/chevron-down.svg' %}" alt="" /></div>
           <div class="top-main__right-row">
             <button type="button" class="top-main__callback">
               Заказать звонок
@@ -70,9 +71,7 @@
       <div class="index-catalog__inner">
         <div class="index-catalog__category">
           {% if category_menu %} {% for category in category_menu %}
-          <a href="{{ category.get_absolute_url }}" class="index-catalog__btn">
-            {{ category.name }}
-          </a>
+          <a href="{{ category.get_absolute_url }}" class="index-catalog__btn"> {{ category.name }} </a>
           {% endfor %} {% endif %}
         </div>
         <div class="index-catalog__content">
@@ -163,19 +162,17 @@
             <div class="index-catalog__card card">
               <div class="card__image">
                 {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image"
-                  alt="{{product.model}}" title="{{product.model}}" />
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" alt="{{product.model}}" title="{{product.model}}" />
                 {% endthumbnail %} {% else %}
                 <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
                 {% endif %}
               </div>
               <div class="card__content">
                 <a href="#" class="card__content-title">{{ product.model }}</a>
-                {% for chr in product.chars.all %}
-                {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p class="card__content-char">
-                  Материал: {{ chr }}</p>
-                  {% endif %} {% endfor %}
-                  <div class="card__content-price">{{ product.price }} ₽</div>
+                {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %}
+                <p class="card__content-char">Материал: {{ chr }}</p>
+                {% endif %} {% endfor %}
+                <div class="card__content-price">{{ product.price }} ₽</div>
               </div>
               <a href="{{ product.get_absolute_url }}" class="card__content-link">Подробнее</a>
             </div>
@@ -239,8 +236,7 @@
             <div class="reviews__wrapper swiper-wrapper">
               <div class="reviews__slide swiper-slide">
                 <p class="reviews__text">
-                  Заказала памятник и оформление захоронения, сделали всё отлично и раньше срока сдали работу, на
-                  отлично, рекомендую надёжная организация. Спасибо большое
+                  Заказала памятник и оформление захоронения, сделали всё отлично и раньше срока сдали работу, на отлично, рекомендую надёжная организация. Спасибо большое
                 </p>
                 <p class="reviews__name">Nina Kartashova</p>
               </div>
@@ -262,8 +258,7 @@
             </li>
             <li>
               <img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
-              <p class="index-contact__list-text"><span>Поможем определиться </span>с типом памятника и заказать его
-                производство</p>
+              <p class="index-contact__list-text"><span>Поможем определиться </span>с типом памятника и заказать его производство</p>
             </li>
             <li>
               <img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
@@ -313,8 +308,7 @@
                 <div class="form__agreement">
                   <input type="checkbox" name="agrement" id="id_agrement" checked />
                   <label for="id_agreement" class="form__label">
-                    Я даю свое согласие на обработку персональных данных и соглашаюсь с <a href="">политикой
-                      конфиденциальности</a>
+                    Я даю свое согласие на обработку персональных данных и соглашаюсь с <a href="">политикой конфиденциальности</a>
                   </label>
                 </div>
               </div>
@@ -324,14 +318,6 @@
       </div>
     </div>
   </section>
-  <section class="index-map">
-    <div class="index-map__container">
-      <div class="index-map__inner">
-        <iframe
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A623b48d95dee10ff640872d957b3d9544f718b3a557b9f85cab68ec0aa000a74&amp;source=constructor"
-          width="100%" height="720" frameborder="0"></iframe>
-      </div>
-    </div>
-  </section>
+  {% include "../components/map.html" %}
 </main>
 {% endblock %}

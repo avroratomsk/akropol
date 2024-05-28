@@ -36,6 +36,9 @@
               <p class="product-card__article">Артикул: {{ product.article }}</p>
               {% endif %}
             </div>
+            {% for ch in chars %}
+            {{ ch.c_chars }}
+            {% endfor %}
             <div class="product-card__info info-card">
               {% for ch_name in char_name %}
               <div class="info-card__item">

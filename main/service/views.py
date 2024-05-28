@@ -21,3 +21,7 @@ def service_detail(request, slug):
   }
   
   return render(request, "pages/service/service_detail.html", context)
+
+
+def service_new(request):
+  return render(request, 'pages/service/service-test.html')

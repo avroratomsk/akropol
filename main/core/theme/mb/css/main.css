@@ -57,7 +57,7 @@ body {
 }
 
 body {
-  color: #000000;
+  color: #3a434b;
   line-height: 1;
   font-family: "Montserrat", sans-serif;
   -ms-text-size-adjust: 100%;
@@ -137,7 +137,7 @@ html.lock body::before {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(58, 67, 75, 0.2);
   backdrop-filter: blur(4px);
   z-index: 100;
 }
@@ -158,8 +158,8 @@ html.lock body::before {
 .stock__row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 4px rgba(58, 67, 75, 0.1);
+  border: 1px solid rgba(58, 67, 75, 0.05);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -556,7 +556,7 @@ html.lock body::before {
 }
 
 .index-work__links a._active {
-  color: black;
+  color: #3a434b;
 }
 
 .index-work__grid {
@@ -758,6 +758,134 @@ html.lock body::before {
   box-shadow: 0px 11px 24px 0px rgba(65, 162, 208, 0.15), 0px 44px 44px 0px rgba(65, 162, 208, 0.13), 0px 99px 60px 0px rgba(65, 162, 208, 0.08), 0px 177px 71px 0px rgba(65, 162, 208, 0.02), 0px 276px 77px 0px rgba(65, 162, 208, 0);
 }
 
+/*
+  Страница услуги
+*/
+
+._aBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero__image {
+  object-position: right;
+}
+
+.hero .breadcrumbs {
+  margin: 0px 0px 20px;
+}
+
+.hero__container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0px;
+}
+
+.hero__title {
+  font-size: 45px;
+  text-wrap: balance;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #3a434b;
+}
+
+.hero__title span {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+}
+
+.hero__subtitle {
+  max-width: 800px;
+  text-wrap: balance;
+  line-height: 160%;
+  margin-bottom: 60px;
+}
+
+.hero__buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero__button {
+  width: 260px;
+  height: 50px;
+  font-weight: 600;
+  border-radius: 5px 5px 5px 5px;
+  color: white;
+  background-color: #41a2d0;
+}
+
+.hero__button--small {
+  width: 50px;
+  background-color: transparent;
+  border: 2px solid #41a2d0;
+  color: #41a2d0;
+  position: relative;
+}
+
+.hero__button--small::before {
+  content: "Заказать консультацию";
+  position: absolute;
+  left: 100%;
+  top: -2px;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #41a2d0;
+  border-radius: 0px 5px 5px 0px;
+  font-size: 14px;
+  transform: translateX(30px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.service__text {
+  border-radius: 10px;
+  box-shadow: 0px 11px 24px 0px rgba(65, 162, 208, 0.15), 0px 43px 43px 0px rgba(65, 162, 208, 0.13), 0px 97px 58px 0px rgba(65, 162, 208, 0.08), 0px 173px 69px 0px rgba(65, 162, 208, 0.02), 0px 270px 76px 0px rgba(65, 162, 208, 0);
+  background: rgb(255, 255, 255);
+  padding: 35px;
+  margin: 50px 0px;
+}
+
+.service__text h2 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.service__text p {
+  margin-bottom: 20px;
+  line-height: 150%;
+}
+
+.service__text ol {
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
+
+.service__text ol li + li {
+  margin-top: 10px;
+}
+
 .about__row {
   display: flex;
   gap: 30px;
@@ -776,7 +904,7 @@ html.lock body::before {
   line-height: 140%;
   max-width: 550px;
   text-wrap: balance;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(58, 67, 75, 0.7);
 }
 
 .about__text p + p {
@@ -790,15 +918,15 @@ html.lock body::before {
 .text {
   font-size: 17px;
   line-height: 150%;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(58, 67, 75, 0.8);
 }
 
 .service-page__item {
   padding: 15px;
   display: inline-flex;
   align-items: center;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(58, 67, 75, 0.1);
+  border: 1px solid rgba(58, 67, 75, 0.1);
   border-radius: 6px;
 }
 
@@ -1066,7 +1194,7 @@ html.lock body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(58, 67, 75, 0);
   backdrop-filter: blur(3px);
   z-index: 100;
   cursor: pointer;
@@ -1127,7 +1255,7 @@ html.lock body::before {
 
 .search form input {
   font-size: 18px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(58, 67, 75, 0.3);
 }
 
 .search form button {
@@ -1171,7 +1299,7 @@ html.lock body::before {
 .price-input__fields {
   display: flex;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(58, 67, 75, 0.1);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1180,8 +1308,8 @@ html.lock body::before {
   width: 100%;
   height: 40px;
   text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0);
-  color: #000000;
+  border: 1px solid rgba(58, 67, 75, 0);
+  color: #3a434b;
   background-color: transparent;
   appearance: none;
 }
@@ -1195,7 +1323,7 @@ html.lock body::before {
   width: 1px;
   height: 40px;
   margin: 0px 1px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(58, 67, 75, 0.1);
 }
 
 .price-input__slider {
@@ -1203,7 +1331,7 @@ html.lock body::before {
   height: 5px;
   border-radius: 5px;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(58, 67, 75, 0.1);
 }
 
 .price-input__progress {
@@ -1315,7 +1443,7 @@ html.lock body::before {
 }
 
 .form__agreement input {
-  border: 1px solid black;
+  border: 1px solid #3a434b;
 }
 
 .form__label a {
@@ -1346,7 +1474,7 @@ html.lock body::before {
   width: 20px;
   height: 1px;
   margin: 0px 10px;
-  background-color: black;
+  background-color: #3a434b;
 }
 
 .breadcrumbs__item:last-child {
@@ -1497,7 +1625,7 @@ html.lock body::before {
   padding: 15px 30px;
   border-radius: 8px;
   margin-top: 30px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 5px rgba(58, 67, 75, 0.3);
   background: white;
 }
 
@@ -1563,7 +1691,7 @@ html.lock body::before {
   position: absolute;
   font-size: 15px;
   font-weight: 600;
-  color: black;
+  color: #3a434b;
 }
 
 .index-slider__next {
@@ -1632,8 +1760,8 @@ html.lock body::before {
   font-weight: 500;
   line-height: 150%;
   text-wrap: balance;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 4px rgba(58, 67, 75, 0.1);
+  border: 1px solid rgba(58, 67, 75, 0.1);
   background-color: #ffffff;
   position: relative;
 }
@@ -2045,7 +2173,7 @@ html.lock body::before {
 
 .profile td,
 .profile th {
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(58, 67, 75, 0.2);
   padding: 15px 5px;
   text-align: left;
 }
@@ -2249,7 +2377,7 @@ html.lock body::before {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(58, 67, 75, 0.1);
 }
 
 .filter__label {
@@ -2437,7 +2565,7 @@ html.lock body::before {
   width: 450px;
   background-color: #ffffff;
   z-index: 101;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(58, 67, 75, 0.1);
   border-radius: 10px 0px 0px 10px;
   padding: 70px 20px 50px;
   transition: 0.5s;
@@ -2476,7 +2604,7 @@ html.lock body::before {
   font-size: 22px;
   line-height: 140%;
   padding: 20px 0px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(58, 67, 75, 0.1);
 }
 
 .mini-cart__title span {
@@ -2496,7 +2624,7 @@ html.lock body::before {
 }
 
 .mini-cart__inner::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(58, 67, 75, 0.2);
 }
 
 .mini-cart__inner::-webkit-scrollbar-thumb {
@@ -2508,7 +2636,7 @@ html.lock body::before {
   display: flex;
   gap: 15px;
   padding: 15px 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(58, 67, 75, 0.1);
 }
 
 .mini-cart__item + .mini-cart__item {
@@ -2622,7 +2750,7 @@ html.lock body::before {
   font-size: 40px;
   text-wrap: balance;
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(58, 67, 75, 0.3);
   margin-bottom: 30px;
 }
 
@@ -2903,6 +3031,16 @@ html.lock body::before {
     display: flex;
   }
 
+  .hero__button--small:hover {
+    border-radius: 5px 0px 0px 5px;
+  }
+
+  .hero__button--small:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
   .nav__item:hover .submenu {
     opacity: 1;
     pointer-events: all;
@@ -2915,7 +3053,7 @@ html.lock body::before {
 
   .submenu li a:hover {
     color: #29779c;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(58, 67, 75, 0.05);
   }
 
   .footer__item:hover {

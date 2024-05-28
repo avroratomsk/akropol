@@ -19,11 +19,12 @@
             {% endif %}
             <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
           </li>
-          <li class="nav__item"><a href="#">Услуги</a>
+          <li class="nav__item">
+            <a href="#">Услуги</a>
             <!-- <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> -->
           </li>
           <li class="nav__item"><a href="#">Гравировка</a></li>
-          <li class="nav__item"><a href="#">Установка</a></li>
+          <li class="nav__item"><a href="{% url 'service_new' %}">Установка</a></li>
           <li class="nav__item"><a href="#">Оплата</a></li>
           <li class="nav__item"><a href="#">Наши работы</a></li>
           <li class="nav__item"><a href="#">О нас</a></li>

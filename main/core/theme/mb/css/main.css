@@ -773,10 +773,17 @@ html.lock body::before {
 
 .hero {
   position: relative;
+  background: rgb(65, 162, 208);
+  background: linear-gradient(0deg, rgba(65, 162, 208, 0.09) 50%, rgb(255, 255, 255) 100%);
 }
 
 .hero__image {
-  object-position: right;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 550px;
+  height: 80%;
 }
 
 .hero .breadcrumbs {
@@ -792,7 +799,7 @@ html.lock body::before {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 0px;
+  padding: 100px 0px;
 }
 
 .hero__title {
@@ -1225,6 +1232,40 @@ html.lock body::before {
   color: rgba(65, 162, 208, 0.5);
   width: 100%;
   text-align: center;
+}
+
+section {
+  padding: 80px 0px;
+}
+
+._title {
+  font-size: 45px;
+  text-wrap: balance;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #3a434b;
+}
+
+._title span {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+}
+
+._title-h2 {
+  font-size: 40px;
+  text-wrap: balance;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #3a434b;
+}
+
+._title-h2 span {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
 }
 
 /*
@@ -2555,6 +2596,79 @@ html.lock body::before {
   box-sizing: border-box;
   border-radius: 5px;
   background: rgb(243, 243, 243);
+}
+
+.service-content:nth-child(even) {
+  box-shadow: 0px 0px 4px rgba(58, 67, 75, 0.1);
+}
+
+.service-content:nth-child(odd) {
+  background: rgb(65, 162, 208);
+  background: linear-gradient(0deg, rgba(65, 162, 208, 0.09) 50%, rgb(255, 255, 255) 100%);
+}
+
+.service-content:nth-child(odd) .service-content__row {
+  flex-direction: row-reverse;
+}
+
+.service-content__title {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.service-content__row {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.service-content__col img {
+  width: 420px;
+  height: 500px;
+}
+
+.service-content__text p {
+  line-height: 140%;
+}
+
+.service-content__text p span {
+  font-weight: 500;
+}
+
+.service-content__text p + p {
+  margin-top: 20px;
+}
+
+.service-content__text ul li {
+  padding-left: 16px;
+  position: relative;
+  line-height: 150%;
+}
+
+.service-content__text ul li::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  margin-top: 10px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #41a2d0;
+}
+
+.service-content__text ul li:last-child {
+  margin-bottom: 40px;
+}
+
+.service-content__text ul li + li {
+  margin-top: 15px;
+}
+
+.service-content__btn {
+  width: 290px;
+  margin-top: 50px;
 }
 
 .mini-cart {

@@ -25,3 +25,7 @@ def service_detail(request, slug):
 
 def service_new(request):
   return render(request, 'pages/service/service-test.html')
+
+
+def service_grav(request):
+  return render(request, 'pages/service/service_grav.html')

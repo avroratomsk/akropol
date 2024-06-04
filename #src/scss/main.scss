@@ -167,7 +167,7 @@ body {
 */
 @import './header';
 @import './footer';
-@import './common';
+@import './global';
 
 /*
     Подключение стилей отдельных компонентов
@@ -203,6 +203,9 @@ body {
 
 @import './pages/catalog/category-details';
 @import './pages/catalog/product';
+
+
+@import './pages/service/service-detail';
 
 
 @import './components/mini-cart/mini-cart';

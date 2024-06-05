@@ -4,50 +4,53 @@
 
   &__container {}
 
-  // .about__row
+  // .about__inner
 
-  &__row {
-    display: flex;
-    gap: 30px;
+  &__inner {}
+
+  // .about__grid
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 70px;
+    width: 100%;
   }
 
-  // .about__col
+  // .about__grid-item
 
-  &__col {
-    flex: 1 1 50%;
-  }
+  &__grid-item {
 
-  // .about__title
+    p {
+      line-height: 140%;
+    }
 
-  &__title {
-    margin-bottom: 20px;
-  }
-
-  // .about__subtitle
-
-  &__subtitle {
-    font-size: 20px;
-    line-height: 140%;
-    max-width: 550px;
-    text-wrap: balance;
-    color: rgba($color: $mainColor, $alpha: .7)
-  }
-
-  // .about__text
-
-  &__text {
     p+p {
-      margin-top: 20px;
+      margin-top: 15px;
+    }
+
+    img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 8px;
+      margin-top: 30px;
     }
   }
 
-  .body-service__row {
-    padding: 120px 0px 60px;
-  }
-}
+  // .about__grid-image
 
-.text {
-  font-size: 17px;
-  line-height: 150%;
-  color: rgba($color: $mainColor, $alpha: .8);
+  &__grid-image {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      margin-top: 0px;
+    }
+  }
 }

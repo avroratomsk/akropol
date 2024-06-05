@@ -268,10 +268,10 @@ def parse_exсel(path):
     meta_title = ''
     meta_description = ''
     meta_keywords = ''
-    # try:
-    #   image = f"goods/{row[16]}"
-    # except:
-    #   pass
+    try:
+      image = f"goods/{row[16]}"
+    except:
+      pass
     
     weight = row[18]
     status = True
@@ -361,7 +361,7 @@ def parse_exсel(path):
             meta_title=meta_title,
             meta_description=meta_description,
             meta_keywords=meta_keywords,
-            # image=image,
+            image=image,
             price=price,
             quantity=quantity,
             category=category,

@@ -215,4 +215,38 @@ function checkScrollbar() {
   }
 }
 
+var formChanged = false;
+
+// Перехватываем изменения в форме
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.querySelector('form');
+  form.addEventListener('input', function () {
+    formChanged = true;
+  });
+});
+
+// Перехватываем событие попытки пользователя покинуть страницу или вернуться назад
+window.addEventListener('beforeunload', function (event) {
+  if (formChanged) {
+    event.preventDefault();
+    alert('Сохранись зайбал')
+    event.returnValue = ''; // Некоторые браузеры требуют строку
+  }
+});
+
+window.addEventListener('popstate', function (event) {
+  if (formChanged) {
+    event.preventDefault();
+    alert('Сохранись зайбал')
+    // Открываем модальное окно с запросом сохранения данных
+    openSaveModal();
+  }
+});
+
+function openSaveModal() {
+  // Отобразите модальное окно с запросом сохранения данных
+  // Например, используйте Bootstrap модальное окно или другую библиотеку
+  // После того, как пользователь сделает выбор, обработайте его действия и сохраните данные или позвольте ему покинуть страницу
+}
+
 

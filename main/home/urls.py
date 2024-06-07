@@ -11,6 +11,7 @@ urlpatterns = [
     path('stock/', views.stock_product, name="stock_product"),
     path('news/', views.news, name="news"),
     path('best-offer/', views.best_offer, name="best_offer"),
+    path('gallery/', views.gallery, name="gallery"),
     # path('uslugi/', views.about, name="about"),
     # path('valancy/', views.about, name="about"),
     

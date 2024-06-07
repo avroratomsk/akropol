@@ -369,3 +369,29 @@ $(document).on("click", ".remove-from-cart", function (e) {
     },
   });
 });
+
+
+/**
+ * Скролл к id блока с фотографиями раздела на страницы галерея. 
+ */
+
+const linkToBlockImages = document.querySelectorAll('[data-id]');
+
+if (linkToBlockImages) {
+  linkToBlockImages.forEach(link => {
+    link.addEventListener('mouseup', scrollToSection)
+  })
+}
+
+function scrollToSection(e) {
+  e.preventDefault();
+  let blockToScroll = document.getElementById(e.target.dataset.id)
+  let distanceToBlock = blockToScroll.getBoundingClientRect().top
+  let headerHeight = document.querySelector('.header').clientHeight
+
+  console.log(headerHeight);
+  window.scroll({
+    top: distanceToBlock + window.pageYOffset - 104,
+    behavior: 'smooth'
+  });
+}

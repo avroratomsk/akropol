@@ -820,6 +820,9 @@
   &__button {
     width: 260px;
     height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 600;
     border-radius: 5px 5px 5px 5px;
     color: rgba($color: $white, $alpha: 1.0);

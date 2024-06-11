@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "cart",
     "order",
     "payment",
+    "subdomain",
     # 'tinymce',
     # "blog",
     # "news",

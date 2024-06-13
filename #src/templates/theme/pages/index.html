@@ -27,7 +27,12 @@
           </a>
         </div>
         <div class="top-main__right">
-          <div class="top-main__right-row">Томск <img src="{% static 'theme/mb/images/icon/chevron-down.svg' %}" alt="" /></div>
+          <div class="top-main__right-row">
+            <button class="subdomain-button" id="subdomain-button">
+              <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="" />
+              <span id="city">Томск</span>
+            </button>
+          </div>
           <div class="top-main__right-row">
             <button type="button" class="top-main__callback">
               Заказать звонок

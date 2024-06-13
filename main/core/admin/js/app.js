@@ -172,10 +172,10 @@ function openSettingsProduct() {
 /**
  * Добавлет дополнительное изображение
  */
-document.querySelector('.product-block__plus').addEventListener('click', function (event) {
-  var image = '<div class="form__group  form__group-image"><input type="file" multiple="multiple" name="src" accept="image/*" required="" id="id_src"><div class="product-block__minus form__remove">Удалить</div></div>';
-  document.querySelector('.product-field').insertAdjacentHTML('beforeend', image);
-})
+// document.querySelector('.product-block__plus').addEventListener('click', function (event) {
+//   var image = '<div class="form__group  form__group-image"><input type="file" multiple="multiple" name="src" accept="image/*" required="" id="id_src"><div class="product-block__minus form__remove">Удалить</div></div>';
+//   document.querySelector('.product-field').insertAdjacentHTML('beforeend', image);
+// })
 
 /**
  * Переключение между вкладками настроек на странице
@@ -215,14 +215,22 @@ function checkScrollbar() {
   }
 }
 
-var formChanged = false;
 
+var formChanged = "";
 // Перехватываем изменения в форме
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.querySelector('form');
-  form.addEventListener('input', function () {
-    formChanged = true;
-  });
+
+  if (form) {
+    formChanged = false;
+    console.log(formChanged);
+
+    form.addEventListener('input', function () {
+      formChanged = true;
+      console.log(formChanged);
+    });
+  }
+
 });
 
 // Перехватываем событие попытки пользователя покинуть страницу или вернуться назад

@@ -1,8 +1,11 @@
 from django import forms
 from home.models import BaseSettings, HomeTemplate, Stock
+from subdomain.models import Subdomain, SubdomainContact
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage
+from shop.models import Category, CharGroup, CharName, ColorProduct, Product, ProductChar, ProductImage
+
+INPUT_CLASS = "form__controls"
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -40,37 +43,37 @@ class GlobalSettingsForm(forms.ModelForm):
     }
     widgets = {
         'phone_one': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'phone_one': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'phone_two': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'time_work': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'email': forms.EmailInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'address_one': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'address_two': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'meta_h1': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'meta_title': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'meta_description': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         }),
         'meta_keywords': forms.TextInput(attrs={
-            'class': 'form__controls'
+            'class': INPUT_CLASS
         })
     }
     
@@ -80,106 +83,67 @@ class ProductForm(forms.ModelForm):
     
     class Meta:
         model = Product
-        fields = [
-            'model',
-            'article',
-            'name',
-            'slug',
-            'description',
-            'meta_h1',
-            'meta_title',
-            'meta_description',
-            'meta_keywords',
-            'image',
-            'price',
-            'polished_sides',
-            'discount',
-            'sale_price',
-            'quantity',
-            'category',
-            'image',
-            'status',
-            'latest',
-        ]
-        labels = {
-            'name': 'Название блюда',
-            'slug':'URL',
-            'description':'Полное описание',
-            'meta_h1':'Заголвок первого уровня',
-            'meta_title':'Meta title',
-            'meta_description':'Мета description',
-            'meta_keywords':'Meta keywords',
-            'image':'Изображение',
-            'price':'Цена',
-            'diameter':'Диаметр',
-            'sale_price':'Цена со скидкой',
-            'quantity_purchase':'Количество покупок',
-            'discount':'Скидка в (%)',
-            'quantity':'Количество',
-            'image': 'Превью изображения',
-            'status': 'Статус публикации',
-            'latest': 'Новинка ?'
-        }
+        fields = "__all__"
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
                 "id":"name"
             }),
             'description': forms.Textarea(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
                 
             }),
             'meta_h1': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'meta_title': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'composition': forms.Textarea(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'width': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'height': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'meta_description': forms.Textarea(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
                 "id": "meta_description"
             }),
             'meta_keywords': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'price': forms.NumberInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'diameter': forms.NumberInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'sale_price': forms.NumberInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'quantity_purchase': forms.NumberInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'quantity': forms.NumberInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'slug': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
                 "id": "slug"
             }),
             'category': forms.Select(attrs={
-                'class': 'form__controls', 
+                'class': INPUT_CLASS, 
             }),
             'free_shipping': forms.CheckboxInput(attrs={
             }),
             'weight': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'discount': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
             'image': forms.FileInput(attrs={
                 'class': 'submit-file',
@@ -201,7 +165,7 @@ class ProductImageForm(forms.ModelForm):
         }
         widgets = {
             'parent': forms.Select(attrs={
-                'class': 'form__controls', 
+                'class': INPUT_CLASS, 
             })
         }
 
@@ -221,13 +185,13 @@ class ProductImageForm(forms.ModelForm):
 #       }
 #       widgets = {
 #           'name': forms.TextInput(attrs={
-#               'class': 'form__controls',
+#               'class': INPUT_CLASS,
 #               'placeholder': 'Название характеристики',
 #               'id': 'id_char_name',
               
 #           }),
 #           'value': forms.TextInput(attrs={
-#               'class': 'form__controls',
+#               'class': INPUT_CLASS,
 #               'placeholder': 'Значение',
 #               'id': 'id_char_value'
 #           }),
@@ -385,27 +349,27 @@ class HomeTemplateForm(forms.ModelForm):
       }
       widgets = {
           'name': forms.TextInput(attrs={
-              'class': 'form__controls'
+              'class': INPUT_CLASS
           }),
           'meta_h1': forms.TextInput(attrs={
-              'class': 'form__controls',
+              'class': INPUT_CLASS,
           }),
           'untitle': forms.TextInput(attrs={
-              'class': 'form__controls',
+              'class': INPUT_CLASS,
           }),
           'meta_title': forms.TextInput(attrs={
-              'class': 'form__controls',
+              'class': INPUT_CLASS,
               # 'placeholder': 'Мета заголовок',
           }),
           'meta_description': forms.TextInput(attrs={
-              'class': 'form__controls',
+              'class': INPUT_CLASS,
               # 'placeholder': 'Мета описание',
           }),
           'meta_keywords': forms.TextInput(attrs={
-              'class': 'form__controls',
+              'class': INPUT_CLASS,
           }),
           'about_text': forms.TextInput(attrs={
-              'class': 'form__controls',
+              'class': INPUT_CLASS,
           }),
       }
            
@@ -442,35 +406,35 @@ class ReviewsForm(forms.ModelForm):
     }
     widgets = {
       'name': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
         'id': 'name'
       }),
       'slug': forms.TextInput(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
         "id": "slug"
       }),
       'date': forms.DateInput(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
       }),
       'text': forms.Textarea(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
         'rows': 5,
       }),
       'status': forms.CheckboxInput(attrs={
         'class': 'form__controls-checkbox',
       }),
       'meta_h1': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
       }),
       'meta_title': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
       }),
       'meta_description': forms.Textarea(attrs={
         'class': 'form-controls',
         'rows': 5,
       }),
       'meta_keywords': forms.TextInput(attrs={
-        'class': 'form__controls'
+        'class': INPUT_CLASS
       })
     }
     
@@ -507,18 +471,18 @@ class StockForm(forms.ModelForm):
     }
     widgets = {
       'title': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
         'id': 'name'
       }),
       'slug': forms.TextInput(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
         "id": "slug"
       }),
       'validity': forms.DateInput(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
       }),
       'description': forms.Textarea(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
         'rows': 5,
       }),
       'status': forms.CheckboxInput(attrs={
@@ -528,14 +492,14 @@ class StockForm(forms.ModelForm):
         'class': 'form__controls-checkbox',
       }),
       'meta_title': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
       }),
       'meta_description': forms.Textarea(attrs={
         'class': 'form-controls',
         'rows': 5,
       }),
       'meta_keywords': forms.TextInput(attrs={
-        'class': 'form__controls'
+        'class': INPUT_CLASS
       })
     }
 
@@ -561,21 +525,21 @@ class ServicePageForm(forms.ModelForm):
     }
     widgets = {
       'name': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
         'id': 'name'
       }),
       'slug': forms.TextInput(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
         "id": "slug"
       }),
       'meta_title': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
       }),
       'meta_description': forms.Textarea(attrs={
         'class': 'form-controls',
       }),
       'meta_keywords': forms.TextInput(attrs={
-        'class': 'form__controls'
+        'class': INPUT_CLASS
       })
     }  
     
@@ -608,28 +572,28 @@ class ServiceForm(forms.ModelForm):
     }
     widgets = {
       'name': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
         'id': 'name'
       }),
       'slug': forms.TextInput(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
         "id": "slug"
       }),
       'subtitle': forms.Textarea(attrs={
-        'class':'form__controls',
+        'class':INPUT_CLASS,
       }),
       'status': forms.CheckboxInput(attrs={
         'class': 'form__controls-checkbox',
       }),
       'meta_title': forms.TextInput(attrs={
-        'class': 'form__controls',
+        'class': INPUT_CLASS,
       }),
       'meta_description': forms.Textarea(attrs={
         'class': 'form-controls',
         'rows': 5,
       }),
       'meta_keywords': forms.TextInput(attrs={
-        'class': 'form__controls'
+        'class': INPUT_CLASS
       })
     }
     
@@ -646,7 +610,7 @@ class ProductCharForm(forms.ModelForm):
         }
         widgets = {
             'char_name': forms.Select(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
                 'placeholder': 'Название характеристики',
                 'id': 'id_char_name',
                
@@ -670,7 +634,7 @@ class CharGroupForm(forms.ModelForm):
         }
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'form__controls',
+                'class': INPUT_CLASS,
             }),
         }
 
@@ -695,19 +659,73 @@ class CharNameForm(forms.ModelForm):
     }
     widgets = {
         'group': forms.Select(attrs={
-          'class': 'form__controls'
+          'class': INPUT_CLASS
         }),
         'text_name': forms.TextInput(attrs={
-            'class': 'form__controls',
+            'class': INPUT_CLASS,
             'id': 'char_name'
         }),
         'filter_add': forms.CheckboxInput(attrs={
             'class': 'form__controls-checkbox',
         }),
         'filter_name': forms.TextInput(attrs={
-            'class': 'form__controls',
+            'class': INPUT_CLASS,
         }),
         'sort_order': forms.TextInput(attrs={
-            'class': 'form__controls',
+            'class': INPUT_CLASS,
         }),
     }
+    
+class SubdomainForm(forms.ModelForm):
+  class Meta:
+    model = Subdomain
+    fields = "__all__"
+    widgets = {
+        'name': forms.TextInput(attrs={
+          'class': INPUT_CLASS
+        }),
+        'geotag': forms.TextInput(attrs={
+            'class': INPUT_CLASS,
+        }),
+        'subdomain': forms.TextInput(attrs={
+            'class': INPUT_CLASS,
+        }),
+    }
+    
+    
+class ColorProductForm(forms.ModelForm):
+  class Meta:
+    model = ColorProduct
+    fields = "__all__"
+    widgets = {
+        'name': forms.TextInput(attrs={
+          'class': INPUT_CLASS
+        }),
+        'code_color': forms.TextInput(attrs={
+            'class': INPUT_CLASS,
+        }),
+    }
+    
+class SubdomainContactForm(forms.ModelForm):
+  class Meta:
+    model = SubdomainContact
+    fields = "__all__"
+    widgets = {
+        'phone': forms.TextInput(attrs={
+          'class': INPUT_CLASS
+        }),
+        'phone_two': forms.TextInput(attrs={
+            'class': INPUT_CLASS,
+        }),
+        'time': forms.DateInput(attrs={
+            'class': INPUT_CLASS,
+        }),
+        'address': forms.TextInput(attrs={
+            'class': INPUT_CLASS,
+        }),
+        'subdomain': forms.Select(attrs={
+            'class': "form__controls-select",
+        }),
+    }
+    
+    

@@ -9,7 +9,7 @@
           {{ min_price_product }}
           <form action="" method="GET" class="filter form">
             <p class="filter__label">Фильтрация</p>
-            {% comment %} {% for char in char_name %}
+            {% for char in char_name %}
             <div class="filter__body">
               <p class="filter__label">{{ char.text_name }}:</p>
               {% for char_value in chars %} {% if char_value.char_name.text_name == char.text_name %}
@@ -25,7 +25,7 @@
               </div>
               {% endif %} {% endfor %}
             </div>
-            {% endfor %} {% endcomment %}
+            {% endfor %}
             <button type="submit" class="form__submit _btn" id="apply-filter">Применить</button>
           </form>
         </div>
@@ -36,7 +36,7 @@
             {% for product in products %}
             <div class="index-catalog__card card">
               <div class="card__image">
-                {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
+                {{ product.image.url }} {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" alt="{{product.model}}" title="{{product.model}}" />
                 {% endthumbnail %} {% else %}
                 <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />

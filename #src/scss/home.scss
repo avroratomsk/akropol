@@ -30,10 +30,15 @@
 }
 
 .top-main {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 20% 1fr;
+  gap: 20px;
   color: $white;
   margin-bottom: 50px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 
   // .top-main__left
 
@@ -41,7 +46,6 @@
     display: flex;
     align-items: center;
     gap: 52px;
-    margin-right: 201px;
   }
 
   // .top-main__item
@@ -67,7 +71,8 @@
   // .top-main__middle
 
   &__middle {
-    margin-right: 328px;
+    display: flex;
+    justify-content: center;
   }
 
   // .top-main__logo
@@ -96,6 +101,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    font-family: $fontFamily;
   }
 }
 

@@ -113,6 +113,7 @@ def category_detail(request, slug):
 def product(request, slug):
   product = Product.objects.get(slug=slug)
   products = Product.objects.filter(category=product.category)[:4]
+  product_color = ColorProduct.objects.filter(active=True)
   # images = ProductImage.objects.filter(parent_id=product.id)[:3]
   chars_all = ProductChar.objects.filter(parent=product).distinct()
   
@@ -133,7 +134,8 @@ def product(request, slug):
     "product": product,
     "products": products,
     "char_name":char_name,
-    "chars":chars,
+    "chars":chars_all,
+    "product_color": product_color
     # "images": images
   }
   return render(request, "pages/catalog/product.html", context)

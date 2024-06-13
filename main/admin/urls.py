@@ -70,4 +70,16 @@ urlpatterns = [
     
     #URl - Шаблон общих настроек сайта
     path('settings/', views.admin_settings, name='admin_settings'),
+    
+    #URl - субдомены
+    path('subdomain/', views.admin_subdomain, name='admin_subdomain'),
+    path('subdomain/add/', views.subdomain_add, name='subdomain_add'),
+    path('subdomain/edit/<int:pk>/', views.subdomain_edit, name='subdomain_edit'),
+    # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
+    
+    #URl - цвета памятников
+    path('color-product/', views.admin_color, name='admin_color'),
+    path('color-product/add/', views.admin_color_add, name='admin_color_add'),
+    path('color-product/edit/<int:pk>/', views.admin_color_edit, name='admin_color_edit'),
+    # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
 ]

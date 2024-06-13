@@ -4,12 +4,13 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, SubdomainForm, UploadFileForm
 from home.models import BaseSettings, HomeTemplate, Stock
 from main.settings import BASE_DIR
+from subdomain.models import Subdomain
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import CharGroup, CharName, Product,Category, ProductChar, ProductImage
+from shop.models import CharGroup, CharName, ColorProduct, Product,Category, ProductChar, ProductImage
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 import openpyxl
@@ -464,14 +465,14 @@ def category_delete(request, pk):
   return redirect('admin_category')
 
 def day_product(request):
-  pass
+  # pass
   # days = Day.objects.all().exclude(slug="ezhednevno")
   
   # context = {
   #   "days": days,
   # }
   
-  # return render(request, "days/days.html", context)
+  return render(request, "days/days.html")
 
 def day_edit(request, pk):
   pass
@@ -724,6 +725,7 @@ def service_add(request):
   }
   
   return render(request, "serv/serv_add.html", context)
+
 def service_edit(request, pk):
   services = Service.objects.get(id=pk)
   form = ServiceForm(instance=services)
@@ -776,7 +778,6 @@ def char_edit(request, pk):
   
   if request.method == 'POST':
       form_new = CharNameForm(request.POST, instance=char)
-      print(form_new)
       if form_new.is_valid():
           form_new.save()
           return redirect('admin_char')
@@ -831,3 +832,107 @@ def char_group_delete(request, pk):
   char_group = CharGroup.objects.get(id=pk)
   char_group.delete()
   return redirect('admin_char')
+
+
+def admin_subdomain(request):
+  subdomains = Subdomain.objects.all()
+  
+  context = {
+    "subdomains": subdomains,  
+  }
+  
+  return render(request, "subdomain/subdomain.html", context)
+
+
+def subdomain_add(request):
+  form = SubdomainForm()
+  
+  if request.method == "POST":
+    form_new = SubdomainForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_subdomain')
+    else:
+      return render(request, "subdomain/subdomain_add.html", { "form": form_new })
+    
+  context = {
+    "form": form, 
+  }  
+    
+  return render(request, "subdomain/subdomain_add.html", context)
+
+def subdomain_edit(request, pk):
+  subdomain = Subdomain.objects.get(id=pk)
+  
+  if request.method == "POST":
+    form_new = SubdomainForm(request.POST, request.FILES, instance=subdomain)
+    
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_subdomain')
+    else:
+      return render(request, "subdomain/subdomain_edit.html", { "form": form_new })
+  
+  form = SubdomainForm(instance=subdomain)
+  context = {
+    "form": form,
+  }  
+    
+  return render(request, "subdomain/subdomain_edit.html", context)
+
+def subdomain_delete(request, pk):
+  subdomain = Subdomain.objects.get(id=pk)
+  subdomain.delete()
+  return redirect(request.META.get('HTTP_REFERER'))
+
+
+def admin_color(request):
+  items = ColorProduct.objects.all()
+  
+  context = {
+    "items": items,  
+  }
+  
+  return render(request, "shop/color/color.html", context)
+
+
+def admin_color_add(request):
+  form = ColorProductForm()
+  
+  if request.method == "POST":
+    form_new = ColorProductForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_color')
+    else:
+      return render(request, "shop/color/color_add.html", { "form": form_new })
+    
+  context = {
+    "form": form, 
+  }  
+    
+  return render(request, "shop/color/color_add.html", context)
+
+def admin_color_edit(request, pk):
+  item = ColorProduct.objects.get(id=pk)
+  
+  if request.method == "POST":
+    form_new = ColorProductForm(request.POST, request.FILES, instance=item)
+    
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_color')
+    else:
+      return render(request, "shop/color/color_edit.html", { "form": form_new })
+  
+  form = ColorProductForm(instance=item)
+  context = {
+    "form": form,
+  }  
+    
+  return render(request, "shop/color/color_edit.html", context)
+
+def admin_color_delete(request, pk):
+  subdomain = Subdomain.objects.get(id=pk)
+  subdomain.delete()
+  return redirect(request.META.get('HTTP_REFERER'))

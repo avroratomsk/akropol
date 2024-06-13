@@ -7,6 +7,22 @@
 //   selector: ".index-gallery__item"
 // });
 
+
+/**
+ * Вспомогательные общие функции
+ */
+
+const bodyLock = (e) => {
+  let widthScrollBar = window.innerWidth - document.documentElement.clientWidth;
+  document.documentElement.style.marginRight = widthScrollBar + 'px';
+  document.documentElement.classList.add('_lock');
+}
+
+const bodyUnLock = (e) => {
+  document.documentElement.style.marginRight = '0px';
+  document.documentElement.classList.remove('_lock');
+}
+
 /**
  * Функция отктия и закрытия строку поиска  и фильтрацию по убыванию/возрастанию
  * 
@@ -97,25 +113,6 @@ if (ratingItemList) {
   })
 }
 
-/**
- * Просмотр полного описания продукта
- */
-
-const btnViewProduct = document.querySelectorAll('.product-desc');
-if (btnViewProduct) {
-  btnViewProduct.forEach(btn => btn.addEventListener('click', viewProduct));
-}
-
-function viewProduct(e) {
-  let parentNodeHtml = this.closest('.card-product').querySelector('.card-product__info').innerHTML;
-  let popupView = document.querySelector('.popup-view .popup__grid');
-  console.log(popupView);
-
-  if (popupView) {
-    popupView.innerHTML = parentNodeHtml;
-  }
-}
-
 const orderBtn = document.querySelectorAll('.filter-sort__value');
 
 orderBtn.forEach(btn => {
@@ -162,20 +159,7 @@ function closeMiniCart(e) {
   bodyUnLock();
 }
 
-/**
- * Вспомогательные общие функции
- */
 
-function bodyLock(e) {
-  let widthScrollBar = window.innerWidth - document.documentElement.clientWidth;
-  document.documentElement.style.marginRight = widthScrollBar + 'px';
-  document.documentElement.classList.add('_lock');
-}
-
-function bodyUnLock(e) {
-  document.documentElement.style.marginRight = '0px';
-  document.documentElement.classList.remove('_lock');
-}
 
 /**
  * Работа с добавление в корзину без перезагрузки страницы
@@ -395,3 +379,43 @@ function scrollToSection(e) {
     behavior: 'smooth'
   });
 }
+
+/**
+ * Popup окна
+ */
+
+// const popupClose = (e) => {
+//   if (e.target.classList.contains('close__popup') || e.target.closest('.close__popup')) {
+//     popup = document.getElementById('popup_show');
+//     document.documentElement.classList.remove('popup-show');
+//     popup.classList.remove('popup_show');
+//     bodyUnLock();
+//   }
+
+// }
+
+const openPopup = (event) => {
+  let popupBtn = event.target.closest('[data-popup]')
+  if (popupBtn) {
+    popup = document.getElementById(popupBtn.dataset.popup);
+    document.documentElement.classList.add('popup-show');
+    popup.classList.add('popup_show');
+    bodyLock();
+  }
+}
+
+const popupBtn = document.querySelectorAll('[data-popup]');
+if (popupBtn) {
+  popupBtn.forEach(btn => btn.addEventListener('mouseup', openPopup));
+}
+
+// const popup = document.querySelectorAll('.popup');
+// if (popup) {
+//   popup.forEach(popup => {
+//     popup.addEventListener('mouseup', popupClose)
+//   })
+// }
+
+
+
+/*******************************/

@@ -88,6 +88,20 @@
           <p class="product__description-text">{{ product.delivery }}.</p>
         </div>
       </div>
+      {% if product_color %}
+      <div class="product__related">
+        <h2 class="product__related-title _title">Возможные цветовые решения</h2>
+        <div class="product__color">
+          {% for color in product_color %}
+          <div class="product__color-item">
+            <p>{{ color.name }}</p>
+            -
+            <p>{{ color.code_color }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
       <div class="product__related">
         <h2 class="product__related-title _title">Сопутствующие товары</h2>
         <div class="index-catalog__cards">

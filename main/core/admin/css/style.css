@@ -9,10 +9,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-}
-
 a {
   color: #26353d;
   text-decoration: none;
@@ -1043,5 +1039,20 @@ ol {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.subdomain {
+  display: grid;
+  gap: 30px;
+}
+
+.subdomain__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 4px rgba(38, 53, 61, 0.1);
+  border-radius: 6px;
 }
 /*# sourceMappingURL=maps/style.css.map */

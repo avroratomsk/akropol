@@ -1,16 +1,7 @@
 from django.db import models
 from django.urls import reverse
-
-# Дни недели с краткими ключами и полнымим наименованиями.
-DAY_NAMES = (
-    ('mon', 'Понедельник'),
-    ('tue', 'Вторник'),
-    ('wed', 'Среда'),
-    ('thu', 'Четверг'),
-    ('fri', 'Пятница'),
-    ('sat', 'Суббота'),
-    ('sun', 'Воскресенье')
-)
+import os
+from django.conf import settings
 
 # Категория
 class Category(models.Model):
@@ -61,13 +52,7 @@ class Product(models.Model):
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   
-  def serialize(self):
-    return {
-        'id': self.id,
-        'name': str(self.name),
-        'price': str(self.price)
-    }
-  
+
   class Meta:
     db_table = 'product' 
     verbose_name = 'Продукт'
@@ -80,6 +65,11 @@ class Product(models.Model):
         for child in children:
             products += child.products.filter(status=True)
         return products
+      
+  def get_image_url(self):
+    if self.image and os.path.isfile(os.path.join(settings.MEDIA_ROOT, self.image.name)):
+      return self.image.url
+    return '/core/theme/mb/images/no-image.png'  # Замените на реальный путь к заглушке
   
     
   def __str__(self):
@@ -142,6 +132,20 @@ class ProductChar(models.Model):
 
     def __str__(self):
         return self.char_value
+      
+      
+class ColorProduct(models.Model):
+  name = models.CharField(max_length=255, unique=True, null=True, blank=True, verbose_name="Название цвета")
+  code_color = models.CharField(max_length=255, unique=True, null=True, blank=True, verbose_name="Код цвета")
+  image_color = models.ImageField(upload_to="product_color", null=True, blank=True, verbose_name="Изображение цвета")
+  active = models.BooleanField(default=True, verbose_name="Выводить на сайте")
+      
+ 
+# class Char(models.Model):
+#   name  = models.CharField(max_length=250, null=True, blank=True, verbose_name="Название характеристики")
+
+# class CharValue(models.Model):
+#   char_name = models.ForeignKey(Char, on_delete=models.CASCADE, related_name="char", verbose_name="Характеристика")
   
   
   

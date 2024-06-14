@@ -1,40 +1,166 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<main class="page-contact">
-	<section class="contact">
-		<div class="contact__row">
-			<div class="contact__container">
-				<div class="contact__row-top">
-					<div class="contact__row-label contact__row-dot">
-						<h1>Контакты</h1>
+<main>
+	<div class="contact">
+		<div class="contact__container">
+			<div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+				<a href="" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+					class="breadcrumbs__item">
+					Главная
+					<meta itemprop="position" content="1" />
+				</a>
+				<span itemprop="name" class="breadcrumbs__item">
+					Контакты
+					<meta itemprop="position" content="2" />
+				</span>
+			</div>
+			<h1 class="contact__title _title-h2">Контакты комании <span>Акрополь</span></h1>
+			<div class="contact__note">
+				<p>
+					​Мастерская по изготовлению памятников и надгробий. Цены на сайте носят ознакомительный характер, точную
+					стоимость уточняйте по телефону. <br>С ценами и товаром вы можете ознакомится на странице
+					<a href="{% url 'category' %}">каталога</a>
+				</p>
+			</div>
+			<div class="contact__grid">
+				<div class="contact__item item-contact">
+					<h2 class="item-contact__title">Контакты</h2>
+					<div class="item-contact__row">
+						<img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Иконка телефона" title="Иконка телефона">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">Яковлева, 41а</p>
+							<a href="tel:+73822210915" class="item-contact__row-small">+7(3822)-210-915</a>
+						</div>
 					</div>
-					<div class="contact__row-questions">
-						<p>Остались вопросы ?</p>
+					<div class="item-contact__row">
+						<img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Иконка телефона" title="Иконка телефона">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">Демьяна Бедного, 16а ст1</p>
+							<a href="tel:+73822224018" class="item-contact__row-small">+7(3822)-224-018</a>
+						</div>
 					</div>
-
+					<div class="item-contact__row" id="time-work">
+						<img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Иконка телефона" title="Иконка телефона">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">Сегодня</p>
+							<p class="item-contact__row-small">c 09:00 до 18:00</p>
+						</div>
+					</div>
+					<div class="item-contact__row">
+						<img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Иконка телефона" title="Иконка телефона">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">Email</p>
+							<p class="item-contact__row-small">akropol@mail.ru</p>
+						</div>
+					</div>
 				</div>
-				<div class="advantages__border borderDotted"></div>
-				<div class="contact__row-bottom">
-					<div class="contact__row-col">
-						<span class="contact__row-label">Пишите</span>
-						<a href="mailto:florens@mail.ru" class="contact__row-info">florens@mail.ru</a>
+				<div class="contact__item item-contact">
+					<h2 class="item-contact__title">Реквизиты</h2>
+					<div class="item-contact__row">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">Юридическое название:</p>
+							<p class="item-contact__row-small">Акрополь</p>
+						</div>
 					</div>
-					<div class="contact__row-col">
-						<span class="contact__row-label">Звоните</span>
-						<a href="tel:+79999999999" class="contact__row-info">8 (999) 999-99-99</a>
+					<div class="item-contact__row">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">ИНН:</p>
+							<p class="item-contact__row-small">7813661352</p>
+						</div>
 					</div>
-					<div class="contact__row-col">
-						<span class="contact__row-label">Приходите и приезжайте</span>
-						<p class="contact__row-info">Россия, г.Город ул.Улица 23</p>
+					<div class="item-contact__row">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">КПП:</p>
+							<p class="item-contact__row-small">7806011231</p>
+						</div>
+					</div>
+					<div class="item-contact__row">
+						<div class="item-contact__row-info">
+							<p class="item-contact__row-big">ОГРН:</p>
+							<p class="item-contact__row-small">1227800031231</p>
+						</div>
 					</div>
 				</div>
-				<div class="advantages__border borderDotted"></div>
+				<div class="contact__item item-contact">
+					<iframe
+						src="https://yandex.ru/map-widget/v1/?um=constructor%3A623b48d95dee10ff640872d957b3d9544f718b3a557b9f85cab68ec0aa000a74&amp;source=constructor"
+						width="100%" height="100%" frameborder="0"></iframe>
+				</div>
 			</div>
 		</div>
-		<div class="contact__map">
-			<iframe
-				src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac1cf0d6cb1a0a77d749e2c1f0f9e9897a548d46e6449e8291a14966d1c6c5cfd&amp;source=constructor"
-				width="100%" height="500" frameborder="0"></iframe>
+	</div>
+	<section class="index-contact">
+		<div class="index-contact__container">
+			<div class="index-contact__grid">
+				<div class="index-contact__item">
+					<h2 class="index-contact__title">Мы готовы ответить на все <span>ваши вопросы</span></h2>
+					<ul class="index-contact__list">
+						<li>
+							<img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
+							<p class="index-contact__list-text"><span>Проконсультируем</span> по материалу памятника</p>
+						</li>
+						<li>
+							<img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
+							<p class="index-contact__list-text"><span>Поможем определиться </span>с типом памятника и заказать его
+								производство</p>
+						</li>
+						<li>
+							<img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
+							<p class="index-contact__list-text"><span>Расскажем все</span> про доставку и установку</p>
+						</li>
+					</ul>
+				</div>
+				<div class="index-contact__item">
+					<div class="index-contact__mobile" style="background-image: url('{% static 'theme/mb/images/mobile.png' %}')">
+						<div class="index-contact__logo">
+							<img src="{% static 'theme/mb/images/logo-black.png' %}" alt="" />
+						</div>
+						<p class="index-contact__mobile-text">
+							Свяжитесь с нами! <br />
+							Мы обязательно поможем!
+						</p>
+						<div class="index-contact__mobile-phones">
+							<a href="">+7(3822)-210-915<img src="{% static 'theme/mb/images/icon/phone-black.svg' %}" alt="" /></a>
+							<a href="">+7-900-921-09-15<img src="{% static 'theme/mb/images/icon/phone-mobile.svg' %}" alt="" /></a>
+						</div>
+						<a href="" class="index-contact__call _btn">Позвонить</a>
+					</div>
+				</div>
+				<div class="index-contact__item">
+					<form action="" method="POST" class="form index-contact__form">
+						<h3 class="form__title">Заполните форму</h3>
+						<p class="form__text">Оставьте заявку - мы обязательно с вами свяжемся</p>
+						<div class="form__inner">
+							<input type="text" name="name" id="id_name" class="form__controls" placeholder="Ваше имя" />
+							<input type="tel" name="phone" id="id_phone" class="form__controls" placeholder="Номер телефона" />
+							<div class="form__social-inner">
+								<label for="tg" class="form__controls-label">
+									<input type="checkbox" id="tg" name="social" />
+									<img src="{% static 'theme/mb/images/icon/tg.svg' %}" alt="" />
+								</label>
+								<label for="vk" class="form__controls-label">
+									<input type="checkbox" id="vk" name="social" />
+									<img src="{% static 'theme/mb/images/icon/vk.svg' %}" alt="" />
+								</label>
+								<label for="wh" class="form__controls-label">
+									<input type="checkbox" id="wh" name="social" />
+									<img src="{% static 'theme/mb/images/icon/wh.svg' %}" alt="" />
+								</label>
+							</div>
+							<div class="form__bottom">
+								<button type="submit" class="form__submit _btn">Отправить</button>
+								<div class="form__agreement">
+									<input type="checkbox" name="agrement" id="id_agrement" checked />
+									<label for="id_agreement" class="form__label">
+										Я даю свое согласие на обработку персональных данных и соглашаюсь с <a href="">политикой
+											конфиденциальности</a>
+									</label>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</section>
 </main>

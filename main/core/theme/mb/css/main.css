@@ -2186,6 +2186,30 @@ body::after {
   font-weight: 500;
 }
 
+#time-work {
+  position: relative;
+}
+
+#time-work .item-contact__hidden {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  position: absolute;
+  top: 90%;
+  left: 0%;
+  height: auto;
+  padding: 10px 6px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(65, 162, 208, 0.1);
+  background-color: white;
+  border: 1px solid rgba(65, 162, 208, 0.3);
+}
+
+#time-work .item-contact__hidden p {
+  font-size: 12px;
+  line-height: 140%;
+}
+
 .login {
   margin: 0px 10px;
 }
@@ -3385,6 +3409,10 @@ body::after {
 
   ._btn:hover {
     background-color: #29779c;
+  }
+
+  #time-work:hover .item-contact__hidden {
+    display: grid;
   }
 
   .gallery__category-link:hover {

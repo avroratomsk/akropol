@@ -85,3 +85,40 @@
 
   &__row-small {}
 }
+
+#time-work {
+  position: relative;
+
+  @media (hover:hover) {
+    &:hover {
+      .item-contact__hidden {
+        display: grid;
+      }
+    }
+  }
+
+  .item-contact__hidden {
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    position: absolute;
+    top: 90%;
+    left: 0%;
+    // width: 200px;
+    height: auto;
+    padding: 10px 6px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba($color: $accent, $alpha: .1);
+    background-color: rgba($color: $white, $alpha: 1.0);
+    border: 1px solid rgba($color: $accent, $alpha: .3);
+
+    p {
+      font-size: 12px;
+      line-height: 140%;
+    }
+
+    // p+p {
+    //   margin-top: 10px;
+    // }
+  }
+}

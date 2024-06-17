@@ -438,26 +438,32 @@ if (burgerButton) {
   })
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const target = document.getElementById('target');
+document.addEventListener('DOMContentLoaded', () => {
+  const dpi = window.devicePixelRatio;
 
-//   const handleEvent = (event) => {
-//       if (event.type === 'mouseup' || event.type === 'touchend') {
-//           console.log('Mouse or Touch Released');
-//           target.style.backgroundColor = 'lightgreen';
-//           setTimeout(() => {
-//               target.style.backgroundColor = 'lightblue';
-//           }, 200);
-//       }
-//   };
+  if (dpi > 2) {
+    console.log(dpi);
+    document.documentElement.classList.add('_big');
+  }
+  // const target = document.getElementById('target');
 
-//   target.addEventListener('mouseup', handleEvent);
-//   target.addEventListener('touchend', handleEvent);
+  // const handleEvent = (event) => {
+  //     if (event.type === 'mouseup' || event.type === 'touchend') {
+  //         console.log('Mouse or Touch Released');
+  //         target.style.backgroundColor = 'lightgreen';
+  //         setTimeout(() => {
+  //             target.style.backgroundColor = 'lightblue';
+  //         }, 200);
+  //     }
+  // };
 
-//   // Prevent default touch behavior to avoid text selection and other issues
-//   target.addEventListener('touchstart', (event) => {
-//       event.preventDefault();
-//   });
-// });
+  // target.addEventListener('mouseup', handleEvent);
+  // target.addEventListener('touchend', handleEvent);
+
+  // // Prevent default touch behavior to avoid text selection and other issues
+  // target.addEventListener('touchstart', (event) => {
+  //     event.preventDefault();
+  // });
+});
 
 /*******************************/

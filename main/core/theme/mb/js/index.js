@@ -437,7 +437,9 @@ if (burgerButton) {
     }
   })
 }
-
+const dpi = window.devicePixelRatio;
+console.log(dpi);
+console.log('---------------------');
 document.addEventListener('DOMContentLoaded', () => {
   const dpi = window.devicePixelRatio;
 

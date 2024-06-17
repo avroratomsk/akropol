@@ -19,7 +19,6 @@
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
-          <div class="top-main__item"></div>
         </div>
         <div class="top-main__middle">
           <a href="/" class="top-main__logo">
@@ -51,7 +50,8 @@
       </div>
     </div>
   </section>
-  <section class="index-stock">
+
+  <section class="index-stock" style="display: none">
     <div class="index-stock__container">
       <div class="index-stock__grid">
         <div class="index-stock__item index-stock__item--first">
@@ -70,7 +70,8 @@
       </div>
     </div>
   </section>
-  <section class="index-catalog">
+
+  <section class="index-catalog" style="display: none">
     <div class="index-catalog__container">
       <h2 class="index-catalog__title">Каталог</h2>
       <div class="index-catalog__inner">
@@ -199,7 +200,8 @@
       </div> -->
     </div>
   </section>
-  <section class="index-work">
+
+  <section class="index-work" style="display: none">
     <div class="index-work__container">
       <h2 class="index-work__title">Наши работы</h2>
       <div class="index-work__links">
@@ -228,7 +230,8 @@
       </div>
     </div>
   </section>
-  <section class="index-reviews">
+
+  <section class="index-reviews" style="display: none">
     <div class="index-reviews__container">
       <div class="index-reviews__inner">
         <div class="index-reviews__info">
@@ -251,7 +254,8 @@
       </div>
     </div>
   </section>
-  <section class="index-contact">
+
+  <section class="index-contact" style="display: none">
     <div class="index-contact__container">
       <div class="index-contact__grid">
         <div class="index-contact__item">
@@ -323,6 +327,7 @@
       </div>
     </div>
   </section>
+
   {% include "../components/map.html" %}
 </main>
 {% endblock %}

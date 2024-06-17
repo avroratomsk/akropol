@@ -419,3 +419,45 @@ if (popupBtn) {
 
 
 /*******************************/
+
+
+
+/********Burger menu**********/
+
+const burgerButton = document.getElementById('burger-btn');
+if (burgerButton) {
+  burgerButton.addEventListener('mouseup', (event) => {
+    const burgerBtn = event.target.closest('#burger-btn');
+    if (burgerBtn) {
+      burgerBtn.classList.toggle('_active');
+      let headerElem = document.querySelector('.header');
+      headerElem.classList.toggle('_active');
+      bodyLock();
+      document.documentElement.classList.toggle('_overlay');
+    }
+  })
+}
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const target = document.getElementById('target');
+
+//   const handleEvent = (event) => {
+//       if (event.type === 'mouseup' || event.type === 'touchend') {
+//           console.log('Mouse or Touch Released');
+//           target.style.backgroundColor = 'lightgreen';
+//           setTimeout(() => {
+//               target.style.backgroundColor = 'lightblue';
+//           }, 200);
+//       }
+//   };
+
+//   target.addEventListener('mouseup', handleEvent);
+//   target.addEventListener('touchend', handleEvent);
+
+//   // Prevent default touch behavior to avoid text selection and other issues
+//   target.addEventListener('touchstart', (event) => {
+//       event.preventDefault();
+//   });
+// });
+
+/*******************************/

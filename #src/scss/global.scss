@@ -106,3 +106,8 @@ h5 {}
 .map-widget-layout-view__controls {
   display: none !important;
 }
+
+
+._overlay body::after {
+  opacity: 1;
+}

@@ -34,7 +34,7 @@ class Product(models.Model):
   name = models.CharField(max_length=150, db_index=True, verbose_name="Наименование")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
   category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, default=None, verbose_name='День недели')
-  price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Цена со скидкой")
+  price = models.CharField(max_length=255, null=True, blank=True, verbose_name="Цена со скидкой")
   sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Цена со скидкой")
   polished_sides = models.CharField(max_length=50, blank=True, null=True, verbose_name="Количество полированных сторон")
   description = models.TextField(blank=True, null=True, verbose_name="Описание")
@@ -46,7 +46,6 @@ class Product(models.Model):
   quantity_purchase = models.IntegerField(default=0, verbose_name="Количество купленных")
   latest = models.BooleanField(default=False, verbose_name="Новинка ?")
   status = models.BooleanField(default=True, verbose_name="Опубликовать ?")
-  
   meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")

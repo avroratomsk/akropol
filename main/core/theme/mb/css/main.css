@@ -434,7 +434,7 @@ html.lock body::before {
 
 .index-catalog__cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 40px;
   width: 100%;
 }
@@ -952,7 +952,6 @@ html.lock body::before {
   bottom: 79px;
   left: 0;
   z-index: 150;
-  pointer-events: none;
   transition: 0.5s;
 }
 

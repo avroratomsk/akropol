@@ -42,3 +42,11 @@ class Stock(models.Model):
 
   def get_absolute_url(self):
       return reverse("stock_detail", kwargs={"slug": self.slug})
+    
+class GalleryCategory(models.Model):
+  name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Наименование")
+  
+class Gallery(models.Model):
+  image = models.ImageField(upload_to="gallery-image", null=True, blank=True, verbose_name="Фотография")
+  name = models.CharField(max_length=255, null=True, blank=True, verbose_name="Наименование пойдет в alt и title")
+  is_active = models.BooleanField(default=True, verbose_name="Выводить на сайт ?")

@@ -82,4 +82,10 @@ urlpatterns = [
     path('color-product/add/', views.admin_color_add, name='admin_color_add'),
     path('color-product/edit/<int:pk>/', views.admin_color_edit, name='admin_color_edit'),
     # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
+    
+    #URl - цвета памятников
+    path('gallery/', views.admin_gallery, name='admin_gallery'),
+    path('gallery/add/', views.admin_gallery_add, name='admin_gallery_add'),
+    # path('gallery/edit/<int:pk>/', views.admin_gallery_edit, name='admin_gallery_edit'),
+    # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
 ]

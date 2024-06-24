@@ -1,5 +1,5 @@
 from django import forms
-from home.models import BaseSettings, HomeTemplate, Stock
+from home.models import BaseSettings, Gallery, HomeTemplate, Stock
 from subdomain.models import Subdomain, SubdomainContact
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -725,6 +725,16 @@ class SubdomainContactForm(forms.ModelForm):
         }),
         'subdomain': forms.Select(attrs={
             'class': "form__controls-select",
+        }),
+    }
+    
+class GalleryForm(forms.ModelForm):
+  class Meta:
+    model = Gallery
+    fields = "__all__"
+    widgets = {
+        'name': forms.TextInput(attrs={
+          'class': INPUT_CLASS
         }),
     }
     

@@ -71,7 +71,7 @@
     </div>
   </section>
 
-  <section class="index-catalog">
+  <section class="index-catalog" style="display: none">
     <div class="index-catalog__container">
       <h2 class="index-catalog__title">Каталог</h2>
       <div class="index-catalog__inner">
@@ -167,11 +167,12 @@
             {% if products %} {% for product in products %}
             <div class="index-catalog__card card">
               <div class="card__image">
-                {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
+                <img src="{% static 'theme/mb/images/product-4.jpeg' %}" alt="" />
+                {% comment %} {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" alt="{{product.model}}" title="{{product.model}}" />
                 {% endthumbnail %} {% else %}
                 <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
-                {% endif %}
+                {% endif %} {% endcomment %}
               </div>
               <div class="card__content">
                 <a href="#" class="card__content-title">{{ product.model }}</a>
@@ -201,7 +202,7 @@
     </div>
   </section>
 
-  <section class="index-work" style="display: none">
+  <section class="index-work">
     <div class="index-work__container">
       <h2 class="index-work__title">Наши работы</h2>
       <div class="index-work__links">

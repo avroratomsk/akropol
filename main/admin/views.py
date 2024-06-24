@@ -4,8 +4,8 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, SubdomainForm, UploadFileForm
-from home.models import BaseSettings, HomeTemplate, Stock
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, SubdomainForm, UploadFileForm
+from home.models import BaseSettings, Gallery, HomeTemplate, Stock
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
 from service.models import Service, ServicePage
@@ -198,6 +198,7 @@ def upload_goods(request):
       form = UploadFileForm(request.POST, request.FILES)
       if form.is_valid():
           file = request.FILES['file']
+          
           destination = open(os.path.join('upload/', file.name), 'wb+')
           for chunk in file.chunks():
               destination.write(chunk)
@@ -212,9 +213,12 @@ def upload_goods(request):
           
           # Сжатие фотографий
           for filename in os.listdir('media/upload'):
-            if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.JPG') or filename.endswith('.JPEG'):
+            
+            if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.JPG') or filename.endswith('.JPEG') or filename.endswith('.jpeg'):
               with Image.open(os.path.join('media/upload', filename)) as img:
-                img.save(os.path.join('media/goods', filename), quality=60)  # quality=60 для JPEG файла
+                temp = filename.replace('.jpeg', '')
+                print(temp)
+                img.save(os.path.join('media/goods', temp), quality=60)  # quality=60 для JPEG файла
                 
           # Очистка временной папки
           os.system('rm -rf media/upload')
@@ -240,6 +244,7 @@ def parse_exсel(path):
     
   Product.objects.all().delete()
   CharName.objects.all().delete()
+  
   for row in sheet.iter_rows(min_row=start_row, values_only=True):
     model = row[0]
     slug = slugify(model)
@@ -261,24 +266,25 @@ def parse_exсel(path):
       else:
         category = Category.objects.filter(name=category_name).first()
     price = row[4]
-    polished_sides = row[12]
-    quantity = row[13]
-    description = row[14]
-    delivery = row[15]
+    polished_sides = row[9]
+    quantity = 1
+    description = row[11]
+    delivery = row[12]
     meta_h1 = ''
     meta_title = ''
     meta_description = ''
     meta_keywords = ''
     try:
-      image = f"goods/{row[16]}"
+      name_image = row[13].replace("№","")
+      image = f"goods/{name_image}"
     except:
       pass
     
-    weight = row[18]
+    # weight = row[18]
     status = True
     
     try:
-      image_list = row[17].split(',')
+      image_list = row[14].split(',')
     except: 
       pass
     
@@ -293,8 +299,8 @@ def parse_exсel(path):
     
     # status = True
   # Получаем строку с материалом и делим по запятой
-    chars = row[6].split(',')
-    char_name = row[5]
+    chars = row[5].split(',')
+    char_name = sheet['F1'].value
     char_eng = slugify(char_name)
     
     try:
@@ -310,8 +316,8 @@ def parse_exсel(path):
       else:
         char = CharName.objects.filter(filter_name=char_eng).first()
     
-    chars_color = row[8].split(',')
-    char_color_name = row[7]
+    chars_color = row[6].split(',')
+    char_color_name = sheet['G1'].value
     char_color_eng = slugify(char_color_name)
        
     try:
@@ -327,10 +333,10 @@ def parse_exсel(path):
       else:
         char_color = CharName.objects.filter(filter_name=char_color_eng).first()
         
-    chars_size = row[11].split(',')
-    char_size_name = row[10]
+    chars_size = row[8].split(',')
+    char_size_name = sheet['I1'].value
     char_size_eng = slugify(chars_size)
-       
+    
     try:
       char_size = CharName.objects.get(filter_name=char_size_eng)
     except ObjectDoesNotExist:
@@ -356,7 +362,7 @@ def parse_exсel(path):
             delivery=delivery,
             name=name,
             slug=slug,
-            weight=weight,
+            # weight=weight,
             description=description,
             meta_h1=meta_h1,
             meta_title=meta_title,
@@ -936,3 +942,56 @@ def admin_color_delete(request, pk):
   subdomain = Subdomain.objects.get(id=pk)
   subdomain.delete()
   return redirect(request.META.get('HTTP_REFERER'))
+
+def admin_gallery(request):
+  items = Gallery.objects.all()
+  
+  context = {
+    "items": items,  
+  }
+  
+  return render(request, "gallery/gallery.html", context)
+
+
+def admin_gallery_add(request):
+  form = GalleryForm()
+  
+  if request.method == "POST":
+    form_new = GalleryForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_gallery')
+    else:
+      return render(request, "gallery/gallery_add.html", { "form": form_new })
+    
+  context = {
+    "form": form, 
+  }  
+    
+  return render(request, "gallery/gallery_add.html", context)
+
+def admin_gallery_edit(request, pk):
+  item = Gallery.objects.get(id=pk)
+  
+  if request.method == "POST":
+    form_new = GalleryForm(request.POST, request.FILES, instance=item)
+    
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_gallery')
+    else:
+      return render(request, "gallery/gallery_edit.html", { "form": form_new })
+  
+  form = GalleryForm(instance=item)
+  context = {
+    "form": form,
+  }  
+    
+  return render(request, "gallery/gallery_edit.html", context)
+
+def admin_color_delete(request, pk):
+  subdomain = Subdomain.objects.get(id=pk)
+  subdomain.delete()
+  return redirect(request.META.get('HTTP_REFERER'))
+
+

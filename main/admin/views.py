@@ -43,7 +43,6 @@ def admin_settings(request):
     if form_new.is_valid():
       form_new.save()
       
-      print("Все хорошо")
       # subprocess.call(["touch", RESET_FILE])
       return redirect("admin")
     else:
@@ -219,7 +218,6 @@ def upload_goods(request):
                 temp = filename.replace('.jpeg', '')
                 temp_one = temp.replace('№', '')
                 temp_b = temp_one.replace('В', 'B')
-                print(temp_b)
                 img.save(os.path.join('media/goods', temp_b), quality=60)  # quality=60 для JPEG файла
                 
           # Очистка временной папки
@@ -576,7 +574,6 @@ def admin_home(request):
     if form_new.is_valid():
       form_new.save()
       
-      print("Все хорошо")
       # subprocess.call(["touch", RESET_FILE])
       return redirect("admin")
     else:

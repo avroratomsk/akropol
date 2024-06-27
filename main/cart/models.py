@@ -8,8 +8,8 @@ from users.models import User
 """
 class CartQuerySet(models.QuerySet):
   
-  def total_price(self):
-    return sum(cart.products_price() for cart in self)
+  # def total_price(self):
+  #   return sum(cart.products_price() for cart in self)
   
   def total_quantity(self):
     if self:
@@ -27,6 +27,7 @@ class Cart(models.Model):
   quantity = models.PositiveSmallIntegerField(default=0, verbose_name="Количество")
   session_key = models.CharField(max_length=32, null=True, blank=True, verbose_name="ключ сессии если пользователь не авторизован")
   created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата обновления")
+  selected_char = models.JSONField(default=dict)
   
   class Meta:
     db_table = "cart"
@@ -35,8 +36,8 @@ class Cart(models.Model):
     
   objects = CartQuerySet().as_manager()  
         
-  def products_price(self):
-    return round(self.product.sell_price() * self.quantity, 2)
+  # def products_price(self):
+  #   return round(self.product.sell_price() * self.quantity, 2)
     
   def __str__(self):
     return self.product.name

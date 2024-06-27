@@ -152,6 +152,14 @@
     gap: 5px;
     font-family: $fontFamily;
   }
+
+  // .top-main__cart
+
+  &__cart {
+    @media screen and (max-width: 560px) {
+      display: none !important;
+    }
+  }
 }
 
 .content-main {
@@ -202,6 +210,10 @@
 
 .index-stock {
   padding: 40px 0px 80px;
+
+  @media screen and (max-width: 620px) {
+    padding: 40px 0px 40px;
+  }
 
   // .index-stock__container
 
@@ -304,6 +316,10 @@
 .index-catalog {
   padding: 90px 0px;
 
+  @media screen and (max-width: 620px) {
+    padding: 40px 0px 40px;
+  }
+
   // .index-catalog__container
 
   &__container {}
@@ -329,6 +345,7 @@
   // .index-catalog__category
 
   &__category {
+    min-width: 225px;
     flex: 1 1 24%;
     display: flex;
     flex-direction: column;
@@ -364,7 +381,7 @@
 
   &__cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 40px;
     width: 100%;
   }
@@ -381,7 +398,7 @@
   // .card__image
 
   &__image {
-    width: 230px;
+    width: 100%;
     height: 230px;
 
     img {
@@ -439,10 +456,45 @@
   }
 }
 
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .filter {
   display: flex;
   align-items: center;
   gap: 35px;
+
+
+  @media screen and (max-width: 1200px) {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  // .filter__inner
+
+  &__inner {
+    overflow-y: auto;
+    max-height: 450px;
+    height: 100%;
+    padding: 10px 0px;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+      /* ширина всей полосы прокрутки */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($color: $accent, $alpha: .05);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba($color: $mainColor, $alpha: .05);
+      /* отступ вокруг бегунка */
+    }
+  }
 
   // .filter__item
 
@@ -511,6 +563,10 @@
 .index-work {
   padding: 90px 0px;
 
+  @media screen and (max-width: 620px) {
+    padding: 40px 0px;
+  }
+
   // .index-work__container
 
   &__container {}
@@ -519,7 +575,7 @@
 
   &__title {
     color: rgb(31, 31, 31);
-    font-size: 56px;
+    font-size: clamp(35px, 4vw, 56px);
     font-weight: 400;
     line-height: 121%;
     margin-bottom: 20px;
@@ -533,6 +589,14 @@
     gap: 50px;
     margin-bottom: 50px;
 
+    @media screen and (max-width: 1024px) {
+      gap: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      flex-wrap: wrap;
+    }
+
     a {
       color: rgba($color: #949494, $alpha: 1);
       font-size: 24px;
@@ -542,16 +606,29 @@
       &._active {
         color: rgba($color: $mainColor, $alpha: 1.0);
       }
+
+      @media screen and (max-width: 1024px) {
+        font-size: 20px;
+      }
     }
   }
 
   // .index-work__grid
 
   &__grid {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 245px);
     gap: 10px;
+
+    @media screen and (max-width: 920px) {
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-rows: auto;
+    }
+
+    &._active {
+      display: grid;
+    }
   }
 
   // .index-work__item
@@ -562,8 +639,10 @@
     box-shadow: 0px 8px 17px 0px rgba(65, 162, 208, 0.1), 0px 30px 30px 0px rgba(65, 162, 208, 0.09), 0px 68px 41px 0px rgba(65, 162, 208, 0.05), 0px 121px 48px 0px rgba(65, 162, 208, 0.01), 0px 188px 53px 0px rgba(65, 162, 208, 0);
 
     &:first-child {
-      grid-column: span 1;
-      grid-row: span 2;
+      @media screen and (min-width: 920px) {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
     }
 
     img {
@@ -578,6 +657,11 @@
 .index-reviews {
   padding: 90px 0px;
 
+  @media screen and (max-width: 620px) {
+    padding: 40px 0px;
+  }
+
+
   // .index-reviews__container
 
   &__container {}
@@ -587,12 +671,29 @@
   &__inner {
     display: grid;
     grid-template-columns: 290px 1fr;
+    align-items: center;
     gap: 58px;
+
+    @media screen and (max-width: 920px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
   }
 
   // .index-reviews__info
 
-  &__info {}
+  &__info {
+
+    @media screen and (max-width: 920px) {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    @media screen and (max-width: 520px) {
+      flex-wrap: wrap;
+    }
+  }
 
   // .index-reviews__text
 
@@ -601,12 +702,21 @@
     font-size: 20px;
     line-height: 150%;
     color: rgba($color: $accent, $alpha: 1.0);
-    margin-bottom: 96px;
+
+    @media screen and (min-width: 920px) {
+      margin-bottom: 96px;
+    }
+
+    @media screen and (max-width: 520px) {
+      text-align: center;
+    }
   }
 
   // .index-reviews__reviews
 
-  &__reviews {}
+  &__reviews {
+    min-width: 0;
+  }
 }
 
 .reviews {
@@ -624,6 +734,10 @@
 
   &__btn {
     width: 100%;
+
+    @media (max-width: 920px) and (min-width: 520px) {
+      width: 290px;
+    }
   }
 
   // .reviews__wrapper
@@ -634,7 +748,7 @@
 
   &__slider {
     height: 100% !important;
-    padding: 10px 10px;
+    padding: 25px 10px;
   }
 
   // .reviews__slide
@@ -661,6 +775,10 @@
 .index-contact {
   padding: 90px 0px;
 
+  @media screen and (max-width: 620px) {
+    padding: 40px 0px;
+  }
+
   // .index-contact__container
 
   &__container {}
@@ -675,6 +793,12 @@
     border-radius: 10px;
     box-shadow: 0px 11px 24px 0px rgba(65, 162, 208, 0.15), 0px 43px 43px 0px rgba(65, 162, 208, 0.13), 0px 97px 58px 0px rgba(65, 162, 208, 0.08), 0px 173px 69px 0px rgba(65, 162, 208, 0.02), 0px 270px 76px 0px rgba(65, 162, 208, 0);
     background: rgb(255, 255, 255);
+
+
+    @media screen and (max-width: 520px) {
+      grid-template-columns: 1fr;
+      padding: 30px 0px 0px;
+    }
   }
 
   // .index-contact__item
@@ -683,6 +807,16 @@
     &:nth-child(2) {
       min-width: 291px;
       align-content: flex-end;
+
+      @media screen and (max-width: 520px) {
+        display: none;
+      }
+    }
+
+    &:nth-child(1) {
+      @media screen and (max-width: 520px) {
+        padding: 0px 20px;
+      }
     }
   }
 
@@ -691,7 +825,7 @@
   &__title {
     font-size: 40px;
     font-weight: 600;
-    line-height: 49px;
+    line-height: 130%;
     letter-spacing: -3%;
     text-align: left;
     margin-bottom: 50px;
@@ -700,6 +834,10 @@
       color: rgba($color: $accent, $alpha: 1.0);
       font-size: inherit;
       font-weight: inherit;
+    }
+
+    @media screen and (max-width: 520px) {
+      font-size: 30px;
     }
   }
 
@@ -726,7 +864,7 @@
   &__list-text {
     font-size: 24px;
     font-weight: 500;
-    line-height: 29px;
+    line-height: 130%;
     letter-spacing: -3%;
     text-align: left;
 
@@ -735,6 +873,10 @@
       line-height: inherit;
       font-weight: inherit;
       color: rgba($color: $accent, $alpha: 1.0);
+    }
+
+    @media screen and (max-width: 520px) {
+      font-size: 17px;
     }
   }
 
@@ -849,6 +991,10 @@
     transform: translateY(-50%);
     width: 550px;
     height: 80%;
+
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
   }
 
   .breadcrumbs {
@@ -887,6 +1033,10 @@
       line-height: inherit;
       font-weight: 600;
     }
+
+    @media screen and (max-width: 768px) {
+      font-size: 35px;
+    }
   }
 
   // .hero__subtitle
@@ -904,6 +1054,11 @@
     display: flex;
     align-items: center;
     gap: 30px;
+
+    @media screen and (max-width: 425px) {
+      flex-direction: column;
+      gap: 15px;
+    }
   }
 
   // .hero__button
@@ -918,6 +1073,10 @@
     border-radius: 5px 5px 5px 5px;
     color: rgba($color: $white, $alpha: 1.0);
     background-color: rgba($color: $accent, $alpha: 1.0);
+
+    @media screen and (max-width: 425px) {
+      width: 100%;
+    }
   }
 
   // .hero__button--blue
@@ -963,6 +1122,18 @@
           transform: translateX(0);
           pointer-events: all;
         }
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      &::before {
+        position: relative;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        pointer-events: all;
+        transform: translateX(0);
+        border: none;
       }
     }
   }
@@ -1011,3 +1182,11 @@
     }
   }
 }
+
+.swiper-pagination-bullet {
+  background-color: rgba($color: $accent, $alpha: 1.0);
+}
+
+.swiper-pagination-bullet-active {}
+
+.swiper-pagination-bullet-active-main {}

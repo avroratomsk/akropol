@@ -1,4 +1,4 @@
-{% load static %}{% load carts_tag %}{% user_carts request as carts %}
+{% load static %}
 <div class="header-under">
   <div class="header-under__container">
     <div class="header-under__inner">
@@ -31,13 +31,14 @@
           <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="" />
           <span id="city">Томск</span>
         </button>
-        <button type="button">
+        <button type="button" data-popup="callback">
           Заказать звонок
           <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
         </button>
-        <button type="button" class="top-main__callback" id="show-cart">
-          Корзина
+        <button type="button" class="top-main__cart" id="show-cart">
+          <span>Корзина</span>
           <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="" />
+          <span class="count-product-cart" id="count-goods"></span>
         </button>
       </div>
     </div>
@@ -46,14 +47,17 @@
 <div class="header header--single">
   <div class="header__container">
     <div class="header__inner">
-      <button type="button" class="header__callback">
+      <button type="button" class="header__callback" data-popup="callback">
         Заказать звонок
         <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
       </button>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item">
-            <a href="{% url 'category' %}">Каталог</a>
+            <div class="nav__item-inner">
+              <a href="{% url 'category' %}">Каталог</a>
+              <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" class="nav__chevron" />
+            </div>
             {% if category_menu %}
             <ul class="nav__submenu submenu">
               {% for category in category_menu %}
@@ -61,9 +65,9 @@
               {% endfor %}
             </ul>
             {% endif %}
-            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
           </li>
-          <li class="nav__item"><a href="#">Услуги</a> {% comment %} <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> {% endcomment %}</li>
+          <li class="nav__item"><a href="#">Услуги</a> {% comment %} <img
+              src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> {% endcomment %}</li>
           <li class="nav__item"><a href="{% url 'service_grav' %}">Гравировка</a></li>
           <li class="nav__item"><a href="{% url 'service_new' %}">Установка</a></li>
           <li class="nav__item"><a href="#">Оплата</a></li>

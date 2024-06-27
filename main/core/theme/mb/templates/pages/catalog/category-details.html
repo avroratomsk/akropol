@@ -5,18 +5,20 @@
       <h1 class="category-details__title _title">Категория - {{ category_name }}</h1>
       <div class="category-details__row">
         <div class="category-details__col" id="filter-category">
-          <button type="button" class="close" id="close-filter">X</button>
+          <button type="button" class="close popup__close" id="close-filter"><span></span></button>
           {{ min_price_product }}
           <form method="GET" class="filter-form">
             {% for field in filter_form %}
             <div class="filter__body">
               <label class="filter__label">{{ field.label }}</label>
-              {% for checkbox in field %}
-              <div class="form__group-boolean">
-                {{ checkbox.tag }}
-                <label class="checkbox-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+              <div class="filter__inner">
+                {% for checkbox in field %}
+                <div class="form__group-boolean">
+                  {{ checkbox.tag }}
+                  <label class="checkbox-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                </div>
+                {% endfor %}
               </div>
-              {% endfor %}
             </div>
             {% endfor %}
             <button type=" submit" class="filter__submit">Фильтровать</button>
@@ -25,27 +27,7 @@
         <div class="category-details__col">
           <button type="button" class="category-details__filter"><i class="fa-solid fa-arrow-up-wide-short"></i></button>
           {% if products %}
-          <div class="index-catalog__cards">
-            {% for product in products %}
-            <div class="index-catalog__card card">
-              <div class="card__image">
-                {{ product.image.url }} {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" alt="{{product.model}}" title="{{product.model}}" />
-                {% endthumbnail %} {% else %}
-                <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
-                {% endif %}
-              </div>
-              <div class="card__content">
-                <a href="#" class="card__content-title">{{ product.model }}</a>
-                {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %}
-                <p class="card__content-char">Материал: {{ chr }}</p>
-                {% endif %} {% endfor %}
-                <div class="card__content-price">От {{ product.price }} ₽</div>
-              </div>
-              <a href="{{ product.get_absolute_url }}" class="card__content-link">Подробнее</a>
-            </div>
-            {% endfor %}
-          </div>
+          <div class="index-catalog__cards">{% for product in products %} {% include "../../includes/card.html" with product=product %} {% endfor %}</div>
           {% else %}
           <div class="empty-info">
             <p>Товара нет</p>

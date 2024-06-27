@@ -5,7 +5,7 @@
   height: 100vh;
   width: 450px;
   background-color: $white;
-  z-index: 101;
+  z-index: 201;
   box-shadow: 0px 0px 10px rgba($color: $mainColor, $alpha: .1);
   border-radius: 10px 0px 0px 10px;
   padding: 70px 20px 50px;
@@ -261,4 +261,23 @@
 
 .mini-cart._show {
   right: 0%;
+}
+
+#show-cart {
+  position: relative;
+}
+
+.count-product-cart {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  padding: 10px;
+  max-width: 20px;
+  max-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: rgba($color: $white, $alpha: 1.0);
+  background-color: rgba($color: $accent, $alpha: 1.0);
 }

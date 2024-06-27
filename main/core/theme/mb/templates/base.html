@@ -27,9 +27,13 @@
 <body>
   <div class="wrapper">
     {% if request.path == '/' %}
-    {% include "./components/header.html" %} {% else %}
-    {% include "./components/header-single.html" %} {% endif %} {% block content %}
-    {% endblock %} {% include "./components/footer.html" %}
+    {% include "./components/header.html" %}
+    {% else %}
+    {% include "./components/header-single.html" %}
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    {% include "./components/footer.html" %}
     {% include "./components/notification/modal.html" %}
     {% include "./components/mini-cart.html" %}
     {% include "./components/popup.html" %}
@@ -106,26 +110,31 @@
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  {% comment %}
+
   <script type="module">
-    import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
 
     const swiper = new Swiper(".index-slider__slider", {
       effect: "fade",
       loop: true,
+      spaceBetween: 20,
       navigation: {
         nextEl: ".index-slider__next",
         prevEl: ".index-slider__prev",
       },
     });
 
-    const swiper_reviews = new Swiper(".index-reviews__slider", {
-      slidesPerView: 3,
+    const swiper_reviews = new Swiper(".reviews__slider", {
+      slidesPerView: 1,
       //slidesPerGroup: 1,
       loop: true,
+      spaceBetween: 20,
       navigation: {
         nextEl: ".index-reviews__next",
         prevEl: ".index-reviews__prev",
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        dynamicBullets: true,
       },
     });
 
@@ -145,8 +154,9 @@
         el: ".swiper-pagination",
         type: "bullets",
       },
-    }); {% endcomment %}
+    }); 
   </script>
+  <script src="{% static 'theme/mb/js/mask.js' %}"></script>
   <script src="{% static 'theme/mb/js/index.js' %}"></script>
 </body>
 

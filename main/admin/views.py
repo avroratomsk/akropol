@@ -217,8 +217,10 @@ def upload_goods(request):
             if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.JPG') or filename.endswith('.JPEG') or filename.endswith('.jpeg'):
               with Image.open(os.path.join('media/upload', filename)) as img:
                 temp = filename.replace('.jpeg', '')
-                print(temp)
-                img.save(os.path.join('media/goods', temp), quality=60)  # quality=60 для JPEG файла
+                temp_one = temp.replace('№', '')
+                temp_b = temp_one.replace('В', 'B')
+                print(temp_b)
+                img.save(os.path.join('media/goods', temp_b), quality=60)  # quality=60 для JPEG файла
                 
           # Очистка временной папки
           os.system('rm -rf media/upload')
@@ -335,7 +337,7 @@ def parse_exсel(path):
         
     chars_size = row[8].split(',')
     char_size_name = sheet['I1'].value
-    char_size_eng = slugify(chars_size)
+    char_size_eng = slugify(char_size_name)
     
     try:
       char_size = CharName.objects.get(filter_name=char_size_eng)
@@ -376,6 +378,7 @@ def parse_exсel(path):
           )
         except Exception as e:
           print(e)
+          
       else:
         new_product = Product.objects.filter(name=model).first() 
       

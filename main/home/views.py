@@ -3,10 +3,31 @@ from django.shortcuts import render
 
 from home.models import BaseSettings, HomeTemplate, Stock
 from cart.models import Cart
+from home.forms import CallbackForm
+from home.callback_send import email_callback
 from shop.models import Category, Product
 from reviews.models import Reviews
+from django.http import JsonResponse
 
 
+def callback(request):
+  if request.method == "POST":
+    form = CallbackForm(request.POST)
+    if form.is_valid():
+      name  = form.cleaned_data['name']
+      phone = form.cleaned_data['phone']
+      print(name)
+      print(phone)
+      title = 'Заказ обратного звонка'
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n"
+      
+      email_callback(messages, title)
+      
+      return JsonResponse({"success": "success"})
+  else:
+    return JsonResponse({'status': "error", 'errors': form.errors})
+  
+  return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 
 def index(request):

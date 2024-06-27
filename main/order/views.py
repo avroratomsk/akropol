@@ -14,10 +14,16 @@ def order(request):
 
 def order_create(request):
   form = CreateOrderForm(request.POST)
+  
+  
   if request.method == "POST":
-    """Получаем способ оплаты и в зависимости от метода оплаты строим логику ниже"""
-    payment_method = request.POST['payment_option']
     if form.is_valid():
+      
+      """
+        Получаем способ оплаты и в зависимости от 
+        метода оплаты строим логику ниже
+      """
+      payment_method = None
       try:
         order = form.save(commit=False)
         if request.user.is_authenticated:
@@ -88,25 +94,26 @@ def order_create(request):
             pay_method = request.POST['payment_option']
             order.pay_method = pay_method
           except: 
-            pass
-          
-          
+            pay_method = None
           
           order.save()
+        
           for item in cart_items:
             product=item.product
             name=item.product.name
-            price=item.product.sell_price()
+            price=item.product.price
             quantity=item.quantity
+            selected_char=item.selected_char
             
             orderItem  = OrderItem.objects.create(
               order = order,
               product=product,
               name=name,
               price=price,
-              quantity=quantity
+              quantity=quantity,
+              selected_char=selected_char
             )
-          print(payment_method)
+          
           if payment_method == "На сайте картой":
               data = create_payment(orderItem, cart_items, request)
               payment_id = data["id"]
@@ -115,7 +122,6 @@ def order_create(request):
               order.payment_id = payment_id
               order.payment_dop_info = confirmation_url
               order.save()
-              email_send(order)
               cart_items.delete()
               return redirect(confirmation_url)
           else:
@@ -124,13 +130,14 @@ def order_create(request):
             return redirect('order_succes')
       except Exception as e:
         print(e)
-  
-  # cart = request.context['cart_my']
-  
+    else:
+      print(form)
+
   session_key = request.session.session_key
   cart_items = Cart.objects.filter(session_key=session_key)
+  
   context = {
-    'title': 'Home - Оформление заказа',
+    'title': 'Оформление заказа',
     'orders': True,
     "cart": cart_items
   }

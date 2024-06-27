@@ -35,6 +35,10 @@
     grid-template-columns: 1fr 1fr 40%;
     gap: 20px;
     margin-top: 60px;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   // .contact__item
@@ -49,6 +53,13 @@
 
   &:not(:last-child) {
     padding: 40px;
+  }
+
+
+  @media screen and (max-width: 425px) {
+    &:last-child {
+      min-height: 350px;
+    }
   }
 
   // .item-contact__title

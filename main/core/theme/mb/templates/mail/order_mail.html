@@ -47,8 +47,10 @@
       <thead>
         <tr>
           <th>Товар</th>
-          <th>Номер детали</th>
+          <th>Модель</th>
           <th>Количество</th>
+          <th>Цена за штуку</th>
+          <th>Цвет,размер,материал</th>
         </tr>
       </thead>
 
@@ -56,8 +58,10 @@
         {% for item in order.items.all %}
         <tr style="border: 1px solid #333" ;>
           <td>{{ item.name }}</td>
+          <td>{{ item.model }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.price }}руб.</td>
+          <td>{% for key, value in item.selected_char.items %} {{ key }}: {{ value }} {% if forloop.last %} {% else %}|{% endif %} {% endfor %}</td>
         </tr>
         {% endfor %}
       </tbody>

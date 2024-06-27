@@ -1,0 +1,20 @@
+{% load static %} {% load thumbnail %}
+<div class="index-catalog__card card">
+  <div class="card__image">
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="" />
+    {% endif %} {% comment %} {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+    {% endthumbnail %} {% else %}
+    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+    {% endif %} {% endcomment %}
+  </div>
+  <div class="card__content">
+    <a href="{{ product.get_absolute_url }}" class="card__content-title">{{ product.model }}</a>
+    {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %}
+    <p class="card__content-char">Материал: {{ chr }}</p>
+    {% endif %} {% endfor %}
+    <div class="card__content-price">{{ product.price }} ₽</div>
+  </div>
+  <a href="{{ product.get_absolute_url }}" class="card__content-link">Подробнее</a>
+</div>

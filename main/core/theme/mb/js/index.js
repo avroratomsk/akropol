@@ -165,7 +165,7 @@ function closeMiniCart(e) {
  * Работа с добавление в корзину без перезагрузки страницы
  */
 
-let addToCartButton = document.querySelectorAll('.add-to-cart');
+
 
 // if (addToCartButton) {
 //   addToCartButton.forEach(btn => [
@@ -255,61 +255,144 @@ if (pickupCheckbox) {
   })
 }
 
-// Ловим собыитие клика по кнопке добавить в корзину
-$(document).on("click", ".add-to-cart", function (e) {
-  // Блокируем его базовое действие
+let addToCartButton = document.querySelectorAll('.add-to-cart');
+if (addToCartButton) {
+  addToCartButton.forEach(btn => {
+    btn.addEventListener('click', addCartProduct)
+  })
+}
+
+function addCartProduct(e) {
   e.preventDefault();
+  let csrfToken = document.querySelector('[name="csrfmiddlewaretoken"]').value;
+  // Элементы которые меняются
+  let productCount = 0;
+  let goodsInCartCount = document.getElementById('mini-cart-count');
+  if (goodsInCartCount) {
+    productCount = parseInt(goodsInCartCount.innerText, 0);
+  }
 
-  // Берем элемент счетчика в значке корзины и берем оттуда значение
-  var goodsInCartCount = $("#mini-cart-count");
-  var cartCount = parseInt(goodsInCartCount.text() || 0);
+  let productId = e.target.dataset.productId;
+  let variation = {}
+  const selectElem = document.querySelectorAll('select');
+  selectElem.forEach(elem => {
+    if (elem.dataset.name == 'Цвета') {
+      elemName = elem.dataset.name.slice(0, -1);
+      variation[elemName] = elem.value;
+    } else if (elem.dataset.name == 'Размеры') {
+      elemName = elem.dataset.name.slice(0, -1);
+      variation[elemName] = elem.value;
+    } else {
+      elemName = elem.dataset.name;
+      variation[elemName] = elem.value;
+    }
+  });
 
-  // Получаем id товара из атрибута data-product-id
-  var product_id = $(this).data("product-id");
-
-  // Из атрибута href берем ссылку на контроллер django
-  var add_to_cart_url = $(this).attr("href");
-  console.log(add_to_cart_url);
-
-  // делаем post запрос через ajax не перезагружая страницу
-  $.ajax({
-    type: "POST",
-    url: add_to_cart_url,
-    data: {
-      product_id: product_id,
-      csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+  let addToCartUrl = e.target.getAttribute('href');
+  // "/cart/cart_add-test/"
+  fetch(addToCartUrl, {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": csrfToken
     },
-    success: function (data) {
-      // $("#notification-modal .success__body").html('<div class="success__body-inner"><p class="success__name">' + data.product_name + '</p> <p  class="success__price">' + data.product_price + '₽</p></div> <div class="success__image"><img src="' + data.product_image + '" alt=""></div>');
-      $("#notification-modal .success__body").html('<div class="success__body-inner"><p class="success__name">Товар добавлен</p></div>');
-      $("#notification-modal").addClass("show");
+    body: JSON.stringify({ "productId": productId, "variation": variation })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error")
+      }
 
-      // Закрытие модального окна после 5 секунд
+      return response.json()
+    })
+    .then(data => {
+      // Уведомление добавления в корзину
+      const notificationModal = document.getElementById('notification-modal');
+      notificationModal.querySelector('.success__body').innerHTML = '<div class="success__body-inner"><p class="success__name">Товар добавлен</p></div>';
+      notificationModal.classList.add("show");
+
+      // Закрытие уведомления после 5 секунд
       setTimeout(function () {
-        $("#notification-modal").removeClass("show");
+        notificationModal.classList.remove("show");
       }, 5000);
 
-      $('#show-cart').append('<div class="no-empty"></div>');
+      const showCartBody = document.getElementById("show-cart");
+      let count = showCartBody.querySelector('.count-product-cart');
 
-
+      // const divElem = document.createElement('div');
+      // divElem.className = "no-empty"
+      // if (!showCartBody.querySelector('.no-empty')) {
+      //   showCartBody.appendChild(divElem);
+      // }
 
       // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
-      cartCount++;
-      goodsInCartCount.text(cartCount);
-      if (cartCount > 0) {
-        console.log(cartCount);
-        $('#mini-cart_noempty').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
-      }
-      // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-      var cartItemsContainer = $("#cart-item");
-      cartItemsContainer.html(data.cart_items_html);
-    },
+      productCount++;
+      goodsInCartCount.innerText += productCount;
+      count.innerText = productCount;
+      document.getElementById('mini-cart_noempty').innerHTML = '<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + productCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>';
 
-    error: function (data) {
-      console.log("Ошибка при добавлении товара в корзину");
-    },
-  });
-});
+
+      // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+      const cartItemsContainer = document.getElementById('cart-item');
+      cartItemsContainer.innerHTML = data.cart_items_html;
+
+
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+
+
+// // // Ловим собыитие клика по кнопке добавить в корзину
+// $(document).on("click", ".add-to-cart", function (e) {
+//   // Блокируем его базовое действие
+//   e.preventDefault();
+
+//   // Берем элемент счетчика в значке корзины и берем оттуда значение
+//   var goodsInCartCount = $("#mini-cart-count");
+//   var cartCount = parseInt(goodsInCartCount.text() || 0);
+
+//   // Получаем id товара из атрибута data-product-id
+//   var product_id = $(this).data("product-id");
+
+//   // Из атрибута href берем ссылку на контроллер django
+//   var add_to_cart_url = $(this).attr("href");
+
+//   // делаем post запрос через ajax не перезагружая страницу
+//   $.ajax({
+//     type: "POST",
+//     url: add_to_cart_url,
+//     data: {
+//       product_id: product_id,
+//       csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+//     },
+//     success: function (data) {
+//       $("#notification-modal .success__body").html('<div class="success__body-inner"><p class="success__name">Товар добавлен</p></div>');
+//       $("#notification-modal").addClass("show");
+
+//       // Закрытие модального окна после 5 секунд
+//       setTimeout(function () {
+//         $("#notification-modal").removeClass("show");
+//       }, 5000);
+
+//       $('#show-cart').append('<div class="no-empty"></div>');
+
+//       // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
+//       cartCount++;
+//       goodsInCartCount.text(cartCount);
+//       if (cartCount > 0) {
+//         $('#mini-cart_noempty').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
+//       }
+//       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+//       var cartItemsContainer = $("#cart-item");
+//       cartItemsContainer.html(data.cart_items_html);
+//     },
+
+//     error: function (data) {
+//       console.log("Ошибка при добавлении товара в корзину");
+//     },
+//   });
+// });
 
 $(document).on("click", ".remove-from-cart", function (e) {
   // Блокируем его базовое действие
@@ -404,9 +487,24 @@ const openPopup = (event) => {
   }
 }
 
+const closePopup = (event) => {
+  let popupCloseBtn = event.target.closest('.popup__close');
+  if (popupCloseBtn) {
+    popup = popupCloseBtn.closest('.popup');
+    popup.classList.remove('popup_show');
+    document.documentElement.classList.remove('popup-show');
+    bodyUnLock();
+  }
+}
+
 const popupBtn = document.querySelectorAll('[data-popup]');
 if (popupBtn) {
   popupBtn.forEach(btn => btn.addEventListener('mouseup', openPopup));
+}
+
+const closePopupBtn = document.querySelectorAll('.popup__close');
+if (closePopupBtn) {
+  closePopupBtn.forEach(btn => btn.addEventListener('click', closePopup))
 }
 
 // const popup = document.querySelectorAll('.popup');
@@ -468,4 +566,89 @@ document.addEventListener('DOMContentLoaded', () => {
   // });
 });
 
+/************Формы обратной связи*************/
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('callback-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrfToken
+      },
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        let loading = document.querySelector('.popup__loading');
+        loading.classList.add('_active');
+        setTimeout(() => {
+          form.reset();
+          loading.classList.remove('_active');
+          document.getElementById('callback').classList.remove('popup_show');
+          document.getElementById('success').classList.add('popup_show');
+        }, 1000);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  });
+});
+
+/*************Табы картинок**********/
+
+
+const tabBtnTrigger = document.querySelectorAll('.index-work__links a');
+const tabContent = document.querySelectorAll('.index-work__grid');
+if (tabBtnTrigger) {
+  tabBtnTrigger.forEach(btn => btn.addEventListener('click', showTabContent));
+}
+
+function showTabContent(e) {
+  e.preventDefault();
+
+  let contentID = this.getAttribute('href').replace('#', '');
+  let contentTab = document.getElementById(contentID);
+  tabContent.forEach(elem => elem.classList.remove('_active'));
+  contentTab.classList.add('_active');
+
+}
+
+
+/*******************************/
+
+const navArrowTriggerSubMenu = document.querySelectorAll('.nav__chevron');
+if (navArrowTriggerSubMenu) {
+  navArrowTriggerSubMenu.forEach(item => {
+    item.addEventListener('click', function (e) {
+      let parent = e.target.closest('.nav__item')
+      console.log(parent);
+
+      parent.classList.add('_active');
+    })
+  })
+}
+
+/*******************************/
+
+const openFilterMobile = document.querySelector('.category-details__filter');
+if (openFilterMobile) {
+  openFilterMobile.addEventListener('click', function (e) {
+    document.getElementById('filter-category').classList.add('_show');
+    bodyLock();
+  })
+}
+
+const closeFilter = document.getElementById('close-filter');
+
+if (closeFilter) {
+  closeFilter.addEventListener('click', function (e) {
+    document.getElementById('filter-category').classList.remove('_show');
+    bodyUnLock();
+  })
+}
 /*******************************/

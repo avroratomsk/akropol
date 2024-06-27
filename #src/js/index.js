@@ -530,7 +530,11 @@ if (burgerButton) {
       burgerBtn.classList.toggle('_active');
       let headerElem = document.querySelector('.header');
       headerElem.classList.toggle('_active');
-      bodyLock();
+      if (headerElem.classList.contains('_active')) {
+        bodyLock();
+      } else {
+        bodyUnLock();
+      }
       document.documentElement.classList.toggle('_overlay');
     }
   })

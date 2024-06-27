@@ -16,8 +16,6 @@ def callback(request):
     if form.is_valid():
       name  = form.cleaned_data['name']
       phone = form.cleaned_data['phone']
-      print(name)
-      print(phone)
       title = 'Заказ обратного звонка'
       messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n"
       

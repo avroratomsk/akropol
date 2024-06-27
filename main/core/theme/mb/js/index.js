@@ -521,7 +521,6 @@ if (closePopupBtn) {
 
 
 /********Burger menu**********/
-
 const burgerButton = document.getElementById('burger-btn');
 if (burgerButton) {
   burgerButton.addEventListener('mouseup', (event) => {

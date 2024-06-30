@@ -20,9 +20,10 @@
           из мрамора и гранита
         </h1>
         <p class="hero__subtitle">
-          На нашем сайте собран целый каталог фотографий памятников и надгробий изготовленных нашими мастерами.
-          Вы можете посмотреть примеры оформления памятников, надгробий, мемориальных комплексов. Мы профессионально
-          подходим к делу. Вы можете убедится в этом, посмотрев фотографии наших работ.
+          На нашем сайте собран целый каталог фотографий памятников и надгробий изготовленных нашими мастерами. Вы
+          можете посмотреть примеры оформления памятников, надгробий,
+          мемориальных комплексов. Мы профессионально подходим к делу. Вы можете убедится в этом, посмотрев фотографии
+          наших работ.
         </p>
         <div class="hero__buttons">
           <a href="{% url 'category' %}" class="hero__button hero__button--blue">Посмотреть каталог</a>
@@ -35,97 +36,27 @@
     <div class="gallery__container">
       <div class="gallery__inner">
         <div class="gallery__category">
-          <button type="button" data-id="svo" class="gallery__category-link">Солдатам СВО</button>
-          <button type="button" data-id="arki" class="gallery__category-link">Арки</button>
-          <button type="button" data-id="memorial_compleks" class="gallery__category-link">Мемориальные
-            комплексы</button>
-          <button type="button" data-id="s_ogradkoi" class="gallery__category-link">С оградкой</button>
+          {% if gallery_category %} {% for gal_cat in gallery_category %}
+          <button type="button" data-id="{{ gal_cat.slug }}" class="gallery__category-link">{{ gal_cat.name }}</button>
+          {% endfor %} {% endif %}
         </div>
         <div class="gallery__content">
-          <div class="gallery__images" id="svo">
-            <h2 class="gallery__images-title">Памятники солдатам СВО</h2>
+          {% if gallery_category %}
+          {% for gal_cat in gallery_category %}
+          <div class="gallery__images" id="{{ gal_cat.slug }}">
+            <h2 class="gallery__images-title">{{ gal_cat.name }}</h2>
             <div class="gallery__images-grid">
+              {% for image in gallery %}
+              {% if image.category.name == gal_cat.name %}
               <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
+                <img src="{{ image.image.url }}" alt="" />
               </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
+              {% endif %}
+              {% endfor %}
             </div>
-            <!-- <a href="#" class="gallery__content-link">Посмотреть все фотографии</a> -->
           </div>
-          <div class="gallery__images" id="arki">
-            <h2 class="gallery__images-title">Мемориальные арки</h2>
-            <div class="gallery__images-grid">
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-            </div>
-            <!-- <a href="#" class="gallery__content-link">Посмотреть все фотографии</a> -->
-          </div>
-          <div class="gallery__images" id="memorial_compleks">
-            <h2 class="gallery__images-title">Мемориальные комплексы</h2>
-            <div class="gallery__images-grid">
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-            </div>
-            <!-- <a href="#" class="gallery__content-link">Посмотреть все фотографии</a> -->
-          </div>
-          <div class="gallery__images" id="s_ogradkoi">
-            <h2 class="gallery__images-title">С оградкой</h2>
-            <div class="gallery__images-grid">
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-              <a href="#" class="gallery__image">
-                <img src="{% static 'theme/mb/images/product.jpg' %}" alt="">
-              </a>
-            </div>
-            <!-- <a href="#" class="gallery__content-link">Посмотреть все фотографии</a> -->
-          </div>
+          {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>

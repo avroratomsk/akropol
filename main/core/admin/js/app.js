@@ -15,20 +15,23 @@
 /**
  * Переключение вкладок на страницах продуктов, категорий
  */
+const tabButton = document.querySelectorAll('[data-name]');
+const pageEditButton = document.querySelectorAll('.page-content');
+if (tabButton) {
+  tabButton.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      tabButton.forEach(item => item.classList.remove('_active'));
+      pageEditButton.forEach(item => item.classList.remove('_show'));
 
-const data_name_tab = document.querySelectorAll('[data-name]');
-if (data_name_tab) {
-  data_name_tab.forEach(btn => {
-    btn.addEventListener('click', showPageConetnt)
+
+      let bodyTabBody = document.getElementById(this.dataset.name);
+
+      btn.classList.add('_active');
+      bodyTabBody.classList.add('_show');
+    })
   })
 }
 
-function showPageConetnt(e) {
-  document.querySelectorAll('.page-content').forEach(item => item.classList.remove('_show'));
-  document.getElementById(this.dataset.name).classList.add('_show');
-  data_name_tab.forEach(item => item.classList.remove('_active'));
-  this.classList.add('_active');
-}
 
 /**
  * Принимает на вход строку и конвертирует ее в английский язык
@@ -78,29 +81,77 @@ if (nameField) {
   })
 }
 
+// const ctx = document.getElementById('myChart');
+
+// const no_register = document.getElementById('no_register');
+// if(no_register){
+
+// }
+
+var ctx = document.getElementById('myChart');
+if (ctx) {
+  ctx.getContext('2d');
+  var salesChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+      datasets: [
+        {
+          label: 'Зарегистрировались и купили',
+          data: [12, 19, 3, 5, 2, 3, 8, 12, 13, 14, 5, 9, 11, 6, 8, 10, 15, 18, 16, 10, 12, 17, 19, 21, 20, 18, 16, 14, 12, 10],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderWidth: 1
+        },
+        {
+          label: 'Не зарегистрировались',
+          data: [10, 15, 6, 8, 5, 4, 7, 9, 11, 12, 6, 8, 10, 9, 7, 5, 12, 14, 13, 9, 10, 13, 15, 16, 14, 13, 11, 9, 8, 7],
+          borderColor: 'rgba(153, 102, 255, 1)',
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Дни месяца'
+          }
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Количество продаж'
+          }
+        }
+      }
+    }
+  });
+}
+
+
 /**
  * Подсчет и отображение количества символов в meta-полях
  */
-const metaFields = document.querySelectorAll('#meta_description');
-if (metaFields) {
-  metaFields.forEach(item => {
-    let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
-    if (item.value <= 0) {
-      parentItem.innerText = 0;
-    } else {
-      parentItem.innerText = item.value.length;
-    }
-    let max_length = 150;
-    item.addEventListener('input', function (e) {
-      parentItem.innerText = item.value.length;
-      if (item.value.length > max_length) {
-        parentItem.classList.add('max_limit');
-      } else {
-        parentItem.classList.remove('max_limit');
-      }
-    })
-  })
-}
+// const metaFields = document.querySelectorAll('.meta_field');
+// if (metaFields) {
+//   metaFields.forEach(item => {
+//     let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
+//     console.log(item);
+//     if (item.value <= 0) {
+//       parentItem.innerText = 0;
+//     } else {
+//       parentItem.innerText = item.value.length;
+//     }
+//     item.addEventListener('input', function (e) {
+//       parentItem.innerText = item.value.length;
+//     })
+//   })
+// }
 
 const dropdownButtons = document.querySelectorAll('.dropdownButton');
 
@@ -122,139 +173,35 @@ if (dropdownButtons) {
   })
 }
 
-const banquetMenuCheckbox = document.getElementById('banquet_menu-checkbox');
-if (banquetMenuCheckbox) {
-  banquetMenuCheckbox.addEventListener('change', shwoField);
-}
-
-function shwoField() {
-  if (banquetMenuCheckbox.checked) {
-    document.getElementById('banquet_menu').classList.add('show');
-  } else {
-    document.getElementById('banquet_menu').classList.remove('show');
-  }
-}
-
-
-/*
- * Добавление характеристики
- */
-
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('form__plus')) {
     const blockPasteChar = document.getElementById('paste-char');
     let char_name_id = document.getElementById('id_char_name').innerHTML;
     console.log(char_name_id);
-
-    const newCharElement = document.createElement('div');
-    newCharElement.classList.add('form__group-char');
-    newCharElement.innerHTML = '<label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">Название характеристики <span>:</span></label><select name="text_name" class="form__controls" placeholder="Название характеристики" id="id_name">' + char_name_id + '</select><label for="id_char_value">Значение:</label><input type="text" name="char_value" class="form__controls" placeholder="Значение" required="" id="id_char_value"><div class="form__remove"></div>';
-    blockPasteChar.appendChild(newCharElement);
+    blockPasteChar.innerHTML += `
+    <div class="form__group-char">
+      <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
+        Название характеристики <span>:</span>
+      </label>
+      <select name="text_name" class="form__controls" placeholder="Название характеристики" id="id_name">${char_name_id}</select>
+    
+    <label for="id_char_value">Значение:</label>
+    <input type="text" name="char_value" class="form__controls" placeholder="Значение" required="" id="id_char_value">
+    <div class="form__remove">
+      Удалить
+    </div>
+    </div>`
   }
 });
 
-/**
- * Открывает настройки товара на странице товаров
- */
+const menuSideBarButton = document.querySelectorAll('.menu-sidebar__dropdown-title');
 
-const tableSettingsBtn = document.querySelectorAll('.body-table__settings');
-if (tableSettingsBtn) {
-  tableSettingsBtn.forEach(btn => {
-    btn.addEventListener('click', openSettingsProduct);
+if (menuSideBarButton) {
+  menuSideBarButton.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      let parent = btn.closest('.menu-sidebar__dropdown');
+      parent.classList.toggle('_active');
+    })
   })
 }
-
-function openSettingsProduct() {
-  let elem = this.previousElementSibling;
-  elem.classList.toggle('_active');
-}
-
-/**
- * Добавлет дополнительное изображение
- */
-// document.querySelector('.product-block__plus').addEventListener('click', function (event) {
-//   var image = '<div class="form__group  form__group-image"><input type="file" multiple="multiple" name="src" accept="image/*" required="" id="id_src"><div class="product-block__minus form__remove">Удалить</div></div>';
-//   document.querySelector('.product-field').insertAdjacentHTML('beforeend', image);
-// })
-
-/**
- * Переключение между вкладками настроек на странице
- */
-
-const tabSettingsBtn = document.querySelectorAll('.page__head-btn');
-if (tabSettingsBtn) {
-  tabSettingsBtn.forEach(btn => {
-    btn.addEventListener('click', showTab);
-  })
-}
-
-function showTab(e) {
-
-  checkScrollbar();
-  document.querySelectorAll('.page-content').forEach(item => item.classList.remove('_show'));
-  tabSettingsBtn.forEach(item => item.classList.remove('active'))
-
-  document.getElementById(this.dataset.name).classList.add('_show');
-  this.classList.add('_active');
-}
-
-function checkScrollbar() {
-  if (window.innerHeight < document.body.scrollHeight) {
-    // Страница имеет скролл
-    console.log('Скролл есть');
-    document.body.style.paddingRight = '0px';
-  } else {
-    // Страница не имеет вертикального скролла
-    console.log('Скролла нет');
-
-    let scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-    console.log('Ширина стандартного скролла: ' + scrollBarWidth);
-
-    // Добавляем отступ равный ширине скролла
-    document.body.style.paddingRight = '17px';
-  }
-}
-
-
-var formChanged = "";
-// Перехватываем изменения в форме
-document.addEventListener('DOMContentLoaded', function () {
-  var form = document.querySelector('form');
-
-  if (form) {
-    formChanged = false;
-    console.log(formChanged);
-
-    form.addEventListener('input', function () {
-      formChanged = true;
-      console.log(formChanged);
-    });
-  }
-
-});
-
-// Перехватываем событие попытки пользователя покинуть страницу или вернуться назад
-window.addEventListener('beforeunload', function (event) {
-  if (formChanged) {
-    event.preventDefault();
-    alert('Сохранись зайбал')
-    event.returnValue = ''; // Некоторые браузеры требуют строку
-  }
-});
-
-window.addEventListener('popstate', function (event) {
-  if (formChanged) {
-    event.preventDefault();
-    alert('Сохранись зайбал')
-    // Открываем модальное окно с запросом сохранения данных
-    openSaveModal();
-  }
-});
-
-function openSaveModal() {
-  // Отобразите модальное окно с запросом сохранения данных
-  // Например, используйте Bootstrap модальное окно или другую библиотеку
-  // После того, как пользователь сделает выбор, обработайте его действия и сохраните данные или позвольте ему покинуть страницу
-}
-
 

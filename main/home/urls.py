@@ -13,6 +13,8 @@ urlpatterns = [
     path('best-offer/', views.best_offer, name="best_offer"),
     path('gallery/', views.gallery, name="gallery"),
     path('callback/', views.callback, name="callback"),
+    path('contact-form/', views.contact_form, name="contact_form"),
+    path('reviews-form/', views.reviews_form, name="reviews_form"),
     # path('uslugi/', views.about, name="about"),
     # path('valancy/', views.about, name="about"),
     

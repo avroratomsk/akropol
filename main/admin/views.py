@@ -4,8 +4,8 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, SubdomainForm, UploadFileForm
-from home.models import BaseSettings, Gallery, HomeTemplate, Stock
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, SubdomainForm, UploadFileForm
+from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
 from service.models import Service, ServicePage
@@ -994,4 +994,37 @@ def admin_color_delete(request, pk):
   subdomain.delete()
   return redirect(request.META.get('HTTP_REFERER'))
 
+
+def admin_gallery_category(request):
+  items = GalleryCategory.objects.all()
+  
+  context = {
+    "items": items,
+  }
+  
+  return render(request, "gallery/gallery_category.html", context)
+
+
+def gallery_category_add(request):
+  form = GalleryCategoryForm()
+  
+  if request.method == "POST":
+    form_new = GalleryCategoryForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_gallery_category')
+    else:
+      return render(request, "gallery/gallery_category_add.html", { "form": form_new })
+    
+  context = {
+    "form": form, 
+  }  
+    
+  return render(request, "gallery/gallery_category_add.html", context)
+
+def gallery_category_edit(request):
+  pass
+
+def gallery_category_delete(request):
+  pass
 

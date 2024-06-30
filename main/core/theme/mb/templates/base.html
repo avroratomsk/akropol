@@ -6,16 +6,12 @@
   <title>{{ title }}</title>
   <meta charset="UTF-8" />
   <meta name="format-detection" content="telephone=no" />
-  <!-- <style>body{opacity: 0;}</style> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="{% static 'theme/mb/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'libs/venobox.min.css' %}" />
   <link rel="shortcut icon" href="favicon.ico" />
   <!-- <meta name="robots" content="noindex, nofollow"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet"
@@ -26,18 +22,11 @@
 
 <body>
   <div class="wrapper">
-    {% if request.path == '/' %}
-    {% include "./components/header.html" %}
-    {% else %}
-    {% include "./components/header-single.html" %}
-    {% endif %}
-    {% block content %}
-    {% endblock %}
-    {% include "./components/footer.html" %}
-    {% include "./components/notification/modal.html" %}
-    {% include "./components/mini-cart.html" %}
-    {% include "./components/popup.html" %}
-    {% include "./components/mobile-nav.html" %}
+    {% if request.path == '/' %} {% include "./components/header.html" %} {% else %}
+    {% include "./components/header-single.html" %} {% endif %}
+    {% block content %} {% endblock %} {% include "./components/footer.html" %}
+    {% include "./components/notification/modal.html" %} {% include "./components/mini-cart.html" %}
+    {% include "./components/popup.html" %} {% include "./components/mobile-nav.html" %}
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -112,7 +101,6 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script type="module">
-
     const swiper = new Swiper(".index-slider__slider", {
       effect: "fade",
       loop: true,
@@ -133,7 +121,7 @@
         prevEl: ".index-reviews__prev",
       },
       pagination: {
-        el: '.swiper-pagination',
+        el: ".swiper-pagination",
         dynamicBullets: true,
       },
     });
@@ -154,9 +142,33 @@
         el: ".swiper-pagination",
         type: "bullets",
       },
-    }); 
+    });
+
+    const product__slider = new Swiper(".product__slider", {
+      // Optional parameters
+      spaceBetween: 20,
+      direction: "horizontal",
+      loop: true,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".product__button-next",
+        prevEl: ".product__button-prev",
+      },
+    });
   </script>
   <script src="{% static 'theme/mb/js/mask.js' %}"></script>
+  <script src="{% static 'libs/venobox.min.js' %}"></script>
+  <script>
+    new VenoBox({
+      selector: ".product__slide-link"
+    });
+  </script>
   <script src="{% static 'theme/mb/js/index.js' %}"></script>
 </body>
 

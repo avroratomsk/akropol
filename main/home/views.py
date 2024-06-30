@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from home.models import BaseSettings, HomeTemplate, Stock
+from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
 from cart.models import Cart
 from home.forms import CallbackForm
 from home.callback_send import email_callback
@@ -27,6 +27,48 @@ def callback(request):
   
   return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
+def contact_form(request):
+  if request.method == "POST":
+    form = CallbackForm(request.POST)
+    if form.is_valid():
+      print(form)
+      name  = form.cleaned_data['name']
+      phone = form.cleaned_data['phone']
+      social = form.cleaned_data['social']
+      title = 'Заказ обратного звонка'
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n"
+      
+      email_callback(messages, title)
+      
+      return JsonResponse({"success": "success"})
+    else:
+      print(form)
+  else:
+    return JsonResponse({'status': "error", 'errors': form.errors})
+  
+  return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+def reviews_form(request):
+  if request.method == "POST":
+    form = CallbackForm(request.POST)
+    if form.is_valid():
+      print(form)
+      name  = form.cleaned_data['name']
+      phone = form.cleaned_data['phone']
+      message = form.cleaned_data['message']
+      title = 'Заказ обратного звонка'
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n"
+      
+      email_callback(messages, title)
+      
+      return JsonResponse({"success": "success"})
+    else:
+      print(form)
+  else:
+    return JsonResponse({'status': "error", 'errors': form.errors})
+  
+  return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
 
 def index(request):
   page = request.GET.get('page', 1)
@@ -43,6 +85,8 @@ def index(request):
   saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
   affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
   reviews = Reviews.objects.filter(status=True)
+  gallery = Gallery.objects.filter(is_active=True)
+  gallery_category = GalleryCategory.objects.all()
   
   context = {
     "categorys": category,
@@ -51,6 +95,8 @@ def index(request):
     "affordable": affordable_products,
     "settings": settings,
     "reviews": reviews,
+    "gallery": gallery,
+    "gallery_category": gallery_category,
   }
   return render(request, 'pages/index.html', context)
 
@@ -127,4 +173,12 @@ def stock_detail(request, slug):
   
   
 def gallery(request):
-  return render(request, "pages/gallery.html")
+  gallery = Gallery.objects.filter(is_active=True)
+  gallery_category = GalleryCategory.objects.all()
+  
+  context = {
+    "gallery": gallery,
+    "gallery_category": gallery_category,
+  }
+  
+  return render(request, "pages/gallery.html", context)

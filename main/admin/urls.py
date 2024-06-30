@@ -16,6 +16,8 @@ urlpatterns = [
     path('category/edit/<int:pk>/', views.category_edit, name='category_edit'),
     path('category/delete/<int:pk>/', views.category_delete, name='category_delete'),
     
+    
+    
     #URl - отвечающие за отображение дня недели, редактирование и удаление дня недели
     path('days/', views.day_product, name='admin_day'),
     path('days/add/', views.day_add, name='days_add'),
@@ -88,4 +90,10 @@ urlpatterns = [
     path('gallery/add/', views.admin_gallery_add, name='admin_gallery_add'),
     # path('gallery/edit/<int:pk>/', views.admin_gallery_edit, name='admin_gallery_edit'),
     # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
+    
+    #URl - отвечающие за отображение категории Галлереи, редактирование и удаление категории
+    path('gallery-category/', views.admin_gallery_category, name='admin_gallery_category'),
+    path('gallery-category/add/', views.gallery_category_add, name='gallery_category_add'),
+    path('gallery-category/edit/<int:pk>/', views.gallery_category_edit, name='gallery_category_edit'),
+    path('gallery-category/delete/<int:pk>/', views.gallery_category_delete, name='gallery_category_delete'),
 ]

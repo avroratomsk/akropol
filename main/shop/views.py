@@ -12,7 +12,7 @@ from django.db.models import Count
 from .models import *
 
 def category(request):
-  products = Product.objects.filter(status=True)
+  products = Product.objects.filter(status=True).order_by('model')
   page = request.GET.get("page", 1)
   filter_form = ProductFilterForm(request.GET)
   if filter_form.is_valid():
@@ -68,7 +68,7 @@ def product(request, slug):
   product = Product.objects.get(slug=slug)
   products = Product.objects.filter(category=product.category)[:4]
   product_color = ColorProduct.objects.filter(active=True)
-  # images = ProductImage.objects.filter(parent_id=product.id)[:3]
+  images = ProductImage.objects.filter(parent_id=product.id)[:3]
   chars_all = ProductChar.objects.filter(parent=product).distinct()
   
   char_name = CharName.objects.filter(c_chars__in=chars_all, filter_add=True).exclude(filter_name=None).distinct()
@@ -89,7 +89,7 @@ def product(request, slug):
     "products": products,
     "char_name":char_name,
     "chars":chars_all,
-    "product_color": product_color
-    # "images": images
+    "product_color": product_color,
+    "images": images
   }
   return render(request, "pages/catalog/product.html", context)

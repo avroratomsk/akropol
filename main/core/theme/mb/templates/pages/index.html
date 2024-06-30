@@ -7,13 +7,15 @@
         <div class="top-main__left">
           <div class="top-main__item">
             <div class="top-main__address">Яковлева, 41а</div>
-            <a href="tel:+73822210915" class="top-main__phone">+7(3822)-210-915
+            <a href="tel:+73822210915" class="top-main__phone"
+              >+7(3822)-210-915
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
           <div class="top-main__item">
             <div class="top-main__address">Демьяна Бедного, 16а ст1</div>
-            <a href="tel:+73822224018" class="top-main__phone">+7(3822)-224-018
+            <a href="tel:+73822224018" class="top-main__phone"
+              >+7(3822)-224-018
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
@@ -35,7 +37,7 @@
               Заказать звонок
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </button>
-            <button type="button" class="top-main__callback" id="show-cart">
+            <button type="button" class="top-main__callback show-cart" id="show-cart">
               Корзина
               <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="" />
             </button>
@@ -69,7 +71,7 @@
     </div>
   </section>
 
-  <section class="index-catalog" style="display: none;">
+  <section class="index-catalog" style="display: none">
     <div class="index-catalog__container">
       <h2 class="index-catalog__title">Каталог</h2>
       <div class="index-catalog__inner">
@@ -162,9 +164,7 @@
             </li>
           </ul>
           <div class="index-catalog__cards">
-            {% if products %} {% for product in products %}
-            {% include '../includes/card.html' with product=product %}
-            {% endfor %} {% else %}
+            {% if products %} {% for product in products %} {% include '../includes/card.html' with product=product %} {% endfor %} {% else %}
             <div class="empty-info">
               <p>Товара нет</p>
             </div>
@@ -187,79 +187,20 @@
     <div class="index-work__container">
       <h2 class="index-work__title">Наши работы</h2>
       <div class="index-work__links">
-        <a href="#svo" class="_active">Солдатам СВО</a>
-        <a href="#arki">Арки</a>
-        <a href="#memo">Мемориальные комплексы</a>
-        <a href="#sogr">С оградкой</a>
+        {% if gallery_category %} {% for cat in gallery_category %}
+
+        <a href="{{ cat.slug }}" class="{% if forloop.first %}_active {% endif %}">{{ cat.name }}</a>
+        {% endfor %} {% endif %}
       </div>
-      <div class="index-work__grid _active" id="svo">
+      {% if gallery %} {% for gal_cat in gallery_category %}
+      <div class="index-work__grid {% if forloop.first %}_active {% endif %}" id="{{ gal_cat.slug }}">
+        {% for image in gallery %} {% if image.category.name == gal_cat.name %}
         <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+          <img src="{{ image.image.url }}" alt="" />
         </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
+        {% endif %} {% endfor %}
       </div>
-      <div class="index-work__grid" id="arki">
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-      </div>
-      <div class="index-work__grid" id="memo">
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-      </div>
-      <div class="index-work__grid" id="sogr">
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-        <div class="index-work__item">
-          <img src="{% static 'theme/mb/images/product.jpg' %}" alt="" />
-        </div>
-      </div>
+      {% endfor %} {% endif %}
     </div>
   </section>
 
@@ -268,7 +209,7 @@
       <div class="index-reviews__inner">
         <div class="index-reviews__info">
           <p class="index-reviews__text">Мы будем очень рады получить Вашу обратную связь</p>
-          <button type="button" class="reviews__btn _btn">Оставить отзыв</button>
+          <button type="button" class="reviews__btn _btn" data-popup="reviews">Оставить отзыв</button>
         </div>
         <!-- Тут доделать слайдер -->
         <div class="index-reviews__reviews reviews">
@@ -276,15 +217,13 @@
             <div class="reviews__wrapper swiper-wrapper">
               <div class="reviews__slide swiper-slide">
                 <p class="reviews__text">
-                  Заказала памятник и оформление захоронения, сделали всё отлично и раньше срока сдали работу, на
-                  отлично, рекомендую надёжная организация. Спасибо большое
+                  Заказала памятник и оформление захоронения, сделали всё отлично и раньше срока сдали работу, на отлично, рекомендую надёжная организация. Спасибо большое
                 </p>
                 <p class="reviews__name">Nina Kartashova</p>
               </div>
               <div class="reviews__slide swiper-slide">
                 <p class="reviews__text">
-                  Заказала памятник и оформление захоронения, сделали всё отлично и раньше срока сдали работу, на
-                  отлично, рекомендую надёжная организация. Спасибо большое
+                  Заказала памятник и оформление захоронения, сделали всё отлично и раньше срока сдали работу, на отлично, рекомендую надёжная организация. Спасибо большое
                 </p>
                 <p class="reviews__name">Nina Kartashova</p>
               </div>
@@ -308,8 +247,7 @@
             </li>
             <li>
               <img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
-              <p class="index-contact__list-text"><span>Поможем определиться </span>с типом памятника и заказать его
-                производство</p>
+              <p class="index-contact__list-text"><span>Поможем определиться </span>с типом памятника и заказать его производство</p>
             </li>
             <li>
               <img src="{% static 'theme/mb/images/icon/check-green.svg' %}" alt="" class="index-contact__list-icon" />
@@ -334,7 +272,8 @@
           </div>
         </div>
         <div class="index-contact__item">
-          <form action="" method="POST" class="form index-contact__form">
+          <form action="{% url 'contact_form' %}" method="POST" class="form index-contact__form">
+            {% csrf_token %}
             <h3 class="form__title">Заполните форму</h3>
             <p class="form__text">Оставьте заявку - мы обязательно с вами свяжемся</p>
             <div class="form__inner">
@@ -359,8 +298,7 @@
                 <div class="form__agreement">
                   <input type="checkbox" name="agrement" id="id_agrement" checked />
                   <label for="id_agreement" class="form__label">
-                    Я даю свое согласие на обработку персональных данных и соглашаюсь с <a href="">политикой
-                      конфиденциальности</a>
+                    Я даю свое согласие на обработку персональных данных и соглашаюсь с <a href="">политикой конфиденциальности</a>
                   </label>
                 </div>
               </div>

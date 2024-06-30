@@ -45,8 +45,16 @@ class Stock(models.Model):
     
 class GalleryCategory(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Наименование")
+  slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="")
+  
+  def __str__(self):
+    return self.name
   
 class Gallery(models.Model):
+  category = models.ForeignKey(GalleryCategory, on_delete=models.CASCADE, null=True, default=None, related_name="categories")
   image = models.ImageField(upload_to="gallery-image", null=True, blank=True, verbose_name="Фотография")
   name = models.CharField(max_length=255, null=True, blank=True, verbose_name="Наименование пойдет в alt и title")
   is_active = models.BooleanField(default=True, verbose_name="Выводить на сайт ?")
+  
+  def __str__(self):
+    return self.name

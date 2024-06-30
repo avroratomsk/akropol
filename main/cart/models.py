@@ -8,8 +8,8 @@ from users.models import User
 """
 class CartQuerySet(models.QuerySet):
   
-  # def total_price(self):
-  #   return sum(cart.products_price() for cart in self)
+  def total_price(self):
+    return sum(cart.products_price() for cart in self)
   
   def total_quantity(self):
     if self:
@@ -36,8 +36,8 @@ class Cart(models.Model):
     
   objects = CartQuerySet().as_manager()  
         
-  # def products_price(self):
-  #   return round(self.product.sell_price() * self.quantity, 2)
+  def products_price(self):
+    return round(self.product.sell_price() * self.quantity, 2)
     
   def __str__(self):
     return self.product.name

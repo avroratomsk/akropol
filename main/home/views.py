@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
 from cart.models import Cart
-from home.forms import CallbackForm
+from home.forms import CallbackForm, ContactForm, OrderSericeForm
 from home.callback_send import email_callback
 from shop.models import Category, Product
 from reviews.models import Reviews
@@ -29,14 +29,14 @@ def callback(request):
 
 def contact_form(request):
   if request.method == "POST":
-    form = CallbackForm(request.POST)
+    form = ContactForm(request.POST)
     if form.is_valid():
       print(form)
       name  = form.cleaned_data['name']
       phone = form.cleaned_data['phone']
       social = form.cleaned_data['social']
       title = 'Заказ обратного звонка'
-      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n"
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n" + "\n" + "*Способ связи*: " + str(social) + "\n"
       
       email_callback(messages, title)
       
@@ -58,6 +58,27 @@ def reviews_form(request):
       message = form.cleaned_data['message']
       title = 'Заказ обратного звонка'
       messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n"
+      
+      email_callback(messages, title)
+      
+      return JsonResponse({"success": "success"})
+    else:
+      print(form)
+  else:
+    return JsonResponse({'status': "error", 'errors': form.errors})
+  
+  return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+def reviews_form(request):
+  if request.method == "POST":
+    form = OrderSericeForm(request.POST)
+    if form.is_valid():
+      print(form)
+      name  = form.cleaned_data['name']
+      phone = form.cleaned_data['phone']
+      service = form.cleaned_data['service']
+      title = 'Заказ обратного звонка'
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n" + "*Заказ услуги*: " + str(service) + "\n"
       
       email_callback(messages, title)
       

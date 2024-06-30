@@ -17,4 +17,46 @@ class CallbackForm(forms.Form):
       "data-input"
       }
   ))
+  
+class ContactForm(forms.Form):
+  name = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваше имя',
+      'class': 'form__controls'
+      }
+  ))
+
+  phone = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваш номер телефона',
+      'class': 'form__controls'
+      "data-input"
+      }
+  ))
+  
+  social = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваш номер телефона',
+      'class': 'form__controls'
+      "data-input"
+      }
+  ))
+  
+class OrderSericeForm(forms.Form):
+  name = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваше имя',
+      'class': 'form__controls'
+      }
+  ))
+
+  phone = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваш номер телефона',
+      'class': 'form__controls'
+      "data-input"
+      }
+  ))
+  
+  service = forms.CharField()
 

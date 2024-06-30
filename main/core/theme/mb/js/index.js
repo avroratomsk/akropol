@@ -398,6 +398,15 @@ const openPopup = (event) => {
     popup = document.getElementById(popupBtn.dataset.popup);
     document.documentElement.classList.add('popup-show');
     popup.classList.add('popup_show');
+
+    let nameOrder = popupBtn.dataset.order;
+    console.log(nameOrder);
+    if (nameOrder) {
+      let fieledHidden = popup.querySelector('input[type="hidden"]');
+      console.log(fieledHidden);
+      fieledHidden.value = nameOrder;
+    }
+
     bodyLock();
   }
 }

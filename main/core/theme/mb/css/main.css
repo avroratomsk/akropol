@@ -950,6 +950,79 @@ html.lock body::before {
   background-color: #41a2d0;
 }
 
+.index-service__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+.index-service__card {
+  position: relative;
+  min-height: 550px;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.index-service__card p {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-size: 25px;
+  line-height: 130%;
+  text-transform: uppercase;
+  max-width: 250px;
+}
+
+.index-service__card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: 0.5s;
+}
+
+.index-service__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(58, 67, 75, 0.2);
+  z-index: 1;
+}
+
+.index-service__card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(1px);
+}
+
+.index-service__count {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background-color: #41a2d0;
+  display: flex;
+  font-size: 14px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
 .about__grid {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -4233,6 +4306,10 @@ body::after {
     opacity: 1;
     transform: translateX(0);
     pointer-events: all;
+  }
+
+  .index-service__card:hover img {
+    transform: scale(1.01);
   }
 
   .nav__item:hover .submenu {

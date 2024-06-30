@@ -85,7 +85,7 @@ def index(request):
   saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
   affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
   reviews = Reviews.objects.filter(status=True)
-  gallery = Gallery.objects.filter(is_active=True)
+  gallery = Gallery.objects.filter(is_active=True)[:5]
   gallery_category = GalleryCategory.objects.all()
   
   context = {
@@ -173,7 +173,7 @@ def stock_detail(request, slug):
   
   
 def gallery(request):
-  gallery = Gallery.objects.filter(is_active=True)
+  gallery = Gallery.objects.filter(is_active=True)[:5]
   gallery_category = GalleryCategory.objects.all()
   
   context = {

@@ -40,6 +40,9 @@
             <button type="button" class="top-main__callback show-cart" id="show-cart">
               Корзина
               <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="" />
+              {% user_carts request as carts %} {% if carts %}
+              <span class="count-product-cart" id="count-goods">{{ carts.total_quantity }}</span>
+              {% endif %}
             </button>
           </div>
         </div>

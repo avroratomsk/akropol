@@ -2063,6 +2063,13 @@ body::after {
   transform: rotate(45deg);
 }
 
+.mobile-nav__item .count-product-cart {
+  color: white;
+  top: 54%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .burger {
   width: 20px;
   height: 19px;
@@ -3555,6 +3562,10 @@ body::after {
   font-size: 12px;
   color: white;
   background-color: #41a2d0;
+}
+
+.show-cart {
+  position: relative;
 }
 
 .success {

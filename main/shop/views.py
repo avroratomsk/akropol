@@ -77,12 +77,7 @@ def product(request, slug):
   for li in chars_all:
     if li.char_value not in chars_list_name_noduble:
       chars_list_name_noduble.append(li.char_value)
-  
-  # print(chars_list_name_noduble)
-  
-  # chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
-  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).values('char_value').annotate(count=Count('char_value')).filter(count=1)
-  
+      
   context = {
     "title": "Название продукта",
     "product": product,

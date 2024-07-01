@@ -22,42 +22,41 @@ def cart_add_test(request):
   return JsonResponse({"status":"true"})
 
 def cart_add(request):
-  data = json.loads(request.body)
-  idProduct = data.get('productId')
-  variation = data.get('variation')
-  product = Product.objects.get(id=idProduct)
-  
-  
-  if request.user.is_authenticated:
-    carts = Cart.objects.filter(user=request.user, product=product, selected_char=variation)
+    data = json.loads(request.body)
+    idProduct = data.get('productId')
+    variation = data.get('variation')
+    product = Product.objects.get(id=idProduct)
     
-    if carts.exists():
-      cart = carts.first()
-      if cart:
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(
+            user=request.user,
+            product=product,
+            selected_char=variation,
+            defaults={'quantity': 1}
+        )
+    else:
+        session_key = request.session.session_key or request.session.save()
+        cart, created = Cart.objects.get_or_create(
+            session_key=session_key,
+            product=product,
+            selected_char=variation,
+            defaults={'quantity': 1}
+        )
+    
+    if not created:
         cart.quantity += 1
         cart.save()
-    else:
-      Cart.objects.create(user=request.user, product=product, quantity=1, selected_char=variation)
-      
-  else:
-    carts = Cart.objects.filter(session_key=request.session.session_key, product=product, selected_char=variation)
-    
-    if carts.exists():
-      cart = carts.first()
-      if cart:
-        cart.quantity += 1
-        cart.save()
-    else:
-      carts = Cart.objects.create(session_key=request.session.session_key, product=product, quantity=1, selected_char=variation)
-      
-  user_cart = get_user_carts(request)
-  cart_items_html = render_to_string("components/cart-item.html", {"carts": user_cart}, request=request)
-  
-  response_data = {
-      "message": "Товар добавлен в корзину",
-      "cart_items_html": cart_items_html,
-  }
-  return JsonResponse(response_data)
+
+    user_cart = get_user_carts(request)
+    cart_items_html = render_to_string("components/cart-item.html", {"carts": user_cart}, request=request)
+    cart_total_count = sum(item.quantity for item in user_cart)
+
+    response_data = {
+        "message": "Товар добавлен в корзину",
+        "cart_items_html": cart_items_html,
+        "cart_total_count": cart_total_count
+    }
+    return JsonResponse(response_data)
   
   
 def cart_change(request):

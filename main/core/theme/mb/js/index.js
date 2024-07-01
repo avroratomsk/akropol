@@ -226,24 +226,22 @@ function addCartProduct(e) {
       setTimeout(function () {
         notificationModal.classList.remove("show");
       }, 5000);
-      const showCartBody = document.querySelectorAll(".show-cart");
 
+      const showCartBody = document.querySelectorAll(".show-cart");
       if (showCartBody) {
         showCartBody.forEach(btn => {
           let countElem = btn.querySelector('.count-product-cart');
-          let productCount = parseInt(countElem.innerText);
-          productCount++;
-          countElem.innerText = productCount;
+          if (countElem) {
+            countElem.innerText = data.cart_total_count;
+          } else {
+            let span = document.createElement('span');
+            span.className = 'count-product-cart';
+            span.innerText = data.cart_total_count;
+            btn.appendChild(span);
+          }
         })
       }
-
-
-      // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
-      // productCount++;
-      // goodsInCartCount.innerText += productCount;
-      // count.innerText = productCount;
-      console.log(document.getElementById('mini-cart_noempty'));
-      document.getElementById('mini-cart_noempty').innerHTML = '<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + productCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>';
+      document.getElementById('mini-cart_noempty').innerHTML = '<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + data.cart_total_count + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>';
 
 
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)

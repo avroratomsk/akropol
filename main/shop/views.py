@@ -40,7 +40,7 @@ def category_detail(request, slug):
   page = request.GET.get("page", 1)
   category = Category.objects.get(slug=slug)
   # chars = CharName.objects.filter(group=None)
-  products = Product.objects.filter(category=category)
+  products = Product.objects.filter(category=category).order_by('model')
   filter_form = ProductFilterForm(request.GET)
   if filter_form.is_valid():
       q_objects = Q()

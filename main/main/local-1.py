@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     "home",
     "shop",
+    'snowpenguin.django.recaptcha3',
     # "coupons",
     "users",
     "reviews",

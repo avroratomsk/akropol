@@ -13,6 +13,7 @@ from django.http import JsonResponse
 def callback(request):
   if request.method == "POST":
     form = CallbackForm(request.POST)
+    print(form)
     if form.is_valid():
       name  = form.cleaned_data['name']
       phone = form.cleaned_data['phone']
@@ -76,9 +77,9 @@ def reviews_form(request):
       print(form)
       name  = form.cleaned_data['name']
       phone = form.cleaned_data['phone']
-      service = form.cleaned_data['service']
+      pagename = form.cleaned_data['pagename']
       title = 'Заказ обратного звонка'
-      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n" + "*Заказ услуги*: " + str(service) + "\n"
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n" + "*Заказ услуги*: " + str(pagename) + "\n"
       
       email_callback(messages, title)
       
@@ -93,7 +94,7 @@ def reviews_form(request):
 
 def index(request):
   page = request.GET.get('page', 1)
-  
+  form = CallbackForm()
   try: 
     home_page = HomeTemplate.objects.get()
     settings = BaseSettings.objects.get()
@@ -118,6 +119,7 @@ def index(request):
     "reviews": reviews,
     "gallery": gallery,
     "gallery_category": gallery_category,
+    "form": form
   }
   return render(request, 'pages/index.html', context)
 

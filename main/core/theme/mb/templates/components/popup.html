@@ -26,8 +26,10 @@
       <h2 class="popup__title">Заказ обратного звонка</h2>
       <form action="{% url 'callback' %}" class="popup__form" method="POST" id="callback-form">
         {% csrf_token %}
+        {{ form.as_p }}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
         <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input required />
+        <input type="text" name="captcha_0" class="popup__form-controls" />
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>
@@ -77,7 +79,7 @@
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
         <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input required />
-        <input type="hidden" name="service" class="popup__form-controls" required />
+        <input type="hidden" name="pagename" class="popup__form-controls" required />
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>

@@ -461,13 +461,10 @@ if (burgerButton) {
   })
 }
 const dpi = window.devicePixelRatio;
-console.log(dpi);
-console.log('---------------------');
 document.addEventListener('DOMContentLoaded', () => {
   const dpi = window.devicePixelRatio;
 
   if (dpi > 2) {
-    console.log(dpi);
     document.documentElement.classList.add('_big');
   }
   // const target = document.getElementById('target');
@@ -492,8 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /************Формы обратной связи*************/
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('callback-form').addEventListener('submit', function (event) {
+
+const sendingForm = (nameForm) => {
+  document.getElementById(nameForm).addEventListener('submit', function (event) {
     event.preventDefault();
 
     const form = event.target;
@@ -522,11 +520,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(error);
       });
   });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  sendingForm('contact-from');
 });
 
+
 /*************Табы картинок**********/
-
-
 const tabBtnTrigger = document.querySelectorAll('.index-work__links a');
 const tabContent = document.querySelectorAll('.index-work__grid');
 if (tabBtnTrigger) {

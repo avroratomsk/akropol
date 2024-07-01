@@ -95,7 +95,9 @@
             {% csrf_token %}
             <a href="{% url 'cart_add' %}" class="product-card__add add-to-cart"
               data-product-id="{{ product.id }}">Добавить в корзину</a>
-            <button type="button" class="product-card__btn">Заказать консультацию</button>
+            <button type="button" class="product-card__btn" data-popup="consultation"
+              data-order="Консультаци по {{ product.model }}">Заказать
+              консультацию</button>
           </div>
         </div>
       </div>

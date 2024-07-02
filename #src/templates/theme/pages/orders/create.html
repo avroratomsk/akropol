@@ -3,7 +3,7 @@
   <section class="order-create">
     <div class="order-create__container">
       <form action="{% url 'order_create' %}" method="POST" class="form">
-        <h2 class="order-create__title">Оформление заказа</h2>
+        <h2 class="order-create__title _title">Оформление заказа</h2>
         <div class="order-create__row">
           <div class="order-create__col">
             {% csrf_token %}

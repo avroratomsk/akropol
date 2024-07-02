@@ -497,7 +497,7 @@ const sendingForm = (nameForm) => {
     const form = event.target;
     const formData = new FormData(form);
     const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
+    console.log("work 1");
     fetch(form.action, {
       method: 'POST',
       headers: {
@@ -509,6 +509,7 @@ const sendingForm = (nameForm) => {
       .then(data => {
         let loading = document.querySelector('.popup__loading');
         loading.classList.add('_active');
+        console.log("work 2");
         setTimeout(() => {
           form.reset();
           loading.classList.remove('_active');

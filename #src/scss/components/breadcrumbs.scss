@@ -25,10 +25,22 @@
         margin: 0px 10px;
         background-color: rgba($color: $mainColor, $alpha: 1.0);
       }
+
+
     }
 
     &:last-child {
       color: rgb(103, 103, 103);
+    }
+
+    @media screen and (max-width: 620px) {
+      font-size: 11px;
+
+      &:not(:last-child) {
+        &::after {
+          width: 5px;
+        }
+      }
     }
   }
 }

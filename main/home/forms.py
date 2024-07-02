@@ -1,7 +1,6 @@
 from django import forms
 from home.models import HomeTemplate
 from shop.models import Category,Product
-from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 class CallbackForm(forms.Form):
   name = forms.CharField(widget=forms.TextInput(
@@ -19,7 +18,6 @@ class CallbackForm(forms.Form):
       }
   ))
   
-  captcha = ReCaptchaField()
   
 class ContactForm(forms.Form):
   name = forms.CharField(widget=forms.TextInput(

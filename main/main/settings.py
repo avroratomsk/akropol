@@ -171,8 +171,9 @@ EMAIL_USE_TLS = False
 
 RECAPTCHA_PUBLIC_KEY = '6LfYJQUqAAAAANqyj-hN9bAMzxy5TNZy8CMYd73W'
 RECAPTCHA_PRIVATE_KEY = '6LfYJQUqAAAAAKCcl1__tYxIgAK7KbPkNMarYp5V'
-RECAPTCHA_DEFAULT_ACTION = 'generic'
-RECAPTCHA_SCORE_THRESHOLD = 0.5
+RECAPTCHA_REQUIRED_SCORE = 0.5
+# RECAPTCHA_DEFAULT_ACTION = 'generic'
+# RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 # Переопределяем путь для @login_required - если пользовательно не авторизован, то перенаправить на страницу login  а не 404
 LOGIN_URL = 'user/login/'

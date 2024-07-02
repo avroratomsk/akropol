@@ -139,9 +139,11 @@ function clearSimvol(str) {
  * Функции отвечающие за открытие и закрытие мини-корзины
  */
 
-const showCart = document.getElementById('show-cart');
+const showCart = document.querySelectorAll('.show-cart');
 if (showCart) {
-  showCart.addEventListener('click', showMiniCart);
+  showCart.forEach(btn => {
+    btn.addEventListener('click', showMiniCart);
+  })
 }
 
 function showMiniCart(e) {
@@ -164,96 +166,6 @@ function closeMiniCart(e) {
 /**
  * Работа с добавление в корзину без перезагрузки страницы
  */
-
-
-
-// if (addToCartButton) {
-//   addToCartButton.forEach(btn => [
-//     btn.addEventListener('click', addToCart)
-//   ])
-// }
-
-// function addToCart(e) {
-//   e.preventDefault();
-//   // let miniCartCount = parseInt(document.querySelector('#mini-cart-count').textContent) || 0;
-//   let productId = this.getAttribute('data-product-id');
-//   console.log(productId);
-//   let productLink = this.getAttribute('href');
-//   console.log(productLink);
-//   let csrfToken = document.querySelector('[name="csrfmiddlewaretoken"]').value;
-//   console.log(csrfToken);
-
-//   fetch('/cart/', {
-//     method: 'POST',
-//     headers: {
-//       // "Accept": "application/json",
-//       'Content-Type': 'application/json',
-//       "X-CSRFToken": csrfToken
-//     },
-//     body: JSON.stringify(productId)
-//   })
-//     .then(response => response.json())
-//     .then(data => { console.log(data) })
-//     .catch(error => {
-//       console.error('Ошибка при отправке данных:', error);
-//     })
-
-// fetch('/cart/cart_add/', {
-//   method: 'POST',
-//   headers: {
-//     "Accept": "application/json",
-//     'Content-Type': 'application/json',
-//     'X-CSRFToken': csrfToken
-//   },
-//   body: JSON.stringify({ product_id: productId })
-// })
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error('Network response was not ok');
-//     }
-//     const contentType = response.headers.get('content-type');
-//     if (contentType && contentType.includes('application/json')) {
-//       return response.json();
-//     } else {
-//       throw new Error('Unexpected response type');
-//     }
-//   })
-//   .then(data => {
-//     console.log(data);
-//     // miniCartCount++;
-//     let cartItemsContainer = document.querySelector('#cart-item');
-//     cartItemsContainer.innerHTML = data.cart_items_html;
-//     // document.querySelector('#mini-cart-count').textContent = miniCartCount; // Обновляем счетчик товаров в мини-корзине
-//   })
-//   .catch(error => {
-//     console.error('Ошибка:', error);
-//   });
-// }
-
-const whoGetRadio = document.querySelectorAll('.who-get');
-if (whoGetRadio) {
-  whoGetRadio.forEach(item => {
-    item.addEventListener('change', function (e) {
-      console.log(this);
-      if (item.dataset.id == 'another') {
-        document.getElementById('contact-human').classList.add('_show')
-      } else {
-        document.getElementById('contact-human').classList.remove('_show')
-      }
-    })
-  })
-}
-
-const pickupCheckbox = document.getElementById('pickup');
-if (pickupCheckbox) {
-  pickupCheckbox.addEventListener('change', function (e) {
-    if (!pickupCheckbox.checked) {
-      document.getElementById('address-delivery').classList.add('_hidden');
-    } else {
-      document.getElementById('address-delivery').classList.remove('_hidden');
-    }
-  })
-}
 
 let addToCartButton = document.querySelectorAll('.add-to-cart');
 if (addToCartButton) {
@@ -315,20 +227,21 @@ function addCartProduct(e) {
         notificationModal.classList.remove("show");
       }, 5000);
 
-      const showCartBody = document.getElementById("show-cart");
-      let count = showCartBody.querySelector('.count-product-cart');
-
-      // const divElem = document.createElement('div');
-      // divElem.className = "no-empty"
-      // if (!showCartBody.querySelector('.no-empty')) {
-      //   showCartBody.appendChild(divElem);
-      // }
-
-      // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
-      productCount++;
-      goodsInCartCount.innerText += productCount;
-      count.innerText = productCount;
-      document.getElementById('mini-cart_noempty').innerHTML = '<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + productCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>';
+      const showCartBody = document.querySelectorAll(".show-cart");
+      if (showCartBody) {
+        showCartBody.forEach(btn => {
+          let countElem = btn.querySelector('.count-product-cart');
+          if (countElem) {
+            countElem.innerText = data.cart_total_count;
+          } else {
+            let span = document.createElement('span');
+            span.className = 'count-product-cart';
+            span.innerText = data.cart_total_count;
+            btn.appendChild(span);
+          }
+        })
+      }
+      document.getElementById('mini-cart_noempty').innerHTML = '<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + data.cart_total_count + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>';
 
 
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
@@ -483,6 +396,15 @@ const openPopup = (event) => {
     popup = document.getElementById(popupBtn.dataset.popup);
     document.documentElement.classList.add('popup-show');
     popup.classList.add('popup_show');
+
+    let nameOrder = popupBtn.dataset.order;
+    console.log(nameOrder);
+    if (nameOrder) {
+      let fieledHidden = popup.querySelector('input[type="hidden"]');
+      console.log(fieledHidden);
+      fieledHidden.value = nameOrder;
+    }
+
     bodyLock();
   }
 }
@@ -539,13 +461,10 @@ if (burgerButton) {
   })
 }
 const dpi = window.devicePixelRatio;
-console.log(dpi);
-console.log('---------------------');
 document.addEventListener('DOMContentLoaded', () => {
   const dpi = window.devicePixelRatio;
 
   if (dpi > 2) {
-    console.log(dpi);
     document.documentElement.classList.add('_big');
   }
   // const target = document.getElementById('target');
@@ -570,14 +489,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /************Формы обратной связи*************/
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('callback-form').addEventListener('submit', function (event) {
+
+const sendingForm = (nameForm) => {
+  document.getElementById(nameForm).addEventListener('submit', function (event) {
     event.preventDefault();
 
     const form = event.target;
     const formData = new FormData(form);
     const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
+    console.log("work 1");
     fetch(form.action, {
       method: 'POST',
       headers: {
@@ -589,6 +509,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         let loading = document.querySelector('.popup__loading');
         loading.classList.add('_active');
+        console.log("work 2");
         setTimeout(() => {
           form.reset();
           loading.classList.remove('_active');
@@ -600,11 +521,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(error);
       });
   });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  sendingForm('contact-from');
 });
 
+
 /*************Табы картинок**********/
-
-
 const tabBtnTrigger = document.querySelectorAll('.index-work__links a');
 const tabContent = document.querySelectorAll('.index-work__grid');
 if (tabBtnTrigger) {

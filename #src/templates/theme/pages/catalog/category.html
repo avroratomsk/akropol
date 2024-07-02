@@ -4,18 +4,20 @@
     <div class="category-details__container">
       <div class="category-details__row">
         <div class="category-details__col" id="filter-category">
-          <button type="button" class="close" id="close-filter">X</button>
+          <button type="button" class="close popup__close" id="close-filter"><span></span></button>
           {{ min_price_product }}
           <form method="GET" class="filter-form">
             {% for field in filter_form %}
             <div class="filter__body">
               <label class="filter__label">{{ field.label }}</label>
-              {% for checkbox in field %}
-              <div class="form__group-boolean">
-                {{ checkbox.tag }}
-                <label class="checkbox-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+              <div class="filter__inner">
+                {% for checkbox in field %}
+                <div class="form__group-boolean">
+                  {{ checkbox.tag }}
+                  <label class="checkbox-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                </div>
+                {% endfor %}
               </div>
-              {% endfor %}
             </div>
             {% endfor %}
             <button type=" submit" class="filter__submit">Фильтровать</button>

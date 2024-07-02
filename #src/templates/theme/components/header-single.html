@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% load carts_tag %}
 <div class="header-under">
   <div class="header-under__container">
     <div class="header-under__inner">
@@ -35,10 +35,12 @@
           Заказать звонок
           <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
         </button>
-        <button type="button" class="top-main__cart" id="show-cart">
+        <button type="button" class="top-main__cart show-cart" id="show-cart">
           <span>Корзина</span>
           <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="" />
-          <span class="count-product-cart" id="count-goods"></span>
+          {% user_carts request as carts %} {% if carts %}
+          <span class="count-product-cart" id="count-goods">{{ carts.total_quantity }}</span>
+          {% endif %}
         </button>
       </div>
     </div>
@@ -66,8 +68,9 @@
             </ul>
             {% endif %}
           </li>
-          <li class="nav__item"><a href="#">Услуги</a> {% comment %} <img
-              src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> {% endcomment %}</li>
+          <li class="nav__item">
+            <a href="{% url 'service' %}">Услуги</a> {% comment %} <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> {% endcomment %}
+          </li>
           <li class="nav__item"><a href="{% url 'service_grav' %}">Гравировка</a></li>
           <li class="nav__item"><a href="{% url 'service_new' %}">Установка</a></li>
           <li class="nav__item"><a href="#">Оплата</a></li>

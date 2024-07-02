@@ -65,6 +65,10 @@
   // .form__controls-label
 
   &__controls-label {
+    position: relative;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
 
     input {
       appearance: none;
@@ -72,6 +76,16 @@
       top: 0;
       left: 0;
       z-index: -2;
+
+      &:checked~img {
+        border: 2px solid rgba($color: $accent, $alpha: 1.0);
+      }
+    }
+
+    img {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
     }
   }
 
@@ -104,6 +118,45 @@
 
     input {
       border: 1px solid rgba($color: $mainColor, $alpha: 1.0);
+    }
+  }
+
+  // .form__group-boolean
+
+  &__group-boolean {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border: 1px solid rgba($color: $accent, $alpha: 1.0);
+      // border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        margin-top: -3px;
+        margin-left: -3px;
+        background-color: rgba($color: $accent, $alpha: 1.0);
+        display: none;
+      }
+
+      &:checked::after {
+        display: block;
+      }
+    }
+
+    label {
+      cursor: pointer;
     }
   }
 

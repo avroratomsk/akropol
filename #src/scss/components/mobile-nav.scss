@@ -49,6 +49,13 @@
         }
       }
     }
+
+    .count-product-cart {
+      color: rgba($color: $white, $alpha: 1.0);
+      top: 54%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }
 

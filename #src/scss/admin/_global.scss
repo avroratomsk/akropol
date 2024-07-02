@@ -4,7 +4,10 @@
     box-sizing: border-box;
 }
 
-body {}
+body {
+    font-family: $fontFamily;
+    background-color: #f2f7fb;
+}
 
 a {
     color: $mainColor;

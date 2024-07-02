@@ -45,7 +45,6 @@ def login(request):
 def register(request):
   if request.method == "POST":
     form = UserRegistrationForm(data=request.POST)
-    print(form)
     if form.is_valid:
       form.save()
       session_key = request.session.session_key

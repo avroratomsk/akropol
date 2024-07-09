@@ -4219,7 +4219,7 @@ body::after {
   }
 
   ._title {
-    font-size: 25px;
+    font-size: 16px;
   }
 
   .breadcrumbs__item {
@@ -4363,6 +4363,10 @@ body::after {
 @media screen and (max-width: 425px) {
   .product-thumb__slider {
     display: none;
+  }
+
+  .hero__title {
+    font-size: 25px;
   }
 
   .hero__buttons {

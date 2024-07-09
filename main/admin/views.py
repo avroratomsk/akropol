@@ -218,7 +218,8 @@ def upload_goods(request):
                 temp = filename.replace('.jpeg', '')
                 temp_one = temp.replace('№', '')
                 temp_b = temp_one.replace('В', 'B')
-                img.save(os.path.join('media/goods', temp_b), quality=60)  # quality=60 для JPEG файла
+                temp_e = temp_one.replace('Э', 'E')
+                img.save(os.path.join('media/goods', temp_e), quality=60)  # quality=60 для JPEG файла
                 
           # Очистка временной папки
           os.system('rm -rf media/upload')
@@ -276,7 +277,10 @@ def parse_exсel(path):
     meta_keywords = ''
     try:
       name_image = row[13].replace("№","")
-      image = f"goods/{name_image}"
+      # print(name_image)
+      name_two = name_image.replace('Э', 'E')
+      print(name_two)
+      image = f"goods/{name_two}"
     except:
       pass
     
@@ -421,7 +425,7 @@ def parse_exсel(path):
         except Exception as e: 
           pass
         
-# parse_exсel(path)
+parse_exсel(path)
 
 def admin_category(request):
   categorys = Category.objects.all()

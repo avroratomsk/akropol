@@ -60,4 +60,22 @@ class OrderSericeForm(forms.Form):
   ))
   
   service = forms.CharField()
+  
+class ConsultationForm(forms.Form):
+  name = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваше имя',
+      'class': 'form__controls'
+      }
+  ))
+
+  phone = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваш номер телефона',
+      'class': 'form__controls'
+      "data-input"
+      }
+  ))
+  
+  pagename = forms.CharField()
 

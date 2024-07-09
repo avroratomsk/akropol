@@ -176,34 +176,6 @@ body::after {
   border-radius: 3px;
 }
 
-#success {
-
-  .popup__content {
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.popup__success-image {
-  max-width: 250px;
-  width: 100%;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.popup__success-text {
-  font-size: 25px;
-  font-weight: 600;
-  margin-top: 30px;
-}
-
 .popup__loading {
   position: absolute;
   top: 0;

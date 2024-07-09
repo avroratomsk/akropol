@@ -398,9 +398,9 @@ const openPopup = (event) => {
     popup.classList.add('popup_show');
 
     let nameOrder = popupBtn.dataset.order;
-    console.log(nameOrder);
+
     if (nameOrder) {
-      let fieledHidden = popup.querySelector('input[type="hidden"]');
+      let fieledHidden = popup.querySelector('input[name="service"]');
       console.log(fieledHidden);
       fieledHidden.value = nameOrder;
     }
@@ -490,42 +490,131 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /************Формы обратной связи*************/
 
-const sendingForm = (nameForm) => {
-  document.getElementById(nameForm).addEventListener('submit', function (event) {
-    event.preventDefault();
 
-    const form = event.target;
-    const formData = new FormData(form);
-    const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-    console.log("work 1");
-    fetch(form.action, {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': csrfToken
-      },
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        let loading = document.querySelector('.popup__loading');
-        loading.classList.add('_active');
-        console.log("work 2");
-        setTimeout(() => {
-          form.reset();
-          loading.classList.remove('_active');
-          document.getElementById('callback').classList.remove('popup_show');
-          document.getElementById('success').classList.add('popup_show');
-        }, 1000);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  });
-}
 
 document.addEventListener('DOMContentLoaded', function () {
-  sendingForm('contact-from');
+  const consultationForm = document.getElementById('consultation');
+  if (consultationForm) {
+    consultationForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          form.reset();
+          document.documentElement.classList.remove('popup-show')
+          bodyUnLock();
+          document.getElementById('consultation-form').classList.remove('popup_show');
+          document.getElementById('success').classList.add('notification_show');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  }
+
+  const callBackForm = document.getElementById('callback-form');
+  if (callBackForm) {
+    callBackForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          form.reset();
+          document.documentElement.classList.remove('popup-show')
+          bodyUnLock();
+          document.getElementById('callback').classList.remove('popup_show');
+          document.getElementById('success').classList.add('notification_show');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  }
+
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          // let loading = document.querySelector('.popup__loading');
+          // loading.classList.add('_active');
+          form.reset();
+          document.getElementById('success').classList.add('notification_show');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  }
+
+  const orderService = document.getElementById('order-service-form');
+  if (orderService) {
+    orderService.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          form.reset();
+          document.documentElement.classList.remove('popup-show');
+          document.getElementById('order-service').classList.remove('popup_show');
+          bodyUnLock();
+          document.getElementById('success').classList.add('notification_show');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  }
 });
+
+
 
 
 /*************Табы картинок**********/

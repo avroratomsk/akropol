@@ -12,10 +12,12 @@ urlpatterns = [
     path('news/', views.news, name="news"),
     path('best-offer/', views.best_offer, name="best_offer"),
     path('gallery/', views.gallery, name="gallery"),
+    path('delivery/', views.delivery, name="delivery"),
     path('callback/', views.callback, name="callback"),
     path('contact-form/', views.contact_form, name="contact_form"),
     path('reviews-form/', views.reviews_form, name="reviews_form"),
-    path('service-form/', views.reviews_form, name="reviews_form"),
+    path('service-form/', views.service_form, name="service_form"),
+    path('consultation/', views.consultation, name="consultation"),
     # path('uslugi/', views.about, name="about"),
     # path('valancy/', views.about, name="about"),
     

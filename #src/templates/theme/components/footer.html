@@ -20,14 +20,12 @@
         </ul>
         <ul class="footer__list">
           <li class="footer__item--first">Меню</li>
-          <li class="footer__item"><a href="">Каталог</a></li>
-          <li class="footer__item"><a href="">О нас</a></li>
-          <li class="footer__item"><a href="">Наши работы</a></li>
+          <li class="footer__item"><a href="{% url 'category' %}">Каталог</a></li>
+          <li class="footer__item"><a href="{% url 'about' %}">О нас</a></li>
+          <li class="footer__item"><a href="{% url 'gallery' %}">Наши работы</a></li>
           <li class="footer__item"><a href="">Оплата</a></li>
-          <li class="footer__item"><a href="">Услуги</a></li>
-          <li class="footer__item"><a href="">Контакты</a></li>
-          <li class="footer__item"><a href="">Гравировка</a></li>
-          <li class="footer__item"><a href="">Избраное </a></li>
+          <li class="footer__item"><a href="{% url 'service' %}">Услуги</a></li>
+          <li class="footer__item"><a href="{% url 'contact' %}">Контакты</a></li>
         </ul>
       </div>
       <div class="footer__contact">
@@ -50,7 +48,7 @@
             <p class="footer__contact-address">Сб-Вс: 10:00-17:00</p>
           </div>
           <div class="footer__contact-list">
-            <a href="mailto:Zakaz.2024@yandex.ru" class="footer__contact-email">Zakaz.2024@yandex.ru</a>
+            <a href="mailto:{{ site_settings.email }}" class="footer__contact-email">{{ site_settings.email }}</a>
           </div>
         </div>
       </div>

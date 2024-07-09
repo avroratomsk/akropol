@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="index-contact__item">
-        <form action="{% url 'contact_form' %}" method="POST" class="form index-contact__form">
+        <form action="{% url 'contact_form' %}" id="contact-form" method="POST" class="form index-contact__form">
           {% csrf_token %}
           <h3 class="form__title">Заполните форму</h3>
           <p class="form__text">Оставьте заявку - мы обязательно с вами свяжемся</p>
@@ -49,15 +49,15 @@
                 <img src="{% static 'theme/mb/images/icon/phone-contact.svg' %}" alt="" />
               </label>
               <label for="tg" class="form__controls-label">
-                <input type="radio" id="tg" name="social" value="по telegram" />
+                <input type="radio" id="tg" name="social" value="Через Telegram" />
                 <img src="{% static 'theme/mb/images/icon/tg.svg' %}" alt="" />
               </label>
               <label for="vk" class="form__controls-label">
-                <input type="radio" id="vk" name="social" value="по vk" />
+                <input type="radio" id="vk" name="social" value="Через Вконтакте" />
                 <img src="{% static 'theme/mb/images/icon/vk.svg' %}" alt="" />
               </label>
               <label for="wh" class="form__controls-label">
-                <input type="radio" id="wh" name="social" value="по whatsapp" />
+                <input type="radio" id="wh" name="social" value="Через Whatsapp" />
                 <img src="{% static 'theme/mb/images/icon/wh.svg' %}" alt="" />
               </label>
             </div>

@@ -919,6 +919,18 @@ html.lock body::before {
   transition: 0.3s;
 }
 
+.service-page .hero__button--small {
+  width: 260px;
+}
+
+.service-page .hero__button--small:before {
+  display: none;
+}
+
+.service-page .hero__button--small:hover {
+  border-radius: 5px;
+}
+
 .service__text {
   border-radius: 10px;
   box-shadow: 0px 11px 24px 0px rgba(65, 162, 208, 0.15), 0px 43px 43px 0px rgba(65, 162, 208, 0.13), 0px 97px 58px 0px rgba(65, 162, 208, 0.08), 0px 173px 69px 0px rgba(65, 162, 208, 0.02), 0px 270px 76px 0px rgba(65, 162, 208, 0);
@@ -944,6 +956,42 @@ html.lock body::before {
 
 .service__text ol li + li {
   margin-top: 10px;
+}
+
+.service-advantge {
+  background: linear-gradient(0deg, rgba(65, 162, 208, 0.09) 50%, rgb(255, 255, 255) 100%);
+}
+
+.service-advantge__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.service-advantge__item {
+  box-shadow: 0px 0px 15px rgba(65, 162, 208, 0.1);
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(65, 162, 208, 0.3);
+}
+
+.service-advantge__item-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.service-advantge__item-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.service-advantge__item-text {
+  flex: 1 1 auto;
+  align-self: flex-start;
+  line-height: 140%;
 }
 
 .swiper-pagination-bullet {
@@ -1060,17 +1108,59 @@ html.lock body::before {
   margin-top: 0px;
 }
 
+.service-page__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 80vw, 350px), 1fr));
+  gap: 50px 30px;
+}
+
 .service-page__item {
-  padding: 15px;
-  display: inline-flex;
-  align-items: center;
-  box-shadow: 0px 0px 10px rgba(58, 67, 75, 0.1);
-  border: 1px solid rgba(58, 67, 75, 0.1);
-  border-radius: 6px;
+  position: relative;
+  background-color: #41a2d0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.service-page__item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(65, 162, 208, 0.1);
+  border-radius: 10px;
+  z-index: 0;
+  display: none;
+}
+
+.service-page__item:hover::before {
+  display: block;
 }
 
 .service-page__icon {
-  margin-right: 10px;
+  position: absolute;
+  bottom: -30px;
+  right: 0px;
+  z-index: 1;
+}
+
+.service-page__item-text {
+  padding: 40px;
+  min-height: 220px;
+  position: relative;
+  height: 100%;
+  font-size: 20px;
+  max-width: 235px;
+  color: #41a2d0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
 /*
@@ -1411,6 +1501,14 @@ section {
 
 ._overlay body::after {
   opacity: 1;
+}
+
+.text p {
+  line-height: 150%;
+}
+
+.text ul li {
+  line-height: 140%;
 }
 
 /*
@@ -1969,31 +2067,6 @@ body::after {
   font-size: 18px;
   border: 1px solid rgba(65, 162, 208, 0.2);
   border-radius: 3px;
-}
-
-#success .popup__content {
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup__success-image {
-  max-width: 250px;
-  width: 100%;
-}
-
-.popup__success-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.popup__success-text {
-  font-size: 25px;
-  font-weight: 600;
-  margin-top: 30px;
 }
 
 .popup__loading {
@@ -3587,6 +3660,44 @@ body::after {
 
 .show {
   right: 0;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: -100%;
+  width: 100%;
+  max-width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 999;
+  background-color: green;
+  transition: 0.5s;
+}
+
+.notification.notification_show {
+  right: 0;
+}
+
+.notification__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.notification__success-image {
+  width: 20px;
+  height: 20px;
+}
+
+.notification__success-image img {
+  width: 100%;
+}
+
+.notification__success-text {
+  font-size: 16px;
+  color: white;
 }
 
 @media screen and (min-width: 611px) {

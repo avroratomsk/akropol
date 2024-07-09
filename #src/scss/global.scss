@@ -128,3 +128,15 @@ h5 {}
 ._overlay body::after {
   opacity: 1;
 }
+
+.text {
+  p {
+    line-height: 150%;
+  }
+
+  ul {
+    li {
+      line-height: 140%;
+    }
+  }
+}

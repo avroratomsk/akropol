@@ -421,7 +421,7 @@ def parse_exсel(path):
         except Exception as e: 
           pass
         
-# parse_exсel(path)
+parse_exсel(path)
 
 def admin_category(request):
   categorys = Category.objects.all()

@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
 from cart.models import Cart
-from home.forms import CallbackForm, ContactForm, OrderSericeForm
+from home.forms import CallbackForm, ContactForm, OrderSericeForm, ReviewsPopupForm
 from home.callback_send import email_callback
 from shop.models import Category, Product
 from reviews.models import Reviews
@@ -49,13 +49,13 @@ def contact_form(request):
 
 def reviews_form(request):
   if request.method == "POST":
-    form = CallbackForm(request.POST)
+    form = ReviewsPopupForm(request.POST)
     if form.is_valid():
       name  = form.cleaned_data['name']
       phone = form.cleaned_data['phone']
-      message = form.cleaned_data['message']
+      reviews = form.cleaned_data['reviews']
       title = 'Форма отзыва'
-      messages = "Форма отзыва:" + "\n" + "Имя: " +str(name) + "\n" + "Телефон: " + str(phone) + "\n" + "\n" + "Отзыв: " + str(message) + "\n"
+      messages = "Форма отзыва:" + "\n" + "Имя: " +str(name) + "\n" + "Телефон: " + str(phone) + "\n" + "\n" + "Отзыв: " + str(reviews) + "\n"
       
       email_callback(messages, title)
       
@@ -123,7 +123,6 @@ def index(request):
   saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
   affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
   reviews = Reviews.objects.filter(status=True)
-  gallery = Gallery.objects.filter(is_active=True)[:5]
   gallery_category = GalleryCategory.objects.all()
   
   context = {

@@ -45,8 +45,8 @@
       <form action="{% url 'reviews_form' %}" class="popup__form" method="POST" id="reviews-form">
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
-        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input />
-        <textarea name="message" rows="10" class="popup__form-controls" placeholder="Ваш отзыв" /></textarea>
+        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" required data-tel-input />
+        <textarea name="reviews" rows="10" class="popup__form-controls" placeholder="Ваш отзыв" /></textarea>
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>

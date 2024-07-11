@@ -78,4 +78,28 @@ class ConsultationForm(forms.Form):
   ))
   
   pagename = forms.CharField()
+  
+class ReviewsPopupForm(forms.Form):
+  name = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваше имя',
+      'class': 'form__controls'
+      }
+  ))
+
+  phone = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваш номер телефона',
+      'class': 'form__controls'
+      "data-input"
+      }
+  ))
+  
+  reviews = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Ваш отзыв',
+            'class': 'form__controls',
+            'rows': 10
+        }),
+  )
 

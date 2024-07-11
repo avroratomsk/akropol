@@ -88,7 +88,7 @@ urlpatterns = [
     #URl - цвета памятников
     path('gallery/', views.admin_gallery, name='admin_gallery'),
     path('gallery/add/', views.admin_gallery_add, name='admin_gallery_add'),
-    # path('gallery/edit/<int:pk>/', views.admin_gallery_edit, name='admin_gallery_edit'),
+    path('gallery/edit/<int:pk>/', views.admin_gallery_edit, name='admin_gallery_edit'),
     # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
     
     #URl - отвечающие за отображение категории Галлереи, редактирование и удаление категории

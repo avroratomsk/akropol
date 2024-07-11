@@ -1029,8 +1029,24 @@ def gallery_category_add(request):
     
   return render(request, "gallery/gallery_category_add.html", context)
 
-def gallery_category_edit(request):
-  pass
+def gallery_category_edit(request, pk):
+  item = GalleryCategory.objects.get(id=pk)
+  
+  if request.method == "POST":
+    form_new = GalleryCategoryForm(request.POST, request.FILES, instance=item)
+    
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_gallery')
+    else:
+      return render(request, "gallery/gallery_category_edit.html", { "form": form_new })
+  
+  form = GalleryCategoryForm(instance=item)
+  context = {
+    "form": form,
+  }  
+    
+  return render(request, "gallery/gallery_category_edit.html", context)
 
 def gallery_category_delete(request):
   pass

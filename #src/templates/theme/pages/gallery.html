@@ -41,22 +41,22 @@
           {% endfor %} {% endif %}
         </div>
         <div class="gallery__content">
-          {% if gallery_category %}
-          {% for gal_cat in gallery_category %}
+          {% if gallery_category %} {% for gal_cat in gallery_category %}
           <div class="gallery__images" id="{{ gal_cat.slug }}">
             <h2 class="gallery__images-title">{{ gal_cat.name }}</h2>
             <div class="gallery__images-grid">
-              {% for image in gallery %}
-              {% if image.category.name == gal_cat.name %}
-              <a href="#" class="gallery__image">
-                <img src="{{ image.image.url }}" alt="" />
+              {% for image in gal_cat.categories.all %}
+              {% if image.category.slug == gal_cat.slug %}
+              <a href="{{ image.image.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
+                {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+                {% endthumbnail %}
               </a>
               {% endif %}
               {% endfor %}
             </div>
           </div>
-          {% endfor %}
-          {% endif %}
+          {% endfor %} {% endif %}
         </div>
       </div>
     </div>

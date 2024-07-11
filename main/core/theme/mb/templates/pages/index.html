@@ -7,15 +7,13 @@
         <div class="top-main__left">
           <div class="top-main__item">
             <div class="top-main__address">Яковлева, 41а</div>
-            <a href="tel:+73822210915" class="top-main__phone"
-              >+7(3822)-210-915
+            <a href="tel:+73822210915" class="top-main__phone">+7(3822)-210-915
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
           <div class="top-main__item">
             <div class="top-main__address">Демьяна Бедного, 16а ст1</div>
-            <a href="tel:+73822224018" class="top-main__phone"
-              >+7(3822)-224-018
+            <a href="tel:+73822224018" class="top-main__phone">+7(3822)-224-018
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
@@ -85,7 +83,8 @@
         </div>
         <div class="index-catalog__content">
           <div class="index-catalog__cards">
-            {% if products %} {% for product in products %} {% include '../includes/card.html' with product=product %} {% endfor %} {% else %}
+            {% if products %} {% for product in products %} {% include '../includes/card.html' with product=product %}
+            {% endfor %} {% else %}
             <div class="empty-info">
               <p>Товара нет</p>
             </div>
@@ -140,17 +139,19 @@
       <h2 class="index-work__title">Наши работы</h2>
       <div class="index-work__links">
         {% if gallery_category %} {% for cat in gallery_category %}
-        <a href="{{ cat.slug }}" class="{% if forloop.first %}_active {% endif %}">{{ cat.name }}</a>
+        <a href="{{ cat.slug }}" class="index-work__link {% if forloop.first %}_active {% endif %}">{{ cat.name }}</a>
         {% endfor %} {% endif %}
       </div>
-      {% if gallery %} {% for gal_cat in gallery_category %}
+      {% if gallery_category %}
+      {% for gal_cat in gallery_category %}
       <div class="index-work__grid {% if forloop.first %}_active {% endif %}" id="{{ gal_cat.slug }}">
-        {% for image in gallery %} {% if image.category.name == gal_cat.name %}
-        <div class="index-work__item">
+        {% for image in gal_cat.categories.all %}
+        {% if image.category.slug == gal_cat.slug %}
+        <a href="{{ image.image.url }}" data-gall="{{ image.category.slug }}" class="index-work__item">
           {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
           {% endthumbnail %}
-        </div>
+        </a>
         {% endif %} {% endfor %}
       </div>
       {% endfor %} {% endif %}

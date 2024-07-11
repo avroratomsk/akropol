@@ -612,13 +612,43 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
   }
+
+  const reviewsForm = document.getElementById('reviews-form');
+  if (reviewsForm) {
+    reviewsForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          form.reset();
+          document.documentElement.classList.remove('popup-show');
+          document.getElementById('reviews').classList.remove('popup_show');
+          bodyUnLock();
+          document.getElementById('success').classList.add('notification_show');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  }
 });
 
 
 
 
 /*************Табы картинок**********/
-const tabBtnTrigger = document.querySelectorAll('.index-work__links a');
+const tabBtnTrigger = document.querySelectorAll('.index-work__link');
 const tabContent = document.querySelectorAll('.index-work__grid');
 if (tabBtnTrigger) {
   tabBtnTrigger.forEach(btn => btn.addEventListener('click', showTabContent));
@@ -626,7 +656,7 @@ if (tabBtnTrigger) {
 
 function showTabContent(e) {
   e.preventDefault();
-
+  console.log(e.target);
   let contentID = this.getAttribute('href').replace('#', '');
   let contentTab = document.getElementById(contentID);
   tabContent.forEach(elem => elem.classList.remove('_active'));

@@ -119,17 +119,15 @@ def index(request):
     settings = BaseSettings.objects.all()
 
   category = Category.objects.all()[:4]
-  products = Product.objects.filter(status=True)[:8]
-  saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
-  affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
+  products = Product.objects.filter(status=True).prefetch_related('chars')[:8]
   reviews = Reviews.objects.filter(status=True)
-  gallery_category = GalleryCategory.objects.all()
+  gallery = Gallery.objects.all()
+  gallery_category = GalleryCategory.objects.all().prefetch_related('categories')
   
   context = {
     "categorys": category,
     "home_page": home_page,
     "products": products,
-    "affordable": affordable_products,
     "settings": settings,
     "reviews": reviews,
     "gallery": gallery,
@@ -137,47 +135,6 @@ def index(request):
     "form": form
   }
   return render(request, 'pages/index.html', context)
-
-def populate(request):
-  products = Product.objects.filter(quantity_purchase__gte=10)
-  
-  context = {
-    "title": "Популярные товары",
-    "products": products,
-  }
-  
-  return render(request, "pages/populate.html", context)
-
-def best_offer(request):
-  free_shipping_products = Product.objects.filter(free_shipping=True)
-  
-  context = {
-    "title": "Лучшие предложения",
-    "free_shipping_products": free_shipping_products
-  }
-  
-  return render(request, "pages/best_offer.html", context)
-
-def stock_product(request):
-  products = Product.objects.filter(discount__gte=1)
-  
-  context = {
-    "title": "Товары по акции",
-    "products": products
-  }
-  
-  return render(request, "pages/stock-product.html", context)
-
-
-def news(request):
-  products = Product.objects.filter(latest=True)
-  
-  context = {
-    "title": "Новинки",
-    "products": products
-  }
-  
-  return render(request, "pages/stock-product.html", context)
 
 def about(request):
     return render(request, "pages/about.html")
@@ -211,9 +168,8 @@ def stock_detail(request, slug):
   
   
 def gallery(request):
-  gallery = Gallery.objects.filter(is_active=True)[:5]
-  gallery_category = GalleryCategory.objects.all()
-  
+  gallery_category = GalleryCategory.objects.all().prefetch_related('categories')
+  gallery = Gallery.objects.all()
   context = {
     "gallery": gallery,
     "gallery_category": gallery_category,

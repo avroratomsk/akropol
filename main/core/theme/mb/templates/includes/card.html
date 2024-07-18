@@ -1,13 +1,11 @@
 {% load static %} {% load thumbnail %}
 <div class="index-catalog__card card">
   <div class="card__image">
-    {% if product.image %}
-    <img src="{{ product.image.url }}" alt="" />
-    {% endif %} {% comment %} {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+    {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}" title="{{ product.name }}" />
     {% endthumbnail %} {% else %}
-    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
-    {% endif %} {% endcomment %}
+    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}" />
+    {% endif %}
   </div>
   <div class="card__content">
     <a href="{{ product.get_absolute_url }}" class="card__content-title">{{ product.model }}</a>
@@ -16,5 +14,5 @@
     {% endif %} {% endfor %}
     <div class="card__content-price">{{ product.price }} ₽</div>
   </div>
-  <a href="{{ product.get_absolute_url }}" class="card__content-link">Подробнее</a>
+  <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
 </div>

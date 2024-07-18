@@ -1,0 +1,11 @@
+{% load static %} {% load thumbnail %} {% for gal_cat in gallery_category %}
+<div class="index-work__grid {% if forloop.first %}_active {% endif %}" id="{{ gal_cat.slug }}">
+  {% for image in gal_cat.categories.all %} {% if image.category.slug == gal_cat.slug %} {% if forloop.counter <= 5 %}
+  <a href="{{ image.image.url }}" data-gall="{{ image.category.slug }}" class="index-work__item">
+    {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+    {% endthumbnail %}
+  </a>
+  {% endif %} {% endif %} {% endfor %}
+</div>
+{% endfor %}

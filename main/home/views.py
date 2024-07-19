@@ -140,7 +140,7 @@ def index(request):
 
 def gal_cat_detail(request, slug):
   category = GalleryCategory.objects.get(slug=slug)
-  images = Gallery.objects.filter(category=category)
+  images = Gallery.objects.filter(category=category, cat_detail=True)
   context = {
     "category": category,
     "images": images,

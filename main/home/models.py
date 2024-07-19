@@ -59,6 +59,7 @@ class Gallery(models.Model):
   category = models.ForeignKey(GalleryCategory, on_delete=models.CASCADE, null=True, default=None, related_name="categories")
   image = models.ImageField(upload_to="gallery-image", null=True, blank=True, verbose_name="Фотография")
   name = models.CharField(max_length=255, null=True, blank=True, verbose_name="Наименование пойдет в alt и title")
+  cat_detail = models.BooleanField(default=False, verbose_name="Вывод в категорию")
   is_active = models.BooleanField(default=True, verbose_name="Выводить на сайт ?")
   
   def __str__(self):

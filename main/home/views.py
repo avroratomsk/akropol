@@ -206,7 +206,7 @@ def stock_detail(request, slug):
   
 def gallery(request):
   gallery_category = GalleryCategory.objects.all().prefetch_related('categories')
-  gallery = Gallery.objects.all()
+  gallery = Gallery.objects.filter(is_active=True)
   context = {
     "gallery": gallery,
     "gallery_category": gallery_category,

@@ -630,6 +630,42 @@ html.lock body::before {
   object-fit: cover;
 }
 
+.index-work__slider {
+  position: relative;
+}
+
+.index-work__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.index-work__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.index-work__next,
+.index-work__prev {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #41a2d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.index-work__next::after,
+.index-work__prev::after {
+  font-size: 14px;
+  color: white;
+}
+
 .index-reviews {
   padding: 90px 0px;
 }

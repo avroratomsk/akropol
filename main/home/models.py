@@ -46,9 +46,14 @@ class Stock(models.Model):
 class GalleryCategory(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Наименование")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="")
+  home_view = models.BooleanField(default=False, verbose_name="Отображать на главной ?")
+  image = models.ImageField(upload_to="gallery-category", null=True, blank=True, verbose_name="Фотография категории")
   
   def __str__(self):
     return self.name
+  
+  def get_absolute_url(self):
+    return reverse("gal_cat_detail", kwargs={"slug": self.slug})
   
 class Gallery(models.Model):
   category = models.ForeignKey(GalleryCategory, on_delete=models.CASCADE, null=True, default=None, related_name="categories")

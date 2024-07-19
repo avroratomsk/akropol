@@ -70,7 +70,7 @@ def admin_product(request):
   current_page = paginator.page(int(page))
   
   context = {
-    "products": current_page
+    "items": current_page
   }
   return render(request, "shop/product/product.html", context)
 

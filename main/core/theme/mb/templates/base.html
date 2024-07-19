@@ -126,6 +126,42 @@
       },
     });
 
+    const index_work__slider = new Swiper(".index-work__slider", {
+      slidesPerView: 3,
+      //slidesPerGroup: 1,
+      loop: true,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: ".index-work__next",
+        prevEl: ".index-work__prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+      },
+      breakpoints: {
+        // when window width is >= 320px
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        // when window width is >= 480px
+        480: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        620: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        // when window width is >= 640px
+        920: {
+          slidesPerView: 3,
+          spaceBetween: 20
+        }
+      },
+    });
+
     const swiper_about = new Swiper(".index-about__slider", {
       slidesPerView: 1,
       //slidesPerGroup: 1,
@@ -174,7 +210,7 @@
     });
 
     new VenoBox({
-      selector: ".index-work__item",
+      selector: ".index-work__slide",
     });
 
   </script>

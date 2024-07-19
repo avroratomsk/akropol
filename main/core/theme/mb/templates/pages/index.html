@@ -57,19 +57,25 @@
   <section class="index-stock">
     <div class="index-stock__container">
       <div class="index-stock__grid">
-        <div class="index-stock__item index-stock__item--first">
+        <a href="{% url 'stock_product' %}" class="index-stock__item index-stock__item--first">
           <img src="{% static 'theme/mb/images/arki.jpg' %}" alt="" class="index-stock__item-img" />
-          <h2 class="index-stock__item-title">Арки со <br />скидкой</h2>
-          <p class="index-stock__item-discount">20%</p>
-        </div>
-        <div class="index-stock__item">
-          <img src="{% static 'theme/mb/images/svo.jpg' %}" alt="" class="index-stock__item-img" />
-          <h2 class="index-stock__item-title">Памятники <br />солдатам <span>СВО</span></h2>
-        </div>
-        <div class="index-stock__item">
-          <img src="{% static 'theme/mb/images/memorial.jpg' %}" alt="" class="index-stock__item-img" />
-          <h2 class="index-stock__item-title">Мемориальные <br /><span>комплексы</span></h2>
-        </div>
+          <h2 class="index-stock__item-title">Товары со <br />скидкой</h2>
+          <p class="index-stock__item-discount"></p>
+        </a>
+        {% if category_gallery %}
+        {% for gal_cat in category_gallery %}
+        <a href="{{ gal_cat.get_absolute_url }}" class="index-stock__item">
+          {% if gal_cat.image %}
+          {% thumbnail gal_cat.image "680x300" format="WEBP" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}" class="index-stock__item-img" />
+          {% endthumbnail %}
+          {% else %}
+          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}" class="index-stock__item-img" />
+          {% endif %}
+          <h2 class="index-stock__item-title">{{ gal_cat.name|safe }}</h2>
+        </a>
+        {% endfor %}
+        {% endif %}
       </div>
     </div>
   </section>
@@ -138,13 +144,25 @@
   <section class="index-work">
     <div class="index-work__container">
       <h2 class="index-work__title">Наши работы</h2>
-      <div class="index-work__links">
-        {% if gallery_category %} {% for cat in gallery_category %}
-        <a href="{{ cat.slug }}" class="index-work__link {% if forloop.first %}_active {% endif %}">{{ cat.name }}</a>
-        {% endfor %} {% endif %}
+      <div class="index-work__slider swiper">
+        <div class="index-work__wrapper swiper-wrapper">
+          {% if gallery %}
+          {% for image in gallery %}
+          <a href="{{ gallery.image.url }}" class="index-work__slide swiper-slide" data-gall="{{ image.category.slug }}" >
+            {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}" />
+            {% endthumbnail %}
+          </a>
+          {% endfor %}
+          {% else %}
+          No image
+          {% endif %}
+          
+        </div>
+        <div class="index-work__next swiper-button-next"></div>
+        <div class="index-work__prev swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
       </div>
-      {% if gallery_category %} {% include "../includes/gallery-image.html" %} {% endif %}
-    </div>
   </section>
 
   <section class="index-reviews">

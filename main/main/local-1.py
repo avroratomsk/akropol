@@ -1,6 +1,7 @@
 INSTALLED_APPS = [
     # "django.contrib.admin",
     "admin",
+    "accounts",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -21,6 +22,8 @@ INSTALLED_APPS = [
     "order",
     "payment",
     "subdomain",
+    'allauth',
+    'allauth.account',
     # 'tinymce',
     # "blog",
     # "news",

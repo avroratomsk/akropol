@@ -176,4 +176,4 @@ RECAPTCHA_REQUIRED_SCORE = 0.5
 # RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 # Переопределяем путь для @login_required - если пользовательно не авторизован, то перенаправить на страницу login  а не 404
-LOGIN_URL = 'user/login/'
+# LOGIN_URL = 'user/login/'

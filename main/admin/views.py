@@ -16,7 +16,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 import openpyxl
 import pandas as pd
 from django.core.files.images import ImageFile
-# from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test
 
 # @user_passes_test(lambda u: u.is_superuser)
 # def sidebar_show(request): 
@@ -27,6 +27,7 @@ from django.core.files.images import ImageFile
 
 # @user_passes_test(lambda u: u.is_superuser)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin(request):
   """Данная предстовление отобразает главную страницу админ панели"""
   return render(request, "page/index.html")

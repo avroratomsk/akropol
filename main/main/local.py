@@ -12,6 +12,7 @@ DATABASES = {
 INSTALLED_APPS = [
     # "django.contrib.admin",
     "admin",
+    'accounts',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -32,6 +33,8 @@ INSTALLED_APPS = [
     "order",
     "payment",
     "subdomain",
+    'allauth',
+    'allauth.account',
     # 'tinymce',
     # "blog",
     # "news",
@@ -48,4 +51,5 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]

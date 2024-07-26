@@ -37,12 +37,11 @@
         {% csrf_token %}
         <div class="form__group">
           <label for="id_login" class="form__label">Имя пользователя<span>:</span></label>
-          <input type="text" class="form__controls" name="login" value="" id="id_login" required />
+          <input type="text" class="form__controls" name="login" id="id_login" required />
         </div>
         <div class="form__group">
           <label for="id_password" class="form__label">Пароль<span>:</span></label>
-          <input type="password" class="form__controls" id="id_password" name="password"
-            placeholder="Введите ваш пароль" required="" />
+          <input type="password" class="form__controls" id="id_password" name="password" required />
         </div>
         <button type="submit" class="form__submit">Войти</button>
       </form>

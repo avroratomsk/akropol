@@ -1122,7 +1122,8 @@ html.lock body::before {
 }
 
 .login__sidebar {
-  padding: 40px;
+  width: 580px;
+  padding: 0px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1143,6 +1144,31 @@ html.lock body::before {
 .login__images img {
   width: 100%;
   height: 100%;
+}
+
+.login .form {
+  display: grid;
+  gap: 20px;
+}
+
+.login .form__group {
+  display: grid;
+  gap: 10px;
+}
+
+.login .form__controls {
+  box-shadow: none;
+  width: 100%;
+  height: 50px;
+}
+
+.login .form__submit {
+  background-color: #41a2d0;
+  width: 100%;
+  height: 50px;
+  color: white;
+  border-radius: 5px;
+  padding: 0px;
 }
 
 .about__grid {
@@ -1412,7 +1438,7 @@ html.lock body::before {
 
 .footer {
   background-color: #29779c;
-  padding: 79px 0px 89px;
+  padding: 79px 0px 0px;
 }
 
 .footer__inner {
@@ -1498,6 +1524,12 @@ html.lock body::before {
   font-weight: 300;
   line-height: 20px;
   text-decoration-line: underline;
+}
+
+.footer__author {
+  text-align: center;
+  color: white;
+  padding: 60px 0px 60px;
 }
 
 ._lock {

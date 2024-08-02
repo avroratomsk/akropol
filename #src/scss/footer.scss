@@ -1,6 +1,6 @@
 .footer {
   background-color: rgba($color: $hoverBtn, $alpha: 1.0);
-  padding: 79px 0px 89px;
+  padding: 79px 0px 0px;
 
   // .footer__container
 
@@ -81,6 +81,7 @@
       }
     }
   }
+
 
   // .footer__contact
 
@@ -168,4 +169,11 @@
   // .footer__contact-email
 
   &__contact-email {}
+
+  // .footer__author
+  &__author {
+    text-align: center;
+    color: rgba($color: $white, $alpha: 1.0);
+    padding: 60px 0px 60px;
+  }
 }

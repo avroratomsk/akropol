@@ -149,8 +149,9 @@
             </div>
             <div class="card__content">
               <a href="#" class="card__content-title">{{ product.model }}</a>
-              {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2
-                %} <p class="card__content-char">Материал: {{ chr }}</p>
+              {% for chr in product.chars.all %}
+              {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p class="card__content-char">
+                Материал: {{ chr }}</p>
                 {% endif %} {% endfor %}
                 <div class="card__content-price">{{ product.price }} ₽</div>
             </div>

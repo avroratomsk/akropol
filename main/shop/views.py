@@ -61,7 +61,7 @@ def category_detail(request, slug):
   current_page = paginator.page(int(page))
   
   context = {
-    "category_name": category.name,
+    "category": category,
     "title": "Название товара",
     "products": current_page,
     "filter_form": filter_form,

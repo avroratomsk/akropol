@@ -144,7 +144,7 @@ if (ctx) {
 
 const numberSymbols = {
   'title': 50,
-  'description': 216
+  'description': 140
 }
 
 // const metaFields = document.querySelectorAll('.meta_field');

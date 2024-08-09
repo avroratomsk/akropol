@@ -13,6 +13,10 @@ from .models import *
 
 def category(request):
   products = Product.objects.filter(status=True).order_by('model')
+  try:
+    shop_setup = ShopSettings.objects.get()
+  except: 
+    shop_setup = ShopSettings()
   page = request.GET.get("page", 1)
   filter_form = ProductFilterForm(request.GET)
   if filter_form.is_valid():
@@ -31,6 +35,7 @@ def category(request):
     "title": "Название товара",
     "products": current_page,
     "filter_form": filter_form,
+    "shop_setup": shop_setup
   }
   
   return render(request, "pages/catalog/category.html", context)

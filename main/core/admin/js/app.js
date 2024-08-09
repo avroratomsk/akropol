@@ -162,32 +162,28 @@ const numberSymbols = {
 //   })
 // }
 
-const metaFields = document.querySelectorAll('.meta_field');
-if (metaFields) {
-  metaFields.forEach(item => {
-    let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
-    if (item.value <= 0) {
-      parentItem.innerText = 0;
-    } else {
-      parentItem.innerText = item.value.length;
-      checkLengthSymbol(item.value.length);
-    }
+// const metaFields = document.querySelectorAll('.meta_field');
+// if (metaFields) {
+//   metaFields.forEach(item => {
+//     let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
+//     if (item.value <= 0) {
+//       parentItem.innerText = 0;
+//     } else {
+//       parentItem.innerText = item.value.length;
+//       checkLengthSymbol(item.value.length);
+//     }
 
-    item.addEventListener('input', function (e) {
-      parentItem.innerText = item.value.length;
-      checkLengthSymbol(item.value.length, parentItem);
-    })
-  })
-}
+//     item.addEventListener('input', function (e) {
+//       parentItem.innerText = item.value.length;
+//       checkLengthSymbol(item.value.length, parentItem);
+//     })
+//   })
+// }
 
 function checkLengthSymbol(lenght, item) {
-
   if (lenght > numberSymbols.title) {
     item.style.color = 'red';
   }
-
-
-
   if (lenght > numberSymbols.description) {
     item.style.color = 'red';
   }

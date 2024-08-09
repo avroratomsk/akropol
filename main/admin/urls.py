@@ -75,6 +75,8 @@ urlpatterns = [
     
     path('home-page/', views.admin_home_page, name='admin_home_page'),
     
+    path('admin-shop/', views.admin_shop, name='admin_shop'),
+    
     #URl - субдомены
     path('subdomain/', views.admin_subdomain, name='admin_subdomain'),
     path('subdomain/add/', views.subdomain_add, name='subdomain_add'),

@@ -4,13 +4,13 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, SubdomainForm, UploadFileForm
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import CharGroup, CharName, ColorProduct, Product,Category, ProductChar, ProductImage
+from shop.models import CharGroup, CharName, ColorProduct, Product,Category, ProductChar, ProductImage, ShopSettings
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 import openpyxl
@@ -86,6 +86,32 @@ def admin_home_page(request):
 
   return render(request, "home-page/home-page.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
+def admin_shop(request):
+  try:
+    shop_setup = ShopSettings.objects.get()
+    form = ShopSettingsForm(instance=shop_setup)
+  except:
+    form = ShopSettingsForm()
+    
+  if request.method == "POST":
+    try:
+      shop_setup = ShopSettings.objects.get()
+    except ShopSettings.DoesNotExist:
+      shop_setup = None
+    form_new = ShopSettingsForm(request.POST, request.FILES, instance=shop_setup)
+    
+    if form_new.is_valid:
+      form_new.save()
+      
+      return redirect('admin_shop')
+    else:
+      return render(request, "shop/settings.html", {"form": form})
+  
+  context = {
+    "form": form,
+  }  
+  return render(request, "shop/settings.html", context)
 def admin_product(request):
   """
   View, которая возвращаяет и отрисовывает все товары на странице

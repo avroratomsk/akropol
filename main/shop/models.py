@@ -2,6 +2,13 @@ from django.db import models
 from django.urls import reverse
 import os
 from django.conf import settings
+from admin.singleton_model import SingletonModel
+
+class ShopSettings(SingletonModel):
+  meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
+  meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="META заголовок")
+  meta_description = models.TextField(null=True, blank=True, verbose_name="META описание")
+  meta_keywords = models.TextField(null=True, blank=True, verbose_name="META keywords")
 
 # Категория
 class Category(models.Model):

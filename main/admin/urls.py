@@ -73,6 +73,8 @@ urlpatterns = [
     #URl - Шаблон общих настроек сайта
     path('settings/', views.admin_settings, name='admin_settings'),
     
+    path('home-page/', views.admin_home_page, name='admin_home_page'),
+    
     #URl - субдомены
     path('subdomain/', views.admin_subdomain, name='admin_subdomain'),
     path('subdomain/add/', views.subdomain_add, name='subdomain_add'),

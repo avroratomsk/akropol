@@ -141,11 +141,16 @@ if (ctx) {
 /**
  * Подсчет и отображение количества символов в meta-полях
  */
+
+const numberSymbols = {
+  'title': 50,
+  'description': 216
+}
+
 // const metaFields = document.querySelectorAll('.meta_field');
 // if (metaFields) {
 //   metaFields.forEach(item => {
 //     let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
-//     console.log(item);
 //     if (item.value <= 0) {
 //       parentItem.innerText = 0;
 //     } else {
@@ -156,6 +161,37 @@ if (ctx) {
 //     })
 //   })
 // }
+
+const metaFields = document.querySelectorAll('.meta_field');
+if (metaFields) {
+  metaFields.forEach(item => {
+    let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
+    if (item.value <= 0) {
+      parentItem.innerText = 0;
+    } else {
+      parentItem.innerText = item.value.length;
+      checkLengthSymbol(item.value.length);
+    }
+
+    item.addEventListener('input', function (e) {
+      parentItem.innerText = item.value.length;
+      checkLengthSymbol(item.value.length, parentItem);
+    })
+  })
+}
+
+function checkLengthSymbol(lenght, item) {
+
+  if (lenght > numberSymbols.title) {
+    item.style.color = 'red';
+  }
+
+
+
+  if (lenght > numberSymbols.description) {
+    item.style.color = 'red';
+  }
+};
 
 const dropdownButtons = document.querySelectorAll('.dropdownButton');
 

@@ -3,14 +3,17 @@
 <html lang="ru" class="">
 
 <head>
-  <title>{{ title }}</title>
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% endblock %}" />
+  <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+  <link rel="canonical" href="{% block canonical %}{% endblock %}" />
   <meta charset="UTF-8" />
   <meta name="format-detection" content="telephone=no" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="{% static 'theme/mb/css/main.css' %}" />
   <link rel="stylesheet" href="{% static 'libs/venobox.min.css' %}" />
-  <link rel="shortcut icon" href="{% static 'theme/mb/images/favicon.ico' %}" />
-  <meta name="robots" content="all">
+  <link rel="shortcut icon" href="{% if site_settings.favicon %} {{ site_settings.favicon.url }} {% endif%}" />
+  <meta name="robots" content="all" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
@@ -21,33 +24,38 @@
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {
-      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i] =
+        m[i] ||
+        function () {
+          (m[i].a = m[i].a || []).push(arguments);
+        };
       m[i].l = 1 * new Date();
-      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
-      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    })
-      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return;
+        }
+      }
+      (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]), (k.async = 1), (k.src = r), a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
     ym(97977097, "init", {
       clickmap: true,
       trackLinks: true,
-      accurateTrackBounce: true
+      accurateTrackBounce: true,
     });
   </script>
   <noscript>
-    <div><img src="https://mc.yandex.ru/watch/97977097" style="position:absolute; left:-9999px;" alt="" /></div>
+    <div><img src="https://mc.yandex.ru/watch/97977097" style="position: absolute; left: -9999px" alt="" /></div>
   </noscript>
   <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>
   <div class="wrapper">
-    {% if request.path == '/' %}
-    {% include "./components/header.html" %}
-    {% else %} {% include "./components/header-single.html" %}
-    {% endif %} {% block content %}
-    {% endblock %} {% include "./components/footer.html" %}
-    {% include "./components/notification/modal.html" %} {% include "./components/mini-cart.html" %}
+    {% if request.path == '/' %} {% include "./components/header.html" %} {% else %}
+    {% include "./components/header-single.html" %} {% endif %} {% block content %}
+    {% endblock %} {% include "./components/footer.html" %} {% include "./components/notification/modal.html" %}
+    {% include "./components/mini-cart.html" %}
     {% include "./components/popup.html" %} {% include "./components/mobile-nav.html" %}
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -165,22 +173,22 @@
         // when window width is >= 320px
         320: {
           slidesPerView: 1,
-          spaceBetween: 20
+          spaceBetween: 20,
         },
         // when window width is >= 480px
         480: {
           slidesPerView: 1,
-          spaceBetween: 20
+          spaceBetween: 20,
         },
         620: {
           slidesPerView: 2,
-          spaceBetween: 20
+          spaceBetween: 20,
         },
         // when window width is >= 640px
         920: {
           slidesPerView: 3,
-          spaceBetween: 20
-        }
+          spaceBetween: 20,
+        },
       },
     });
 
@@ -234,7 +242,6 @@
     new VenoBox({
       selector: ".index-work__slide",
     });
-
   </script>
   <script src="{% static 'theme/mb/js/index.js' %}"></script>
 </body>

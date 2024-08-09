@@ -110,14 +110,11 @@ def consultation(request):
 
 
 def index(request):
-  page = request.GET.get('page', 1)
   form = CallbackForm()
   try: 
     home_page = HomeTemplate.objects.get()
-    settings = BaseSettings.objects.get()
   except:
     home_page = HomeTemplate.objects.all()
-    settings = BaseSettings.objects.all()
 
   category = Category.objects.all()[:4]
   products = Product.objects.filter(status=True).prefetch_related('chars')[:8]
@@ -129,7 +126,6 @@ def index(request):
     "categorys": category,
     "home_page": home_page,
     "products": products,
-    "settings": settings,
     "reviews": reviews,
     "gallery": gallery,
     "category_gallery": category_gallery,

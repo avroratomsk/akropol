@@ -45,7 +45,7 @@ def admin_settings(request):
       form_new.save()
       
       # subprocess.call(["touch", RESET_FILE])
-      return redirect("admin")
+      return redirect(request.META.get('HTTP_REFERER'))
     else:
       return render(request, "settings/general_settings.html", {"form": form_new})
 
@@ -58,6 +58,33 @@ def admin_settings(request):
   }  
 
   return render(request, "settings/general_settings.html", context)
+
+def admin_home_page(request):
+  try:
+    settings = HomeTemplate.objects.get()
+  except:
+    settings = HomeTemplate()
+    settings.save()
+  
+  if request.method == "POST":
+    form_new = HomeTemplateForm(request.POST, request.FILES, instance=settings)
+    if form_new.is_valid():
+      form_new.save()
+      
+      # subprocess.call(["touch", RESET_FILE])
+      return redirect(request.META.get('HTTP_REFERER'))
+    else:
+      return render(request, "home-page/home-page.html", {"form": form_new})
+
+  settings = HomeTemplate.objects.get()
+
+  form = HomeTemplateForm(instance=settings)
+  context = {
+    "form": form,
+    "settings":settings
+  }  
+
+  return render(request, "home-page/home-page.html", context)
 
 def admin_product(request):
   """

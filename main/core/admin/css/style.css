@@ -938,6 +938,7 @@ ol {
 }
 
 .page-content__col:first-child {
+  width: 100%;
   flex: 1 1 auto;
 }
 

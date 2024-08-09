@@ -1,21 +1,29 @@
-{% extends 'base.html' %} {% load static %}{% load carts_tag %}{% load thumbnail %}{% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% load carts_tag %}
+{% load thumbnail %}
+{% block title %}{{ home_page.meta_title }}{% endblock %}
+{% block description %}{{ home_page.meta_description }}{% endblock %}
+{% block keywords %}{{ home_page.meta_keywords }}{% endblock %}
+{% block content %}
 <main class="page">
   <section class="main">
-    <img src="{% static 'theme/mb/images/bg-main.jpg' %}" alt="" class="main__bg" />
+    {% thumbnail home_page.banner "1920x1080" format="WEBP" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
+      alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}" class="index-stock__item-img" />
+    {% endthumbnail %}
     <div class="main__container">
       <div class="main__top top-main">
         <div class="top-main__left">
           <div class="top-main__item">
             <div class="top-main__address">Яковлева, 41а</div>
-            <a href="tel:+79009210915" class="top-main__phone"
-              >+7(900) 921-09-15
+            <a href="tel:+79009210915" class="top-main__phone">+7(900) 921-09-15
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
           <div class="top-main__item">
             <div class="top-main__address">Демьяна Бедного, 16а ст1</div>
-            <a href="tel:+79039554018" class="top-main__phone"
-              >+7(903) 955-40-18
+            <a href="tel:+79039554018" class="top-main__phone">+7(903) 955-40-18
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
             </a>
           </div>
@@ -67,10 +75,12 @@
         <a href="{{ gal_cat.get_absolute_url }}" class="index-stock__item">
           {% if gal_cat.image %}
           {% thumbnail gal_cat.image "680x300" format="WEBP" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}" class="index-stock__item-img" />
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
+            alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}" class="index-stock__item-img" />
           {% endthumbnail %}
           {% else %}
-          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}" class="index-stock__item-img" />
+          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}"
+            class="index-stock__item-img" />
           {% endif %}
           <h2 class="index-stock__item-title">{{ gal_cat.name|safe }}</h2>
         </a>
@@ -91,7 +101,8 @@
         </div>
         <div class="index-catalog__content">
           <div class="index-catalog__cards">
-            {% if products %} {% for product in products %} {% include '../includes/card.html' with product=product %} {% endfor %} {% else %}
+            {% if products %} {% for product in products %} {% include '../includes/card.html' with product=product %}
+            {% endfor %} {% else %}
             <div class="empty-info">
               <p>Товара нет</p>
             </div>
@@ -148,7 +159,8 @@
         <div class="index-work__wrapper swiper-wrapper">
           {% if gallery %}
           {% for image in gallery %}
-          <a href="{{ gallery.image.url }}" class="index-work__slide swiper-slide" data-gall="{{ image.category.slug }}" >
+          <a href="{{ gallery.image.url }}" class="index-work__slide swiper-slide"
+            data-gall="{{ image.category.slug }}">
             {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}" />
             {% endthumbnail %}
@@ -157,7 +169,7 @@
           {% else %}
           No image
           {% endif %}
-          
+
         </div>
         <div class="index-work__next swiper-button-next"></div>
         <div class="index-work__prev swiper-button-prev"></div>

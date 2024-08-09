@@ -15,40 +15,13 @@ class GlobalSettingsForm(forms.ModelForm):
   # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
   class Meta:
     model = BaseSettings
-    fields = [
-        'logo',
-        'phone_one',
-        'phone_two',
-        'time_work',
-        'email',
-        'address_one',
-        'address_two',
-        'meta_h1',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
-    ]
-    labels = {
-        'logo': 'Логотип',
-        'phone_one': 'Номер телефона Пролетарская',
-        'phone_two': 'Номер телефона Ракетная',
-        'time_work': 'Режим работы',
-        'email': 'Email',
-        'address_one': 'Адрес Пролетарская',
-        'address_two': 'Адрес Ракетная',
-        'meta_h1':'Заголвок первого уровня',
-        'meta_title':'Meta title',
-        'meta_description':'Мета description',
-        'meta_keywords':'Meta keywords',
-    }
+    fields = "__all__"
+    
     widgets = {
         'phone_one': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
-        'phone_one': forms.TextInput(attrs={
-            'class': INPUT_CLASS
-        }),
-        'phone_two': forms.TextInput(attrs={
+        'phone': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
         'time_work': forms.TextInput(attrs={
@@ -57,10 +30,7 @@ class GlobalSettingsForm(forms.ModelForm):
         'email': forms.EmailInput(attrs={
             'class': INPUT_CLASS
         }),
-        'address_one': forms.TextInput(attrs={
-            'class': INPUT_CLASS
-        }),
-        'address_two': forms.TextInput(attrs={
+        'address': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
         'meta_h1': forms.TextInput(attrs={
@@ -330,22 +300,16 @@ class HomeTemplateForm(forms.ModelForm):
       fields = [
           'banner',
           'meta_h1',
-          'untitle',
           'meta_title',
           'meta_description',
           'meta_keywords',
-          'about_text',
-          'about_image'
       ]
       labels = {
           'banner': 'Изображение банера',
           'meta_h1':'Заголвок первого уровня',
           'meta_title':'Meta title',
-          'untitle': 'Надзаголовок',
           'meta_description':'Мета description',
           'meta_keywords':'Meta keywords',
-          'about_text':'Текст о нас',
-          'about_image':'Изображение о нас'
       }
       widgets = {
           'name': forms.TextInput(attrs={
@@ -354,21 +318,14 @@ class HomeTemplateForm(forms.ModelForm):
           'meta_h1': forms.TextInput(attrs={
               'class': INPUT_CLASS,
           }),
-          'untitle': forms.TextInput(attrs={
-              'class': INPUT_CLASS,
-          }),
           'meta_title': forms.TextInput(attrs={
-              'class': INPUT_CLASS,
-              # 'placeholder': 'Мета заголовок',
+              'class': f"{INPUT_CLASS} meta_field",
           }),
-          'meta_description': forms.TextInput(attrs={
-              'class': INPUT_CLASS,
-              # 'placeholder': 'Мета описание',
+          'meta_description': forms.Textarea(attrs={
+              'class': f"{INPUT_CLASS} meta_field",
+              'rows': 5
           }),
           'meta_keywords': forms.TextInput(attrs={
-              'class': INPUT_CLASS,
-          }),
-          'about_text': forms.TextInput(attrs={
               'class': INPUT_CLASS,
           }),
       }

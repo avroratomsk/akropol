@@ -1,6 +1,14 @@
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from .sitemap import PostSitemap, ShopCategory, ShopProduct
+
+sitemaps = {
+    'posts': PostSitemap,
+    'category': ShopCategory,
+    'products': ShopProduct,
+}
 
 from main import settings
 
@@ -16,6 +24,7 @@ urlpatterns = [
     path('admin/', include('admin.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),  # Маршрут для sitemap.xml
     path('', include('home.urls')),
 ]
 

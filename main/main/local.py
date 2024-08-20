@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     # "corsheaders",
     'sorl.thumbnail',
+    'django.contrib.sitemaps',
     "home",
     "shop",
     # "coupons",
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     # 'tinymce',
-    # "blog",
+    "blog",
     # "news",
 ]
 

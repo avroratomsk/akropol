@@ -1,5 +1,5 @@
 from django import forms
-from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
+from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
 from subdomain.models import Subdomain, SubdomainContact
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -46,20 +46,21 @@ class GlobalSettingsForm(forms.ModelForm):
             'class': INPUT_CLASS
         })
     }
+    
+class RobotsForm(forms.ModelForm):
+  
+  class Meta:
+    model = RobotsTxt
+    fields = "__all__"
+    
+    widgets = {'content': forms.Textarea(attrs={'class': INPUT_CLASS, 'rows': 30 }),}
 
 class ShopSettingsForm(forms.ModelForm):
   """ Form, отвечает за создание товара и редактирование товара"""
-  # description = forms.CharField(label='Описание производителя', required=False, widget=CKEditorUploadingWidget)
-  # description = forms.CharField(widget=TinyMCE())
+  
   class Meta:
       model = ShopSettings
       fields = "__all__"
-      labels = {
-          'meta_h1':'Заголвок первого уровня',
-          'meta_title':'Meta title',
-          'meta_description':'Мета description',
-          'meta_keywords':'Meta keywords',
-      }
       widgets = {
           'meta_h1': forms.TextInput(attrs={
               'class': 'form__controls',

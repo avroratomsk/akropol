@@ -18,6 +18,7 @@ class BlogCategory(models.Model):
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   image = models.ImageField(upload_to="blog-category", blank=True, null=True, verbose_name="Изображение статьи")
+  updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
 
 class Post(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, db_index=True, verbose_name="Название статьи")
@@ -25,7 +26,7 @@ class Post(models.Model):
   text = models.TextField(null=True, blank=True, verbose_name="Содержимое статьи")
   category = models.ForeignKey("BlogCategory", on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name='Категория')
   date_creation = models.DateField(auto_now_add=True)
-  date_update = models.DateField(auto_now=True)
+  updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
   image = models.ImageField(upload_to="blog", blank=True, null=True, verbose_name="Изображение статьи")
   meta_h1 = models.CharField(max_length=250, blank=True, null=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")

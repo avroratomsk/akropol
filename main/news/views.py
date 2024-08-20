@@ -13,9 +13,7 @@ def news(request):
 
 def news_detail(request, slug):
   new = News.objects.get(slug=slug)
-  print(new)
   news = News.objects.filter(status=True).exclude(slug=slug)
-  print(news)
   context = {
     "new": new,
     "news": news

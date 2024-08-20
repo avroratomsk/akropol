@@ -60,3 +60,9 @@ class Gallery(models.Model):
   
   def __str__(self):
     return self.name
+  
+class RobotsTxt(models.Model):
+  content = models.TextField(default="User-agent: *\nDisallow: /admin/")
+    
+  def __str__(self):
+    return "robots.txt"

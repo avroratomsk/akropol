@@ -22,6 +22,7 @@ class Category(models.Model):
   meta_description = models.TextField(null=True, blank=True, verbose_name="META описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="META keywords")
   add_menu = models.BooleanField(default=False, blank=True, null=True, verbose_name="Выводить в меню ? ")
+  updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
   
   class Meta:
     db_table = 'category' 
@@ -57,6 +58,7 @@ class Product(models.Model):
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
+  updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
   
 
   class Meta:

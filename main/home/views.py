@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
+from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
 from cart.models import Cart
 from home.forms import CallbackForm, ContactForm, OrderSericeForm, ReviewsPopupForm
 from home.callback_send import email_callback
@@ -213,3 +213,12 @@ def gallery(request):
 
 def delivery(request):
   return render(request, "pages/delivery.html")
+
+def robots_txt(request):
+  try:
+      robots_txt = RobotsTxt.objects.first()  # Получаем первую запись, т.к. нам нужен только один robots.txt
+      content = robots_txt.content if robots_txt else "User-agent: *\nDisallow: /admin/"
+  except RobotsTxt.DoesNotExist:
+    content = "User-agent: *\nDisallow: /admin/"
+
+  return HttpResponse(content, content_type="text/plain")

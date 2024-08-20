@@ -4,8 +4,8 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
-from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, Stock
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
+from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
 from service.models import Service, ServicePage
@@ -58,6 +58,33 @@ def admin_settings(request):
   }  
 
   return render(request, "settings/general_settings.html", context)
+
+def robots(request):
+  try:
+    robots = RobotsTxt.objects.get()
+  except:
+    robots = RobotsTxt()
+    robots.save()
+  
+  if request.method == "POST":
+    form_new = RobotsForm(request.POST, request.FILES, instance=robots)
+    if form_new.is_valid():
+      form_new.save()
+      
+      return redirect(request.META.get('HTTP_REFERER'))
+    else:
+      return render(request, "settings/robots.html", {"form": form_new})
+
+  robots = RobotsTxt.objects.get()
+
+  form = RobotsForm(instance=robots)
+  
+  context = {
+    "form": form,
+    "robots":robots
+  }  
+
+  return render(request, "settings/robots.html", context)
 
 def admin_home_page(request):
   try:

@@ -3142,6 +3142,10 @@ body::after {
   line-height: 150%;
 }
 
+.blog-detail__content a {
+  color: #41a2d0;
+}
+
 .banner {
   position: relative;
   margin: 20px 0px;

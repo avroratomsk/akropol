@@ -30,14 +30,10 @@ def post(request, slug):
       # Обновляем сессию, сохраняя в ней обновленный список.
       request.session['viewed_articles'] = viewed_articles
       
-  next = Post.objects.filter(date_creation__gt=article.date_creation).order_by("date_creation").first()
-  prev = Post.objects.filter(date_creation__lt=article.date_creation).order_by("-date_creation").first()
   
   context = {
     "article": article,
     "articles": articles,
-    "next": next,
-    "prev": prev
   }
   
   return render(request, "pages/blog/blog_detail.html", context)

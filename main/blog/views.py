@@ -16,10 +16,28 @@ def blog_detail(request, slug):
 def post(request, slug):
   article = Post.objects.get(slug=slug) 
   articles = Post.objects.filter(status=True).exclude(slug=slug)
+  viewed_articles = request.session.get('viewed_articles', [])
+    
+  # Проверяем, просматривал ли пользователь эту статью ранее.
+  if slug not in viewed_articles:
+      # Увеличиваем счетчик просмотров, если статья просматривается впервые.
+      article.view_count += 1
+      article.save()
+      
+      # Добавляем идентификатор статьи в список просмотренных.
+      viewed_articles.append(slug)
+      
+      # Обновляем сессию, сохраняя в ней обновленный список.
+      request.session['viewed_articles'] = viewed_articles
+      
+  next = Post.objects.filter(date_creation__gt=article.date_creation).order_by("date_creation").first()
+  prev = Post.objects.filter(date_creation__lt=article.date_creation).order_by("-date_creation").first()
   
   context = {
     "article": article,
-    "articles": articles
+    "articles": articles,
+    "next": next,
+    "prev": prev
   }
   
   return render(request, "pages/blog/blog_detail.html", context)

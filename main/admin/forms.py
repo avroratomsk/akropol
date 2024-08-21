@@ -168,62 +168,6 @@ class PostForm(forms.ModelForm):
                 'class': INPUT_CLASS,
                 
             }),
-            'meta_h1': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'meta_title': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'composition': forms.Textarea(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'width': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'height': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'meta_description': forms.Textarea(attrs={
-                'class': INPUT_CLASS,
-                "id": "meta_description"
-            }),
-            'meta_keywords': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'price': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'diameter': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'sale_price': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'quantity_purchase': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'quantity': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'slug': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-                "id": "slug"
-            }),
-            'category': forms.Select(attrs={
-                'class': INPUT_CLASS, 
-            }),
-            'free_shipping': forms.CheckboxInput(attrs={
-            }),
-            'weight': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'discount': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'image': forms.FileInput(attrs={
-                'class': 'submit-file',
-                'accept': 'image/*'
-            }),
         }
 
 # Товар и опции товара

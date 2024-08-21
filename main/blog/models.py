@@ -32,6 +32,7 @@ class Post(models.Model):
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
+  view_count =  models.PositiveIntegerField(default=0,null=True, blank=True, verbose_name="Счетчик просмотров")
   status = models.BooleanField(default=True, verbose_name="Статус публикации")
 
   def __str__(self):

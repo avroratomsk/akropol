@@ -4,8 +4,9 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
+from blog.models import Post
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
 from service.models import Service, ServicePage
@@ -1132,3 +1133,53 @@ def gallery_category_edit(request, pk):
 def gallery_category_delete(request):
   pass
 
+
+
+def article(request):
+  items = Post.objects.all()
+  
+  context ={
+    "items": items,
+  }
+  return render(request, "blog/blog_post/blog_post.html", context)
+
+def article_add(request):
+  form = PostForm()
+  if request.method == "POST":
+    form_new = PostForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("article")
+    else:
+      return render(request, "blog/blog_post/post_add.html", {"form": form_new})
+    
+  context = {
+    "form": form
+  }
+  
+  return render(request, "blog/blog_post/post_add.html", context)
+
+def article_edit(request, pk):
+  item = Post.objects.get(id=pk)
+  form = PostForm(request.POST, request.FILES, instance=item)
+  
+  if request.method == "POST":
+    
+    if form.is_valid():
+      form.save()
+      return redirect("article")
+    else:
+      return render(request, "blog/blog_post/post_edit.html", {"form": form, 'image_path': image_path})
+  
+  context = {
+    "form": PostForm(instance=item),
+    "item": item
+  }
+
+  return render(request, "blog/blog_post/post_edit.html", context)
+
+def article_delete(request, pk):
+  category = Category.objects.get(id=pk)
+  category.delete()
+  
+  return redirect('admin_category')

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from blog.models import Post
 
 def blog(request):
-  articles = Post.objects.filter(status=True) 
+  articles = Post.objects.all() 
   
   context = {
     "articles": articles

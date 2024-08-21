@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% load static %} {% load thumbnail %} {% block title %}{% endblock %}
+{% block description%}{% endblock %} {% block keywords %}{% endblock %}
+{% block content %}
+
+<main>
+  <div class="blog">
+    <div class="blog__container">
+      <div class="blog__inner">
+        <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+          <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+            class="breadcrumbs__item">
+            Главная
+            <meta itemprop="position" content="1" />
+          </a>
+          <span itemprop="name" class="breadcrumbs__item">
+            Статьи
+            <meta itemprop="position" content="2" />
+          </span>
+        </div>
+        <h1 class="blog__title _title">Статьи</h1>
+        <div class="blog__grid">
+          {% if articles %} {% for article in articles %}
+          <article class="blog__article article">
+            <a href="{{ article.get_absolute_url }}" class="article__image">
+              {% if article.image %}
+              {% thumbnail article.image "368x350" format="WEBP" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
+                title="{{ image.name }}" />
+              {% endthumbnail %}
+              {% else %}
+              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+              {% endif %}
+            </a>
+            <div class="article__content">
+              <img src="{% static 'theme/mb/images/plamya.png' %}" class="article__icon" alt="" />
+              <a href="{{ article.get_absolute_url }}" class="article__content-title">{{ article.name }}</a>
+              <a href="{{ article.get_absolute_url }}" class="article__content-btn">Прочитать</a>
+            </div>
+          </article>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include "../../includes/contact-block.html" %} {% include "../../components/map.html" %}
+</main>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django import forms
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
+from blog.models import Post
 from subdomain.models import Subdomain, SubdomainContact
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -83,6 +84,80 @@ class ProductForm(forms.ModelForm):
     
     class Meta:
         model = Product
+        fields = "__all__"
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+                "id":"name"
+            }),
+            'description': forms.Textarea(attrs={
+                'class': INPUT_CLASS,
+                
+            }),
+            'meta_h1': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'meta_title': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'composition': forms.Textarea(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'width': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'height': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'meta_description': forms.Textarea(attrs={
+                'class': INPUT_CLASS,
+                "id": "meta_description"
+            }),
+            'meta_keywords': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'price': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'diameter': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'sale_price': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'quantity_purchase': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'quantity': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'slug': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+                "id": "slug"
+            }),
+            'category': forms.Select(attrs={
+                'class': INPUT_CLASS, 
+            }),
+            'free_shipping': forms.CheckboxInput(attrs={
+            }),
+            'weight': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'discount': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'submit-file',
+                'accept': 'image/*'
+            }),
+        }
+        
+class PostForm(forms.ModelForm):
+    """ Form, отвечает за создание товара и редактирование товара"""
+    # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+    
+    class Meta:
+        model = Post
         fields = "__all__"
         widgets = {
             'name': forms.TextInput(attrs={

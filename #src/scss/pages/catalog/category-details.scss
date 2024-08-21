@@ -5,6 +5,19 @@
 
   &__container {}
 
+  // .category-details__head
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  .breadcrumbs {
+    margin: 0px;
+  }
+
   // .category-details__title
 
   &__title {
@@ -12,9 +25,9 @@
     font-weight: 700;
     font-family: $fontTitle;
     text-align: center;
-    margin-bottom: 40px;
     text-wrap: balance;
     line-height: 140%;
+    margin-bottom: 0px;
   }
 
   // .category-details__row

@@ -27,7 +27,13 @@
           <li class="nav__item"><a href="{% url 'service_new' %}">Установка</a></li>
           <li class="nav__item"><a href="{% url 'delivery' %}">Оплата</a></li>
           <li class="nav__item"><a href="{% url 'gallery' %}">Наши работы</a></li>
-          <li class="nav__item"><a href="{% url 'about' %}">О нас</a></li>
+          <li class="nav__item">
+            <a href="{% url 'about' %}">О нас</a>
+            <ul class="nav__submenu submenu">
+              <li><a href="{% url 'blog' %}">Статьи</a></li>
+            </ul>
+            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
+          </li>
           <li class="nav__item"><a href="{% url 'contact' %}">Контакты</a></li>
         </ul>
       </nav>

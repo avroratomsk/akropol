@@ -101,4 +101,10 @@ urlpatterns = [
     path('gallery-category/add/', views.gallery_category_add, name='gallery_category_add'),
     path('gallery-category/edit/<int:pk>/', views.gallery_category_edit, name='gallery_category_edit'),
     path('gallery-category/delete/<int:pk>/', views.gallery_category_delete, name='gallery_category_delete'),
+    
+    #URl - отвечающие за отображение категории Страниц блога, редактирование и удаление категории
+    path('article/', views.article, name='article'),
+    path('article/add/', views.article_add, name='article_add'),
+    path('article/edit/<int:pk>/', views.article_edit, name='article_edit'),
+    path('article/delete/<int:pk>/', views.article_delete, name='article_delete'),
 ]

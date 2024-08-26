@@ -490,157 +490,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /************Формы обратной связи*************/
 
+// Функция для поиска английских букв в поле ввода
+function containsEnglishLetters(str) {
+  const regex = /[a-zA-Z]/;
+  return regex.test(str);
+}
 
+
+// Функция для нахождения ссылки в поле ввода
+function containsLink(input) {
+  const regex = /(https?:\/\/[^\s]+)/g;
+  return regex.test(input);
+}
+
+// Валидация полей формы
+function validateForm(fieldsArray) {
+  if (containsEnglishLetters(fieldsArray.name)) {
+    return false;
+  }
+
+  if (containsLink(fieldsArray.message)) {
+    return false;
+  }
+
+  if (containsLink(fieldsArray.reviews)) {
+    return false;
+  }
+
+  return true;
+}
+
+// Отправка формы
+function sendForm(form, popupName = 'default') {
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const eventForm = event.target;
+    const formData = new FormData(eventForm);
+    const csrfToken = eventForm.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    let dataObj = {}
+    for (let [key, value] of formData.entries()) {
+      dataObj[key] = value;
+    }
+
+    if (validateForm(dataObj)) {
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          form.reset();
+          if (popupName != 'default') {
+            document.documentElement.classList.remove('popup-show')
+            bodyUnLock();
+            document.getElementById(popupName).classList.remove('popup_show');
+          }
+          document.getElementById('success').classList.add('notification_show');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   const consultationForm = document.getElementById('consultation');
   if (consultationForm) {
-    consultationForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const formData = new FormData(form);
-      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
-      fetch(form.action, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          form.reset();
-          document.documentElement.classList.remove('popup-show')
-          bodyUnLock();
-          document.getElementById('consultation-form').classList.remove('popup_show');
-          document.getElementById('success').classList.add('notification_show');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
+    sendForm(consultationForm, 'consultation-form');
   }
 
   const callBackForm = document.getElementById('callback-form');
   if (callBackForm) {
-    callBackForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const formData = new FormData(form);
-      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
-      fetch(form.action, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          form.reset();
-          document.documentElement.classList.remove('popup-show')
-          bodyUnLock();
-          document.getElementById('callback').classList.remove('popup_show');
-          document.getElementById('success').classList.add('notification_show');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
+    sendForm(callBackForm, 'callback');
   }
 
   const contactForm = document.getElementById('contact-form');
-
   if (contactForm) {
-    contactForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const formData = new FormData(form);
-      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
-      fetch(form.action, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          // let loading = document.querySelector('.popup__loading');
-          // loading.classList.add('_active');
-          form.reset();
-          document.getElementById('success').classList.add('notification_show');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
+    sendForm(contactForm);
   }
 
   const orderService = document.getElementById('order-service-form');
   if (orderService) {
-    orderService.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const formData = new FormData(form);
-      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
-      fetch(form.action, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          form.reset();
-          document.documentElement.classList.remove('popup-show');
-          document.getElementById('order-service').classList.remove('popup_show');
-          bodyUnLock();
-          document.getElementById('success').classList.add('notification_show');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
+    sendForm(orderService, 'order-service');
   }
 
   const reviewsForm = document.getElementById('reviews-form');
   if (reviewsForm) {
-    reviewsForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const formData = new FormData(form);
-      const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-
-      fetch(form.action, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          form.reset();
-          document.documentElement.classList.remove('popup-show');
-          document.getElementById('reviews').classList.remove('popup_show');
-          bodyUnLock();
-          document.getElementById('success').classList.add('notification_show');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
+    sendForm(reviewsForm, 'reviews');
   }
 });
 

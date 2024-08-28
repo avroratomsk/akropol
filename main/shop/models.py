@@ -60,6 +60,7 @@ class Product(models.Model):
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
   type_image = models.BooleanField(default=False, verbose_name="Вид отображение картинки")
+  catalog = models.BooleanField(default=True, verbose_name="Выводить в каталог")
   
 
   class Meta:

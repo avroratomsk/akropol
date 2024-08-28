@@ -67,7 +67,7 @@
               <h1 class="product-card__title">Модель: {{ product.model }}</h1>
               {% endif %}
               {% if not product.model %}
-              <h1 class="product-card__title">Модель: {{ product.name }}</h1>
+              <h1 class="product-card__title">{{ product.name }}</h1>
               {% else %}
               <p class="product-card__article">Наименование: {{ product.name }}</p>
               {% endif %}

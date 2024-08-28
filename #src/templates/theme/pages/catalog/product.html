@@ -63,8 +63,14 @@
         <div class="product-card__inner">
           <div class="product-card__content">
             <div class="product-card__head">
+              {% if product.model %}
               <h1 class="product-card__title">Модель: {{ product.model }}</h1>
+              {% endif %}
+              {% if not product.model %}
+              <h1 class="product-card__title">Модель: {{ product.name }}</h1>
+              {% else %}
               <p class="product-card__article">Наименование: {{ product.name }}</p>
+              {% endif %}
               {% if product.article %}
               <p class="product-card__article">Артикул: {{ product.article }}</p>
               {% endif %}

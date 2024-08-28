@@ -640,3 +640,7 @@ if (closeFilter) {
   })
 }
 /*******************************/
+
+const squareDigits = (num) => parseInt([...'' + num].map(m => m * m).join(''));
+
+console.log(squareDigits(3212));

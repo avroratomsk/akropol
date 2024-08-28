@@ -59,6 +59,7 @@ class Product(models.Model):
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
+  type_image = models.BooleanField(default=False, verbose_name="Вид отображение картинки")
   
 
   class Meta:

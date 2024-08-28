@@ -206,7 +206,7 @@ def product_edit(request, pk):
       for image in images:
           img = ProductImage(parent=product, src=image)
           img.save()
-      return redirect('admin_product')
+      return redirect(request.META.get('HTTP_REFERER'))
     else:
       return render(request, 'shop/product/product_edit.html', {'form': form_new})
   context = {

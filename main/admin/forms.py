@@ -86,50 +86,17 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = "__all__"
         widgets = {
+            'model': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+                "id":"model"
+            }),
+            'article': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+                "id":"article"
+            }),
             'name': forms.TextInput(attrs={
                 'class': INPUT_CLASS,
                 "id":"name"
-            }),
-            'description': forms.Textarea(attrs={
-                'class': INPUT_CLASS,
-                
-            }),
-            'meta_h1': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'meta_title': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'composition': forms.Textarea(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'width': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'height': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'meta_description': forms.Textarea(attrs={
-                'class': INPUT_CLASS,
-                "id": "meta_description"
-            }),
-            'meta_keywords': forms.TextInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'price': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'diameter': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'sale_price': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'quantity_purchase': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
-            }),
-            'quantity': forms.NumberInput(attrs={
-                'class': INPUT_CLASS,
             }),
             'slug': forms.TextInput(attrs={
                 'class': INPUT_CLASS,
@@ -138,17 +105,45 @@ class ProductForm(forms.ModelForm):
             'category': forms.Select(attrs={
                 'class': INPUT_CLASS, 
             }),
-            'free_shipping': forms.CheckboxInput(attrs={
-            }),
-            'weight': forms.TextInput(attrs={
+            'price': forms.NumberInput(attrs={
                 'class': INPUT_CLASS,
+            }),
+            'sale_price': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'polished_sides': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'description': forms.Textarea(attrs={
+                'class': INPUT_CLASS, 
+            }),
+            'delivery': forms.Textarea(attrs={
+                'class': INPUT_CLASS, 
             }),
             'discount': forms.TextInput(attrs={
                 'class': INPUT_CLASS,
             }),
-            'image': forms.FileInput(attrs={
-                'class': 'submit-file',
-                'accept': 'image/*'
+            'quantity': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'weight': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'quantity_purchase': forms.NumberInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'meta_h1': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'meta_title': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
+            'meta_description': forms.Textarea(attrs={
+                'class': INPUT_CLASS,
+                "id": "meta_description"
+            }),
+            'meta_keywords': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
             }),
         }
         

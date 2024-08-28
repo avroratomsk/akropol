@@ -3,11 +3,11 @@
   <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
     {% if product.image %}
     {% if product.type_image %}
-    <img src="{{ product.image.url }}" style="" alt="{{ product.name }}" title="{{ product.name }}" />
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" />
     {% else %}
     {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
-      title="{{ product.name }}" />
+      title="{{ product.name }}" style="height: 100%;" />
     {% endthumbnail %}
     {% endif %}
 

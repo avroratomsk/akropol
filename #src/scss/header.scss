@@ -74,6 +74,8 @@
 }
 
 .nav {
+  display: flex;
+  align-items: center;
   background-color: rgba($color: $accent, $alpha: 1.0);
   flex: 1 1 auto;
   height: 100%;
@@ -91,6 +93,7 @@
   // .nav__list
 
   &__list {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -126,9 +129,16 @@
       padding: 13px 0px;
       font-size: 16px;
       color: rgba($color: $white, $alpha: 1.0);
+      transition: all ease .5s;
 
       @media screen and (max-width: 1042px) {
         font-size: 14px;
+      }
+
+      @media (hover:hover) {
+        &:hover {
+          color: rgba($color: $white, $alpha: .8);
+        }
       }
     }
 

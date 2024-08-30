@@ -28,7 +28,9 @@
           </a>
         </div>
       </div>
+
       <div class="category-details__row">
+        {% if request.path != "/category/ogradki/" %}
         <div class="category-details__col" id="filter-category">
           <button type="button" class="close popup__close" id="close-filter"><span></span></button>
           {{ min_price_product }}
@@ -49,6 +51,7 @@
             <button type=" submit" class="filter__submit">Фильтровать</button>
           </form>
         </div>
+        {% endif %}
         <div class="category-details__col">
           <button type="button" class="category-details__filter"><i
               class="fa-solid fa-arrow-up-wide-short"></i></button>

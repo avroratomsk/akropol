@@ -123,16 +123,31 @@ orderBtn.forEach(btn => {
 
 
 // Создание правильной ссылка номера телефона
-const regNum = document.querySelectorAll('.reg-num');
+const regNum = document.querySelectorAll('a[href^="tel:"]');
 if (regNum) {
   regNum.forEach(num => {
-    phoneNumber = num.href.replace('tel:', '');
-    newNumber = clearSimvol(phoneNumber.replace('8', "+7"));
-    num.href = newNumber
-  });
+    let number = formatPhoneNumber(num.href);
+    num.href = `tel:${number}`;
+  })
 }
-function clearSimvol(str) {
-  return str.replace(/[\s.,%,),(,-]/g, '');
+
+function formatPhoneNumber(phoneNumber) {
+
+  // Убираем все лишние символы (скобки, пробелы, тире)
+  let cleanedNumber = phoneNumber.replace('tel:', '').replace(/[\s\-\(\)]/g, '');
+
+  // Если номер уже начинается на +7, ничего не делаем
+  if (cleanedNumber.startsWith('+7')) {
+    return cleanedNumber;
+  }
+
+  // Если номер начинается на 8, заменяем на +7
+  if (cleanedNumber.startsWith('8')) {
+    return '+7' + cleanedNumber.slice(1);
+  }
+
+  // В остальных случаях добавляем +7 к началу
+  return '+7' + cleanedNumber;
 }
 
 /**
@@ -254,58 +269,6 @@ function addCartProduct(e) {
       console.log(error);
     })
 }
-
-
-// // // Ловим собыитие клика по кнопке добавить в корзину
-// $(document).on("click", ".add-to-cart", function (e) {
-//   // Блокируем его базовое действие
-//   e.preventDefault();
-
-//   // Берем элемент счетчика в значке корзины и берем оттуда значение
-//   var goodsInCartCount = $("#mini-cart-count");
-//   var cartCount = parseInt(goodsInCartCount.text() || 0);
-
-//   // Получаем id товара из атрибута data-product-id
-//   var product_id = $(this).data("product-id");
-
-//   // Из атрибута href берем ссылку на контроллер django
-//   var add_to_cart_url = $(this).attr("href");
-
-//   // делаем post запрос через ajax не перезагружая страницу
-//   $.ajax({
-//     type: "POST",
-//     url: add_to_cart_url,
-//     data: {
-//       product_id: product_id,
-//       csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
-//     },
-//     success: function (data) {
-//       $("#notification-modal .success__body").html('<div class="success__body-inner"><p class="success__name">Товар добавлен</p></div>');
-//       $("#notification-modal").addClass("show");
-
-//       // Закрытие модального окна после 5 секунд
-//       setTimeout(function () {
-//         $("#notification-modal").removeClass("show");
-//       }, 5000);
-
-//       $('#show-cart').append('<div class="no-empty"></div>');
-
-//       // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
-//       cartCount++;
-//       goodsInCartCount.text(cartCount);
-//       if (cartCount > 0) {
-//         $('#mini-cart_noempty').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
-//       }
-//       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-//       var cartItemsContainer = $("#cart-item");
-//       cartItemsContainer.html(data.cart_items_html);
-//     },
-
-//     error: function (data) {
-//       console.log("Ошибка при добавлении товара в корзину");
-//     },
-//   });
-// });
 
 $(document).on("click", ".remove-from-cart", function (e) {
   // Блокируем его базовое действие

@@ -1301,6 +1301,8 @@ html.lock body::before {
 }
 
 .nav {
+  display: flex;
+  align-items: center;
   background-color: #41a2d0;
   flex: 1 1 auto;
   height: 100%;
@@ -1309,6 +1311,7 @@ html.lock body::before {
 }
 
 .nav__list {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1333,6 +1336,7 @@ html.lock body::before {
   padding: 13px 0px;
   font-size: 16px;
   color: white;
+  transition: all ease 0.5s;
 }
 
 .nav__item img {
@@ -3585,8 +3589,8 @@ body::after {
 }
 
 .service-content__col img {
-  width: 420px;
-  height: 500px;
+  width: 520px;
+  height: 400px;
 }
 
 .service-content__text p {
@@ -4773,6 +4777,10 @@ body::after {
 
   .index-service__card:hover img {
     transform: scale(1.01);
+  }
+
+  .nav__item a:hover {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .nav__item:hover .submenu {

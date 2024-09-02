@@ -3257,6 +3257,10 @@ body::after {
   position: relative;
 }
 
+.category-details__col--last {
+  flex: 1 1 auto;
+}
+
 .category-details__col .close {
   position: absolute;
   top: 10px;

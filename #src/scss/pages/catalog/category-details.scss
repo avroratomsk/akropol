@@ -59,6 +59,12 @@
       width: 100%;
     }
 
+    // .category-details__col--last
+
+    &--last {
+      flex: 1 1 auto;
+    }
+
     position: relative;
 
     .close {

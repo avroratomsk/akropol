@@ -1,14 +1,21 @@
-{% extends "base.html" %} {% load static %} {% load thumbnail %} {% block title %} Купить памятник модель {{product.model }} в Томске | Акрополь {% endblock %} {% block description %}{% endblock %} {% block keywords %} {%endblock %} {% block content %}
+{% extends "base.html" %} {% load static %} {% load thumbnail %}
+{% block title %} Купить памятник модель{{product.model }} в Томске | Акрополь {% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}
+{%endblock %}
+{% block content %}
 
 <main class="page">
   <div class="product">
     <div class="product__container">
       <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-        <a href="{% url 'category' %}" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+        <a href="{% url 'category' %}" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+          class="breadcrumbs__item">
           Каталог
           <meta itemprop="position" content="1" />
         </a>
-        <a href="{{ product.category.get_absolute_url }}" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+        <a href="{{ product.category.get_absolute_url }}" itemprop="itemListElement" itemscope=""
+          itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
           {{ product.category }}
           <meta itemprop="position" content="2" />
         </a>
@@ -23,7 +30,8 @@
             <div class="product__wrapper swiper-wrapper">
               <div class="product__slide swiper-slide">
                 {% if product.image %} {% if product.type_image %}
-                <img src="{{ product.image.url }}" style="object-fit: cover; max-width: 100%" class="index-slider__image" />
+                <img src="{{ product.image.url }}" style="object-fit: cover; max-width: 100%"
+                  class="index-slider__image" />
                 {% else %} {% thumbnail product.image "409x510" format="WEBP" crop="center" as im %}
                 <a href="{{ im.url }}" data-gall="myGallery" class="product__slide-link">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="index-slider__image" />
@@ -67,7 +75,8 @@
               {% for ch_name in char_name %}
               <div class="info-card__item">
                 <p class="info-card__label">Выберите {{ ch_name.text_name }}:</p>
-                <select name="{{ ch_name.filter_name }}" id="{{ ch_name.filter_name }}" data-name="{{ ch_name.text_name }}">
+                <select name="{{ ch_name.filter_name }}" id="{{ ch_name.filter_name }}"
+                  data-name="{{ ch_name.text_name }}">
                   {% for char_value in chars %} {% if char_value.char_name.text_name == ch_name.text_name %}
                   <option value="{{ char_value.char_value }}">{{ char_value.char_value }}</option>
                   {% endif %} {% endfor %}
@@ -86,12 +95,16 @@
           <p class="product-card__price">
             От {{ product.price }} ₽
 
-            <span class="product-card__note"> В связи с частыми изменениями цен у поставщиков, указанная информация о ценах на сайте является ориентировочной. Точную информацию о ценах можно получить у менеджеров компании по телефону или оставить заявку с сайта. </span>
+            <span class="product-card__note"> В связи с частыми изменениями цен у поставщиков, указанная информация о
+              ценах на сайте является ориентировочной. Точную информацию о ценах можно получить у менеджеров компании по
+              телефону или оставить заявку с сайта. </span>
           </p>
           <div class="product-card__action">
             {% csrf_token %}
-            <a href="{% url 'cart_add' %}" class="product-card__add add-to-cart" data-product-id="{{ product.id }}">Добавить в корзину</a>
-            <button type="button" class="product-card__btn" data-popup="consultation" data-order="Консультаци по {{ product.model }}">Заказать консультацию</button>
+            <a href="{% url 'cart_add' %}" class="product-card__add add-to-cart"
+              data-product-id="{{ product.id }}">Добавить в корзину</a>
+            <button type="button" class="product-card__btn" data-popup="consultation"
+              data-order="Консультаци по {{ product.model }}">Заказать консультацию</button>
           </div>
         </div>
       </div>
@@ -129,17 +142,18 @@
           <div class="index-catalog__card card">
             <div class="card__image">
               {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" alt="{{product.model}}" title="{{product.model}}" />
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image"
+                alt="{{product.model}}" title="{{product.model}}" />
               {% endthumbnail %} {% else %}
               <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
               {% endif %}
             </div>
             <div class="card__content">
               <a href="#" class="card__content-title">{{ product.model }}</a>
-              {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %}
-              <p class="card__content-char">Материал: {{ chr }}</p>
-              {% endif %} {% endfor %}
-              <div class="card__content-price">{{ product.price }} ₽</div>
+              {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2
+                %} <p class="card__content-char">Материал: {{ chr }}</p>
+                {% endif %} {% endfor %}
+                <div class="card__content-price">{{ product.price }} ₽</div>
             </div>
             <a href="{{ product.get_absolute_url }}" class="card__content-link">Подробнее</a>
           </div>

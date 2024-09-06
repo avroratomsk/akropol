@@ -158,7 +158,7 @@ def blog_settings(request):
     if form_new.is_valid:
       form_new.save()
       
-      return redirect('admin_shop')
+      return redirect('.')
     else:
       return render(request, "blog/blog_settings.html", {"form": form})
   

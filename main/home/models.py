@@ -41,6 +41,7 @@ class Stock(models.Model):
     
 class GalleryCategory(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Наименование")
+  meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")

@@ -32,6 +32,9 @@
         </div>
         {% endcomment %}
         <div class="gallery__content">
+          {% if category.meta_h1 %}
+          <h1 class="category-details__title _title">{{category.meta_h1}}</h1>
+          {% endif %}
           <div class="gallery__images">
             {% comment %}
             <h2 class="gallery__images-title">{{ category.name|safe }}</h2>

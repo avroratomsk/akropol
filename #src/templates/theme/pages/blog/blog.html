@@ -6,11 +6,18 @@
 Статьи и полезная информация| Акрополь
 {% endif %}
 {% endblock %}
-
 {% block description%}
+{% if setup.meta_description %}
+{{ setup.meta_description }}
+{% else %}
 Раздел с информацией о памятниках, мемориальных услугах полезные советы от компании Акрополь в Томске
+{% endif %}
 {% endblock %}
-{% block keywords %}{% endblock %}
+{% block keywords %}
+{% if setup.meta_keywords %}
+{{ setup.meta_keywords }}
+{% endif %}
+{% endblock %}
 {% block content %}
 
 <main>
@@ -31,8 +38,9 @@
         {% if setup.meta_h1 %}
         <h1 class="blog__title _title">{{ setup.meta_h1 }}</h1>
         {% endif %}
+        {% if articles %}
         <div class="blog__grid">
-          {% if articles %} {% for article in articles %}
+          {% for article in articles %}
           <article class="blog__article article">
             <a href="{{ article.get_absolute_url }}" class="article__image">
               {% if article.image %}
@@ -50,8 +58,11 @@
               <a href="{{ article.get_absolute_url }}" class="article__content-btn">Прочитать</a>
             </div>
           </article>
-          {% endfor %} {% endif %}
+          {% endfor %}
         </div>
+        {% else %}
+        <div class="empty-info">Статьи не заполнены</div>
+        {% endif %}
       </div>
     </div>
   </div>

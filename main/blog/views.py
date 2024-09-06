@@ -1,12 +1,17 @@
 from django.shortcuts import render
 
-from blog.models import Post
+from blog.models import BlogSettings, Post
 
 def blog(request):
-  articles = Post.objects.filter(status=True) 
+  articles = Post.objects.filter(status=True)
+  try:
+    setup = BlogSettings.objects.get()
+  except:
+    setup = BlogSettings()
   
   context = {
-    "articles": articles
+    "articles": articles,
+    "setup": setup
   }
   return render(request, "pages/blog/blog.html", context)
 

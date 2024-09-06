@@ -1,6 +1,10 @@
 {% extends 'base.html' %} {% load static %} {% load thumbnail %}
 {% block title %}
+{% if setup.meta_title %}
+{{ setup.meta_title }}
+{% else %}
 Статьи и полезная информация| Акрополь
+{% endif %}
 {% endblock %}
 
 {% block description%}

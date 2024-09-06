@@ -28,7 +28,9 @@
             <meta itemprop="position" content="2" />
           </span>
         </div>
-        <h1 class="blog__title _title">Статьи</h1>
+        {% if setup.meta_h1 %}
+        <h1 class="blog__title _title">{{ setup.meta_h1 }}</h1>
+        {% endif %}
         <div class="blog__grid">
           {% if articles %} {% for article in articles %}
           <article class="blog__article article">

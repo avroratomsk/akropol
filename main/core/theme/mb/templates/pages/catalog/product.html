@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% load static %} {% load thumbnail %}
 {% block title %}
-
 Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}
 {% else %}
 {%filter lower%}{{product.name }}{% endfilter %}

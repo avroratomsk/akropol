@@ -91,6 +91,7 @@ urlpatterns = [
     # path('subdomain/delete/<int:pk>/', views.subdomain_delete, name='subdomain_delete'),
     
     #URl - цвета памятников
+    path('gallery-settings/', views.gallery_settings, name='gallery_settings'),
     path('gallery/', views.admin_gallery, name='admin_gallery'),
     path('gallery/add/', views.admin_gallery_add, name='admin_gallery_add'),
     path('gallery/edit/<int:pk>/', views.admin_gallery_edit, name='admin_gallery_edit'),

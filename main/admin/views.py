@@ -4,7 +4,7 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import BlogSettingsForm, CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
+from admin.forms import BlogSettingsForm, CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryCategorySettingsForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
 from blog.models import BlogSettings, Post
 from main.settings import BASE_DIR
@@ -166,6 +166,32 @@ def blog_settings(request):
     "form": form,
   }  
   return render(request, "blog/blog_settings.html", context)
+
+def gallery_settings(request):
+  try:
+    setup = GalleryCategory.objects.get()
+    form = GalleryCategorySettingsForm(instance=setup)
+  except:
+    form = GalleryCategorySettingsForm()
+    
+  if request.method == "POST":
+    try:
+      setup = BlogSettings.objects.get()
+    except BlogSettings.DoesNotExist:
+      setup = None
+    form_new = GalleryCategorySettingsForm(request.POST, request.FILES, instance=setup)
+    
+    if form_new.is_valid:
+      form_new.save()
+      
+      return redirect('.')
+    else:
+      return render(request, "gallery/gallery_settings.html", {"form": form})
+  
+  context = {
+    "form": form,
+  }  
+  return render(request, "gallery/gallery_settings.html", context)
 
 def admin_product(request):
   """

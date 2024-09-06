@@ -41,6 +41,9 @@ class Stock(models.Model):
     
 class GalleryCategory(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Наименование")
+  meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
+  meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
+  meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="")
   home_view = models.BooleanField(default=False, verbose_name="Отображать на главной ?")
   image = models.ImageField(upload_to="gallery-category", null=True, blank=True, verbose_name="Фотография категории")

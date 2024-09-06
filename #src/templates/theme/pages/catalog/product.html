@@ -1,5 +1,13 @@
 {% extends "base.html" %} {% load static %} {% load thumbnail %}
-{% block title %} Купить памятник модель{{product.model }} в Томске | Акрополь {% endblock %}
+{% block title %}
+
+Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}
+{% else %}
+{%filter lower%}{{product.name }}{% endfilter %}
+{% endif %}
+
+в Томске | Акрополь
+{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}
 {%endblock %}

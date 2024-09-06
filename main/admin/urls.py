@@ -103,6 +103,7 @@ urlpatterns = [
     path('gallery-category/delete/<int:pk>/', views.gallery_category_delete, name='gallery_category_delete'),
     
     #URl - отвечающие за отображение категории Страниц блога, редактирование и удаление категории
+    path('blog-settings/', views.blog_settings, name='blog_settings'),
     path('article/', views.article, name='article'),
     path('article/add/', views.article_add, name='article_add'),
     path('article/edit/<int:pk>/', views.article_edit, name='article_edit'),

@@ -1,6 +1,6 @@
 from django import forms
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
-from blog.models import Post
+from blog.models import BlogSettings, Post
 from subdomain.models import Subdomain, SubdomainContact
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -61,6 +61,27 @@ class ShopSettingsForm(forms.ModelForm):
   
   class Meta:
       model = ShopSettings
+      fields = "__all__"
+      widgets = {
+          'meta_h1': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_title': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_description': forms.Textarea(attrs={
+              'class': 'form__controls',
+              "id": "meta_description"
+          }),
+          'meta_keywords': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+      }
+      
+class BlogSettingsForm(forms.ModelForm):
+  
+  class Meta:
+      model = BlogSettings
       fields = "__all__"
       widgets = {
           'meta_h1': forms.TextInput(attrs={

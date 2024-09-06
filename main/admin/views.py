@@ -4,9 +4,9 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
+from admin.forms import BlogSettingsForm, CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
-from blog.models import Post
+from blog.models import BlogSettings, Post
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
 from service.models import Service, ServicePage
@@ -140,6 +140,33 @@ def admin_shop(request):
     "form": form,
   }  
   return render(request, "shop/settings.html", context)
+
+def blog_settings(request):
+  try:
+    setup = BlogSettings.objects.get()
+    form = BlogSettingsForm(instance=setup)
+  except:
+    form = BlogSettingsForm()
+    
+  if request.method == "POST":
+    try:
+      setup = BlogSettings.objects.get()
+    except BlogSettings.DoesNotExist:
+      setup = None
+    form_new = BlogSettingsForm(request.POST, request.FILES, instance=setup)
+    
+    if form_new.is_valid:
+      form_new.save()
+      
+      return redirect('admin_shop')
+    else:
+      return render(request, "blog/blog_settings.html", {"form": form})
+  
+  context = {
+    "form": form,
+  }  
+  return render(request, "blog/blog_settings.html", context)
+
 def admin_product(request):
   """
   View, которая возвращаяет и отрисовывает все товары на странице

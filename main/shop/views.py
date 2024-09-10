@@ -12,7 +12,7 @@ from django.db.models import Count
 from .models import *
 
 def category(request):
-  products = Product.objects.filter(status=True).order_by('model')
+  products = Product.objects.filter(status=True, catalog=True).order_by('model')
   try:
     shop_setup = ShopSettings.objects.get()
   except: 

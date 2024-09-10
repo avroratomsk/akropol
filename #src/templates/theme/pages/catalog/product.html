@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% load static %} {% load thumbnail %}
 {% block title %}
-
 Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}
 {% else %}
 {%filter lower%}{{product.name }}{% endfilter %}
@@ -8,7 +7,13 @@
 
 в Томске | Акрополь
 {% endblock %}
-{% block description %}{% endblock %}
+{% block description %}
+Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}
+{%filter lower%}{{product.name }}{% endfilter %}
+{% endif %} от компании Акрополь в городе Томск
+
+{% endblock %}
+
 {% block keywords %}
 {%endblock %}
 {% block content %}

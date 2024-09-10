@@ -117,7 +117,7 @@ def index(request):
     home_page = HomeTemplate.objects.all()
 
   category = Category.objects.all()[:4]
-  products = Product.objects.filter(status=True).prefetch_related('chars')[:8]
+  products = Product.objects.filter(status=True, catalog=True).prefetch_related('chars')[:8]
   reviews = Reviews.objects.filter(status=True)
   gallery = Gallery.objects.filter(is_active=True)
   category_gallery = GalleryCategory.objects.filter(home_view=True)

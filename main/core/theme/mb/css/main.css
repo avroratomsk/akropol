@@ -3143,6 +3143,7 @@ body::after {
   color: #41a2d0;
   width: 8px;
   height: 8px;
+  margin-right: 6px;
 }
 
 .blog-detail__content p {

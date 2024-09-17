@@ -3216,6 +3216,7 @@ body::after {
   line-height: 150%;
   max-width: 700px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .banner .breadcrumbs__item {

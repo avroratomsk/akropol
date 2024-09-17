@@ -13,11 +13,11 @@
       <div class="banner__inner">
         <div class="banner__content">
           <h1 class="_title">{{ article.name }}</h1>
+          {% if article.subtitle_text %}
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptates alias illo enim qui soluta
-            magnam laboriosam est sapiente excepturi, dolorem dicta! Quibusdam nemo temporibus nesciunt aperiam, velit
-            molestiae enim.
+            {{ article.subtitle_text }}
           </p>
+          {% endif %}
           <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
             <a href="" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
               class="breadcrumbs__item">

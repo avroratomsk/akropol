@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
-{% block title %}{% endblock %}
-{% block description %}{% endblock %}
-{% block keywords %}{% endblock %}
+{% block title %}{{ article.meta_title }}{% endblock %}
+{% block description %}{{ article.meta_description }}{% endblock %}
+{% block keywords %}{{ article.meta_keywords }}{% endblock %}
 {% block content %}
 
 <main>

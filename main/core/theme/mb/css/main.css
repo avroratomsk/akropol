@@ -3123,7 +3123,7 @@ body::after {
 
 .blog-detail__content ul,
 .blog-detail__content ol {
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .blog-detail__content ul li {
@@ -3131,10 +3131,15 @@ body::after {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding-left: 10px;
 }
 
 .blog-detail__content ul li::before {
   content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -4px;
   width: 8px;
   height: 8px;
   border: 1px solid #41a2d0;

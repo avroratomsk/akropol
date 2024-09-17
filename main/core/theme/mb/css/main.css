@@ -3127,24 +3127,17 @@ body::after {
 }
 
 .blog-detail__content ul li {
+  display: block;
   line-height: 150%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   padding-left: 10px;
   position: relative;
 }
 
 .blog-detail__content ul li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-top: -4px;
+  content: "○";
+  color: #41a2d0;
   width: 8px;
   height: 8px;
-  border: 1px solid #41a2d0;
-  border-radius: 50%;
 }
 
 .blog-detail__content p {

@@ -3197,6 +3197,7 @@ body::after {
 .banner__content h1 {
   color: white;
   line-height: 150%;
+  text-align: center;
 }
 
 .banner__content p {

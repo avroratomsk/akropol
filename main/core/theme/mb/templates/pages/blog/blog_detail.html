@@ -12,7 +12,13 @@
       <img src="{{ article.image.url }}" alt="" class="banner__image">
       <div class="banner__inner">
         <div class="banner__content">
-          <h1 class="_title">{{ article.name }}</h1>
+
+          <h1 class="_title">
+            {% if article.meta_h1 %}
+            {{article.meta_h1}}
+            {% else %}
+            {{ article.name }}</h1>
+          {% endif %}
           {% if article.subtitle_text %}
           <p>
             {{ article.subtitle_text }}

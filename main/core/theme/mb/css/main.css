@@ -3130,13 +3130,17 @@ body::after {
 .blog-detail__content ul,
 .blog-detail__content ol {
   margin-left: 15px;
+  margin-bottom: 15px;
 }
 
 .blog-detail__content ul li {
   display: block;
   line-height: 150%;
   position: relative;
-  margin-bottom: 10px;
+}
+
+.blog-detail__content ul li:not(:last-child) {
+  margin-bottom: 12px;
 }
 
 .blog-detail__content ul li::before {

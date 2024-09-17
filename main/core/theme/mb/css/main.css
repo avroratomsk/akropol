@@ -3132,6 +3132,7 @@ body::after {
   align-items: center;
   gap: 10px;
   padding-left: 10px;
+  position: relative;
 }
 
 .blog-detail__content ul li::before {

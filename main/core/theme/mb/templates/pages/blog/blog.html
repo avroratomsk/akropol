@@ -49,11 +49,12 @@
                 title="{{ image.name }}" />
               {% endthumbnail %}
               {% else %}
-              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="Нет картинки" title="Нет картинки" />
               {% endif %}
             </a>
             <div class="article__content">
-              <img src="{% static 'theme/mb/images/plamya.png' %}" class="article__icon" alt="" />
+              <img src="{% static 'theme/mb/images/plamya.png' %}" class="article__icon" alt="Паттерн"
+                title="Паттерн" />
               <a href="{{ article.get_absolute_url }}" class="article__content-title">{{ article.name }}</a>
               <a href="{{ article.get_absolute_url }}" class="article__content-btn">Прочитать</a>
             </div>

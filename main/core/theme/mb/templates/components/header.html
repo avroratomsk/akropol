@@ -4,7 +4,7 @@
     <div class="header__inner">
       <button type="button" class="header__callback" data-popup="callback">
         Заказать звонок
-        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок" title="Заказать звонок" />
       </button>
       <nav class="nav">
         <ul class="nav__list">
@@ -17,11 +17,11 @@
               {% endfor %}
             </ul>
             {% endif %}
-            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="Иконка открытие меню"
+              title="Иконка открытие меню" />
           </li>
           <li class="nav__item">
             <a href="{% url 'service' %}">Услуги</a>
-            <!-- <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> -->
           </li>
           <li class="nav__item"><a href="{% url 'service_grav' %}">Гравировка</a></li>
           <li class="nav__item"><a href="{% url 'service_new' %}">Установка</a></li>
@@ -32,7 +32,8 @@
             <ul class="nav__submenu submenu">
               <li><a href="{% url 'blog' %}">Статьи</a></li>
             </ul>
-            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="Иконка открытие меню"
+              title="Иконка открытие меню" />
           </li>
           <li class="nav__item"><a href="{% url 'contact' %}">Контакты</a></li>
         </ul>

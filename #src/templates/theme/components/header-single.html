@@ -3,7 +3,8 @@
   <div class="header-under__container">
     <div class="header-under__inner">
       <a href="/" class="header-under__logo">
-        <img src="{% static 'theme/mb/images/logo.png' %}" alt="" />
+        <img src="{% static 'theme/mb/images/logo.png' %}" alt="Мемориальные услуги в Томске"
+          title="Мемориальные услуги в Томске" />
       </a>
       <div class="header-under__address">
         <p class="header-under__address-title">Адрес:</p>
@@ -14,7 +15,8 @@
             <p>Сб-Вс: 10:00 – 17:00</p>
             <a href="tel:+79009210915">
               +7(900) 921-09-15
-              <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+              <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
+                title="Заказать звонок" />
             </a>
           </div>
           <div class="header-under__address-col">
@@ -23,23 +25,25 @@
             <p>Сб-Вс: 10:00 – 17:00</p>
             <a href="tel:+79039554018">
               +7(903) 955-40-18
-              <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+              <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
+                title="Заказать звонок" />
             </a>
           </div>
         </div>
       </div>
       <div class="header-under__action">
         <button class="subdomain-button" id="subdomain-button" data-popup="subdomain">
-          <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="" />
+          <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Иконка адреса" title="Иконка адреса" />
           <span id="city">Томск</span>
         </button>
         <button type="button" data-popup="callback">
           Заказать звонок
-          <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+          <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок Акрополь"
+            title="Заказать звонок Акрополь" />
         </button>
         <button type="button" class="top-main__cart show-cart" id="show-cart">
           <span>Корзина</span>
-          <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="" />
+          <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="Иконка корзины" title="Иконка корзины" />
           {% user_carts request as carts %} {% if carts %}
           <span class="count-product-cart" id="count-goods">{{ carts.total_quantity }}</span>
           {% endif %}
@@ -53,14 +57,16 @@
     <div class="header__inner">
       <button type="button" class="header__callback" data-popup="callback">
         Заказать звонок
-        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="" />
+        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Телефон мемориальных услуг"
+          title="Телефон мемориальных услуг" />
       </button>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item">
             <div class="nav__item-inner">
               <a href="{% url 'category' %}">Каталог</a>
-              <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" class="nav__chevron" />
+              <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="Иконка открытие меню"
+                title="Иконка открытие меню" class="nav__chevron" />
             </div>
             {% if category_menu %}
             <ul class="nav__submenu submenu">
@@ -70,7 +76,7 @@
             </ul>
             {% endif %}
           </li>
-          <li class="nav__item"><a href="{% url 'service' %}">Услуги</a> {% comment %} <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" /> {% endcomment %}</li>
+          <li class="nav__item"><a href="{% url 'service' %}">Услуги</a></li>
           <li class="nav__item"><a href="{% url 'service_grav' %}">Гравировка</a></li>
           <li class="nav__item"><a href="{% url 'service_new' %}">Установка</a></li>
           <li class="nav__item"><a href="{% url 'delivery' %}">Оплата</a></li>
@@ -80,7 +86,8 @@
             <ul class="nav__submenu submenu">
               <li><a href="{% url 'blog' %}">Статьи</a></li>
             </ul>
-            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="Иконка открытие меню"
+              title="Иконка открытие меню" />
           </li>
           <li class="nav__item"><a href="{% url 'contact' %}">Контакты</a></li>
         </ul>

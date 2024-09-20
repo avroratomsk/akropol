@@ -33,16 +33,18 @@
   <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
     {% if product.image %} {% if product.type_image %}
     <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" />
-    {% else %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+    {% else %}
+    {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
       title="{{ product.name }}" style="height: 100%" />
-    {% endthumbnail %} {% endif %} {% else %}
+    {% endthumbnail %}
+    {% endif %}
+    {% else %}
     <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}" />
     {% endif %}
   </div>
   <div class="card__content">
-    <a href="{{ product.get_absolute_url }}" class="card__content-title"> {% if product.model %} {{ product.model }} {%
-      else %} {{ product.name }} {% endif %} </a>
+    <a href="{{ product.get_absolute_url }}" class="card__content-title"> {{ product.name }} </a>
     {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
       class="card__content-char">Материал: {{ chr }}</p>
       {% endif %} {% endfor %}

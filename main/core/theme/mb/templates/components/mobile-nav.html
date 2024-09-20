@@ -2,11 +2,11 @@
 <div class="mobile-nav">
   <a href="{% url 'category' %}" class="mobile-nav__item">
     <span>Каталог</span>
-    <img src="{% static 'theme/mb/images/icon/catalog.svg' %}" alt="" />
+    <img src="{% static 'theme/mb/images/icon/catalog.svg' %}" alt="Каталог" title="Каталог" />
   </a>
   <button class="mobile-nav__item show-cart">
     <span>Корзина</span>
-    <img src="{% static 'theme/mb/images/icon/cart-mobile.svg' %}" alt="" />
+    <img src="{% static 'theme/mb/images/icon/cart-mobile.svg' %}" alt="Корзина" title="Корзина" />
     {% user_carts request as carts %} {% if carts %}
     <span class="count-product-cart" id="count-goods">{{ carts.total_quantity }}</span>
     {% endif %}

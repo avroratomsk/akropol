@@ -5,7 +5,8 @@
       <button data-close type="button" class="popup__close sssss"></button>
       <h2 class="popup__subdomain-title">Выбирете город</h2>
       <form action="" class="form">
-        <input type="search" id="search-city" class="popup__search-city" name="search-city" placeholder="Поиск города" />
+        <input type="search" id="search-city" class="popup__search-city" name="search-city"
+          placeholder="Поиск города" />
       </form>
       <div class="popup__subdomain-grid">
         {% for subdomain in subdomains %}
@@ -21,13 +22,14 @@
     <div class="popup__content">
       <button data-close type="button" class="popup__close"></button>
       <div class="popup__loading">
-        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="" />
+        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="Загрузка" title="Загрузка" />
       </div>
       <h2 class="popup__title">Заказ обратного звонка</h2>
       <form action="{% url 'callback' %}" class="popup__form" method="POST" id="callback-form">
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
-        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input required />
+        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input
+          required />
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>
@@ -39,13 +41,14 @@
     <div class="popup__content">
       <button data-close type="button" class="popup__close"></button>
       <div class="popup__loading">
-        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="" />
+        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="Загрузка" title="Загрузка" />
       </div>
       <h2 class="popup__title">Оставить отзыв</h2>
       <form action="{% url 'reviews_form' %}" class="popup__form" method="POST" id="reviews-form">
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
-        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" required data-tel-input />
+        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" required
+          data-tel-input />
         <textarea name="reviews" rows="10" class="popup__form-controls" placeholder="Ваш отзыв" /></textarea>
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
@@ -54,12 +57,12 @@
 </div>
 
 <div id="success" class="notification">
-    <div class="notification__content">
-      <div class="notification__success-image">
-        <img src="{% static 'theme/mb/images/tick.png' %}" alt="Обратный звонок" title="Обратный звонок" />
-      </div>
-      <p class="notification__success-text">Успешно</p>
+  <div class="notification__content">
+    <div class="notification__success-image">
+      <img src="{% static 'theme/mb/images/tick.png' %}" alt="Обратный звонок" title="Обратный звонок" />
     </div>
+    <p class="notification__success-text">Успешно</p>
+  </div>
 </div>
 
 <div id="order-service" aria-hidden="true" class="popup">
@@ -67,13 +70,14 @@
     <div class="popup__content">
       <button data-close type="button" class="popup__close"></button>
       <div class="popup__loading">
-        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="" />
+        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="Загрузка" title="Загрузка" />
       </div>
       <h2 class="popup__title">Заказать услугу</h2>
       <form action="{% url 'service_form' %}" class="popup__form" method="POST" id="order-service-form">
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
-        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input required />
+        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input
+          required />
         <input type="hidden" name="service" class="popup__form-controls" required />
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
@@ -86,13 +90,14 @@
     <div class="popup__content">
       <button data-close type="button" class="popup__close"></button>
       <div class="popup__loading">
-        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="" />
+        <img src="{% static 'theme/mb/images/loading.gif' %}" alt="Загрузка" title="Загрузка" />
       </div>
       <h2 class="popup__title">Заказать консультацию</h2>
       <form action="{% url 'consultation' %}" class="popup__form" method="POST" id="consultation">
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
-        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input required />
+        <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input
+          required />
         <input type="hidden" name="service" class="popup__form-controls" required />
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>

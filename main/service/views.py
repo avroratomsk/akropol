@@ -29,3 +29,6 @@ def service_new(request):
 
 def service_grav(request):
   return render(request, 'pages/service/service_grav.html')
+
+def service_model(request):
+  return render(request,  'pages/service/service_model.html')

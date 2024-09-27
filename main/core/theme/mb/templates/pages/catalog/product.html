@@ -152,25 +152,7 @@
         <h2 class="product__related-title _title">Сопутствующие товары</h2>
         <div class="index-catalog__cards">
           {% if products %} {% for product in products %}
-          <div class="index-catalog__card card">
-            <div class="card__image">
-              {% if product.image %} {% thumbnail product.image "230x230" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image"
-                alt="{{product.model}}" title="{{product.model}}" />
-              {% endthumbnail %} {% else %}
-              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
-              {% endif %}
-            </div>
-            <div class="card__content">
-              <a href="#" class="card__content-title">{{ product.model }}</a>
-              {% for chr in product.chars.all %}
-              {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p class="card__content-char">
-                Материал: {{ chr }}</p>
-                {% endif %} {% endfor %}
-                <div class="card__content-price">{{ product.price }} ₽</div>
-            </div>
-            <a href="{{ product.get_absolute_url }}" class="card__content-link">Подробнее</a>
-          </div>
+          {% include "../../includes/card.html" with product=product %}
           {% endfor %} {% else %}
           <div class="empty-info">
             <p>Товара нет</p>

@@ -23,6 +23,7 @@
       <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
         <span itemprop="priceCurrency" content="RUB">₽</span>
+        <link itemprop="availability" href="http://schema.org/InStock" />
       </div>
   </div>
   <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
@@ -53,6 +54,7 @@
       <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
         <span itemprop="priceCurrency" content="RUB">₽</span>
+        <link itemprop="availability" href="http://schema.org/InStock" />
       </div>
   </div>
   <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
@@ -80,6 +82,7 @@
       class="card__content-char">Материал: {{ chr }}</p>
       {% endif %} {% endfor %}
       <div class="card__content-price">{{ product.price }} ₽</div>
+      <link itemprop="availability" href="http://schema.org/InStock" />
   </div>
   <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
 </div>

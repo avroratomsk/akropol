@@ -8,10 +8,11 @@
 в Томске | Акрополь
 {% endblock %}
 {% block description %}
-Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}
+Купить памятник на могилу в Томске от мастерской Акрополь недорого. Фото памятников и цены указаны на сайте мастерской.
+Модель памятника
+{% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}
 {%filter lower%}{{product.name }}{% endfilter %}
-{% endif %} от компании Акрополь в городе Томск
-
+{% endif %}
 {% endblock %}
 
 {% block keywords %}

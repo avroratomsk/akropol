@@ -3352,32 +3352,32 @@ body::after {
 }
 
 .category-detail__text .text h1 {
-  font-size: 2rem;
+  font-size: 32px;
   margin-bottom: 20px;
 }
 
 .category-detail__text .text h2 {
-  font-size: 1.5rem;
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
 .category-detail__text .text h3 {
-  font-size: 1.1875rem;
+  font-size: 19px;
   margin-bottom: 20px;
 }
 
 .category-detail__text .text h4 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-size: 1rem;
 }
 
 .category-detail__text .text h5 {
-  font-size: 0.875rem;
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
 .category-detail__text .text h6 {
-  font-size: 0.75rem;
+  font-size: 12px;
   margin-bottom: 20px;
 }
 

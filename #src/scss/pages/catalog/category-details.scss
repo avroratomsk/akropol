@@ -183,8 +183,10 @@
       margin-bottom: 20px;
     }
 
-    ul {
+    ul,
+    ol {
       margin-bottom: 20px;
+      margin-left: 25px;
 
       li {
         &:not(:last-child) {

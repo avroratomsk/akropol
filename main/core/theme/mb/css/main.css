@@ -3381,11 +3381,14 @@ body::after {
   margin-bottom: 20px;
 }
 
-.category-detail__text .text ul {
+.category-detail__text .text ul,
+.category-detail__text .text ol {
   margin-bottom: 20px;
+  margin-left: 25px;
 }
 
-.category-detail__text .text ul li:not(:last-child) {
+.category-detail__text .text ul li:not(:last-child),
+.category-detail__text .text ol li:not(:last-child) {
   margin-bottom: 10px;
 }
 

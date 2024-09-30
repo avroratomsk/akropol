@@ -3348,7 +3348,7 @@ body::after {
 }
 
 .category-detail__text .text p {
-  margin-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 .category-detail__text .text h1 {
@@ -3383,7 +3383,7 @@ body::after {
 
 .category-detail__text .text ul,
 .category-detail__text .text ol {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   margin-left: 25px;
 }
 
@@ -4833,6 +4833,15 @@ body::after {
 
   .item-contact:last-child {
     min-height: 350px;
+  }
+
+  .category-detail__text .text p {
+    margin-bottom: 25px;
+  }
+
+  .category-detail__text .text ul,
+  .category-detail__text .text ol {
+    margin-bottom: 25px;
   }
 
   .service-content__btn {

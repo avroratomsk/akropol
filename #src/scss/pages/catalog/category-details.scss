@@ -150,7 +150,11 @@
 
   .text {
     p {
-      margin-bottom: 15px;
+      margin-bottom: 40px;
+
+      @media screen and (max-width: 425px) {
+        margin-bottom: 25px;
+      }
     }
 
     h1 {
@@ -185,8 +189,12 @@
 
     ul,
     ol {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
       margin-left: 25px;
+
+      @media screen and (max-width: 425px) {
+        margin-bottom: 25px;
+      }
 
       li {
         line-height: 150%;

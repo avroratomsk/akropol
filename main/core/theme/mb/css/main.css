@@ -3319,6 +3319,15 @@ body::after {
   padding: 0px 0px 60px;
 }
 
+.category-detail__text .text p {
+  margin-bottom: 15px;
+}
+
+.category-detail__text .text h2 {
+  font-size: inherit;
+  margin-bottom: 20px;
+}
+
 .filter {
   padding-right: 10px;
 }

@@ -147,6 +147,17 @@
 
 .category-detail__text {
   padding: 0px 0px 60px;
+
+  .text {
+    p {
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: inherit;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .filter {

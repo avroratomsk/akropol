@@ -3315,6 +3315,10 @@ body::after {
   background-color: #41a2d0;
 }
 
+.category-detail__text {
+  padding: 0px 0px 60px;
+}
+
 .filter {
   padding-right: 10px;
 }

@@ -182,6 +182,16 @@
       font-size: 12px;
       margin-bottom: 20px;
     }
+
+    ul {
+      margin-bottom: 20px;
+
+      li {
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
   }
 }
 

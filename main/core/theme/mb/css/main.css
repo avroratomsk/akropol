@@ -3381,6 +3381,14 @@ body::after {
   margin-bottom: 20px;
 }
 
+.category-detail__text .text ul {
+  margin-bottom: 20px;
+}
+
+.category-detail__text .text ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .filter {
   padding-right: 10px;
 }

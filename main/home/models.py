@@ -62,6 +62,7 @@ class Gallery(models.Model):
   cat_detail = models.BooleanField(default=False, verbose_name="Вывод в категорию")
   is_active = models.BooleanField(default=True, verbose_name="Выводить на сайт ?")
   
+  
   def __str__(self):
     return self.name
   

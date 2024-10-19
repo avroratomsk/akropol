@@ -1,13 +1,4 @@
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "akropol",
-        "USER": "akropol",
-        "PASSWORD": "1111",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
+from .settings import BASE_DIR
 
 INSTALLED_APPS = [
     # "django.contrib.admin",
@@ -54,3 +45,10 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     'allauth.account.middleware.AccountMiddleware',
 ]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}

@@ -176,8 +176,8 @@ def gallery_settings(request):
     
   if request.method == "POST":
     try:
-      setup = BlogSettings.objects.get()
-    except BlogSettings.DoesNotExist:
+      setup = GalleryCategory.objects.get()
+    except GalleryCategory.DoesNotExist:
       setup = None
     form_new = GalleryCategorySettingsForm(request.POST, request.FILES, instance=setup)
     

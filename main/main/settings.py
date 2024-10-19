@@ -31,9 +31,9 @@ ALLOWED_HOSTS = ["*"]
 # RESET_FILE = "/home/gorills/project/knc/main/manage.py"
 
 # Application definition
-
 from .local import INSTALLED_APPS
 from .local import MIDDLEWARE
+from .local import DATABASES
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
@@ -41,7 +41,9 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 ROOT_URLCONF = "main.urls"
+
 theme_name = "core/theme/mb/templates"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -71,7 +73,7 @@ WSGI_APPLICATION = "main.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-from .local import DATABASES
+
 
 
 # Password validation

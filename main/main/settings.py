@@ -61,6 +61,7 @@ TEMPLATES = [
                 "home.context_processors.load_settings",
                 "home.context_processors.category_menu",
                 "subdomain.context_processors.subdomain",
+                "home.context_processors.catalog_download",
             ],
         },
     },

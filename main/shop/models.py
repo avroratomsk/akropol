@@ -9,6 +9,7 @@ class ShopSettings(SingletonModel):
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="META заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="META описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="META keywords")
+  download_catalog = models.FileField(upload_to='shop-catalog/', blank=True, null=True, verbose_name="PDF каталог")
 
 # Категория
 class Category(models.Model):

@@ -76,6 +76,9 @@ class ShopSettingsForm(forms.ModelForm):
           'meta_keywords': forms.TextInput(attrs={
               'class': 'form__controls',
           }),
+          # 'download_catalog': forms.TextInput(attrs={
+          #     'class': 'form__controls',
+          # }),
       }
       
 class BlogSettingsForm(forms.ModelForm):

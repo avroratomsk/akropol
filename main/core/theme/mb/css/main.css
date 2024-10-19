@@ -3735,6 +3735,13 @@ body::after {
   margin-top: 15px;
 }
 
+.service-content__buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
 .service-content__btn {
   width: 290px;
   margin-top: 50px;
@@ -4695,6 +4702,12 @@ body::after {
   .top-main__cart {
     display: none !important;
   }
+
+  .service-content__col img {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -4848,8 +4861,13 @@ body::after {
     margin-bottom: 25px;
   }
 
+  .service-content__buttons {
+    gap: 10px;
+  }
+
   .service-content__btn {
     width: 100%;
+    margin-top: 20px;
   }
 }
 

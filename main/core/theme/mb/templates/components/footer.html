@@ -9,7 +9,7 @@
           {% if category_menu %} {% for category in category_menu %}
           <li class="footer__item"><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
           {% endfor %} {% endif %}
-          <li class="footer__item"><a href="/media/{{ catalog_pdf.download_catalog.url }}" download>Скачать каталог</a></li>
+          <li class="footer__item"><a href="/media/{{ catalog_pdf.download_catalog }}" download>Скачать каталог</a></li>
         </ul>
         <ul class="footer__list">
           <li class="footer__item--first">Услуги</li>

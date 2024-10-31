@@ -158,8 +158,8 @@
           <h2 class="product__related-title _title">Сопутствующие товары</h2>
         </div>
         <div class="index-catalog__cards">
-          1
           {% for related_product in product.related_products.all %}
+          {{ related_product.name }}
           {% include "../../includes/card.html" with product=related_product %}
           {% endfor %}
         </div>
@@ -168,7 +168,6 @@
       <div class="product__related">
         <h2 class="product__related-title _title">Сопутствующие товары</h2>
         <div class="index-catalog__cards">
-          2
           {% for product in products %}
           {% include "../../includes/card.html" with product=product %}
           {% endfor %}

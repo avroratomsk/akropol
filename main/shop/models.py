@@ -24,6 +24,7 @@ class Category(models.Model):
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="META keywords")
   add_menu = models.BooleanField(default=False, blank=True, null=True, verbose_name="Выводить в меню ? ")
   updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
+  related_categories = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='related_to')
   
   class Meta:
     db_table = 'category' 
@@ -99,6 +100,11 @@ class Product(models.Model):
   
   def get_absolute_url(self):
         return reverse("product", kwargs={"slug": self.slug})
+
+  def get_related_products(self):
+    related_categories = self.category.related_categories.all()
+    related_products = Product.objects.filter(category__in=related_categories).exclude(id=self.id)[:5]
+    return related_products
 
 class ProductImage(models.Model):
     parent = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images", verbose_name="Привязка к продукту")

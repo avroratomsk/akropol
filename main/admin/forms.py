@@ -269,8 +269,10 @@ class CategoryForm(forms.ModelForm):
       "meta_h1",
       "meta_title",
       "meta_description",
-      "meta_keywords"
+      "meta_keywords",
+      "related_categories"
     ]
+
     labels = {
       "name": "Назване категории",
       "slug": "URL",
@@ -282,6 +284,7 @@ class CategoryForm(forms.ModelForm):
       "meta_description": "Meta описание",
       "meta_keyword": "Meta keywords",
     }
+
     widgets = {
       "name": forms.TextInput(attrs={
           "class": "form__controls",

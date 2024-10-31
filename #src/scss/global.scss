@@ -141,4 +141,8 @@ h5 {}
       line-height: 140%;
     }
   }
+
+  a {
+    color: rgba($color: $accent, $alpha: 1.0);
+  }
 }

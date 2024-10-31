@@ -71,20 +71,20 @@ def category_detail(request, slug):
 
 def product(request, slug):
   product = Product.objects.get(slug=slug)
-  products = Product.objects.filter(category_id=6)[:4]
+  products = product.get_related_products()
   product_color = ColorProduct.objects.filter(active=True)
   images = ProductImage.objects.filter(parent_id=product.id)[:3]
   chars_all = ProductChar.objects.filter(parent=product).distinct()
   
   char_name = CharName.objects.filter(c_chars__in=chars_all, filter_add=True).exclude(filter_name=None).distinct()
-  
+
+  print(products)
   chars_list_name_noduble = []
   for li in chars_all:
     if li.char_value not in chars_list_name_noduble:
       chars_list_name_noduble.append(li.char_value)
       
   context = {
-    "title": "Название продукта",
     "product": product,
     "products": products,
     "char_name":char_name,

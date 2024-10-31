@@ -7,7 +7,7 @@ class Reviews(models.Model):
   name = models.CharField(max_length=150, blank=True, null=True, verbose_name="Имя")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
   date = models.DateTimeField(blank=True, null=True, verbose_name="Дата")
-  text = models.TextField(max_length=250, blank=True, null=True, verbose_name="Текст отзыва")
+  text = models.TextField(blank=True, null=True, verbose_name="Текст отзыва")
   status = models.BooleanField(default=False, verbose_name="Статус публикации")
   meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")

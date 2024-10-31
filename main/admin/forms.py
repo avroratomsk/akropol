@@ -468,7 +468,7 @@ class ReviewsForm(forms.ModelForm):
       }),
       'text': forms.Textarea(attrs={
         'class': INPUT_CLASS,
-        'rows': 5,
+        'rows': 7,
       }),
       'status': forms.CheckboxInput(attrs={
         'class': 'form__controls-checkbox',

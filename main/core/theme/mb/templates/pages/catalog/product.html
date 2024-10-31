@@ -155,11 +155,7 @@
         <div class="index-catalog__cards">
            {% for product in products %}
           {% include "../../includes/card.html" with product=product %}
-          {% endfor %} {% else %}
-          <div class="empty-info">
-            <p>Товара нет</p>
-          </div>
-
+          {% endfor %}
         </div>
       </div>
       {% endif %}

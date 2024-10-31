@@ -77,8 +77,6 @@ def product(request, slug):
   chars_all = ProductChar.objects.filter(parent=product).distinct()
   
   char_name = CharName.objects.filter(c_chars__in=chars_all, filter_add=True).exclude(filter_name=None).distinct()
-
-  print(products)
   chars_list_name_noduble = []
   for li in chars_all:
     if li.char_value not in chars_list_name_noduble:

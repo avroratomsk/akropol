@@ -48,26 +48,6 @@ def contact_form(request):
   
   return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
-def reviews_form(request):
-  if request.method == "POST":
-    form = ReviewsPopupForm(request.POST)
-    if form.is_valid():
-      name  = form.cleaned_data['name']
-      phone = form.cleaned_data['phone']
-      reviews = form.cleaned_data['reviews']
-      title = 'Форма отзыва'
-      messages = "Форма отзыва:" + "\n" + "Имя: " +str(name) + "\n" + "Телефон: " + str(phone) + "\n" + "\n" + "Отзыв: " + str(reviews) + "\n"
-      
-      email_callback(messages, title)
-      
-      return JsonResponse({"success": "success"})
-    else:
-      print(form)
-  else:
-    return JsonResponse({'status': "error", 'errors': form.errors})
-  
-  return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
-
 def service_form(request):
   if request.method == "POST":
     form = OrderSericeForm(request.POST)

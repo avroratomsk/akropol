@@ -258,6 +258,7 @@ class ProductImageForm(forms.ModelForm):
 
 class CategoryForm(forms.ModelForm):
   """ Form, отвечает за создание категорий и редактирование категорий"""
+
   class Meta:
     model = Category
     fields = [
@@ -744,6 +745,11 @@ class SubdomainForm(forms.ModelForm):
     
 class ColorProductForm(forms.ModelForm):
   class Meta:
+    related_products = forms.ModelMultipleChoiceField(
+      queryset=Product.objects.all(),
+      widget=forms.CheckboxSelectMultiple,
+      required=False
+      )
     model = ColorProduct
     fields = "__all__"
     widgets = {

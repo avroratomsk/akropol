@@ -122,19 +122,22 @@
           </div>
         </div>
       </div>
+      {% if product.description or product.delivery %}
       <div class="product__description">
         {% if product.description %}
         <div class="product__description-col">
           <p class="product__description-title">Описание</p>
           <p class="product__description-text">{{ product.description }}</p>
         </div>
-        {% endif %} {% if product.delivery %}
+        {% endif %}
+        {% if product.delivery %}
         <div class="product__description-col">
           <p class="product__description-title">Доставка</p>
           <p class="product__description-text">{{ product.delivery }}.</p>
         </div>
         {% endif %}
       </div>
+      {% endif %}
       {% if product_color %}
       <div class="product__related">
         <h2 class="product__related-title _title">Возможные цветовые решения</h2>
@@ -149,19 +152,30 @@
         </div>
       </div>
       {% endif %}
-      {% if products or product.related_products %}
+      {% if product.related_products %}
+      <div class="product__related">
+        <div class="product__related--top">
+          <h2 class="product__related-title _title">Сопутствующие товары</h2>
+
+        </div>
+
+        <div class="index-catalog__cards">
+          {% for related_product in product.related_products.all %}
+          {% include "../../includes/card.html" with product=related_product %}
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
       <div class="product__related">
         <h2 class="product__related-title _title">Сопутствующие товары</h2>
         <div class="index-catalog__cards">
           {% for product in products %}
           {% include "../../includes/card.html" with product=product %}
           {% endfor %}
-          {% for related_product in product.related_products.all %}
-          {% include "../../includes/card.html" with product=related_product %}
-          {% endfor %}
         </div>
       </div>
       {% endif %}
+      <a href="/category/soputstvuyushchie-tovary/" class="product__related--link">Смотреть все</a>
     </div>
   </div>
 </main>

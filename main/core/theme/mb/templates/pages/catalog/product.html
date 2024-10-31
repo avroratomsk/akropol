@@ -131,13 +131,13 @@
         {% if product.description %}
         <div class="product__description-col">
           <p class="product__description-title">Описание</p>
-          <p class="product__description-text">{{ product.description }}</p>
+          <p class="product__description-text">{{ product.description|safe }}</p>
         </div>
         {% endif %}
         {% if product.delivery %}
         <div class="product__description-col">
           <p class="product__description-title">Доставка</p>
-          <p class="product__description-text">{{ product.delivery }}.</p>
+          <p class="product__description-text">{{ product.delivery|safe }}.</p>
         </div>
         {% endif %}
       </div>

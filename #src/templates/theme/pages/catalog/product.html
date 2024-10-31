@@ -149,12 +149,15 @@
         </div>
       </div>
       {% endif %}
-      {% if products %}
+      {% if products or product.related_products %}
       <div class="product__related">
         <h2 class="product__related-title _title">Сопутствующие товары</h2>
         <div class="index-catalog__cards">
-           {% for product in products %}
+          {% for product in products %}
           {% include "../../includes/card.html" with product=product %}
+          {% endfor %}
+          {% for related_product in product.related_products.all %}
+          {% include "../../includes/card.html" with product=related_product %}
           {% endfor %}
         </div>
       </div>

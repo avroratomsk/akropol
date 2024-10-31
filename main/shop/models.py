@@ -63,6 +63,7 @@ class Product(models.Model):
   updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
   type_image = models.BooleanField(default=False, verbose_name="Вид отображение картинки")
   catalog = models.BooleanField(default=True, verbose_name="Выводить в каталог")
+  related_products = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='related')
   
 
   class Meta:
@@ -85,7 +86,7 @@ class Product(models.Model):
   
     
   def __str__(self):
-    return f'{self.name} Кол-во - {self.quantity}'
+    return f'{self.name}'
     
   """ Данный метод добавляет к id нули в начале """
   def display_id(self):

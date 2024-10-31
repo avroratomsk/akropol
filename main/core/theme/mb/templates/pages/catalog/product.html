@@ -158,6 +158,7 @@
       </div>
       {% endif %}
       {% for related_product in product.related_products.all %}
+      {{related_product.name}}
       {% include "../../includes/card.html" with product=related_product %}
       {% endfor %}
       {% if product.related_products %}

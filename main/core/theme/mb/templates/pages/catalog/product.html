@@ -157,11 +157,10 @@
         </div>
       </div>
       {% endif %}
-      {% for related_product in product.related_products.all %}
-      {{related_product.name}}
-      {% include "../../includes/card.html" with product=related_product %}
-      {% endfor %}
-      {% if product.related_products %}
+
+<!--      {{ product.related_products.all }}-->
+
+      {% if product.related_products.all %}
       <div class="product__related">
         <div class="product__related--top">
           <h2 class="product__related-title _title">Сопутствующие товары</h2>

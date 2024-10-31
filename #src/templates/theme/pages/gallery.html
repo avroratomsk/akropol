@@ -62,7 +62,7 @@
               {% for image in gallery %}
               <a href="{{ image.image.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
                 {% thumbnail image.image format="WEBP" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
+                <img src="{{ im.url }}" data-id="1" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
                   title="{{ image.name }}" />
                 {% endthumbnail %}
               </a>

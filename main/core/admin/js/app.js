@@ -1,6 +1,25 @@
+/*
+* Общие функции
+* */
+
+function addEventHandlerToElements(elements, event, func) {
+  elements.forEach(item => item.addEventListener(event, func));
+}
+
+
 /**
  * Добавление класса активности вкладкам sidebar
  */
+
+const openTabMenuSidebar = () => {
+  console.log('Click')
+}
+
+const btnSidebarMenu = document.querySelectorAll('.menu-sidebar__dropdown');
+if(btnSidebarMenu) {
+  addEventHandlerToElements(btnSidebarMenu, 'click', openTabMenuSidebar)
+}
+
 // const sideBarItem = document.querySelectorAll('.sidebar__item');
 // if (sideBarItem) {
 //   sideBarItem.forEach(item => {

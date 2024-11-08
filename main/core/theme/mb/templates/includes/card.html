@@ -67,7 +67,7 @@
 </div>
 {% endif %}
 
-{% if request.path == "/category/ogradki/" %}
+{% if request.path == "/category/ogradki/" and not product.catalog %}
 <div class="index-catalog__card card">
   <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
     {% if product.image %} {% if product.type_image %}

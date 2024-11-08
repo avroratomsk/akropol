@@ -64,7 +64,7 @@ class Product(models.Model):
   type_image = models.BooleanField(default=False, verbose_name="Вид отображение картинки")
   catalog = models.BooleanField(default=True, verbose_name="Выводить в каталог")
   related_products = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='related')
-  order_by = models.CharField(max_length=255, default=0, null=True, blank=True, verbose_name="Сортировка")
+  order_by = models.PositiveIntegerField(default=0, verbose_name="Сортировка")
   
 
   class Meta:

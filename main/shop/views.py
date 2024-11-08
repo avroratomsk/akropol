@@ -12,7 +12,7 @@ from django.db.models import Count
 from .models import *
 
 def category(request):
-  products = Product.objects.filter(status=True, catalog=True).order_by('model')
+  products = Product.objects.filter(status=True, catalog=True).order_by('order_by')
   try:
     shop_setup = ShopSettings.objects.get()
   except: 
@@ -45,7 +45,7 @@ def category_detail(request, slug):
   page = request.GET.get("page", 1)
   category = Category.objects.get(slug=slug)
   # chars = CharName.objects.filter(group=None)
-  products = Product.objects.filter(category=category).order_by('model')
+  products = Product.objects.filter(category=category).order_by('order_by')
   filter_form = ProductFilterForm(request.GET)
   if filter_form.is_valid():
       q_objects = Q()

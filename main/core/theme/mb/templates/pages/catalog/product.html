@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %} {% load thumbnail %}
 {% block title %}
 {% if product.meta_title %}
-{{ product.meta-title }}
+{{ product.meta_title }}
 {% else %}
 Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}
 {% else %}

@@ -3,11 +3,6 @@
 // import "./import/inputMask";
 // import "./import/script";
 
-// import "./import/test"
-import {test} from "./import/test";
-
-test();
-
 // new VenoBox({
 //   selector: ".index-gallery__item"
 // });

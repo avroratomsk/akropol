@@ -72,7 +72,6 @@ def category_detail(request, slug):
 def product(request, slug):
   product = Product.objects.get(slug=slug)
   products = product.get_related_products()
-  print(products)
   product_color = ColorProduct.objects.filter(active=True)
   images = ProductImage.objects.filter(parent_id=product.id)[:3]
   chars_all = ProductChar.objects.filter(parent=product).distinct()

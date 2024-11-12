@@ -620,7 +620,10 @@ html.lock body::before {
   display: flex;
   align-items: center;
   gap: 30px;
-  min-width: 0;
+}
+
+.index-work .reviews-gis iframe {
+  width: 500px;
 }
 
 .index-work__links {
@@ -693,18 +696,6 @@ html.lock body::before {
 .index-work__prev::after {
   font-size: 14px;
   color: white;
-}
-
-.reviews-gis {
-  width: 100%;
-}
-
-.reviews-gis iframe {
-  width: 100%;
-}
-
-.reviews-gis .bigWidget {
-  padding: 0px 20px !important;
 }
 
 .index-reviews {
@@ -4451,6 +4442,14 @@ body::after {
 @media screen and (max-width: 960px) {
   .index-work__inner {
     flex-direction: column;
+  }
+
+  .index-work .reviews-gis iframe {
+    width: 100%;
+  }
+
+  .index-work .reviews-gis {
+    width: 100%;
   }
 }
 

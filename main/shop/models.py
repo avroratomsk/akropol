@@ -63,7 +63,6 @@ class Product(models.Model):
   updated_at = models.DateTimeField(auto_now=True)  # Поле для даты последнего обновления
   type_image = models.BooleanField(default=False, verbose_name="Вид отображение картинки")
   catalog = models.BooleanField(default=True, verbose_name="Выводить в каталог")
-  related_products = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='related')
   order_by = models.PositiveIntegerField(default=0, verbose_name="Сортировка")
   
 
@@ -104,9 +103,9 @@ class Product(models.Model):
         return reverse("product", kwargs={"slug": self.slug})
 
   def get_related_products(self):
-    related_categories = self.category.related_categories.all()
-    related_products = Product.objects.filter(category__in=related_categories).exclude(id=self.id)[:5]
-    return related_products
+      related_categories = self.category.related_categories.all()
+      related_products = Product.objects.filter(category__in=related_categories).exclude(id=self.id)[:5]
+      return related_products
 
 class ProductImage(models.Model):
     parent = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images", verbose_name="Привязка к продукту")

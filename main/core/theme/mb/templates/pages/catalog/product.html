@@ -168,9 +168,6 @@
         </div>
       </div>
       {% endif %}
-      <!-- Тут -->
-      {% for product in products %}{{ product.name }}{% endfor %}
-
 
       <div class="product__related">
         <div class="product__related--top">
@@ -209,7 +206,7 @@
                     {% if product.model %}
                     {{ product.model }}
                     {% else %}
-                    {{ product.model }}
+                    {{ product.name }}
                     {% endif %}
                   </a>
                   {% for chr in product.chars.all %}
@@ -231,8 +228,8 @@
             </div>
             {% endfor %}
           </div>
-          <div class="product-related__next swiper-button-next"></div>
-          <div class="product-related__prev swiper-button-prev"></div>
+          <div class="product-related__next swiper-button-next index-work__next"></div>
+          <div class="product-related__prev swiper-button-prev index-work__next"></div>
         </div>
       </div>
       <a href="/category/soputstvuyushchie-tovary/" class="product__related--link">Смотреть все</a>

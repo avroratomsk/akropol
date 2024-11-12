@@ -104,7 +104,7 @@ class Product(models.Model):
 
   def get_related_products(self):
       related_categories = self.category.related_categories.all()
-      related_products = Product.objects.filter(category__in=related_categories).exclude(id=self.id)[:5]
+      related_products = Product.objects.filter(category__in=related_categories).exclude(id=self.id)
       return related_products
 
 class ProductImage(models.Model):

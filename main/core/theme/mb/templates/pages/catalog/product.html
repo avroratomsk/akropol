@@ -169,29 +169,62 @@
       </div>
       {% endif %}
 
-      {% if product.related_products.all %}
+      {% if product.related_products.all > 0 %}
       <div class="product__related">
         <div class="product__related--top">
           <h2 class="product__related-title _title">Сопутствующие товары</h2>
         </div>
-        <div class="index-catalog__cards">
+        <!-- <div class="index-catalog__cards">
           {% for related_product in product.related_products.all %}
           {% include "../../includes/card.html" with product=related_product %}
           {% endfor %}
+        </div> -->
+        <div class="product-related__slider swiper">
+          <div class="product-related__wrapper swiper-wrapper">
+            {% for related_product in product.related_products.all %}
+            <div class="index-catalog__card card" itemscope itemtype="https://schema.org/Product">
+              <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
+                {% if product.image %}
+                {% if product.type_image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}"
+                  itemprop="image" />
+                {% else %}
+                {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
+                  title="{{ product.name }}" style="height: 100%" itemprop="image" />
+                {% endthumbnail %}
+                {% endif %}
+                {% else %}
+                <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}"
+                  title="{{ product.name }}" />
+                {% endif %}
+              </div>
+              <div class="card__content">
+                <a href="{{ product.get_absolute_url }}" class="card__content-title" itemprop="name">{{ product.model
+                  }}</a>
+                {% for chr in product.chars.all %}
+                {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p class="card__content-char">
+                  Материал: {{ chr }}</p>
+                  {% endif %} {% endfor %}
+                  {% if product.price %}
+                  <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
+                    <span itemprop="priceCurrency" content="RUB">₽</span>
+                    <meta itemprop="priceValidUntil" content="2029-12-31">
+                    <link itemprop="availability" href="http://schema.org/InStock" />
+                  </div>
+                  {% endif %}
+              </div>
+              <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="product-related__next swiper-button-next"></div>
+          <div class="product-related__prev swiper-button-prev"></div>
         </div>
       </div>
-      {% else %}
-      <div class="product__related">
-        <h2 class="product__related-title _title">Сопутствующие товары</h2>
-        <div class="index-catalog__cards">
-          {% for product in products %}
-          {% include "../../includes/card.html" with product=product %}
-          {% endfor %}
-        </div>
-      </div>
+      <a href="/category/soputstvuyushchie-tovary/" class="product__related--link">Смотреть все</a>
       {% endif %}
-      {% if product.related_products.all or products %}<a href="/category/soputstvuyushchie-tovary/"
-        class="product__related--link">Смотреть все</a>{% endif %}
     </div>
   </div>
 </main>

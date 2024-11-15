@@ -1266,8 +1266,8 @@ def upload_archive(request):
                           category=category,
                           image=image,
                           name="",
-                          cat_detail=False,
-                          is_active=True
+                          cat_detail=True,
+                          is_active=False
                         )
                     except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
                       print('Error')

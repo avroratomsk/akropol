@@ -16,11 +16,13 @@
           <button type="button" data-name="seo" class="page__head-btn">Поля SEO</button>
           <button type="button" data-name="char" class="page__head-btn">Характеристики</button>
         </div>
-        <a href="{% url 'product_add' %}">Добавить новый</a>
-        <button type="submit" class="form__btn">
-          <img src="{% static 'theme/mb/images/admin/save.svg' %}" alt="" />
-          Сохранить
-        </button>
+        <div class="page__head-right">
+          <a href="{% url 'product_add' %}">Добавить новый</a>
+          <button type="submit" class="form__btn">
+            <img src="{% static 'theme/mb/images/admin/save.svg' %}" alt="" />
+            Сохранить
+          </button>
+        </div>
       </div>
       {% csrf_token %}
       <div class="page-content _show" id="basic">
@@ -92,6 +94,13 @@
               {{ form.slug }} {{ form.slug.errors }}
             </div>
             <div class="form__group">
+              <label for="{{ form.order_by.id_for_label }}" class="form__controls-label">
+                <span>*</span>
+                Сортировка :
+              </label>
+              {{ form.order_by }} {{ form.order_by.errors }}
+            </div>
+            <div class="form__group">
               <label for="{{ form.category.id_for_label }}" class="form__controls-label">Выбор категории :</label>
               {{ form.category }} {{ form.category.errors }}
             </div>
@@ -112,11 +121,16 @@
               {{ form.type_image }} {{ form.type_image.errors }}
               <label for="{{ form.type_image.id_for_label }}" class="form__controls-label">Отображение картинки ? : </label>
             </div>
+            <div class="form__group-checkbox">
+              {{ form.catalog }} {{ form.catalog.errors }}
+              <label for="{{ form.catalog.id_for_label }}" class="form__controls-label">Выводить в каталог ? : </label>
+            </div>
 
             <div class="form__group-checkbox">
               {{ form.status }} {{ form.status.errors }}
               <label for="{{ form.status.id_for_label }}" class="form__controls-label"> Опубликовать ? :</label>
             </div>
+
             <div class="form__group">
               <label for="{{ form.related_products.id_for_label }}" class="form__controls-label">Сопутствующий товар :</label>
               {{ form.related_products }} {{ form.related_products.errors }}

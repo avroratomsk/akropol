@@ -155,39 +155,51 @@
 
   <section class="index-work">
     <div class="index-work__container">
-      <h2 class="index-work__title">Наши работы</h2>
-      <div class="index-work__slider swiper">
-        <div class="index-work__wrapper swiper-wrapper">
-          {% if gallery %}
-          {% for image in gallery %}
-          <a href="{{ gallery.image.url }}" class="index-work__slide swiper-slide"
-            data-gall="{{ image.category.slug }}">
-            {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
-              title="{{ image.name }}" />
-            {% endthumbnail %}
-          </a>
-          {% endfor %}
-          {% else %}
-          No image
-          {% endif %}
+      <div class="index-work__inner">
+        <div class="index-work__slider swiper">
+          <h2 class="index-work__title">Наши работы</h2>
+          <div class="index-work__wrapper swiper-wrapper">
+            {% if gallery %}
+            {% for image in gallery %}
+            <a href="{{ gallery.image.url }}" class="index-work__slide swiper-slide"
+              data-gall="{{ image.category.slug }}">
+              {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
+                title="{{ image.name }}" />
+              {% endthumbnail %}
+            </a>
+            {% endfor %}
+            {% else %}
+            No image
+            {% endif %}
 
+          </div>
+          <div class="index-work__next swiper-button-next"></div>
+          <div class="index-work__prev swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
         </div>
-        <div class="index-work__next swiper-button-next"></div>
-        <div class="index-work__prev swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
+        <div class="reviews-gis">
+          <iframe id="big_light_70000001020920164" frameborder="0" width="" height="824px"
+            sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+          <script
+            type="text/javascript">((r, p) => { const l = document.getElementById(r); l.contentWindow.document.open(), l.contentWindow.document.write(decodeURIComponent(escape(atob(p)))), l.contentWindow.document.close() })("big_light_70000001020920164", "PGhlYWQ+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPgogICAgd2luZG93Ll9fc2l6ZV9fPSdiaWcnOwogICAgd2luZG93Ll9fdGhlbWVfXz0nbGlnaHQnOwogICAgd2luZG93Ll9fYnJhbmNoSWRfXz0nJwogICAgd2luZG93Ll9fb3JnSWRfXz0nNzAwMDAwMDEwMjA5MjAxNjQnCiAgIDwvc2NyaXB0PjxzY3JpcHQgY3Jvc3NvcmlnaW49ImFub255bW91cyIgdHlwZT0ibW9kdWxlIiBzcmM9Imh0dHBzOi8vZGlzay4yZ2lzLmNvbS93aWRnZXQtY29uc3RydWN0b3IvYXNzZXRzL2lmcmFtZS5qcyI+PC9zY3JpcHQ+PGxpbmsgcmVsPSJtb2R1bGVwcmVsb2FkIiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5qcyI+PGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5jc3MiPjwvaGVhZD48Ym9keT48ZGl2IGlkPSJpZnJhbWUiPjwvZGl2PjwvYm9keT4=")</script>
+        </div>
       </div>
   </section>
 
+  {% comment %}
   <section class="index-reviews">
     <div class="index-reviews__container">
+      <!-- <iframe id="big_light_70000001020920164" frameborder="0" width="528px" height="824px"
+        sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+      <script
+        type="text/javascript">((r, p) => { const l = document.getElementById(r); l.contentWindow.document.open(), l.contentWindow.document.write(decodeURIComponent(escape(atob(p)))), l.contentWindow.document.close() })("big_light_70000001020920164", "PGhlYWQ+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPgogICAgd2luZG93Ll9fc2l6ZV9fPSdiaWcnOwogICAgd2luZG93Ll9fdGhlbWVfXz0nbGlnaHQnOwogICAgd2luZG93Ll9fYnJhbmNoSWRfXz0nJwogICAgd2luZG93Ll9fb3JnSWRfXz0nNzAwMDAwMDEwMjA5MjAxNjQnCiAgIDwvc2NyaXB0PjxzY3JpcHQgY3Jvc3NvcmlnaW49ImFub255bW91cyIgdHlwZT0ibW9kdWxlIiBzcmM9Imh0dHBzOi8vZGlzay4yZ2lzLmNvbS93aWRnZXQtY29uc3RydWN0b3IvYXNzZXRzL2lmcmFtZS5qcyI+PC9zY3JpcHQ+PGxpbmsgcmVsPSJtb2R1bGVwcmVsb2FkIiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5qcyI+PGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5jc3MiPjwvaGVhZD48Ym9keT48ZGl2IGlkPSJpZnJhbWUiPjwvZGl2PjwvYm9keT4=")</script> -->
       <div class="index-reviews__inner">
         <div class="index-reviews__info">
           <p class="index-reviews__text">Мы будем очень рады получить Вашу обратную связь</p>
           <a href="https://2gis.ru/tomsk/search/%D0%B0%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%20%D1%82%D0%BE%D0%BC%D1%81%D0%BA/firm/70000001020920165/84.969766%2C56.492936/tab/reviews?m=84.987737%2C56.48199%2F12.22"
-             class="reviews__btn _btn" target="_blank">Оставить отзыв</a>
+            class="reviews__btn _btn" target="_blank">Оставить отзыв</a>
         </div>
-        <!-- Тут доделать слайдер -->
         <div class="index-reviews__reviews reviews">
           <div class="reviews__slider swiper">
             <div class="reviews__wrapper swiper-wrapper">
@@ -202,8 +214,10 @@
           </div>
         </div>
       </div>
+
+
     </div>
-  </section>
+  </section>{% endcomment %}
   {% include "../includes/contact-block.html" %} {% include "../components/map.html" %}
 </main>
 {% endblock %}

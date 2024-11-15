@@ -1,21 +1,34 @@
 {% extends "base.html" %} {% load static %} {% load thumbnail %}
+
+
 {% block title %}
+{% if product.meta_title %}
+{{ product.meta_title }}
+{% else %}
 Купить памятник {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}
 {% else %}
 {%filter lower%}{{product.name }}{% endfilter %}
 {% endif %}
-
 в Томске | Акрополь
+{% endif %}
+
 {% endblock %}
+
 {% block description %}
+
+{% if product.meta_description %}
+{{ product.meta_description }}
+{% else %}
 Купить памятник на могилу в Томске от мастерской Акрополь недорого. Фото памятников и цены указаны на сайте мастерской.
 Модель памятника
 {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}
 {%filter lower%}{{product.name }}{% endfilter %}
 {% endif %}
+{% endif %}
 {% endblock %}
 
 {% block keywords %}
+{{ product.meta_keywords }}
 {%endblock %}
 {% block content %}
 
@@ -108,15 +121,19 @@
                   <p>шт.</p>
                 </div>
               </div>
+
             </div>
           </div>
+          {% if product.price %}
           <p class="product-card__price">
             От {{ product.price }} ₽
-
-            <span class="product-card__note"> В связи с частыми изменениями цен у поставщиков, указанная информация о
-              ценах на сайте является ориентировочной. Точную информацию о ценах можно получить у менеджеров компании по
-              телефону или оставить заявку с сайта. </span>
           </p>
+          {% endif %}
+          <span class="product-card__note">
+            В связи с частыми изменениями цен у поставщиков, указанная информация о
+            ценах на сайте является ориентировочной. Точную информацию о ценах можно получить у менеджеров компании по
+            телефону или оставить заявку с сайта.
+          </span>
           <div class="product-card__action">
             {% csrf_token %}
             <a href="{% url 'cart_add' %}" rel="nofollow, noindex" class="product-card__add add-to-cart"
@@ -158,30 +175,114 @@
       </div>
       {% endif %}
 
-      {% if product.related_products.all %}
       <div class="product__related">
         <div class="product__related--top">
           <h2 class="product__related-title _title">Сопутствующие товары</h2>
         </div>
-        <div class="index-catalog__cards">
+
+        <!-- <div class="index-catalog__cards">
           {% for related_product in product.related_products.all %}
           {% include "../../includes/card.html" with product=related_product %}
           {% endfor %}
+        </div> -->
+
+        <div class="product-related__slider swiper">
+          <div class="product-related__wrapper swiper-wrapper">
+            {% for product in products %}
+            <div class="swiper-slide">
+              <div class="index-catalog__card card" itemscope itemtype="https://schema.org/Product">
+                <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
+                  {% if product.image %}
+                  {% if product.type_image %}
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}"
+                    itemprop="image" />
+                  {% else %}
+                  {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
+                    title="{{ product.name }}" style="height: 100%" itemprop="image" />
+                  {% endthumbnail %}
+                  {% endif %}
+                  {% else %}
+                  <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}"
+                    title="{{ product.name }}" />
+                  {% endif %}
+                </div>
+                <div class="card__content">
+                  <a href="{{ product.get_absolute_url }}" class="card__content-title" itemprop="name">
+                    {% if product.model %}
+                    {{ product.model }}
+                    {% else %}
+                    {{ product.name }}
+                    {% endif %}
+                  </a>
+                  {% for chr in product.chars.all %}
+                  {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
+                    class="card__content-char">
+                    Материал: {{ chr }}</p>
+                    {% endif %} {% endfor %}
+                    {% if product.price %}
+                    <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                      <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
+                      <span itemprop="priceCurrency" content="RUB">₽</span>
+                      <meta itemprop="priceValidUntil" content="2029-12-31">
+                      <link itemprop="availability" href="http://schema.org/InStock" />
+                    </div>
+                    {% endif %}
+                </div>
+                <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="product-related__next swiper-button-next index-work__next"></div>
+          <div class="product-related__prev swiper-button-prev index-work__next"></div>
         </div>
       </div>
-      {% else %}
-      <div class="product__related">
-        <h2 class="product__related-title _title">Сопутствующие товары</h2>
-        <div class="index-catalog__cards">
-          {% for product in products %}
-          {% include "../../includes/card.html" with product=product %}
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-      {% if product.related_products.all or products %}<a href="/category/soputstvuyushchie-tovary/" class="product__related--link">Смотреть все</a>{% endif %}
+      <a href="/category/soputstvuyushchie-tovary/" class="product__related--link">Смотреть все</a>
     </div>
   </div>
 </main>
 
 {% endblock content %}
+
+<div class="g-header__top ">
+  <div class="container-fluid">
+    <div class="g-header__top-inner">
+      <span class="c-header__city" type="button" data-toggle="modal" data-target="#modal-location">
+        <span class="c-header__city-text">Томск</span></span>
+      <div class="c-header__top-nav">
+        <div style="display: none!important;">48</div>
+        <ul class="c-header__top-list ul-clear">
+          <li class="c-header__top-list-item">
+            <a href="/prise">Цены</a>
+          </li>
+          <li class="c-header__top-list-item">
+            <a href="/about" rel="nofollow">О Компании</a>
+          </li>
+          <li class="c-header__top-list-item">
+            <a href="/blog">Полезная информация</a>
+          </li>
+          <li class="c-header__top-list-item">
+            <a href="/specialisty" rel="nofollow">Специалисты</a>
+          </li>
+          <li class="c-header__top-list-item">
+            <a href="/licenzii" rel="nofollow">Лицензии</a>
+          </li>
+          <li class="c-header__top-list-item">
+            <a href="/contacts">Контакты</a>
+          </li>
+
+        </ul>
+
+        <a class="header__link d-block d-xl-none" href="/payment/">Онлайн оплата</a>
+        <div class="c-header__top-search">
+          <button type="button" data-toggle="modal" data-target="#modal-search">
+            <svg class="svg-sprite-icon svg-sprite-icon-search ">
+              <use xlink:href="#icon-search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

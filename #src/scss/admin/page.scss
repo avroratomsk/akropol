@@ -1,5 +1,5 @@
 .page {
-  padding: 80px 0px 0px 280px;
+  padding: 0px 0px 0px 280px;
 
   // .page__inner
 
@@ -22,6 +22,13 @@
   // .page__head-tab
 
   &__head-tab {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  // .page__head-right
+  &__head-right {
     display: flex;
     align-items: center;
     gap: 20px;

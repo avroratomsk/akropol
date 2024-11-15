@@ -16,11 +16,13 @@
           <button type="button" data-name="seo" class="page__head-btn">Поля SEO</button>
           <button type="button" data-name="char" class="page__head-btn">Характеристики</button>
         </div>
-        <a href="{% url 'product_add' %}">Добавить новый</a>
-        <button type="submit" class="form__btn">
-          <img src="{% static 'theme/mb/images/admin/save.svg' %}" alt="" />
-          Сохранить
-        </button>
+        <div class="page__head-right">
+          <a href="{% url 'product_add' %}">Добавить новый</a>
+          <button type="submit" class="form__btn">
+            <img src="{% static 'theme/mb/images/admin/save.svg' %}" alt="" />
+            Сохранить
+          </button>
+        </div>
       </div>
       {% csrf_token %}
       <div class="page-content _show" id="basic">
@@ -54,7 +56,8 @@
             </div>
 
             <div class="form__group form__group-image">
-              <label for="{{ image_form.src.id_for_label }}" class="form__controls-label"> Дополнительные изображения : </label>
+              <label for="{{ image_form.src.id_for_label }}" class="form__controls-label"> Дополнительные изображения :
+              </label>
               {{ image_form.src }} {{ image_form.src.errors }}
             </div>
             <div class="product-field"></div>
@@ -69,16 +72,19 @@
               </div>
 
               <div class="form__group">
-                <label for="{{ form.quantity_purchase.id_for_label }}" class="form__controls-label"> Количество купленных : </label>
+                <label for="{{ form.quantity_purchase.id_for_label }}" class="form__controls-label"> Количество
+                  купленных : </label>
                 {{ form.quantity_purchase }} {{ form.quantity_purchase.errors }}
               </div>
 
               <div class="form__group">
-                <label for="{{ form.discount.id_for_label }}" class="form__controls-label"> Скидка в (<span>% :</span>) </label>
+                <label for="{{ form.discount.id_for_label }}" class="form__controls-label"> Скидка в (<span>% :</span>)
+                </label>
                 {{ form.discount }} {{ form.discount.errors }}
               </div>
               <div class="form__group">
-                <label for="{{ form.slug.id_for_label }}" class="form__controls-label"> Количество товара в наличии : </label>
+                <label for="{{ form.slug.id_for_label }}" class="form__controls-label"> Количество товара в наличии :
+                </label>
                 {{ form.quantity }} {{ form.quantity.errors }}
               </div>
             </div>
@@ -92,6 +98,13 @@
               {{ form.slug }} {{ form.slug.errors }}
             </div>
             <div class="form__group">
+              <label for="{{ form.order_by.id_for_label }}" class="form__controls-label">
+                <span>*</span>
+                Сортировка :
+              </label>
+              {{ form.order_by }} {{ form.order_by.errors }}
+            </div>
+            <div class="form__group">
               <label for="{{ form.category.id_for_label }}" class="form__controls-label">Выбор категории :</label>
               {{ form.category }} {{ form.category.errors }}
             </div>
@@ -101,7 +114,8 @@
             </div>
             {% if form.instance.image %}
             <a href="{{ form.instance.image.url }}" target="_blank">
-              <img src="{{ form.instance.image.url }}" alt="Миниатюра изображения" style="max-width: 100px; max-height: 100px" />
+              <img src="{{ form.instance.image.url }}" alt="Миниатюра изображения"
+                style="max-width: 100px; max-height: 100px" />
             </a>
             {% endif %}
             <div class="form__group-checkbox">
@@ -110,7 +124,8 @@
             </div>
             <div class="form__group-checkbox">
               {{ form.type_image }} {{ form.type_image.errors }}
-              <label for="{{ form.type_image.id_for_label }}" class="form__controls-label">Отображение картинки ? : </label>
+              <label for="{{ form.type_image.id_for_label }}" class="form__controls-label">Отображение картинки ? :
+              </label>
             </div>
             <div class="form__group-checkbox">
               {{ form.catalog }} {{ form.catalog.errors }}
@@ -123,7 +138,8 @@
             </div>
 
             <div class="form__group">
-              <label for="{{ form.related_products.id_for_label }}" class="form__controls-label">Сопутствующий товар :</label>
+              <label for="{{ form.related_products.id_for_label }}" class="form__controls-label">Сопутствующий товар
+                :</label>
               {{ form.related_products }} {{ form.related_products.errors }}
             </div>
           </div>
@@ -149,7 +165,8 @@
               {{ form.meta_description }} {{ form.meta_description.errors }}
             </div>
             <div class="form__group">
-              <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label"> Мета keywords : </label>
+              <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label"> Мета keywords :
+              </label>
               {{ form.meta_keywords }} {{ form.meta_keywords.errors }}
             </div>
           </div>
@@ -163,7 +180,8 @@
               {% for char in chars %}
               <div class="form__group-char">
                 <input type="text" name="old_char_id" value="{{ char.id }}" hidden />
-                <label for="{{ form.category.id_for_label }}" class="form__controls-label">Название характеристики :</label>
+                <label for="{{ form.category.id_for_label }}" class="form__controls-label">Название характеристики
+                  :</label>
                 <select name="old_text_name" class="form__controls" placeholder="Название характеристики" id="id_name">
                   <option value="{{ char.char_name.id }}">{{ char.char_name.text_name }}</option>
                   {% for ch in all_chars %}
@@ -171,7 +189,8 @@
                   {% endfor %}
                 </select>
                 <label for="id_char_value" class="form__controls-label">Значение :</label>
-                <input type="text" name="old_char_value" class="form__controls" placeholder="Значение" required="" id="id_char_value" value="{{ char.char_value }}" />
+                <input type="text" name="old_char_value" class="form__controls" placeholder="Значение" required=""
+                  id="id_char_value" value="{{ char.char_value }}" />
                 <a href="" class="form__remove"> Удалить </a>
               </div>
               {% endfor %}
@@ -181,8 +200,799 @@
         <button type="button" id="add-char" class="form__plus">Добавить характеристику</button>
       </div>
     </form>
-    <div class="select-hide" id="select-hide" style="opacity: 0; position: absolute">{{ option_form.type }} {{ product_char_form.char_name }}</div>
+    <div class="select-hide" id="select-hide" style="opacity: 0; position: absolute">{{ option_form.type }} {{
+      product_char_form.char_name }}</div>
   </div>
 </div>
 
 {% endblock %}
+
+<header class="header g-header fadein">
+  <div class="g-header__top">
+    <div class="container-fluid">
+      <div class="g-header__top-inner">
+        <button class="c-header__city" type="button" data-toggle="modal" data-target="#modal-location">
+          <span class="c-header__city-text">Ваш город:</span>
+          <span class="c-header__city-name">Москва</span>
+        </button>
+        <div class="c-header__top-nav">
+          <div style="display: none !important">48</div>
+          <ul class="c-header__top-list ul-clear">
+            <li class="c-header__top-list-item">
+              <a href="https://www.yescenter.ru/payment/">Онлайн оплата</a>
+            </li>
+            <li class="c-header__top-list-item">
+              <a href="https://www.yescenter.ru/inostrannye-yazyki/english/corporate/" rel="nofollow">Компаниям</a>
+            </li>
+            <li class="c-header__top-list-item">
+              <a href="https://www.yescenter.ru/franchising/">Франчайзинг</a>
+            </li>
+            <li class="c-header__top-list-item">
+              <a href="https://www.yescenter.ru/inostrannye-yazyki/english/speakingclub/" rel="nofollow">Разговорный
+                клуб</a>
+            </li>
+            <li class="c-header__top-list-item">
+              <a href="https://www.yescenter.ru/online/english/">Онлайн обучение</a>
+            </li>
+            <li class="c-header__top-list-item">
+              <a href="https://www.yescenter.ru/test/">Онлайн тестирование</a>
+            </li>
+          </ul>
+
+          <a class="header__link d-block d-xl-none" href="https://www.yescenter.ru/payment/">Онлайн оплата</a>
+          <div class="c-header__top-search">
+            <button type="button" data-toggle="modal" data-target="#modal-search">
+              <svg class="svg-sprite-icon svg-sprite-icon-search">
+                <use xlink:href="#icon-search"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <ul class="c-header__links-languages ul-links">
+      <li>
+        <a href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-detey/">Детям</a>
+      </li>
+      <li>
+        <a href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-vzroslyh/">Взрослым</a>
+      </li>
+      <li>
+        <a href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-prepodavatelei/"
+          rel="nofollow">Преподавателям</a>
+      </li>
+      <li>
+        <a href="https://www.yescenter.ru/inostrannye-yazyki/english/corporate/" rel="nofollow">Компаниям</a>
+      </li>
+      <li>
+        <a href="https://www.yescenter.ru/exams/cambridge/">Кембриджские экзамены</a>
+      </li>
+      <li>
+        <a href="https://www.yescenter.ru/online/english/">Онлайн обучение</a>
+      </li>
+    </ul>
+    <div class="c-header__main">
+      <div class="c-header__main-box">
+        <a href="https://www.yescenter.ru/" class="c-header__logo e-logo">
+          <div class="e-logo__img">
+            <img src="./Курсы иностранных языков в Москве _ Языковые курсы Yes_files/logo.svg"
+              alt="Иностранные языки в Москве" />
+          </div>
+          <div class="e-logo__slogan">Иностранные языки<br />в Москве</div>
+        </a>
+        <div class="c-header__logo e-logo e-logo--cambridge">
+          <a class="e-logo__img" href="https://www.yescenter.ru/exams/cambridge/"><img
+              src="./Курсы иностранных языков в Москве _ Языковые курсы Yes_files/logo-cambridge.svg"
+              alt="Кембриджские экзамены" /></a>
+        </div>
+      </div>
+      <div class="c-header__main-box c-header__main-box--burger">
+        <button class="g-header__hamburger hamburger hamburger--spin" type="button" data-element-open="menu">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
+      <div class="c-header__main-box c-header__main-box--links">
+        <div class="g-header__phone-box">
+          <div class="g-header__messenger g-header__messenger--wa">
+            <a href="https://wa.me/79258090143" target="_blank" rel="nofollow">
+              <svg class="svg-sprite-icon svg-sprite-icon-wa-header">
+                <use xlink:href="#icon-wa-header"></use>
+              </svg>
+            </a>
+          </div>
+
+          <div class="g-header__messenger g-header__messenger--tg">
+            <a href="https://t.me/yescenter_ru" target="_blank" rel="nofollow">
+              <svg class="svg-sprite-icon svg-sprite-icon-tg-header">
+                <use xlink:href="#icon-tg-header"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="g-header__phone">
+            <a class="g-header__phone-num telephone_click_event" href="tel:+74951548309">+7 495 154-83-09</a>
+            <div class="text-right">
+              <button type="button" data-toggle="modal" data-target="#callback"
+                class="g-header__phone-text callback_event">Заказать звонок</button>
+            </div>
+          </div>
+        </div>
+        <button class="e-btn order_course_event" type="button" data-toggle="modal"
+          data-target="#order-course">записаться на курсы</button>
+      </div>
+    </div>
+    <div class="c-header__menu">
+      <div class="header__menu" data-element-wrap="menu">
+        <div class="menu">
+          <div class="menu__inner">
+            <button class="menu__close btn-close text-hide js-menu-close d-md-block d-xl-none" type="button"
+              data-element-close="menu">
+              <svg class="svg-sprite-icon svg-sprite-icon-close">
+                <use xlink:href="#icon-close"></use>
+              </svg><span>Закрыть</span>
+            </button>
+
+            <ul data-menu="wrap" class="menu__main">
+              <li data-menu="parent" class="menu__main-item">
+                <a data-menu="link" class="menu__main-link"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/">Иностранные языки</a>
+                <u l data-menu="submenu" class="menu__submenu menu__submenu--second-level">
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/english/">Английский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/english/">Онлайн</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-prepodavatelei/">Преподавателям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/inostrannye-yazyki/english/ege-oge/">ЕГЭ И
+                      ОГЭ</a>
+                  </li>
+                  <li data-menu="parent" class="menu__subitem">
+                    <a data-menu="link" class="menu__sublink" href="javascript:void(0)">Цели изучения</a>
+                    <ul data-menu="submenu" class="menu__submenu menu__submenu--four-level">
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/angliyskiy-dlya-pilotov/">Для
+                          пилотов</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/kursy-angliyskogo-dlya-spetsialistov-po-naymu-personala/">Для
+                          HR</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/kurs-angliyskogo-yazyka-dlya-puteshestviy/">Английский
+                          язык для путешествий</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-it-spetsialistov/">Для IT</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/kurs-angliyskogo-proiznosheniya/">Английское
+                          произношение</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/meditsinskiy-angliyskiy/">Медицинский
+                          английский</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/razgovornyy-angliyskiy/">Разговорный
+                          английский</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/tekhnicheskiy-angliyskiy/">Технический</a>
+                      </li>
+                      <li class="menu__subitem">
+                        <a class="menu__sublink"
+                          href="https://www.yescenter.ru/inostrannye-yazyki/english/yuridicheskiy-angliyskiy/">Для
+                          юристов</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/inostrannye-yazyki/english/lawyers/">Для
+                      юристов</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/razgovornyy-klub-dlya-detey/">Разговорный
+                      клуб для детей</a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/">Немецкий</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/deutsch/">Онлайн</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/podgotovka-k-ekzamenam/">Подготовка к
+                      экзаменам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/deutsch/dlya-prepodavatelei/">Преподавателям
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/french/">Французский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/french/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/french/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/french/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/french/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/french/">Онлайн</a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/italian/">Итальянский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/italian/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/italian/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/italian/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/italian/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/italian/">Онлайн</a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/spanish/">Испанский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/spanish/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/spanish/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/spanish/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/spanish/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/spanish/">Онлайн</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/spanish/podgotovka-k-ekzamenam/">Подготовка к
+                      экзаменам</a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/korean/">Корейский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/korean/dlya-vzroslykh/">Для взрослых</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/inostrannye-yazyki/korean/dlya-detey/">Для
+                      детей</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/korean/dlya-podrostkov/">Для подростков</a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/chinese/">Китайский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/biznes-kursy/">Бизнес-курсы</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/individualnye-zanyatiya/">Индивидуальные
+                      занятия</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/intensivnyy-kurs/">Интенсивный курс</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/summer-vibes/">Летний садик и лагерь</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/obshchiy-kurs-kitayskogo-yazyka/">Общий
+                      курс китайского языка</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/chinese/">Онлайн</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/podgotovka-k-ekzamenam/">Подготовка к
+                      экзаменам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/chinese/razgovornyy-klub/">Разговорный клуб</a>
+                  </li>
+                </ul>
+              </li>
+              <li data-menu="parent" class="menu__subitem">
+                <a data-menu="link" class="menu__sublink"
+                  href="https://www.yescenter.ru/inostrannye-yazyki/japanese/">Японский</a>
+                <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/dlya-detey/">Детям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/dlya-shkolnikov/">Подросткам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/dlya-vzroslyh/">Взрослым</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/corporate/">Компаниям</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/podgotovka-k-ekzamenam/">Подготовка к
+                      экзаменам</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/dlya-nachinayushchikh/">Для
+                      начинающих</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/japanese/kalligrafiya/">Каллиграфия</a>
+                  </li>
+                  <li class="menu__subitem">
+                    <a class="menu__sublink" href="https://www.yescenter.ru/online/japanese/">Онлайн</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            </li>
+            <li data-menu="parent" class="menu__main-item">
+              <a data-menu="link" class="menu__main-link" href="https://www.yescenter.ru/online/">Онлайн курсы</a>
+              <ul data-menu="submenu" class="menu__submenu menu__submenu--second-level">
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink"
+                    href="https://www.yescenter.ru/online/english/">Английский</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/distant-learning/">Дистанционное обучение</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/dlya-vzroslyh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/kids/">Для детей</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/dlya-prepodavateley/">Для
+                        преподавателей</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/korporativnyy-angliyskiy/">Корпоративный
+                        английский</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/ekspress-kursy/">Экспресс-курсы</a>
+                    </li>
+                  </ul>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink" href="https://www.yescenter.ru/online/deutsch/">Немецкий</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/deutsch/dlya-vzroslykh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/deutsch/kids/">Для детей</a>
+                    </li>
+                  </ul>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink"
+                    href="https://www.yescenter.ru/online/spanish/">Испанский</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/spanish/dlya-vzroslykh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/spanish/kids/">Для детей</a>
+                    </li>
+                  </ul>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink"
+                    href="https://www.yescenter.ru/online/italian/">Итальянский</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/italian/dlya-vzroslykh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/italian/kids/">Для детей</a>
+                    </li>
+                  </ul>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink"
+                    href="https://www.yescenter.ru/online/chinese/">Китайский</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/chinese/dlya-vzroslykh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/chinese/kids/">Для детей</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/online/korean/">Корейский</a>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink"
+                    href="https://www.yescenter.ru/online/french/">Французский</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/french/dlya-vzroslykh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/french/kids/">Для детей</a>
+                    </li>
+                  </ul>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink"
+                    href="https://www.yescenter.ru/online/japanese/">Японский</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/japanese/dlya-vzroslykh/">Для
+                        взрослых</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/japanese/kids/">Для детей</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/japanese/dlya-nachinayushchikh/">Для начинающих</a>
+                    </li>
+                  </ul>
+                </li>
+                <li data-menu="parent" class="menu__subitem">
+                  <a data-menu="link" class="menu__sublink" href="javascript:void(0)">Курсы</a>
+                  <ul data-menu="submenu" class="menu__submenu menu__submenu--third-level">
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/elementary/">Elementary</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/exams/">Exams</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/ielts/">IELTS</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/intermediate/">Intermediate</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/it/">IT</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/skype/">Skype</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/toefl/">TOEFL</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/travelling/">Travelling</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/upper-itermediate/">Upper-intermediate</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/angliyskiy-s-nositelem-yazyka/">Английский с
+                        носителем языка</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/business/">Бизнес</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/ege/">ЕГЭ</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/oge/">ОГЭ</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink"
+                        href="https://www.yescenter.ru/online/english/razgovornyy-angliyskiy/">Разговорный
+                        английский</a>
+                    </li>
+                    <li class="menu__subitem">
+                      <a class="menu__sublink" href="https://www.yescenter.ru/online/english/speakingclub/">Разговорный
+                        клуб</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/story/" rel="nofollow">Интерактивные уроки</a>
+                </li>
+              </ul>
+            </li>
+            <li data-menu="parent" class="menu__main-item">
+              <a data-menu="link" class="menu__main-link" href="https://www.yescenter.ru/about/">О компании</a>
+              <ul data-menu="submenu" class="menu__submenu menu__submenu--second-level">
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/about/reviews/">Отзывы</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/about/student-success/">Успехи учеников</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/about/gallery/">Фотогалерея</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/prepodavateli/">Преподаватели</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/rukovoditeli/">Руководители школ</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/rukovodstvo-kompanii/"
+                    rel="nofollow">Руководство компании</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/about/sertificates/">Сертификаты</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/about/vacans/">Наши вакансии</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/metodics/">Наша методика</a>
+                </li>
+              </ul>
+            </li>
+            <li data-menu="parent" class="menu__main-item">
+              <a data-menu="link" class="menu__main-link" href="https://www.yescenter.ru/informaciya/">Информация</a>
+              <ul data-menu="submenu" class="menu__submenu menu__submenu--second-level">
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/informaciya/pravovaya-informaciya/">Правовая
+                    информация</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink"
+                    href="https://www.yescenter.ru/upload/static/infromation_law/DOGOVOR-obshhij.doc">Договор</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/payment/">Оплата</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/informaciya/faq/">Ваши вопросы</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/blog/novosti-kompanii/">Наши новости</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/blog/articles/">Статьи</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink"
+                    href="https://www.yescenter.ru/informaciya/baza-znanij/anglijskij-yazyk/">База знаний</a>
+                </li>
+              </ul>
+            </li>
+            <li data-menu="parent" class="menu__main-item">
+              <a data-menu="link" class="menu__main-link" href="https://www.yescenter.ru/inostrannye-yazyki/english/"
+                rel="nofollow">Наши программы</a>
+              <ul data-menu="submenu" class="menu__submenu menu__submenu--second-level">
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-detey/">Для
+                    детей</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-vzroslyh/">Для
+                    взрослых</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/inostrannye-yazyki/english/corporate/"
+                    rel="nofollow">Компаниям</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink"
+                    href="https://www.yescenter.ru/inostrannye-yazyki/english/dlya-prepodavatelei/"
+                    rel="nofollow">Преподавателям</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/exams/cambridge/">Кембриджские экзамены</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/online/english/">Онлайн обучение</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink"
+                    href="https://www.yescenter.ru/inostrannye-yazyki/english/kursy-anglijskogo-yazyka/"
+                    rel="nofollow">Курсы в Англии</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/nashi-programmy/obrazovanie-za-rubezhom/"
+                    rel="nofollow">Образование за рубежом</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/nashi-programmy/podgotovka-k-ege-po-russkomu/"
+                    rel="nofollow">Подготовка к ЕГЭ по русскому</a>
+                </li>
+                <li class="menu__subitem">
+                  <a class="menu__sublink" href="https://www.yescenter.ru/nashi-programmy/podgotovka-k-oge-po-russkomu/"
+                    rel="nofollow">Подготовка к ОГЭ по русскому</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu__main-item">
+              <a class="menu__main-link" href="https://www.yescenter.ru/ceny/">Цены</a>
+            </li>
+            <li class="menu__main-item">
+              <a class="menu__main-link" href="https://www.yescenter.ru/nashi-akcii/">Акции</a>
+            </li>
+            <li class="menu__main-item">
+              <a class="menu__main-link" href="https://www.yescenter.ru/raspisanie/">Расписание</a>
+            </li>
+            <li class="menu__main-item">
+              <a class="menu__main-link" href="https://www.yescenter.ru/contacts/">Контакты</a>
+            </li>
+            </ul>
+            <div class="menu__body d-xl-none">
+              <div class="container">
+                <ul class="menu__additional">
+                  <li class="menu__additional-item"><a class="menu__additional-link"
+                      href="https://www.yescenter.ru/payment/">Онлайн оплата</a></li>
+                  <li class="menu__additional-item"><a class="menu__additional-link"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/corporate/" rel="nofollow">Компаниям</a>
+                  </li>
+                  <li class="menu__additional-item"><a class="menu__additional-link"
+                      href="https://www.yescenter.ru/franchising/">Франчайзинг</a></li>
+                  <li class="menu__additional-item"><a class="menu__additional-link"
+                      href="https://www.yescenter.ru/inostrannye-yazyki/english/speakingclub/"
+                      rel="nofollow">Разговорный клуб</a></li>
+                  <li class="menu__additional-item"><a class="menu__additional-link"
+                      href="https://www.yescenter.ru/online/english/">Онлайн обучение</a></li>
+                  <li class="menu__additional-item"><a class="menu__additional-link"
+                      href="https://www.yescenter.ru/test/">Онлайн тестирование</a></li>
+                </ul>
+                <button class="menu__registration-course btn btn--red order_course_event" type="button"
+                  data-toggle="modal" data-target="#order-course">записаться на курсы</button>
+                <div class="menu__footer">
+                  <ul class="menu__contacts">
+                    <li class="menu__contact"><a class="menu__tel" href="tel:74951549198">+7 495 154-91-98</a><span
+                        class="menu__desc d-block">Для Москвы, 09:00—18:00</span></li>
+                    <li class="menu__contact"><a class="menu__tel" href="tel:84951549198">8 495 154-91-98</a><span
+                        class="menu__desc d-none">Бесплатно по России</span></li>
+                  </ul>
+                  <button class="btn btn--light-blue" data-toggle="modal" data-target="#callback">заказать обратный
+                    звонок</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

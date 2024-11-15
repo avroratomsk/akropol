@@ -621,6 +621,34 @@
     margin-bottom: 20px;
   }
 
+  // .index-work__inner
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @media screen and (max-width: 960px) {
+      flex-direction: column;
+    }
+  }
+
+  .reviews-gis {
+
+
+    iframe {
+      width: 500px;
+
+      @media screen and (max-width: 960px) {
+        width: 100%
+      }
+    }
+
+    @media screen and (max-width: 960px) {
+      width: 100%;
+    }
+  }
+
   // .index-work__links
 
   &__links {
@@ -696,6 +724,7 @@
 
   &__slider {
     position: relative;
+    max-width: 100%;
   }
 
   // .index-work__wrapper
@@ -713,9 +742,11 @@
     border-radius: 10px;
 
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      @media screen and (min-width: 1200px) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 

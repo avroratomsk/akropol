@@ -50,20 +50,22 @@
               {% endfor %}
             </div>
           </div>
-          <!-- <div class="pagging">
-            <a href="{% if images.has_previous %}?{% chenge_params page=images.previous_page_number %}{% else %}#{% endif %}"
-              class="pagging__arrow {% if not images.has_previous%}disabled{% endif %}">«</a>
+          {% if products.paginator.count > 15 %}
+          <div class="pagging">
+            <a href="{% if products.has_previous %}?{% chenge_params page=products.previous_page_number %}{% else %}#{% endif %}"
+              class="pagging__arrow {% if not products.has_previous%}disabled{% endif %}">«</a>
             <ul class="pagging__list">
-              {% for page in images.paginator.page_range %}
-              {% if page >= images.number|add:-2 and page <= images.number|add:2 %} <li>
+              {% for page in products.paginator.page_range %}
+              {% if page >= products.number|add:-2 and page <= products.number|add:2 %} <li>
                 <a href="?{% chenge_params page=page %}"
-                  class="pagging__item {% if images.number == page %}_active{% endif %}">{{page}}</a>
+                  class="pagging__item {% if products.number == page %}_active{% endif %}">{{page}}</a>
                 </li>
                 {% endif %} {% endfor %}
             </ul>
-            <a href="{% if images.has_next %}?{% chenge_params page=images.next_page_number %}{% else %}#{% endif %}"
+            <a href="{% if products.has_next %}?{% chenge_params page=products.next_page_number %}{% else %}#{% endif %}"
               class="pagging__arrow">»</a>
-          </div> -->
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>

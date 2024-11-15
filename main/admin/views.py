@@ -414,7 +414,6 @@ def parse_exсel(path):
       name_image = row[13].replace("№","")
       # print(name_image)
       name_two = name_image.replace('Э', 'E')
-      print(name_two)
       image = f"goods/{name_two}"
     except:
       pass
@@ -1237,52 +1236,54 @@ def article_delete(request, pk):
 from django.conf import settings
 from PIL import Image as PILImage
 from django.core.files.base import ContentFile
+
 def upload_archive(request):
-  if request.method == 'POST':
-    form = ArchiveUploadForm(request.POST, request.FILES)
-    if form.is_valid():
-      category = form.cleaned_data['category']
-      archive = form.cleaned_data['archive']
+    if request.method == 'POST':
+        form = ArchiveUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            category = form.cleaned_data['category']
+            archive = form.cleaned_data['archive']
 
-      # Создаем временную директорию для распаковки архива
-      temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
-      os.makedirs(temp_dir, exist_ok=True)
+            # Создаем временную директорию для распаковки архива
+            temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
+            os.makedirs(temp_dir, exist_ok=True)
 
-      # Распаковываем архив
-      with zipfile.ZipFile(archive, 'r') as zip_ref:
-        zip_ref.extractall(temp_dir)
-      
-      # Обрабатываем каждый файл в директории
-      for root, dirs, files in os.walk(temp_dir):
-          for file in files:
-              print(file)
-              file_path = os.path.join(root, file)
-              try:
-                  # Проверяем, является ли файл изображением
-                  img = PILImage.open(file_path)
-                  img.verify()  # Проверяем целостность изображения
+            # Распаковываем архив
+            with zipfile.ZipFile(archive, 'r') as zip_ref:
+                zip_ref.extractall(temp_dir)
 
-                  # Сохраняем изображение в базу данных
-                  with open(file_path, 'rb') as f:
-                      
-                      image_data = f.read()
-                      print(image_data)
-                      image_file = Gallery(category=category, image=image_data, name="", cat_detail=False, is_active=True)
-                      image_file.image.save(file, ContentFile(image_data), save=True)
-                      image_file.save()
-              except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
-                  # Если файл не является изображением, пропускаем его
-                  continue
+            # Обрабатываем каждый файл в директории
+            for root, dirs, files in os.walk(temp_dir):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    
+                    try:
+                        image = file_path
+                    #     # Проверяем, является ли файл изображением
+                        img = PILImage.open(file_path)
+                        img.verify()  # Проверяем целостность изображения
+                        new_image = Gallery.objects.create(
+                          category=category,
+                          image=image,
+                          name="",
+                          cat_detail=False,
+                          is_active=True
+                        )
+                    except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
+                      print('Error')
+                    #     # Если файл не является изображением, пропускаем его
+                      continue
 
-      # Удаляем временную директорию
-      for root, dirs, files in os.walk(temp_dir, topdown=False):
-          for file in files:
-              os.remove(os.path.join(root, file))
-          for dir in dirs:
-              os.rmdir(os.path.join(root, dir))
-      os.rmdir(temp_dir)
+            # Удаляем временную директорию
+            # for root, dirs, files in os.walk(temp_dir, topdown=False):
+            #     for file in files:
+            #         os.remove(os.path.join(root, file))
+            #     for dir in dirs:
+            #         os.rmdir(os.path.join(root, dir))
+            # os.rmdir(temp_dir)
 
-      return redirect('admin_gallery')  # Перенаправление на страницу галереи
-  else:
-    form = ArchiveUploadForm()
-  return render(request, 'upload/upload_archive.html', {'form': form})
+            return redirect('gallery')  # Перенаправление на страницу галереи
+    else:
+        form = ArchiveUploadForm()
+    
+    return render(request, 'upload/upload_archive.html', {'form': form})

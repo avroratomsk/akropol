@@ -11,6 +11,10 @@ INPUT_CLASS = "form__controls"
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
+class ArchiveUploadForm(forms.Form):
+  category = forms.ModelChoiceField(queryset=GalleryCategory.objects.all())
+  archive = forms.FileField()
+
 class GlobalSettingsForm(forms.ModelForm):
   """ Form, глобальные и общие настройки сайта(лого, телефон, email)"""
   # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())

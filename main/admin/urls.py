@@ -8,6 +8,7 @@ urlpatterns = [
     
     #URl - отвечающие за загрузку данных
     path('upload-goods/', views.upload_goods, name="upload_goods"),
+    path('upload-archive/', views.upload_archive, name="upload_archive"),
     path('upload-succes/', views.upload_succes, name="upload-succes"),
     
     #URl - отвечающие за отображение категорий, редактирование и удаление категории

@@ -4,7 +4,7 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import BlogSettingsForm, CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryCategorySettingsForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
+from admin.forms import ArchiveUploadForm, BlogSettingsForm, CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryCategorySettingsForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
 from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
 from blog.models import BlogSettings, Post
 from main.settings import BASE_DIR
@@ -1146,7 +1146,6 @@ def admin_gallery_category(request):
   
   return render(request, "gallery/gallery_category.html", context)
 
-
 def gallery_category_add(request):
   form = GalleryCategoryForm()
   
@@ -1185,8 +1184,6 @@ def gallery_category_edit(request, pk):
 
 def gallery_category_delete(request):
   pass
-
-
 
 def article(request):
   items = Post.objects.all()
@@ -1236,3 +1233,56 @@ def article_delete(request, pk):
   category.delete()
   
   return redirect('admin_category')
+
+from django.conf import settings
+from PIL import Image as PILImage
+from django.core.files.base import ContentFile
+def upload_archive(request):
+  if request.method == 'POST':
+    form = ArchiveUploadForm(request.POST, request.FILES)
+    if form.is_valid():
+      category = form.cleaned_data['category']
+      archive = form.cleaned_data['archive']
+
+      # Создаем временную директорию для распаковки архива
+      temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
+      os.makedirs(temp_dir, exist_ok=True)
+
+      # Распаковываем архив
+      with zipfile.ZipFile(archive, 'r') as zip_ref:
+        zip_ref.extractall(temp_dir)
+      
+      # Обрабатываем каждый файл в директории
+      for root, dirs, files in os.walk(temp_dir):
+          for file in files:
+              print(file)
+              file_path = os.path.join(root, file)
+              try:
+                  # Проверяем, является ли файл изображением
+                  img = PILImage.open(file_path)
+                  img.verify()  # Проверяем целостность изображения
+
+                  # Сохраняем изображение в базу данных
+                  with open(file_path, 'rb') as f:
+                      
+                      image_data = f.read()
+                      print(image_data)
+                      image_file = Gallery(category=category, image=image_data, name="", cat_detail=False, is_active=True)
+                      image_file.image.save(file, ContentFile(image_data), save=True)
+                      image_file.save()
+              except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
+                  # Если файл не является изображением, пропускаем его
+                  continue
+
+      # Удаляем временную директорию
+      for root, dirs, files in os.walk(temp_dir, topdown=False):
+          for file in files:
+              os.remove(os.path.join(root, file))
+          for dir in dirs:
+              os.rmdir(os.path.join(root, dir))
+      os.rmdir(temp_dir)
+
+      return redirect('admin_gallery')  # Перенаправление на страницу галереи
+  else:
+    form = ArchiveUploadForm()
+  return render(request, 'upload/upload_archive.html', {'form': form})

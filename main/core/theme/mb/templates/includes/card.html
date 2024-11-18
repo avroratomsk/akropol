@@ -21,7 +21,7 @@
       class="card__content-char">Материал: {{ chr }}</p>
       {% endif %} {% endfor %}
       {% if product.price %}
-      <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <div class="card__content-price">
         <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
         <span itemprop="priceCurrency" content="RUB">₽</span>
         <meta itemprop="priceValidUntil" content="2029-12-31">
@@ -29,7 +29,8 @@
       </div>
       {% endif %}
   </div>
-  <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
+  <a href="{{ product.get_absolute_url }}" class="card__content-link" itemprop="offers" itemscope
+    itemtype="https://schema.org/Offer">Выбрать конфигурацию</a>
 </div>
 {% endif %}
 

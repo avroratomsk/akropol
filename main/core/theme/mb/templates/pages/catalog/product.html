@@ -4,7 +4,7 @@
 {% if product.meta_title %}
 {{ product.meta_title }}
 {% else %}
-  {% if product.category == "оградки" %}
+  {% if product.category|lower == "оградки" %}
   Купить памятник из гранита {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} в Томске | Акрополь
   {% else %}
     Купить оградку  {% if product.model %}тип {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} в Томске | Акрополь

@@ -73,8 +73,10 @@
           <button type="button" class="category-details__filter"><i
               class="fa-solid fa-arrow-up-wide-short"></i></button>
           {% if products %}
-          <div class="index-catalog__cards">{% for product in products %} {% include
-            "../../includes/card.html" with product=product %} {% endfor %}
+          <div class="index-catalog__cards">
+            {% for product in products %}
+            {% include "../../includes/card.html" with product=product %}
+            {% endfor %}
           </div>
           {% else %}
           <div class="empty-info">
@@ -87,8 +89,8 @@
         <a href="{% if products.has_previous %}?{% chenge_params page=products.previous_page_number %}{% else %}#{% endif %}"
            class="pagging__arrow {% if not products.has_previous%}disabled{% endif %}">«</a>
         <ul class="pagging__list">
-          {% for page in products.paginator.page_range %} {% if page >= products.number|add:-2 and page <=
-          products.number|add:2 %}
+          {% for page in products.paginator.page_range %}
+          {% if page >= products.number|add:-2 and page <= products.number|add:2 %}
           <li>
             <a href="?{% chenge_params page=page %}"
                class="pagging__item {% if products.number == page %}_active{% endif %}">{{page}}</a>

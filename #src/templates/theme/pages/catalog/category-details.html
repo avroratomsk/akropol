@@ -1,10 +1,19 @@
-{% extends "base.html" %} {% load shop_tags %} {% load thumbnail %}{% load static %} {% block title %} {% if category.meta_title %} {{ category.meta_title}} {% else %} Заказать {% filter lower %}{{ category.name }}{% endfilter %} памятников на могилу в Томске | Акрополь {% endif %} {% endblock %} {% block description %} {% if category.meta_description %} {{ category.meta_description }} {% else %} Купить {% filter lower %}{{ category.name }}{% endfilter %} на могилу по выгодной цене в Томске от
+{% extends "base.html" %} {% load shop_tags %} {% load thumbnail %}{% load static %} {% block title %} {% if category.meta_title %}
+{{ category.meta_title}} {% else %}
+Заказать {% filter lower %}{{ category.name }}{% endfilter %} памятников на могилу в Томске | Акрополь {% endif %} {% endblock %}
+{% block description %} {% if category.meta_description %} {{ category.meta_description }} {% else %} Купить {% filter lower %}{{ category.name }}{% endfilter %} на могилу по выгодной цене в Томске от
 компании Акрополь. Заказать памятники можно по номеру +7(900) 921-09-15 и +7(903) 955-40-18 {% endif %} {% endblock %} {% block keywords %} {{ category.meta_keywords }} {% endblock %} {% block content %}
 <main class="page">
   <section class="category-details">
     <div class="category-details__container">
       <div class="category-details__head">
-        <h1 class="category-details__title _title">Категория - {{ category.name }}</h1>
+        <h1 class="category-details__title _title">
+          {% if category.meta_h1 %}
+            {{ category.meta_h1 }}
+          {% else %}
+            Категория - {{ category.name }}
+          {% endif %}
+        </h1>
         <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
           <a href="{% url 'category' %}" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
             Каталог

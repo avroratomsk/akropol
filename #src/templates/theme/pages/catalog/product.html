@@ -17,7 +17,7 @@
 {% if product.meta_description %}
 {{ product.meta_description }}
 {% else %}
-  {% if product.category == "Оградки"%}
+  {% if product.category|lower != "оградки"%}
     Купить памятник на могилу в Томске от мастерской Акрополь недорого. Фото памятников и цены указаны на сайте мастерской.
     Модель памятника {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
   {% else %}

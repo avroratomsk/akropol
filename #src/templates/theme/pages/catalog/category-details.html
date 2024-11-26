@@ -58,8 +58,9 @@
                 {% for checkbox in field %}
                 <div class="form__group-boolean">
                   {{ checkbox.tag }}
-                  <label class="checkbox-label" for="{{ checkbox.id_for_label }}">{{
-                    checkbox.choice_label }}</label>
+                  <label class="checkbox-label" for="{{ checkbox.id_for_label }}">
+                    {{ checkbox.choice_label }}
+                  </label>
                 </div>
                 {% endfor %}
               </div>

@@ -4308,6 +4308,10 @@ body::after {
     line-height: 120%;
     font-weight: 700;
   }
+
+  .index-stock__item--first .index-stock__item-img {
+    object-fit: none;
+  }
 }
 
 @media screen and (min-width: 1024px) {

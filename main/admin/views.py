@@ -1238,12 +1238,13 @@ from PIL import Image as PILImage
 from django.core.files.base import ContentFile
 
 def upload_archive(request):
+
     if request.method == 'POST':
         form = ArchiveUploadForm(request.POST, request.FILES)
         if form.is_valid():
             category = form.cleaned_data['category']
             archive = form.cleaned_data['archive']
-
+            Gallery.objects.filter(category=category).all()
             # Создаем временную директорию для распаковки архива
             temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
             os.makedirs(temp_dir, exist_ok=True)

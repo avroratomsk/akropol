@@ -1281,7 +1281,7 @@ def upload_archive(request):
             #         os.rmdir(os.path.join(root, dir))
             # os.rmdir(temp_dir)
 
-            return redirect(request.META.get("HTTP_REFERER")  # Перенаправление на страницу галереи
+            return redirect('admin')  # Перенаправление на страницу галереи
     else:
         form = ArchiveUploadForm()
     

@@ -1238,40 +1238,39 @@ from PIL import Image as PILImage
 from django.core.files.base import ContentFile
 
 def upload_archive(request):
-    Gallery.objects.all().delete()
-#     if request.method == 'POST':
-#         form = ArchiveUploadForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             category = form.cleaned_data['category']
-#             archive = form.cleaned_data['archive']
-#
-#             # Создаем временную директорию для распаковки архива
-#             temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
-#             os.makedirs(temp_dir, exist_ok=True)
-#
-#             # Распаковываем архив
-#             with zipfile.ZipFile(archive, 'r') as zip_ref:
-#                 zip_ref.extractall(temp_dir)
-#
-#             # Обрабатываем каждый файл в директории
-#             for root, dirs, files in os.walk(temp_dir):
-#                 for file in files:
-#                     file_path = os.path.join(root, file)
-#
-#                     try:
-#                         image = file_path
-#                         img = PILImage.open(file_path)
-#                         img.verify()
-#                         new_image = Gallery.objects.create(
-#                           category=category,
-#                           image=image,
-#                           name="",
-#                           cat_detail=True,
-#                           is_active=False
-#                         )
-#                     except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
-#                       print('Error')
-#                       continue
+    if request.method == 'POST':
+        form = ArchiveUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            category = form.cleaned_data['category']
+            archive = form.cleaned_data['archive']
+
+            # Создаем временную директорию для распаковки архива
+            temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
+            os.makedirs(temp_dir, exist_ok=True)
+
+            # Распаковываем архив
+            with zipfile.ZipFile(archive, 'r') as zip_ref:
+                zip_ref.extractall(temp_dir)
+
+            # Обрабатываем каждый файл в директории
+            for root, dirs, files in os.walk(temp_dir):
+                for file in files:
+                    file_path = os.path.join(root, file)
+
+                    try:
+                        image = file_path
+                        img = PILImage.open(file_path)
+                        img.verify()
+                        new_image = Gallery.objects.create(
+                          category=category,
+                          image=image,
+                          name="",
+                          cat_detail=True,
+                          is_active=False
+                        )
+                    except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
+                      print('Error')
+                      continue
 
             # Удаляем временную директорию
             # for root, dirs, files in os.walk(temp_dir, topdown=False):
@@ -1281,7 +1280,7 @@ def upload_archive(request):
             #         os.rmdir(os.path.join(root, dir))
             # os.rmdir(temp_dir)
 
-            return redirect('admin')  # Перенаправление на страницу галереи
+            return redirect('gallery')  # Перенаправление на страницу галереи
     else:
         form = ArchiveUploadForm()
     

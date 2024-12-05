@@ -137,9 +137,10 @@ def index(request):
 def gal_cat_detail(request, slug):
   category = GalleryCategory.objects.get(slug=slug)
   images = Gallery.objects.filter(category=category, cat_detail=True)
-  # page = request.GET.get("page", 1)
-  # paginator = Paginator(images, 20)
-  # current_page = paginator.page(int(page))
+  page = request.GET.get("page", 1)
+  paginator = Paginator(images, 20)
+  current_page = paginator.page(int(page))
+
   context = {
     "category": category,
     "images": images,

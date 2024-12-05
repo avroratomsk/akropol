@@ -1238,6 +1238,7 @@ from PIL import Image as PILImage
 from django.core.files.base import ContentFile
 
 def upload_archive(request):
+    Gallery.objects.all().delete()
     if request.method == 'POST':
         form = ArchiveUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1259,9 +1260,8 @@ def upload_archive(request):
                     
                     try:
                         image = file_path
-                    #     # Проверяем, является ли файл изображением
                         img = PILImage.open(file_path)
-                        img.verify()  # Проверяем целостность изображения
+                        img.verify()
                         new_image = Gallery.objects.create(
                           category=category,
                           image=image,
@@ -1271,7 +1271,6 @@ def upload_archive(request):
                         )
                     except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
                       print('Error')
-                    #     # Если файл не является изображением, пропускаем его
                       continue
 
             # Удаляем временную директорию

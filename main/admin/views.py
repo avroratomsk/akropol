@@ -1245,41 +1245,40 @@ def upload_archive(request):
             category = form.cleaned_data['category']
             archive = form.cleaned_data['archive']
             Gallery.objects.filter(category=category).delete()
-            # Создаем временную директорию для распаковки архива
-#             temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
-#             os.makedirs(temp_dir, exist_ok=True)
-#
-#             # Распаковываем архив
-#             with zipfile.ZipFile(archive, 'r') as zip_ref:
-#                 zip_ref.extractall(temp_dir)
-#
-#             # Обрабатываем каждый файл в директории
-#             for root, dirs, files in os.walk(temp_dir):
-#                 for file in files:
-#                     file_path = os.path.join(root, file)
-#
-#                     try:
-#                         image = file_path
-#                         img = PILImage.open(file_path)
-#                         img.verify()
-#                         new_image = Gallery.objects.create(
-#                           category=category,
-#                           image=image,
-#                           name="",
-#                           cat_detail=True,
-#                           is_active=False
-#                         )
-#                     except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
-#                       print('Error')
-#                       continue
+            Создаем временную директорию для распаковки архива
+            temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
+            os.makedirs(temp_dir, exist_ok=True)
 
-            # Удаляем временную директорию
-            # for root, dirs, files in os.walk(temp_dir, topdown=False):
-            #     for file in files:
-            #         os.remove(os.path.join(root, file))
-            #     for dir in dirs:
-            #         os.rmdir(os.path.join(root, dir))
-            # os.rmdir(temp_dir)
+            # Распаковываем архив
+            with zipfile.ZipFile(archive, 'r') as zip_ref:
+                zip_ref.extractall(temp_dir)
+
+            # Обрабатываем каждый файл в директории
+            for root, dirs, files in os.walk(temp_dir):
+                for file in files:
+                    file_path = os.path.join(root, file)
+
+                    try:
+                        image = file_path
+                        img = PILImage.open(file_path)
+                        img.verify()
+                        new_image = Gallery.objects.create(
+                          category=category,
+                          image=image,
+                          name="",
+                          cat_detail=True,
+                          is_active=False
+                        )
+                    except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
+                      print('Error')
+                      continue
+
+            for root, dirs, files in os.walk(temp_dir, topdown=False):
+                for file in files:
+                    os.remove(os.path.join(root, file))
+                for dir in dirs:
+                    os.rmdir(os.path.join(root, dir))
+            os.rmdir(temp_dir)
 
             return redirect('gallery')  # Перенаправление на страницу галереи
     else:

@@ -1244,7 +1244,7 @@ def upload_archive(request):
         if form.is_valid():
             category = form.cleaned_data['category']
             archive = form.cleaned_data['archive']
-            Gallery.objects.filter(category=category).all()
+            Gallery.objects.filter(category=category).delete()
             # Создаем временную директорию для распаковки архива
             temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
             os.makedirs(temp_dir, exist_ok=True)

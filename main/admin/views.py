@@ -1244,7 +1244,7 @@ def upload_archive(request):
         if form.is_valid():
             category = form.cleaned_data['category']
             archive = form.cleaned_data['archive']
-            Gallery.objects.filter(category=category).delete()
+#             Gallery.objects.filter(category=category).delete()
             temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
             os.makedirs(temp_dir, exist_ok=True)
 
@@ -1272,12 +1272,12 @@ def upload_archive(request):
                       print('Error')
                       continue
 
-            for root, dirs, files in os.walk(temp_dir, topdown=False):
-                for file in files:
-                    os.remove(os.path.join(root, file))
-                for dir in dirs:
-                    os.rmdir(os.path.join(root, dir))
-            os.rmdir(temp_dir)
+#             for root, dirs, files in os.walk(temp_dir, topdown=False):
+#                 for file in files:
+#                     os.remove(os.path.join(root, file))
+#                 for dir in dirs:
+#                     os.rmdir(os.path.join(root, dir))
+#             os.rmdir(temp_dir)
 
             return redirect('gallery')  # Перенаправление на страницу галереи
     else:

@@ -4,92 +4,88 @@
   <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
     {% if product.image %}
     {% if product.type_image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" itemprop="image" />
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" itemprop="image"/>
     {% else %}
     {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
-      title="{{ product.name }}" style="height: 100%" itemprop="image" />
+         title="{{ product.name }}" style="height: 100%" itemprop="image"/>
     {% endthumbnail %}
     {% endif %}
     {% else %}
-    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}" />
+    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}"/>
     {% endif %}
   </div>
   <div class="card__content">
     <a href="{{ product.get_absolute_url }}" class="card__content-title" itemprop="name">{{ product.model }}</a>
     {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
-      class="card__content-char">Материал: {{ chr }}</p>
-      {% endif %} {% endfor %}
-      {% if product.price %}
-      <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-        <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
-        <span itemprop="priceCurrency" content="RUB">₽</span>
-        <meta itemprop="priceValidUntil" content="2029-12-31">
-        <link itemprop="availability" href="http://schema.org/InStock" />
+    class="card__content-char">Материал: {{ chr }}</p>
+    {% endif %} {% endfor %}
+    {% if product.price %}
+    <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
+      <span itemprop="priceCurrency" content="RUB">₽</span>
+      <meta itemprop="priceValidUntil" content="2029-12-31">
+      <link itemprop="availability" href="http://schema.org/InStock"/>
+    </div>
+    {% endif %}
+    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+      <span itemprop="ratingValue"></span>
+      <span itemprop="reviewCount"></span>
+    </div>
+    <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+      <span itemprop="name"></span>
+      <span itemprop="author"></span>,
+      <meta itemprop="datePublished" content="2013-09-14">
+      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+        <meta itemprop="worstRating" content="1">
+        <span itemprop="ratingValue"></span>
+        <span itemprop="bestRating"></span>звезд.
+        <span itemprop="description">текст_отзыва</span>
       </div>
-      {% endif %}
+    </div>
   </div>
   <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
 </div>
 {% endif %}
 
-<!-- {% if not product.catalog %}
-<div class="index-catalog__card card" itemscope itemtype="https://schema.org/Product">
-  <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
-    {% if product.image %}
-    {% if product.type_image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" itemprop="image" />
-    {% else %}
-    {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
-      title="{{ product.name }}" style="height: 100%" itemprop="image" />
-    {% endthumbnail %}
-    {% endif %}
-    {% else %}
-    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}" />
-    {% endif %}
-  </div>
-  <div class="card__content">
-    <a href="{{ product.get_absolute_url }}" class="card__content-title" itemprop="name">{{ product.name }}</a>
-    {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
-      class="card__content-char">Материал: {{ chr }}</p>
-      {% endif %} {% endfor %}
-      {% if product.price %}
-      <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-        <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>
-        <span itemprop="priceCurrency" content="RUB">₽</span>
-        <meta itemprop="priceValidUntil" content="2029-12-31">
-        <link itemprop="availability" href="http://schema.org/InStock" />
-      </div>
-      {% endif %}
-  </div>
-  <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
-</div>
-{% endif %} -->
-
 {% if request.path == "/category/ogradki/" and not product.catalog %}
 <div class="index-catalog__card card">
   <div class="card__image" {% if product.type_image %}style="height: auto;" {% endif %}>
     {% if product.image %} {% if product.type_image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" />
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}"/>
     {% else %}
     {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"
-      title="{{ product.name }}" style="height: 100%" />
+         title="{{ product.name }}" style="height: 100%"/>
     {% endthumbnail %}
     {% endif %}
     {% else %}
-    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}" />
+    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ product.name }}" title="{{ product.name }}"/>
     {% endif %}
   </div>
   <div class="card__content">
     <a href="{{ product.get_absolute_url }}" class="card__content-title"> {{ product.name }} </a>
     {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
-      class="card__content-char">Материал: {{ chr }}</p>
-      {% endif %} {% endfor %}
-      <div class="card__content-price">{{ product.price }} ₽</div>
-      <meta itemprop="priceValidUntil" content="2029-12-31">
-      <link itemprop="availability" href="http://schema.org/InStock" />
+    class="card__content-char">Материал: {{ chr }}</p>
+    {% endif %} {% endfor %}
+    <div class="card__content-price">{{ product.price }} ₽</div>
+    <meta itemprop="priceValidUntil" content="2029-12-31">
+    <link itemprop="availability" href="http://schema.org/InStock"/>
+  </div>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue"></span>
+    <span itemprop="reviewCount"></span>
+  </div>
+  <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+    <span itemprop="name"></span>
+    <span itemprop="author"></span>,
+    <meta itemprop="datePublished" content="2013-09-14">
+    <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+      <meta itemprop="worstRating" content="1">
+      <span itemprop="ratingValue"></span>
+      <span itemprop="bestRating"></span>звезд.
+      <span itemprop="description">текст_отзыва</span>
+    </div>
   </div>
   <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
 </div>

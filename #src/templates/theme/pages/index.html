@@ -6,11 +6,12 @@
 {% block description %}{{ home_page.meta_description }}{% endblock %}
 {% block keywords %}{{ home_page.meta_keywords }}{% endblock %}
 {% block content %}
+
 <main class="page">
   <section class="main">
     {% thumbnail home_page.banner "1920x1080" format="WEBP" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ home_page.title }}"
-      title="{{ home_page.title }}" class="index-stock__item-img" />
+         title="{{ home_page.title }}" class="index-stock__item-img"/>
     {% endthumbnail %}
     <div class="main__container">
       <div class="main__top top-main">
@@ -19,26 +20,26 @@
             <div class="top-main__address">Яковлева, 41а</div>
             <a href="tel:+79009210915" class="top-main__phone">+7(900) 921-09-15
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
-                title="Заказать звонок" />
+                   title="Заказать звонок"/>
             </a>
           </div>
           <div class="top-main__item">
             <div class="top-main__address">Демьяна Бедного, 16а ст1</div>
             <a href="tel:+79039554018" class="top-main__phone">+7(903) 955-40-18
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
-                title="Заказать звонок" />
+                   title="Заказать звонок"/>
             </a>
           </div>
         </div>
         <div class="top-main__middle">
           <a href="/" class="top-main__logo">
-            <img src="{% static 'theme/mb/images/logo.png' %}" alt="Логотип" title="Логотип" />
+            <img src="{% static 'theme/mb/images/logo.png' %}" alt="Логотип" title="Логотип"/>
           </a>
         </div>
         <div class="top-main__right">
           <div class="top-main__right-row">
             <button class="subdomain-button" id="subdomain-button" data-popup="subdomain">
-              <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Адрес" title="Адрес" />
+              <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Адрес" title="Адрес"/>
               <span id="city">Томск</span>
             </button>
           </div>
@@ -46,11 +47,11 @@
             <button type="button" class="top-main__callback" data-popup="callback">
               Заказать звонок
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
-                title="Заказать звонок" />
+                   title="Заказать звонок"/>
             </button>
             <button type="button" class="top-main__callback show-cart" id="show-cart">
               Корзина
-              <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="Иконка корзины" title="Иконка корзины" />
+              <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="Иконка корзины" title="Иконка корзины"/>
 
               {% user_carts request as carts %} {% if carts %}
               <span class="count-product-cart" id="count-goods">{{ carts.total_quantity }}</span>
@@ -71,9 +72,9 @@
       <div class="index-stock__grid">
         <a href="{% url 'stock_product' %}" class="index-stock__item index-stock__item--first">
           <img src="{% static 'theme/mb/images/skidka.jpg' %}" alt="Памятники со скидкой" title="Памятники со скидкой"
-            class="index-stock__item-img" />
-<!--          <h2 class="index-stock__item-title">Памятники со <br />скидкой</h2>-->
-<!--          <p class="index-stock__item-discount"></p>-->
+               class="index-stock__item-img"/>
+          <!--          <h2 class="index-stock__item-title">Памятники со <br />скидкой</h2>-->
+          <!--          <p class="index-stock__item-discount"></p>-->
         </a>
         {% if category_gallery %}
         {% for gal_cat in category_gallery %}
@@ -81,11 +82,11 @@
           {% if gal_cat.image %}
           {% thumbnail gal_cat.image "680x300" format="WEBP" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ gal_cat.name }}"
-            title="{{ gal_cat.name }}" class="index-stock__item-img" />
+               title="{{ gal_cat.name }}" class="index-stock__item-img"/>
           {% endthumbnail %}
           {% else %}
           <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}"
-            class="index-stock__item-img" />
+               class="index-stock__item-img"/>
           {% endif %}
           <h2 class="index-stock__item-title">{{ gal_cat.name|safe }}</h2>
         </a>
@@ -126,26 +127,26 @@
       <div class="index-service__cards">
         <a href="#" class="index-service__card">
           <img src="{% static 'theme/mb/images/service-1.jpg' %}" alt="Изготовление памятников из гранита и мрамора"
-            title="Изготовление памятников из гранита и мрамора" />
+               title="Изготовление памятников из гранита и мрамора"/>
           <span class="index-service__count">01</span>
           <p class="index-service__title">Изготовление памятников из гранита и мрамора</p>
         </a>
         <a href="#" class="index-service__card">
           <span class="index-service__count">02</span>
           <img src="{% static 'theme/mb/images/service-2.jpg' %}" alt="Установка памятников"
-            title="Установка памятников" />
+               title="Установка памятников"/>
           <p class="index-service__title">Установка памятников</p>
         </a>
         <a href="#" class="index-service__card">
           <span class="index-service__count">03</span>
           <img src="{% static 'theme/mb/images/service-3.jpg' %}" alt="Гравировка на памятниках"
-            title="Гравировка на памятниках" />
+               title="Гравировка на памятниках"/>
           <p class="index-service__title">Гравировка на памятниках</p>
         </a>
         <a href="#" class="index-service__card">
           <span class="index-service__count">04</span>
           <img src="{% static 'theme/mb/images/service-4.jpg' %}" alt="Благоустройство мест захоронения"
-            title="Благоустройство мест захоронения" />
+               title="Благоустройство мест захоронения"/>
           <p class="index-service__title">Благоустройство мест захоронения</p>
         </a>
       </div>
@@ -162,10 +163,10 @@
             {% if gallery %}
             {% for image in gallery %}
             <a href="{{ gallery.image.url }}" class="index-work__slide swiper-slide"
-              data-gall="{{ image.category.slug }}">
+               data-gall="{{ image.category.slug }}">
               {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
-                title="{{ image.name }}" />
+                   title="{{ image.name }}"/>
               {% endthumbnail %}
             </a>
             {% endfor %}
@@ -180,9 +181,12 @@
         </div>
         <div class="reviews-gis">
           <iframe id="big_light_70000001020920164" frameborder="0" width="" height="824px"
-            sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+                  sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
           <script
-            type="text/javascript">((r, p) => { const l = document.getElementById(r); l.contentWindow.document.open(), l.contentWindow.document.write(decodeURIComponent(escape(atob(p)))), l.contentWindow.document.close() })("big_light_70000001020920164", "PGhlYWQ+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPgogICAgd2luZG93Ll9fc2l6ZV9fPSdiaWcnOwogICAgd2luZG93Ll9fdGhlbWVfXz0nbGlnaHQnOwogICAgd2luZG93Ll9fYnJhbmNoSWRfXz0nJwogICAgd2luZG93Ll9fb3JnSWRfXz0nNzAwMDAwMDEwMjA5MjAxNjQnCiAgIDwvc2NyaXB0PjxzY3JpcHQgY3Jvc3NvcmlnaW49ImFub255bW91cyIgdHlwZT0ibW9kdWxlIiBzcmM9Imh0dHBzOi8vZGlzay4yZ2lzLmNvbS93aWRnZXQtY29uc3RydWN0b3IvYXNzZXRzL2lmcmFtZS5qcyI+PC9zY3JpcHQ+PGxpbmsgcmVsPSJtb2R1bGVwcmVsb2FkIiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5qcyI+PGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5jc3MiPjwvaGVhZD48Ym9keT48ZGl2IGlkPSJpZnJhbWUiPjwvZGl2PjwvYm9keT4=")</script>
+            type="text/javascript">((r, p) => {
+            const l = document.getElementById(r);
+            l.contentWindow.document.open(), l.contentWindow.document.write(decodeURIComponent(escape(atob(p)))), l.contentWindow.document.close()
+          })("big_light_70000001020920164", "PGhlYWQ+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPgogICAgd2luZG93Ll9fc2l6ZV9fPSdiaWcnOwogICAgd2luZG93Ll9fdGhlbWVfXz0nbGlnaHQnOwogICAgd2luZG93Ll9fYnJhbmNoSWRfXz0nJwogICAgd2luZG93Ll9fb3JnSWRfXz0nNzAwMDAwMDEwMjA5MjAxNjQnCiAgIDwvc2NyaXB0PjxzY3JpcHQgY3Jvc3NvcmlnaW49ImFub255bW91cyIgdHlwZT0ibW9kdWxlIiBzcmM9Imh0dHBzOi8vZGlzay4yZ2lzLmNvbS93aWRnZXQtY29uc3RydWN0b3IvYXNzZXRzL2lmcmFtZS5qcyI+PC9zY3JpcHQ+PGxpbmsgcmVsPSJtb2R1bGVwcmVsb2FkIiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5qcyI+PGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBjcm9zc29yaWdpbj0iYW5vbnltb3VzIiBocmVmPSJodHRwczovL2Rpc2suMmdpcy5jb20vd2lkZ2V0LWNvbnN0cnVjdG9yL2Fzc2V0cy9kZWZhdWx0cy5jc3MiPjwvaGVhZD48Ym9keT48ZGl2IGlkPSJpZnJhbWUiPjwvZGl2PjwvYm9keT4=")</script>
         </div>
       </div>
   </section>
@@ -197,7 +201,8 @@
       <div class="index-reviews__inner">
         <div class="index-reviews__info">
           <p class="index-reviews__text">Мы будем очень рады получить Вашу обратную связь</p>
-          <a href="https://2gis.ru/tomsk/search/%D0%B0%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%20%D1%82%D0%BE%D0%BC%D1%81%D0%BA/firm/70000001020920165/84.969766%2C56.492936/tab/reviews?m=84.987737%2C56.48199%2F12.22"
+          <a
+            href="https://2gis.ru/tomsk/search/%D0%B0%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%20%D1%82%D0%BE%D0%BC%D1%81%D0%BA/firm/70000001020920165/84.969766%2C56.492936/tab/reviews?m=84.987737%2C56.48199%2F12.22"
             class="reviews__btn _btn" target="_blank">Оставить отзыв</a>
         </div>
         <div class="index-reviews__reviews reviews">
@@ -217,7 +222,8 @@
 
 
     </div>
-  </section>{% endcomment %}
+  </section>
+  {% endcomment %}
   {% include "../includes/contact-block.html" %} {% include "../components/map.html" %}
 </main>
 {% endblock %}

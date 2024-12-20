@@ -33,9 +33,9 @@
   {{ product.meta_keywords }}
 {% else %}
   {% if product.category|lower != "оградки" %}
-    {{ product.category.name }} {% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
+    {{ product.category.name }},{% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
   {% else %}
-    {{ product.category.name }}  {% if product.model %}тип {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
+    {{ product.category.name }},{% if product.model %}тип {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
   {% endif %}
 {% endif %}
 

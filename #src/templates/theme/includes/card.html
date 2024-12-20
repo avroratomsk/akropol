@@ -39,8 +39,8 @@
       <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
         <meta itemprop="worstRating" content="1">
         <span itemprop="ratingValue"></span>
-        <span itemprop="bestRating"></span>звезд.
-        <span itemprop="description">текст_отзыва</span>
+        <span itemprop="bestRating"></span>з
+        <span itemprop="description"></span>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
     {% endif %}
   </div>
   <div class="card__content">
-    <a href="{{ product.get_absolute_url }}" class="card__content-title"> {{ product.name }} </a>
+    <a href="{{ product.get_absolute_url }}" class="card__content-title" itemprop="name"> {{ product.name }} </a>
     {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
     class="card__content-char">Материал: {{ chr }}</p>
     {% endif %} {% endfor %}

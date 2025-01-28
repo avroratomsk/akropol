@@ -88,15 +88,23 @@
     }
 
     ol{
-      list-style: circle;
+      counter-reset: custom-counter;
       li{
-        list-style: decimal;
+        counter-increment: custom-counter;
         display: block;
         line-height: 150%;
         position: relative;
 
         &:not(:last-child) {
           margin-bottom: 12px;
+        }
+
+        &::before {
+          content: counter(custom-counter);
+          color: rgba($color: $accent, $alpha: 1.0);
+          width: 8px;
+          height: 8px;
+          margin-right: 6px;
         }
       }
     }

@@ -3170,6 +3170,16 @@ body::after {
   margin-bottom: 15px;
 }
 
+.blog-detail__content ol li {
+  display: block;
+  line-height: 150%;
+  position: relative;
+}
+
+.blog-detail__content ol li:not(:last-child) {
+  margin-bottom: 12px;
+}
+
 .blog-detail__content ul li {
   display: block;
   line-height: 150%;

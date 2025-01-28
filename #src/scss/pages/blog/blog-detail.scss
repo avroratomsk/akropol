@@ -87,6 +87,18 @@
       margin-bottom: 15px;
     }
 
+    ol{
+      li{
+        display: block;
+        line-height: 150%;
+        position: relative;
+
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+      }
+    }
+
     ul {
       li {
         display: block;

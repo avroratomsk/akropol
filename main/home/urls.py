@@ -19,6 +19,5 @@ urlpatterns = [
     path('robots.txt', views.robots_txt),
     # path('uslugi/', views.about, name="about"),
     # path('valancy/', views.about, name="about"),
-    
     path('', views.index, name="home"),
 ]

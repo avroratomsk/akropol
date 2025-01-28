@@ -60,12 +60,12 @@
             <h2 class="gallery__images-title">{{ gal_cat.name }}</h2>
             <div class="gallery__images-grid">
               {% for image in gallery %}
-              <a href="{{ image.image.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
                 {% thumbnail image.image "250x300" format="WEBP" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
-                  title="{{ image.name }}" />
+                <a href="{{ im.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
+                    title="{{ image.name }}" />
+                </a>
                 {% endthumbnail %}
-              </a>
               {% endfor %}
             </div>
           </div>

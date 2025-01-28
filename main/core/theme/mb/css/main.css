@@ -3170,6 +3170,10 @@ body::after {
   margin-bottom: 15px;
 }
 
+.blog-detail__content ol {
+  list-style: decimal;
+}
+
 .blog-detail__content ol li {
   display: block;
   line-height: 150%;

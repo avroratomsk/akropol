@@ -342,8 +342,8 @@ html.lock body::before {
 }
 
 .content-main__title {
-  font-size: clamp(26px, 4vw, 72px);
-  max-width: 900px;
+  font-size: clamp(26px, 4vw, 60px);
+  max-width: 800px;
   line-height: 120%;
   text-transform: uppercase;
   color: #ffffff;
@@ -355,6 +355,7 @@ html.lock body::before {
 }
 
 .content-main__subtitle {
+  font-size: 25px;
   color: #fff0ff;
   margin-top: 40px;
   font-weight: 600;

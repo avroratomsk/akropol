@@ -354,6 +354,12 @@ html.lock body::before {
   font-size: inherit;
 }
 
+.content-main__subtitle {
+  color: #fff0ff;
+  margin-top: 40px;
+  font-weight: 600;
+}
+
 .content-main__link {
   display: flex;
   align-items: center;

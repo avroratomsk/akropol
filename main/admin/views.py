@@ -30,8 +30,11 @@ from django.contrib.auth.decorators import user_passes_test
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
-  """Данная предстовление отобразает главную страницу админ панели"""
-  return render(request, "page/index.html")
+    gallery = Gallery.objects.all()
+    for gal in gallery:
+        gal.work = False
+        print(gal.work)
+    return render(request, "page/index.html")
 
 def admin_settings(request):
   try:

@@ -11,6 +11,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     # "debug_toolbar",
     # "corsheaders",
+    'django_recaptcha',
     'sorl.thumbnail',
     'django.contrib.sitemaps',
     "home",

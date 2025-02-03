@@ -1238,12 +1238,14 @@ from PIL import Image as PILImage
 from django.core.files.base import ContentFile
 
 def upload_archive(request):
-
+    print("nen")
     if request.method == 'POST':
         form = ArchiveUploadForm(request.POST, request.FILES)
         if form.is_valid():
             category = form.cleaned_data['category']
+            print(category)
             archive = form.cleaned_data['archive']
+            print(archive)
 #             Gallery.objects.filter(category=category).delete()
             temp_dir = os.path.join(settings.MEDIA_ROOT, 'gallery-image')
             os.makedirs(temp_dir, exist_ok=True)
@@ -1266,11 +1268,11 @@ def upload_archive(request):
                           image=image,
                           name="",
                           cat_detail=True,
-                          is_active=False
+                          is_active=True,
                         )
                     except (PILImage.UnidentifiedImageError, PILImage.DecompressionBombError):
                       print('Error')
-                      continue
+                      #continue
 
 #             for root, dirs, files in os.walk(temp_dir, topdown=False):
 #                 for file in files:

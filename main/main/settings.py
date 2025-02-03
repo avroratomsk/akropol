@@ -40,6 +40,9 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
 ]
 
+RECAPTCHA_PUBLIC_KEY = '6LepxMgqAAAAAH6VtC8Ntdw7kX5TXoasLNA-ol8n'
+RECAPTCHA_PRIVATE_KEY = '6LepxMgqAAAAABf28NohgoZ4MFSxuyl45iiuHDkW'
+
 ROOT_URLCONF = "main.urls"
 
 theme_name = "core/theme/mb/templates"

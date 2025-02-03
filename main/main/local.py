@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "users",
     "reviews",
     "service",
+    'django_recaptcha',
     "cart",
     "order",
     "payment",

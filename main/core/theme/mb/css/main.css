@@ -394,6 +394,13 @@ html.lock body::before {
   color: white;
 }
 
+.index-stock__item--first {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .index-stock__item-img {
   position: absolute;
   top: 0;

@@ -269,6 +269,11 @@
   // .index-stock__item--first
 
   &__item--first {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+
     @media screen and (min-width: 990px) {
       grid-column: 1 / 3;
       grid-row: 1 / 3;

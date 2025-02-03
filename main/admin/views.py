@@ -1130,6 +1130,11 @@ def admin_gallery_edit(request, pk):
     
   return render(request, "gallery/gallery_edit.html", context)
 
+def admin_gallery_delete(request,pk):
+    item = Gallery.objects.get(id=pk)
+    item.delete()
+    return redirect(request.META.get('HTTP_REFERER'))
+
 def admin_color_delete(request, pk):
   subdomain = Subdomain.objects.get(id=pk)
   subdomain.delete()
@@ -1278,7 +1283,7 @@ def upload_archive(request):
 #                     os.rmdir(os.path.join(root, dir))
 #             os.rmdir(temp_dir)
 
-            return redirect('gallery')  # Перенаправление на страницу галереи
+            return redirect('gallery')
     else:
         form = ArchiveUploadForm()
     

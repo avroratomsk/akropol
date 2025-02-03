@@ -61,6 +61,7 @@ class Gallery(models.Model):
   name = models.CharField(max_length=255, null=True, blank=True, verbose_name="Наименование пойдет в alt и title")
   cat_detail = models.BooleanField(default=False, verbose_name="Вывод в категорию")
   is_active = models.BooleanField(default=True, verbose_name="Выводить на сайт ?")
+  work = models.BooleanField(default=False, verbose_name="Выводить на сайт ?")
   
   
   def __str__(self):

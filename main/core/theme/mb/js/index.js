@@ -532,10 +532,6 @@ document.addEventListener("DOMContentLoaded", function () {
         sendForm(orderService, "order-service");
     }
 
-    const reviewsForm = document.getElementById("reviews-form");
-    if (reviewsForm) {
-        sendForm(reviewsForm, "reviews");
-    }
 });
 
 

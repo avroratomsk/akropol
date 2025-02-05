@@ -73,7 +73,7 @@
         <img src="{% static 'theme/mb/images/loading.gif' %}" alt="Загрузка" title="Загрузка" />
       </div>
       <h2 class="popup__title">Заказать консультацию</h2>
-      <form action="{% url 'consultation' %}" class="popup__form" method="POST" id="consultation">
+      <form action="{% url 'consultation' %}" class="popup__form" method="POST">
         {% csrf_token %}
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
         <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input

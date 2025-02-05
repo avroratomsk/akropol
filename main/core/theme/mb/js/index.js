@@ -347,7 +347,6 @@ const openPopup = (event) => {
     let popupBtn = event.target.closest("[data-popup]");
     if (popupBtn) {
         const popup = document.getElementById(popupBtn.dataset.popup);
-      console.log(popup)
         document.documentElement.classList.add("popup-show");
         popup.classList.add("popup_show");
 

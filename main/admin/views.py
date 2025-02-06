@@ -30,6 +30,16 @@ from django.contrib.auth.decorators import user_passes_test
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
+    a = Product.objects.filter(category_id=2)
+    b = Product.objects.all()
+    print(a)
+
+    for pr in b:
+        try:
+            print(pr.model.split('.0')[0])
+        except Exception as e:
+            print(e)
+
     return render(request, "page/index.html")
 
 def admin_settings(request):

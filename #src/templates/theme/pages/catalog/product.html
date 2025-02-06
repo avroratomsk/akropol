@@ -111,11 +111,11 @@
               <p class="product-card__article">Артикул: {{ product.article }}</p>
               {% endif %}
             </div>
-            {% for ch in chars %} {{ ch.c_chars }} {% endfor %}
             <div class="product-card__info info-card">
               {% for ch_name in char_name %}
               <div class="info-card__item">
-                <p class="info-card__label">Выберите {{ ch_name.text_name }}:</p>
+                <p class="info-card__label">{{ ch_name.text_name }}:</p>
+                <p class="info-card__info-char">Гранит</p>
                 <select name="{{ ch_name.filter_name }}" id="{{ ch_name.filter_name }}"
                   data-name="{{ ch_name.text_name }}">
                   {% for char_value in chars %} {% if char_value.char_name.text_name == ch_name.text_name %}

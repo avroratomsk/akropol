@@ -24,8 +24,8 @@
           </a>
         </div>
       </div>
-      <div class="category-details__row">
-        <div class="category-details__col" id="filter-category">
+      <div class="category-details__row-onecol">
+        {% comment %}<div class="category-details__col" id="filter-category">
           <button type="button" class="close popup__close" id="close-filter"><span></span></button>
           <form method="GET" class="filter-form">
             {% for field in filter_form %}
@@ -43,7 +43,7 @@
             {% endfor %}
             <button type=" submit" class="filter__submit">Фильтровать</button>
           </form>
-        </div>
+        </div>{% endcomment %}
         <div class="category-details__col">
           <button type="button" class="category-details__filter"><i
               class="fa-solid fa-arrow-up-wide-short"></i></button>

@@ -3702,6 +3702,9 @@ body::after {
 }
 
 .info-card__info-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   border-radius: 5px;
   background: rgb(243, 243, 243);
@@ -3711,7 +3714,7 @@ body::after {
   height: 35px;
   color: rgb(0, 0, 0);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 20px;
 }
 

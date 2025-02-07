@@ -48,7 +48,13 @@
       </div>
     </div>
   </div>
-  <a href="{{ product.get_absolute_url }}" class="card__content-link">Выбрать конфигурацию</a>
+  <a href="{{ product.get_absolute_url }}" class="card__content-link">
+    {% if request.path == "/category/soputstvuyushchie-tovary/" %}
+      Посмотреть
+    {% else %}
+      Выбрать конфигурацию
+    {% endif %}
+  </a>
 </div>
 {% endif %}
 

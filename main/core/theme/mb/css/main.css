@@ -1217,6 +1217,22 @@ html.lock body::before {
   padding: 0px;
 }
 
+.form__controls-textarea {
+  padding: 15px 20px;
+  border: 0.2px solid rgb(130, 130, 130);
+  border-radius: 4px;
+  font-size: 14px;
+  color: rgba(58, 67, 75, 0.9);
+  resize: none;
+}
+
+.form__controls-textarea:focus,
+.form__controls-textarea:focus-visible,
+.form__controls-textarea:focus-within {
+  outline: none;
+  border-color: rgba(58, 67, 75, 0.4);
+}
+
 .about__grid {
   display: grid;
   grid-template-columns: 1fr 300px;

@@ -5,8 +5,8 @@ from home.models import BaseSettings
 EMAIL_FROM = "info@xn----7sbah6bllcobpj.xn--p1ai"
 
 try:
-  #email_clients = BaseSettings.objects.get().email
-  email_clients = 'saniagolovanev@gmail.com'
+  email_clients = BaseSettings.objects.get().email
+  #email_clients = 'saniagolovanev@gmail.com'
 except:
   email_clients = 'akropol70@gmail.com'
   

@@ -15,9 +15,9 @@ def order(request):
 def order_create(request):
   form = CreateOrderForm(request.POST)
   
-  
   if request.method == "POST":
     if form.is_valid():
+
       
       """
         Получаем способ оплаты и в зависимости от 
@@ -89,17 +89,22 @@ def order_create(request):
             order.delivery_address = delivery_address
           except: 
             pass
+
+          try:
+            message = request.POST['message']
+            order.message = message
+          except:
+            pass
           
           try:
             pay_method = request.POST['payment_option']
             order.pay_method = pay_method
           except: 
             pay_method = None
-          
           order.save()
-        
           for item in cart_items:
             product=item.product
+            model=item.product.model
             name=item.product.name
             price=item.product.price
             quantity=item.quantity
@@ -107,6 +112,7 @@ def order_create(request):
             
             orderItem  = OrderItem.objects.create(
               order = order,
+              model=model,
               product=product,
               name=name,
               price=price,

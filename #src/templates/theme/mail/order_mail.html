@@ -39,7 +39,7 @@
     Имя: {{ order.first_name }} <br />
     Email: {{ order.email }} <br />
     Телефон: {{ order.phone }} <br />
-    Адрес: {{ order.delivery_address }} <br />
+    Комментарий к заказу: {{ order.message }} <br />
 
     <h2>Детали заказа:</h2>
 
@@ -50,18 +50,18 @@
           <th>Модель</th>
           <th>Количество</th>
           <th>Цена за штуку</th>
-          <th>Цвет,размер,материал</th>
         </tr>
       </thead>
 
       <tbody style="width: 100%">
         {% for item in order.items.all %}
+
         <tr style="border: 1px solid #333" ;>
           <td>{{ item.name }}</td>
           <td>{{ item.model }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.price }}руб.</td>
-          <td>{% for key, value in item.selected_char.items %} {{ key }}: {{ value }} {% if forloop.last %} {% else %}|{% endif %} {% endfor %}</td>
+          {% comment %}<td>{% for key, value in item.selected_char.items %} {{ key }}: {{ value }} {% if forloop.last %} {% else %}|{% endif %} {% endfor %}</td>{% endcomment %}
         </tr>
         {% endfor %}
       </tbody>

@@ -1577,3 +1577,19 @@
 
   .login__images {}
 }
+
+.form__controls-textarea {
+    padding: 15px 20px;
+    border: 0.2px solid rgb(130, 130, 130);
+    border-radius: 4px;
+    font-size: 14px;
+    color: rgba($color: $mainColor, $alpha: .9);
+    resize: none;
+
+    &:focus,
+    &:focus-visible,
+    &:focus-within {
+      outline: none;
+      border-color: rgba($color: $mainColor, $alpha: .4);
+    }
+}

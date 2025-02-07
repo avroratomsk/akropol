@@ -30,6 +30,105 @@ def order_create(request):
           user = request.user
           order.user = user
           # Получаем корзину пользователя если он авторизован
+          cart_items = Cart.objects.filter(user=user)
+          try:
+              first_name = request.POST['first_name']
+              order.first_name = first_name
+          except:
+              pass
+
+          try:
+              email = request.POST['email']
+              order.email = email
+          except:
+              pass
+
+          try:
+              first_name_human = request.POST['first_name_human']
+              order.first_name_human = first_name_human
+          except:
+              pass
+
+          try:
+              phone_number_human = request.POST['phone_number_human']
+              order.phone_number_human = phone_number_human
+          except:
+              pass
+
+          try:
+              pickup = request.POST['pickup']
+              order.pickup = True
+          except:
+              pass
+
+          try:
+              surprise = request.POST['surprise']
+              order.surprise = True
+          except:
+              pass
+
+          try:
+              anonymous = request.POST['anonymous']
+              order.anonymous = True
+          except:
+              pass
+
+          try:
+              phone = request.POST['phone']
+              order.phone = phone
+          except:
+              pass
+
+          try:
+              delivery_address = request.POST['delivery_address']
+              order.delivery_address = delivery_address
+          except:
+              pass
+
+          try:
+              message = request.POST['message']
+              order.message = message
+          except:
+              pass
+
+          try:
+              pay_method = request.POST['payment_option']
+              order.pay_method = pay_method
+          except:
+              pay_method = None
+          order.save()
+          for item in cart_items:
+              product=item.product
+              model=item.product.model
+              name=item.product.name
+              price=item.product.price
+              quantity=item.quantity
+              selected_char=item.selected_char
+
+              orderItem  = OrderItem.objects.create(
+                order = order,
+                model=model,
+                product=product,
+                name=name,
+                price=price,
+                quantity=quantity,
+                selected_char=selected_char
+              )
+
+          if payment_method == "На сайте картой":
+                data = create_payment(orderItem, cart_items, request)
+                payment_id = data["id"]
+                confirmation_url = data["confirmation_url"]
+
+                order.payment_id = payment_id
+                order.payment_dop_info = confirmation_url
+                order.save()
+                cart_items.delete()
+                return redirect(confirmation_url)
+          else:
+              email_send(order)
+              cart_items.delete()
+              return redirect('order_succes')
         else:
           order.user = None
           # Получаем корзину пользователя если он не авторизован по ключу сессии

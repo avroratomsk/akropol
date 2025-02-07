@@ -16,10 +16,18 @@
     {% endif %}
   </div>
   <div class="card__content">
-    <a href="{{ product.get_absolute_url }}" class="card__content-title"><span itemprop="name">{{ product.model }}</span></a>
-    {% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
+    <a href="{{ product.get_absolute_url }}" class="card__content-title">
+      <span itemprop="name">
+        {% if product.model %}
+          Модель: {{ product.model }}
+        {% else %}
+          Наименование: {{ product.name }}
+        {% endif %}
+      </span>
+    </a>
+    {% comment %}{% for chr in product.chars.all %} {% if chr.char_name.filter_name == "material" and forloop.counter <= 2 %} <p
     class="card__content-char">Материал: {{ chr }}</p>
-    {% endif %} {% endfor %}
+    {% endif %} {% endfor %}{% endcomment %}
     {% if product.price %}
     <div class="card__content-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
       <span itemprop="price" content="{{ product.price }}">{{ product.price }}</span>

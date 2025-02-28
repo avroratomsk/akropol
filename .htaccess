@@ -2,9 +2,6 @@ PassengerEnabled On
 PassengerAppRoot /home/a/avroraweb/akropol.ru/public_html/main/main
 PassengerPython /home/a/avroraweb/akropol.ru/public_html/venv/bin/python
 
-
-# Перенаправление URL без слэша на URL со слэшем
-RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !(.*)/$
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]

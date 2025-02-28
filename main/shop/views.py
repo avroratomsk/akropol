@@ -56,7 +56,7 @@ def granit(request):
     "shop_setup": shop_setup
   }
 
-  return render(request, "pages/catalog/category.html", context)
+  return render(request, "pages/catalog/granit.html", context)
 
 
 def category_detail(request, slug):

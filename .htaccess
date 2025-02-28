@@ -2,6 +2,15 @@ PassengerEnabled On
 PassengerAppRoot /home/a/avroraweb/akropol.ru/public_html/main/main
 PassengerPython /home/a/avroraweb/akropol.ru/public_html/venv/bin/python
 
+# Включаем RewriteEngine
+RewriteEngine On
+
+# Исключаем статические файлы из редиректа
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|eot|mp4|webp|avi|mov|mp3|ogg|wav)$ [NC]
+RewriteRule .* - [L]
+
+# Перенаправление URL без слэша на URL со слэшем
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteCond %{REQUEST_URI} !.*/$
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]

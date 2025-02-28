@@ -20,23 +20,24 @@
         <h1 class="category-details__title _title">Гранитные памятники в Томске</h1>
         <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
           <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-            class="breadcrumbs__item">
+             class="breadcrumbs__item">
             Главная
-            <meta itemprop="position" content="1" />
+            <meta itemprop="position" content="1"/>
           </a>
           <a href="{% url 'category' %}" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-            class="breadcrumbs__item">
+             class="breadcrumbs__item">
             Каталог
-            <meta itemprop="position" content="2" />
+            <meta itemprop="position" content="2"/>
           </a>
           <span itemprop="name" class="breadcrumbs__item">
           Гранитные памятники
-          <meta itemprop="position" content="3" />
+          <meta itemprop="position" content="3"/>
         </span>
         </div>
       </div>
       <div class="category-details__row-onecol">
-        {% comment %}<div class="category-details__col" id="filter-category">
+        {% comment %}
+        <div class="category-details__col" id="filter-category">
           <button type="button" class="close popup__close" id="close-filter"><span></span></button>
           <form method="GET" class="filter-form">
             {% for field in filter_form %}
@@ -54,13 +55,15 @@
             {% endfor %}
             <button type=" submit" class="filter__submit">Фильтровать</button>
           </form>
-        </div>{% endcomment %}
+        </div>
+        {% endcomment %}
         <div class="category-details__col">
           <button type="button" class="category-details__filter"><i
-              class="fa-solid fa-arrow-up-wide-short"></i></button>
+            class="fa-solid fa-arrow-up-wide-short"></i></button>
           {% if products %}
           <div class="index-catalog__cards">{% for product in products %}
-            {% include "../../includes/card.html" with product=product %} {% endfor %}</div>
+            {% include "../../includes/card.html" with product=product %} {% endfor %}
+          </div>
           {% else %}
           <div class="empty-info">
             <p>Товара нет</p>
@@ -70,21 +73,50 @@
       </div>
       {% if products.paginator.count > 15 %}
       <div class="pagging">
-        <a href="{% if products.has_previous %}?{% chenge_params page=products.previous_page_number %}{% else %}#{% endif %}"
+        <a
+          href="{% if products.has_previous %}?{% chenge_params page=products.previous_page_number %}{% else %}#{% endif %}"
           class="pagging__arrow {% if not products.has_previous%}disabled{% endif %}">«</a>
         <ul class="pagging__list">
           {% for page in products.paginator.page_range %}
-          {% if page >= products.number|add:-2 and page <= products.number|add:2 %} <li>
+          {% if page >= products.number|add:-2 and page <= products.number|add:2 %}
+          <li>
             <a href="?{% chenge_params page=page %}"
-              class="pagging__item {% if products.number == page %}_active{% endif %}">{{page}}</a>
-            </li>
-            {% endif %} {% endfor %}
+               class="pagging__item {% if products.number == page %}_active{% endif %}">{{page}}</a>
+          </li>
+          {% endif %} {% endfor %}
         </ul>
         <a href="{% if products.has_next %}?{% chenge_params page=products.next_page_number %}{% else %}#{% endif %}"
-          class="pagging__arrow">»</a>
+           class="pagging__arrow">»</a>
       </div>
       {% endif %}
     </div>
   </section>
+  <div class="category-detail__text">
+    <div class="category-detail__container">
+      <div class="text">
+        <p>
+          Изготавливаем и устанавливаем гранитные памятники в Томске. В наличии классические и эксклюзивные модели разной
+          формы и размера. Работаем с прочным, морозостойким гранитом, который сохраняет внешний вид десятилетиями.
+        </p>
+        <p><strong>Наши услуги:</strong></p>
+        <ul>
+          <li>
+            <strong>Изготовление памятников стандартных и индивидуальных размеров</strong> – мы подберём оптимальные параметры памятника в зависимости от ваших пожеланий и особенностей участка.
+          </li>
+          <li>
+            <strong><a href="/service/gravirovka/">Гравировка</a>, фотокерамика, художественное оформление</strong> – создание уникальных надписей, изображений и декоративных элементов, которые делают памятник действительно персонализированным.
+          </li>
+          <li>
+            <strong><a href="">Доставка</a> и установка на кладбище в Томске и области</strong> – мы доставляем памятники и осуществляем их установку, соблюдая все требования, чтобы памятник был установлен надёжно и аккуратно.
+          </li>
+          <li>
+            Благоустройство могилы – укладка плитки, установка оград, создание красивых и долговечных элементов для украшения места захоронения.
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
 </main>
 {% endblock content %}

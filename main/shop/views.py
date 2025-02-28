@@ -40,6 +40,24 @@ def category(request):
   
   return render(request, "pages/catalog/category.html", context)
 
+def granit(request):
+  products = Product.objects.filter(status=True, catalog=True).order_by('order_by')
+  try:
+    shop_setup = ShopSettings.objects.get()
+  except:
+    shop_setup = ShopSettings()
+  page = request.GET.get("page", 1)
+
+  paginator = Paginator(products, 16)
+  current_page = paginator.page(int(page))
+  context = {
+    "title": "Название товара",
+    "products": current_page,
+    "shop_setup": shop_setup
+  }
+
+  return render(request, "pages/catalog/category.html", context)
+
 
 def category_detail(request, slug):
   page = request.GET.get("page", 1)

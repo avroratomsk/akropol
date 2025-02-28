@@ -12,6 +12,7 @@
             <a href="{% url 'category'%}">Каталог</a>
             {% if category_menu %}
             <ul class="nav__submenu submenu">
+              <li><a href="{% url 'granit' %}">Гранитные</a></li>
               {% for category in category_menu %}
               <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
               {% endfor %}

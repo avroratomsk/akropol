@@ -201,7 +201,7 @@ def delivery(request):
 
 def robots_txt(request):
   try:
-      robots_txt = RobotsTxt.objects.first()  # Получаем первую запись, т.к. нам нужен только один robots.txt
+      robots_txt = RobotsTxt.objects.first()
       content = robots_txt.content if robots_txt else "User-agent: *\nDisallow: /admin/"
   except RobotsTxt.DoesNotExist:
     content = "User-agent: *\nDisallow: /admin/"

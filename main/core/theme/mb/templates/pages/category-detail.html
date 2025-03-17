@@ -41,12 +41,12 @@
             {% endcomment %}
             <div class="gallery__images-grid">
               {% for image in images %}
-              {% comment %}{% thumbnail image.image "368x290" format="WEBP" crop="center" as im %}{% endcomment %}
-              <a href="{{ image.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
-                <img src="{{ image.image.url }}" alt="{{ image.name }}"
+              {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
+              <a href="{{ im.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
                   title="{{ image.name }}" />
               </a>
-              {% comment %}{% endthumbnail %}{% endcomment %}
+              {% endthumbnail %}
               {% endfor %}
             </div>
           </div>

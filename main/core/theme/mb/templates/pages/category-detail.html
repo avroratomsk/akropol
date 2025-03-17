@@ -41,8 +41,8 @@
             {% endcomment %}
             <div class="gallery__images-grid">
               {% for image in images %}
-              <a href="{{ image.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
-                <img src="{{ image.url }}"  alt="{{ image.name }}"
+              <a href="{{ image.image.url }}" data-gall="{{ image.category.slug }}" class="gallery__image">
+                <img src="{{ image.image.url }}"  alt="{{ image.name }}"
                   title="{{ image.name }}" />
               </a>
               {% endfor %}

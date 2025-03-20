@@ -535,6 +535,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+const hideBtn  = document.querySelectorAll("[data-popup='more']");
+
+hideBtn?.forEach(btn => {
+    btn.addEventListener("click", function (e) {
+        const parentHiddenElement = e.currentTarget.closest(".service-content__col");
+        const hiidenElement = parentHiddenElement.querySelector(".hidden_content").innerHTML;
+        const popup = document.getElementById("more");
+        popup.querySelector(".popup__text").innerHTML = hiidenElement;
+
+    });
+});
 
 
 /*************Табы картинок**********/

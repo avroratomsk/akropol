@@ -28,6 +28,64 @@ body::after {
   pointer-events: none;
 }
 
+.popup__text {
+  h2 {
+    font-size: 35px;
+    line-height: 120%;
+  }
+
+  a {
+    color: #41a2d0;
+    text-decoration: underline;
+  }
+
+  p {
+    line-height: 140%;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  p + p {
+    margin-top: 20px;
+  }
+
+  ul, ol {
+    padding-left: 35px;
+
+    li {
+      padding-left: 16px;
+      position: relative;
+      line-height: 150%;
+
+      &:last-child {
+        //margin-bottom: 40px;
+      }
+    }
+
+    li + li {
+      //margin-top: 15px;
+    }
+  }
+
+  ul {
+    li {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0%;
+        margin-top: 10px;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: rgba($color: $accent, $alpha: 1.0);
+      }
+    }
+  }
+}
+
 .popup_show {
   z-index: 9999;
   visibility: visible;

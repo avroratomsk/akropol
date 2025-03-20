@@ -919,6 +919,14 @@ html.lock body::before {
   height: 80%;
 }
 
+.hero__image-grav {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 80%;
+}
+
 .hero .breadcrumbs {
   margin: 0px 0px 20px;
 }
@@ -2137,6 +2145,11 @@ body::after {
   padding-left: 16px;
   position: relative;
   line-height: 150%;
+}
+
+.popup__text ul li + li,
+.popup__text ol li + li {
+  margin-top: 15px;
 }
 
 .popup__text ul li::before {
@@ -3875,6 +3888,11 @@ body::after {
   padding-left: 16px;
   position: relative;
   line-height: 150%;
+}
+
+.service-content__text ul li + li,
+.service-content__text ol li + li {
+  margin-top: 15px;
 }
 
 .service-content__text ul li::before {

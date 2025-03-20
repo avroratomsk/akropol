@@ -1132,6 +1132,14 @@
     }
   }
 
+  &__image-grav{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 80%;
+  }
+
   .breadcrumbs {
     margin: 0px 0px 20px;
   }

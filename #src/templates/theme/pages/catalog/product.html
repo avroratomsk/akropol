@@ -67,8 +67,9 @@
             <div class="product__wrapper swiper-wrapper">
               <div class="product__slide swiper-slide">
                 {% if product.image %} {% if product.type_image %}
-                <img src="{{ product.image.url }}" style="object-fit: cover; max-width: 100%"
-                  class="index-slider__image" />
+                <a href="{{ product.image.url }}" data-gall="myGallery" class="product__slide-link">
+                  <img src="{{ product.image.url }}" style="object-fit: cover; max-width: 100%" class="index-slider__image" />
+                </a>
                 {% else %} {% thumbnail product.image "409x510" format="WEBP" crop="center" as im %}
                 <a href="{{ im.url }}" data-gall="myGallery" class="product__slide-link">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="index-slider__image" />

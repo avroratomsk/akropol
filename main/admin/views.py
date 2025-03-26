@@ -36,8 +36,6 @@ def admin(request):
         elif not default_storage.exists(image.image.path):
             image.delete()
 
-    print(f"✅ Удалено записей: {deleted_count}")
-
     return render(request, "page/index.html")
 
 def admin_settings(request):

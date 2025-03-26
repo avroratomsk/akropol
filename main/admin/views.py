@@ -31,7 +31,7 @@ from django.core.files.storage import default_storage
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
     for image in Gallery.objects.all():
-        if not default_storage.exists(image.file.path):
+        if not default_storage.exists(image.image.path):
             image.delete()
 
     return render(request, "page/index.html")

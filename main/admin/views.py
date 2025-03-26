@@ -27,9 +27,13 @@ from django.contrib.auth.decorators import user_passes_test
 #     return redirect('admin')
 
 # @user_passes_test(lambda u: u.is_superuser)
-
+from django.core.files.storage import default_storage
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
+    for image in Gallery.objects.all():
+        if not default_storage.exists(image.file.path):
+            image.delete()
+
     return render(request, "page/index.html")
 
 def admin_settings(request):

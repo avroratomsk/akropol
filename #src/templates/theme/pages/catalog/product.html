@@ -22,7 +22,7 @@
     Модель памятника {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
   {% else %}
     Купить оградку на могилу в Томске от мастерской Акрополь недорого. Фото оградок и цены указаны на сайте мастерской.
-    Оградка {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
+    Оградка {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} цена - {{ product.price }}
   {% endif %}
 {% endif %}
 {% endblock %}

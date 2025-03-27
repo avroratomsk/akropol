@@ -3,12 +3,16 @@
 
 {% block title %}
 {% if category.meta_title %}
+  {{ category.meta_title}}
+{% else %}
 Фотографии памятников солдатам СВО | Акрополь
 {% endif %}
 {% endblock %}
 
 {% block description %}
 {% if category.meta_description %}
+  {{ meta_description }}
+{% else %}
 Фотографии памятников солдатам СВО. Консультация по телефону +7(900) 921-09-15, +7(903) 955-40-18
 {% endif %}
 {% endblock %}

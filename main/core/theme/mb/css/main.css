@@ -1010,6 +1010,14 @@ html.lock body::before {
   transition: 0.3s;
 }
 
+.hero__button--border {
+  background-color: transparent;
+  border: 2px solid #41a2d0;
+  color: #41a2d0;
+  position: relative;
+  transition: 0.25s;
+}
+
 .service-page .hero__button--small {
   width: 260px;
 }
@@ -5023,6 +5031,16 @@ body::after {
   }
 
   .hero__button--small::before {
+    position: relative;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+    border: none;
+  }
+
+  .hero__button--border::before {
     position: relative;
     top: 0;
     left: 0;

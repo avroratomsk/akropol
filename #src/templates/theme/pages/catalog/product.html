@@ -19,10 +19,10 @@
 {% else %}
   {% if product.category|lower != "оградки"%}
     Купить памятник на могилу в Томске от мастерской Акрополь недорого. Фото памятников и цены указаны на сайте мастерской.
-    Модель памятника {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
+    Модель памятника {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} {% if product.price  %}цена - {{ product.price }}{% endif %}
   {% else %}
     Купить оградку на могилу в Томске от мастерской Акрополь недорого. Фото оградок и цены указаны на сайте мастерской.
-    Оградка {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} цена - {{ product.price }}
+    Оградка {% if product.model %}{%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} {% if product.price  %}цена - {{ product.price }}{% endif %}
   {% endif %}
 {% endif %}
 {% endblock %}
@@ -33,9 +33,9 @@
   {{ product.meta_keywords }}
 {% else %}
   {% if product.category|lower != "оградки" %}
-    {{ product.category.name }},{% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
+    {{ product.category.name }},{% if product.model %}модель {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} {% if product.price  %}цена - {{ product.price }}{% endif %}
   {% else %}
-    {{ product.category.name }},{% if product.model %}тип {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %}
+    {{ product.category.name }},{% if product.model %}тип {%filter lower%}{{product.model }}{% endfilter %}{% else %}{%filter lower%}{{product.name }}{% endfilter %}{% endif %} {% if product.price  %}цена - {{ product.price }}{% endif %}
   {% endif %}
 {% endif %}
 

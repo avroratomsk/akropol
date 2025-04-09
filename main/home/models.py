@@ -48,6 +48,7 @@ class GalleryCategory(models.Model):
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="")
   home_view = models.BooleanField(default=False, verbose_name="Отображать на главной ?")
   image = models.ImageField(upload_to="gallery-category", null=True, blank=True, verbose_name="Фотография категории")
+  description = models.TextField(null=True, blank=True, verbose_name="Описание на странице")
   
   def __str__(self):
     return self.name

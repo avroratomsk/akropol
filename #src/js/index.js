@@ -1,3 +1,86 @@
+/*
+* Yandex metrika
+*/
+
+(function(){
+
+    let loadMetrika = false;
+    const metrikaId = 97977097;
+    let timerId;
+
+    if ( navigator.userAgent.indexOf( "YandexMetrika" ) > -1 ) {
+        loadYandexMetrika();
+    }else{
+        // Подключаем Метрику, если юзер начал скроллить.
+        window.addEventListener( "scroll", loadYandexMetrika, {passive: true} );
+
+        // Подключаем Метрику, если юзер коснулся экрана.
+        window.addEventListener( "touchstart", loadYandexMetrika );
+
+        // Подключаем Метрику, если юзер дернул мышкой.
+        document.addEventListener( "mouseenter", loadYandexMetrika );
+
+        // Подключаем Метрику, если юзер кликнул мышкой.
+        document.addEventListener( "click", loadYandexMetrika );
+
+        // Подключаем Метрику при полной загрузке DOM дерева,
+        // с "отложкой" в 1 секунду через setTimeout,
+        // если пользователь ничего вообще не делал (фоллбэк).
+        document.addEventListener( "DOMContentLoaded", loadFallback);
+    }
+
+    function loadFallback() {
+        timerId = setTimeout( loadYandexMetrika, 1000 );
+    }
+    
+    function loadYandexMetrika (e) {
+        // Пишем отладку в консоль браузера.
+        if ( e && e.type ) {
+            console.log( e.type );
+        } else {
+            console.log( "DOMContentLoaded" );
+        }
+
+        if ( loadMetrika ) {
+            return;
+        }
+
+        (function (m, e, t, r, i, k, a) {
+            m[i] =
+              m[i] ||
+              function () {
+                  (m[i].a = m[i].a || []).push(arguments);
+              };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) {
+                    return;
+                }
+            }
+            (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]), (k.async = 1), (k.src = r), a.parentNode.insertBefore(k, a);
+        })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(metrikaId, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+        });
+
+        loadMetrika = true;
+
+        clearTimeout( timerId );
+
+        window.removeEventListener( "scroll", loadYandexMetrika );
+        window.removeEventListener( "touchstart", loadYandexMetrika );
+        document.removeEventListener( "mouseenter", loadYandexMetrika );
+        document.removeEventListener( "click", loadYandexMetrika );
+        document.removeEventListener( "DOMContentLoaded", loadFallback );
+    }
+})();
+
+
+
+
 /**
  * Вспомогательные общие функции
  * * */

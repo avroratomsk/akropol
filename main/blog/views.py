@@ -3,7 +3,7 @@ from django.shortcuts import render
 from blog.models import BlogSettings, Post
 
 def blog(request):
-  articles = Post.objects.filter(status=True).order_by(-date_creation)
+  articles = Post.objects.filter(status=True).order_by('-date_creation')
   try:
     setup = BlogSettings.objects.get()
   except:

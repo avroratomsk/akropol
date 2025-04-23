@@ -1195,7 +1195,7 @@ def gallery_category_delete(request):
   pass
 
 def article(request):
-  items = Post.objects.all()
+  items = Post.objects.all().order_by('-date_creation')
   
   context ={
     "items": items,

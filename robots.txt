@@ -16,6 +16,7 @@ Disallow: /order/
 Disallow: /accounts/
 Disallow: /cart/
 Disallow: /search/?q*
+Disallow: /*?*
 Allow: /static/*.css
 Allow: /static/*.js
 Allow: /static/*.png

@@ -111,6 +111,9 @@
   // .top-main__logo
 
   &__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     img {
       @media screen and (max-width: 650px) {
@@ -121,6 +124,20 @@
       @media screen and (max-width: 550px) {
         width: 56px;
         height: 56px;
+      }
+    }
+
+    span {
+      color: #4ebffe;
+      font-weight: 600;
+      white-space: nowrap;
+
+      @media screen and (max-width: 650px) {
+        font-size: 14px;
+      }
+
+      @media screen and (max-width: 550px) {
+        font-size: 10px;
       }
     }
   }

@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', include('admin.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),  # Маршрут для sitemap.xml
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='sitemap'),  # Маршрут для sitemap.xml
     path('', include('home.urls')),
 ]
 

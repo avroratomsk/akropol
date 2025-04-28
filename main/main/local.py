@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # 'tinymce',
     "blog",
     # "news",
+#     "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [

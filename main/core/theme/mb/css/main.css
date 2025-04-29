@@ -329,7 +329,7 @@ html.lock body::before {
 }
 
 .top-main__logo span {
-  color: #4ebffe;
+  color: #23bdf2;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -1487,7 +1487,7 @@ html.lock body::before {
 .header-under__logo span {
   font-weight: 600;
   white-space: nowrap;
-  color: #4ebffe;
+  color: #23bdf2;
 }
 
 .header-under__address-title {

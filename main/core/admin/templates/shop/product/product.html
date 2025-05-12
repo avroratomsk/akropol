@@ -21,7 +21,12 @@
           </select>
           <p>элементов</p>
         </div>
+<!--        <form method="get" action="/search/" class="form">-->
+<!--          <input type="text" name="q" placeholder="Введите запрос..." class="form__controls">-->
+<!--          <button type="submit" class="action-button">Поиск</button>-->
+<!--        </form>-->
         <a href="{% url 'product_add' %}" class="action-button">Добавить новый</a>
+<!--        <button type="button" class="action-button" data-popup="add">Добавить новый кнопка</button>-->
       </div>
       <div class="grid-items">
         {% for item in items %}
@@ -63,105 +68,230 @@
       </div>
     </div>
 
-    <!-- <div class="table-4">
-      <div class="head-table table-4__head">
-        <div class="head-table__image">Изображение</div>
-        <div class="head-table__name">Название</div>
-        <div class="head-table__price">Цена</div>
-        <div class="head-table__action">Действия</div>
-      </div>
-      <div class="body-table table-4__body">
-        {% for product in products %}
-        <div class="body-table__row">
-          <div class="body-table__image">
+  </div>
+</div>
 
+
+<div id="add" aria-hidden="true" class="popup {% if show_modal %}popup_show{% endif %}">
+  <div class="popup__wrapper">
+    <div class="popup__content">
+      <div class="popup__top">
+        <button data-close type="button" class="popup__close close"></button>
+      </div>
+      <form action="." method="POST" class="form" enctype="multipart/form-data">
+        <div class="page__head">
+          <div class="page__head-tab">
+            <button type="button" data-name="basic" class="page__head-btn _active">Основные</button>
+            <button type="button" data-name="seo" class="page__head-btn">Поля SEO</button>
+            <button type="button" data-name="char" class="page__head-btn">Характеристики</button>
           </div>
-          <div class="body-table__name">
-            {% if product.slug %}
-            <a href="{% url 'product_edit' product.id %}" class="">{{ product.name }}</a>
-            {% else %}
-            <p class="">{{ product.name }}</p>
-            {% endif %}
-          </div>
-          <div class="body-table__price">
-            <span>{{ product.price }} руб.</span>
-          </div>
-          <div class="body-table__action">
-            <a href="{{ product.get_absolute_url }}" target="_blank" class="info">
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                y="0px" viewBox="0 0 495.558 495.558" xml:space="preserve">
-                <g>
-                  <g>
-                    <path
-                      d="M492.538,242.716c-3.702-6.173-92.288-151.327-244.76-151.327c-152.476,0-241.063,145.154-244.76,151.327L0,247.774 l3.019,5.058c3.697,6.173,92.284,151.337,244.76,151.337c152.471,0,241.058-145.164,244.76-151.337l3.019-5.058L492.538,242.716z M247.779,384.476c-125.769,0-207.625-111.394-224.587-136.702c16.962-25.298,98.817-136.692,224.587-136.692 s207.625,111.394,224.587,136.692C455.404,273.082,373.548,384.476,247.779,384.476z" />
-                  </g>
-                </g>
-                <g>
-                  <g>
-                    <path
-                      d="M247.779,140.505c-59.149,0-107.274,48.125-107.274,107.269c0,59.154,48.125,107.279,107.274,107.279 c59.154,0,107.279-48.125,107.279-107.279C355.058,188.63,306.933,140.505,247.779,140.505z M247.779,335.361 c-48.293,0-87.582-39.288-87.582-87.587c0-48.288,39.288-87.577,87.582-87.577c48.298,0,87.587,39.288,87.587,87.577 C335.365,296.072,296.077,335.361,247.779,335.361z" />
-                  </g>
-                </g>
-                <g>
-                  <g>
-                    <path
-                      d="M247.779,207.438c-22.24,0-40.337,18.096-40.337,40.336c0,22.24,18.096,40.337,40.337,40.337 c22.24,0,40.337-18.096,40.337-40.337C288.115,225.534,270.019,207.438,247.779,207.438z M247.779,268.418 c-11.385,0-20.644-9.26-20.644-20.644c0-11.385,9.26-20.644,20.644-20.644c11.385,0,20.644,9.26,20.644,20.644 C268.423,259.159,259.163,268.418,247.779,268.418z" />
-                  </g>
-                </g>
-              </svg>
-            </a>
-            <a href="{% url 'product_edit' product.id %}" class="edit">
-              <?xml version="1.0" ?><svg id="Layer_1" style="enable-background: new 0 0 24 24" version="1.1"
-                viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path
-                  d="M19.607,18.746c0,0.881-0.716,1.624-1.597,1.624H5.231c-0.881,0-1.597-0.743-1.597-1.624V5.967  c0-0.881,0.716-1.571,1.597-1.571h7.454V3.332H5.231c-1.468,0-2.662,1.168-2.662,2.636v12.778c0,1.468,1.194,2.688,2.662,2.688  h12.778c1.468,0,2.662-1.221,2.662-2.688v-7.428h-1.065V18.746z" />
-                <path
-                  d="M20.807,3.17c-0.804-0.805-2.207-0.805-3.012,0l-7.143,7.143c-0.068,0.068-0.117,0.154-0.14,0.247L9.76,13.571  c-0.045,0.181,0.008,0.373,0.14,0.506c0.101,0.101,0.237,0.156,0.376,0.156c0.043,0,0.086-0.005,0.129-0.016l3.012-0.753  c0.094-0.023,0.179-0.072,0.247-0.14l7.143-7.143c0.402-0.402,0.624-0.937,0.624-1.506S21.21,3.572,20.807,3.17z M13.016,12.467  l-2.008,0.502l0.502-2.008l5.909-5.909l1.506,1.506L13.016,12.467z M20.054,5.428l-0.376,0.376l-1.506-1.506l0.376-0.376  c0.402-0.402,1.104-0.402,1.506,0c0.201,0.201,0.312,0.468,0.312,0.753C20.366,4.96,20.255,5.227,20.054,5.428z" />
-              </svg>
-            </a>
-            <a href="{% url 'product_delete' product.id %}" class="remove" title="Удалить продукт">
-              <?xml version="1.0" ?><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <style>
-                    .cls-1 {
-                      fill: none;
-                      stroke: #fff;
-                      stroke-linecap: round;
-                      stroke-linejoin: round;
-                      stroke-width: 2px;
-                    }
-                  </style>
-                </defs>
-                <title />
-                <g id="trash">
-                  <rect class="cls-1" height="22" width="18" x="7" y="7" />
-                  <line class="cls-1" x1="3" x2="29" y1="7" y2="7" />
-                  <line class="cls-1" x1="13" x2="19" y1="3" y2="3" />
-                  <line class="cls-1" x1="13" x2="13" y1="12" y2="22" />
-                  <line class="cls-1" x1="19" x2="19" y1="12" y2="22" />
-                </g>
-              </svg>
-            </a>
+          <div class="page__head-right">
+            <a href="{% url 'product_add' %}">Добавить новый</a>
+            <button type="submit" class="form__btn">
+              <img src="{% static 'theme/mb/images/admin/save.svg' %}" alt="" />
+              Сохранить
+            </button>
           </div>
         </div>
-        {% endfor %}
-      </div>
+        {% csrf_token %}
+        <div class="page-content _show" id="basic">
+          <div class="page-content__row">
+            <div class="page-content__col">
+              {% if form.name %}
+              <div class="form__group">
+                <label for="{{ form.name.id_for_label }}" class="form__controls-label">Наименование: </label>
+                {{ form.name }} {{ form.name.errors }}
+              </div>
+              {% endif %}
+              <div class="form__grid">
+                {% if form.model %}
+                <div class="form__group">
+                  <label for="{{ form.model.id_for_label }}" class="form__controls-label">Модель: </label>
+                  {{ form.model }} {{ form.model.errors }}
+                </div>
+                {% endif %}
+                {% if form.article %}
+                <div class="form__group">
+                  <label for="{{ form.article.id_for_label }}" class="form__controls-label">Артикул: </label>
+                  {{ form.article }} {{ form.article.errors }}
+                </div>
+                {% endif %}
+                {% if form.price %}
+                <div class="form__group">
+                  <label for="{{ form.price.id_for_label }}" class="form__controls-label">
+                    <span>*</span>
+                    Цена :
+                  </label>
+                  {{ form.price }} {{ form.price.errors }}
+                </div>
+                {% endif %}
+              </div>
+              {% if form.description %}
+              <div class="form__group">
+                <label for="{{ form.description.id_for_label }}" class="form__controls-label"> Полное описание : </label>
+                {{ form.description }} {{ form.description.errors }}
+              </div>
+              {% endif %}
+              {% if image_form.src %}
+              <div class="form__group form__group-image">
+                <label for="{{ image_form.src.id_for_label }}" class="form__controls-label"> Дополнительные изображения : </label>
+                {{ image_form.src }} {{ image_form.src.errors }}
+              </div>
+              {% endif %}
+              <div class="product-field"></div>
+              <div class="product-block__plus form__btn">Добавить изрбражение</div>
+              <div class="form__grid">
+                {% if form.sale_price %}
+                <div class="form__group">
+                  <label for="{{ form.sale_price.id_for_label }}" class="form__controls-label">
+                    <span>*</span>
+                    Цена со скидкой :
+                  </label>
+                  {{ form.sale_price }} {{ form.sale_price.errors }}
+                </div>
+                {% endif %}
+                {% if form.quantity_purchase %}
+                <div class="form__group">
+                  <label for="{{ form.quantity_purchase.id_for_label }}" class="form__controls-label"> Количество купленных : </label>
+                  {{ form.quantity_purchase }} {{ form.quantity_purchase.errors }}
+                </div>
+                {% endif %}
+                {% if form.discount %}
+                <div class="form__group">
+                  <label for="{{ form.discount.id_for_label }}" class="form__controls-label"> Скидка в (<span>% :</span>) </label>
+                  {{ form.discount }} {{ form.discount.errors }}
+                </div>
+                {% endif %}
+                {% if form.quantity %}
+                <div class="form__group">
+                  <label for="{{ form.slug.id_for_label }}" class="form__controls-label"> Количество товара в наличии : </label>
+                  {{ form.quantity }} {{ form.quantity.errors }}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="page-content__col">
+              {% if form.slug %}
+              <div class="form__group">
+                <label for="{{ form.slug.id_for_label }}" class="form__controls-label">
+                  <span>*</span>
+                  URL :
+                </label>
+                {{ form.slug }} {{ form.slug.errors }}
+              </div>
+              {% endif %}
+              {% if form.order_by %}
+              <div class="form__group">
+                <label for="{{ form.order_by.id_for_label }}" class="form__controls-label">
+                  <span>*</span>
+                  Сортировка :
+                </label>
+                {{ form.order_by }} {{ form.order_by.errors }}
+              </div>
+              {% endif %}
+              {% if form.category %}
+              <div class="form__group">
+                <label for="{{ form.category.id_for_label }}" class="form__controls-label">Выбор категории :</label>
+                {{ form.category }} {{ form.category.errors }}
+              </div>
+              {% endif %}
+              {% if form.image %}
+              <div class="form__group form__group-image">
+                <label for="{{ form.image.id_for_label }}" class="form__controls-label">Выбор изображения товара :</label>
+                {{ form.image }} {{ form.image.errors }}
+              </div>
+              {% endif %}
+              {% if form.instance.image %}
+              <a href="{{ form.instance.image.url }}" target="_blank">
+                <img src="{{ form.instance.image.url }}" alt="Миниатюра изображения" style="max-width: 100px; max-height: 100px" />
+              </a>
+              {% endif %}
+              {% if form.latest %}
+              <div class="form__group-checkbox">
+                {{ form.latest }} {{ form.latest.errors }}
+                <label for="{{ form.latest.id_for_label }}" class="form__controls-label"> Новинка ? :</label>
+              </div>
+              {% endif %}
+              {% if form.type_image %}
+              <div class="form__group-checkbox">
+                {{ form.type_image }} {{ form.type_image.errors }}
+                <label for="{{ form.type_image.id_for_label }}" class="form__controls-label">Отображение картинки ? : </label>
+              </div>
+              {% endif %}
+              {% if form.catalog %}
+              <div class="form__group-checkbox">
+                {{ form.catalog }} {{ form.catalog.errors }}
+                <label for="{{ form.catalog.id_for_label }}" class="form__controls-label">Выводить в каталог ? : </label>
+              </div>
+              {% endif %}
+              {% if form.status %}
+              <div class="form__group-checkbox">
+                {{ form.status }} {{ form.status.errors }}
+                <label for="{{ form.status.id_for_label }}" class="form__controls-label"> Опубликовать ? :</label>
+              </div>
+              {% endif %}
+              {% if form.related_products %}
+              <div class="form__group">
+                <label for="{{ form.related_products.id_for_label }}" class="form__controls-label">Сопутствующий товар :</label>
+                {{ form.related_products }} {{ form.related_products.errors }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="page-content" id="seo">
+          <!-- SEO страницы -->
+          <div class="page-content__row">
+            <div class="page-content__onecol">
+              <div class="form__group">
+                <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1 : </label>
+                {{ form.meta_h1 }} {{ form.meta_h1.errors }}
+              </div>
+              <div class="form__group">
+                <label for="{{ form.meta_title.id_for_label }}" class="form__controls-label"> Мета заголовок : </label>
+                {{ form.meta_title }} {{ form.meta_title.errors }}
+              </div>
+              <div class="form__group">
+                <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label">
+                  Мета описание :
+                  <div class="meta-lenght">0</div>
+                </label>
+                {{ form.meta_description }} {{ form.meta_description.errors }}
+              </div>
+              <div class="form__group">
+                <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label"> Мета keywords : </label>
+                {{ form.meta_keywords }} {{ form.meta_keywords.errors }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-content" id="char">
+          <!-- Характеристики товара страницы -->
+          <div class="page-content__row">
+            <div class="page-content__onecol">
+              <div class="page-content__char" id="paste-char">
+                {% for char in chars %}
+                <div class="form__group-char">
+                  <input type="text" name="old_char_id" value="{{ char.id }}" hidden />
+                  <label for="{{ form.category.id_for_label }}" class="form__controls-label">Название характеристики :</label>
+                  <select name="old_text_name" class="form__controls" placeholder="Название характеристики" id="id_name">
+                    <option value="{{ char.char_name.id }}">{{ char.char_name.text_name }}</option>
+                    {% for ch in all_chars %}
+                    <option value="{{ ch.id }}">{{ ch.text_name }}</option>
+                    {% endfor %}
+                  </select>
+                  <label for="id_char_value" class="form__controls-label">Значение :</label>
+                  <input type="text" name="old_char_value" class="form__controls" placeholder="Значение" required="" id="id_char_value" value="{{ char.char_value }}" />
+                  <a href="" class="form__remove"> Удалить </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <button type="button" id="add-char" class="form__plus">Добавить характеристику</button>
+        </div>
+      </form>
     </div>
-    <div class="pagging">
-      <a href="{% if products.has_previous %}?{% chenge_params page=products.previous_page_number %}{% else %}#{% endif %}"
-        class="pagging__arrow {% if not products.has_previous%}disabled{% endif %}">«</a>
-      <ul class="pagging__list">
-        {% for page in products.paginator.page_range %}
-        {% if page >= products.number|add:-2 and page <= products.number|add:2 %} <li>
-          <a href="?{% chenge_params page=page %}"
-            class="pagging__item {% if products.number == page %}_active{% endif %}">{{page}}</a>
-          </li>
-          {% endif %} {% endfor %}
-      </ul>
-      <a href="{% if products.has_next %}?{% chenge_params page=products.next_page_number %}{% else %}#{% endif %}"
-        class="pagging__arrow">»</a>
-    </div> -->
   </div>
 </div>
 

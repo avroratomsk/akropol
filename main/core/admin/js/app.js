@@ -1,24 +1,7 @@
-/*
-* Общие функции
-* */
-
-function addEventHandlerToElements(elements, event, func) {
-  elements.forEach(item => item.addEventListener(event, func));
-}
-
-
 /**
  * Добавление класса активности вкладкам sidebar
  */
 
-const openTabMenuSidebar = () => {
-  console.log('Click')
-}
-
-const btnSidebarMenu = document.querySelectorAll('.menu-sidebar__dropdown');
-if(btnSidebarMenu) {
-  addEventHandlerToElements(btnSidebarMenu, 'click', openTabMenuSidebar)
-}
 
 // const sideBarItem = document.querySelectorAll('.sidebar__item');
 // if (sideBarItem) {
@@ -33,26 +16,38 @@ if(btnSidebarMenu) {
 
 // Функция для добавления обработчиков событий
 
+const bodyLock = (e) => {
+    let widthScrollBar = window.innerWidth - document.documentElement.clientWidth;
 
+    document.querySelector(".header").style.paddingRight = widthScrollBar + "px";
+    document.documentElement.style.marginRight = widthScrollBar + "px";
+    document.body.classList.add("_lock");
+};
 
+// Удаление блокировки скролла
+const bodyUnLock = (e) => {
+    document.documentElement.style.marginRight = "0px";
+    document.querySelector(".header").style.paddingRight = "0px";
+    document.body.classList.remove("_lock");
+};
 /**
  * Переключение вкладок на страницах продуктов, категорий
  */
-const tabButton = document.querySelectorAll('[data-name]');
-const pageEditButton = document.querySelectorAll('.page-content');
+const tabButton = document.querySelectorAll("[data-name]");
+const pageEditButton = document.querySelectorAll(".page-content");
 if (tabButton) {
-  tabButton.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      tabButton.forEach(item => item.classList.remove('_active'));
-      pageEditButton.forEach(item => item.classList.remove('_show'));
+    tabButton.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            tabButton.forEach(item => item.classList.remove("_active"));
+            pageEditButton.forEach(item => item.classList.remove("_show"));
 
 
-      let bodyTabBody = document.getElementById(this.dataset.name);
+            let bodyTabBody = document.getElementById(this.dataset.name);
 
-      btn.classList.add('_active');
-      bodyTabBody.classList.add('_show');
-    })
-  })
+            btn.classList.add("_active");
+            bodyTabBody.classList.add("_show");
+        });
+    });
 }
 
 
@@ -60,48 +55,48 @@ if (tabButton) {
  * Принимает на вход строку и конвертирует ее в английский язык
  */
 function makeSlug(str) {
-  var from = "а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я ā ą ä á à â å č ć ē ę ě é è ê æ ģ ğ ö ó ø ǿ ô ő ḿ ŉ ń ṕ ŕ ş ü ß ř ł đ þ ĥ ḧ ī ï í î ĵ ķ ł ņ ń ň ř š ś ť ů ú û ứ ù ü ű ū ý ÿ ž ź ż ç є ґ".split(' ');
-  var to = "a b v g d e e zh z i y k l m n o p r s t u f h ts ch sh shch # y # e yu ya a a ae a a a a c c e e e e e e e g g oe o o o o o m n n p r s ue ss r l d th h h i i i i j k l n n n r s s t u u u u u u u u y y z z z c ye g".split(' ');
+    var from = "а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я ā ą ä á à â å č ć ē ę ě é è ê æ ģ ğ ö ó ø ǿ ô ő ḿ ŉ ń ṕ ŕ ş ü ß ř ł đ þ ĥ ḧ ī ï í î ĵ ķ ł ņ ń ň ř š ś ť ů ú û ứ ù ü ű ū ý ÿ ž ź ż ç є ґ".split(" ");
+    var to = "a b v g d e e zh z i y k l m n o p r s t u f h ts ch sh shch # y # e yu ya a a ae a a a a c c e e e e e e e g g oe o o o o o m n n p r s ue ss r l d th h h i i i i j k l n n n r s s t u u u u u u u u y y z z z c ye g".split(" ");
 
-  str = str.toLowerCase();
+    str = str.toLowerCase();
 
-  // remove simple HTML tags
-  str = str.replace(/(<[a-z0-9\-]{1,15}[\s]*>)/gi, '');
-  str = str.replace(/(<\/[a-z0-9\-]{1,15}[\s]*>)/gi, '');
-  str = str.replace(/(<[a-z0-9\-]{1,15}[\s]*\/>)/gi, '');
+    // remove simple HTML tags
+    str = str.replace(/(<[a-z0-9\-]{1,15}[\s]*>)/gi, "");
+    str = str.replace(/(<\/[a-z0-9\-]{1,15}[\s]*>)/gi, "");
+    str = str.replace(/(<[a-z0-9\-]{1,15}[\s]*\/>)/gi, "");
 
-  str = str.replace(/^\s+|\s+$/gm, ''); // trim spaces
+    str = str.replace(/^\s+|\s+$/gm, ""); // trim spaces
 
-  for (i = 0; i < from.length; ++i)
-    str = str.split(from[i]).join(to[i]);
+    for (i = 0; i < from.length; ++i)
+        str = str.split(from[i]).join(to[i]);
 
-  // Replace different kind of spaces with dashes
-  var spaces = [/(&nbsp;|&#160;|&#32;)/gi, /(&mdash;|&ndash;|&#8209;)/gi,
-    /[(_|=|\\|\,|\.|!)]+/gi, /\s/gi];
+    // Replace different kind of spaces with dashes
+    var spaces = [/(&nbsp;|&#160;|&#32;)/gi, /(&mdash;|&ndash;|&#8209;)/gi,
+        /[(_|=|\\|\,|\.|!)]+/gi, /\s/gi];
 
-  for (i = 0; i < from.length; ++i)
-    str = str.replace(spaces[i], '-');
-  str = str.replace(/-{2,}/g, "-");
+    for (i = 0; i < from.length; ++i)
+        str = str.replace(spaces[i], "-");
+    str = str.replace(/-{2,}/g, "-");
 
-  // remove special chars like &amp;
-  str = str.replace(/&[a-z]{2,7};/gi, '');
-  str = str.replace(/&#[0-9]{1,6};/gi, '');
-  str = str.replace(/&#x[0-9a-f]{1,6};/gi, '');
+    // remove special chars like &amp;
+    str = str.replace(/&[a-z]{2,7};/gi, "");
+    str = str.replace(/&#[0-9]{1,6};/gi, "");
+    str = str.replace(/&#x[0-9a-f]{1,6};/gi, "");
 
-  str = str.replace(/[^a-z0-9\-]+/gmi, ""); // remove all other stuff
-  str = str.replace(/^\-+|\-+$/gm, ''); // trim edges
+    str = str.replace(/[^a-z0-9\-]+/gmi, ""); // remove all other stuff
+    str = str.replace(/^\-+|\-+$/gm, ""); // trim edges
 
-  return str;
-};
+    return str;
+}
 
 /**
  * Получаем имя/названия и конвертируем его в английский язык
  */
-const nameField = document.getElementById('name');
+const nameField = document.getElementById("name");
 if (nameField) {
-  nameField.addEventListener('input', function (e) {
-    document.getElementById('slug').value = makeSlug(this.value);
-  })
+    nameField.addEventListener("input", function (e) {
+        document.getElementById("slug").value = makeSlug(this.value);
+    });
 }
 
 // const ctx = document.getElementById('myChart');
@@ -111,49 +106,49 @@ if (nameField) {
 
 // }
 
-var ctx = document.getElementById('myChart');
+var ctx = document.getElementById("myChart");
 if (ctx) {
-  ctx.getContext('2d');
-  var salesChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
-      datasets: [
-        {
-          label: 'Зарегистрировались и купили',
-          data: [12, 19, 3, 5, 2, 3, 8, 12, 13, 14, 5, 9, 11, 6, 8, 10, 15, 18, 16, 10, 12, 17, 19, 21, 20, 18, 16, 14, 12, 10],
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderWidth: 1
+    ctx.getContext("2d");
+    var salesChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"],
+            datasets: [
+                {
+                    label: "Зарегистрировались и купили",
+                    data: [12, 19, 3, 5, 2, 3, 8, 12, 13, 14, 5, 9, 11, 6, 8, 10, 15, 18, 16, 10, 12, 17, 19, 21, 20, 18, 16, 14, 12, 10],
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderWidth: 1
+                },
+                {
+                    label: "Не зарегистрировались",
+                    data: [10, 15, 6, 8, 5, 4, 7, 9, 11, 12, 6, 8, 10, 9, 7, 5, 12, 14, 13, 9, 10, 13, 15, 16, 14, 13, 11, 9, 8, 7],
+                    borderColor: "rgba(153, 102, 255, 1)",
+                    backgroundColor: "rgba(153, 102, 255, 0.2)",
+                    borderWidth: 1
+                }
+            ]
         },
-        {
-          label: 'Не зарегистрировались',
-          data: [10, 15, 6, 8, 5, 4, 7, 9, 11, 12, 6, 8, 10, 9, 7, 5, 12, 14, 13, 9, 10, 13, 15, 16, 14, 13, 11, 9, 8, 7],
-          borderColor: 'rgba(153, 102, 255, 1)',
-          backgroundColor: 'rgba(153, 102, 255, 0.2)',
-          borderWidth: 1
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Дни месяца"
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Количество продаж"
+                    }
+                }
+            }
         }
-      ]
-    },
-    options: {
-      scales: {
-        x: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Дни месяца'
-          }
-        },
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Количество продаж'
-          }
-        }
-      }
-    }
-  });
+    });
 }
 
 
@@ -162,9 +157,9 @@ if (ctx) {
  */
 
 const numberSymbols = {
-  'title': 50,
-  'description': 140
-}
+    "title": 50,
+    "description": 140
+};
 
 // const metaFields = document.querySelectorAll('.meta_field');
 // if (metaFields) {
@@ -200,40 +195,40 @@ const numberSymbols = {
 // }
 
 function checkLengthSymbol(lenght, item) {
-  if (lenght > numberSymbols.title) {
-    item.style.color = 'red';
-  }
-  if (lenght > numberSymbols.description) {
-    item.style.color = 'red';
-  }
-};
-
-const dropdownButtons = document.querySelectorAll('.dropdownButton');
-
-if (dropdownButtons) {
-  dropdownButtons.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      console.log(e.target);
-      let dropdownContent = this.querySelector('.dropdownContent');
-      if (dropdownContent.classList.contains('hidden')) {
-        dropdownContent.classList.remove('hidden');
-        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
-      } else {
-        dropdownContent.style.maxHeight = 0;
-        // setTimeout(function () {
-        dropdownContent.classList.add('hidden');
-        // }, 500); // transition duration
-      }
-    })
-  })
+    if (lenght > numberSymbols.title) {
+        item.style.color = "red";
+    }
+    if (lenght > numberSymbols.description) {
+        item.style.color = "red";
+    }
 }
 
-document.addEventListener('click', function (event) {
-  if (event.target.classList.contains('form__plus')) {
-    const blockPasteChar = document.getElementById('paste-char');
-    let char_name_id = document.getElementById('id_char_name').innerHTML;
-    console.log(char_name_id);
-    blockPasteChar.innerHTML += `
+const dropdownButtons = document.querySelectorAll(".dropdownButton");
+
+if (dropdownButtons) {
+    dropdownButtons.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            console.log(e.target);
+            let dropdownContent = this.querySelector(".dropdownContent");
+            if (dropdownContent.classList.contains("hidden")) {
+                dropdownContent.classList.remove("hidden");
+                dropdownContent.style.maxHeight = dropdownContent.scrollHeight + "px";
+            } else {
+                dropdownContent.style.maxHeight = 0;
+                // setTimeout(function () {
+                dropdownContent.classList.add("hidden");
+                // }, 500); // transition duration
+            }
+        });
+    });
+}
+
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("form__plus")) {
+        const blockPasteChar = document.getElementById("paste-char");
+        let char_name_id = document.getElementById("id_char_name").innerHTML;
+        console.log(char_name_id);
+        blockPasteChar.innerHTML += `
     <div class="form__group-char">
       <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
         Название характеристики <span>:</span>
@@ -245,18 +240,62 @@ document.addEventListener('click', function (event) {
     <div class="form__remove">
       Удалить
     </div>
-    </div>`
-  }
+    </div>`;
+    }
 });
 
-const menuSideBarButton = document.querySelectorAll('.menu-sidebar__dropdown-title');
+const menuSideBarButton = document.querySelectorAll(".menu-sidebar__dropdown-title");
 
 if (menuSideBarButton) {
-  menuSideBarButton.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      let parent = btn.closest('.menu-sidebar__dropdown');
-      parent.classList.toggle('_active');
-    })
-  })
+    menuSideBarButton.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            let parent = btn.closest(".menu-sidebar__dropdown");
+            parent.classList.toggle("_active");
+        });
+    });
 }
+
+
+const openPopup = (e) => {
+    bodyLock();
+    const currentPopup = document.getElementById(e.currentTarget.dataset.popup);
+    currentPopup.classList.add("popup_show");
+
+    const hiddenField = currentPopup.querySelector("#order-product");
+    if (hiddenField) {
+        hiddenField.value = e.currentTarget.dataset.name;
+    }
+};
+
+const closePopup = (e) => {
+    bodyUnLock();
+    document.querySelector(".popup_show").classList.remove("popup_show");
+};
+
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27 && document.querySelector(".popup_show").classList.contains("popup_show")) {
+        document.querySelector(".popup_show").classList.remove("popup_show");
+        document.body.classList.remove("_lock");
+        bodyUnLock();
+    }
+});
+
+const popup = document.querySelectorAll(".popup");
+popup?.forEach(popup => popup.addEventListener("click", (e) => {
+    if (!e.target.closest(".popup__content")) {
+        e.currentTarget.classList.remove("popup_show");
+        document.body.classList.remove("_lock");
+        bodyUnLock();
+    }
+}));
+
+const modalOpenButtonsList = document.querySelectorAll("[data-popup]");
+modalOpenButtonsList?.forEach(btn => btn.addEventListener("click", openPopup));
+
+const modalCloseButtonsList = document.querySelectorAll("[data-close]");
+modalCloseButtonsList?.forEach(btn => btn.addEventListener("click", closePopup));
+
+
+
+/*******************************/
 

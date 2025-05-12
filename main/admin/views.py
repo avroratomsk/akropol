@@ -203,6 +203,18 @@ def admin_product(request):
   View, которая возвращаяет и отрисовывает все товары на странице
   и разбивает их на пагинацию 
   """
+
+  form = ProductForm()
+  show_modal = False
+
+  if request.method == "POST":
+    form_new = ProductForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect('admin_product')
+    else:
+      return render(request, "shop/product/product.html", {"form": form_new,  "show_modal": True})
+
   page = request.GET.get('page', 1)
   
   products = Product.objects.all()
@@ -210,7 +222,9 @@ def admin_product(request):
   current_page = paginator.page(int(page))
   
   context = {
-    "items": current_page
+    "items": current_page,
+    "form": form,
+    "show_modal": show_modal
   }
   return render(request, "shop/product/product.html", context)
 

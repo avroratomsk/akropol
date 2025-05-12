@@ -17,11 +17,13 @@ Disallow: /accounts/
 Disallow: /cart/
 Disallow: /search/?q*
 Disallow: /*?*
+Disallow: /*?erid=
 Allow: /static/*.css
 Allow: /static/*.js
 Allow: /static/*.png
 Allow: /static/*.jpg
 Allow: /static/*.gif
+
 
 Clean-Param: utm_source&utm_medium&utm_campaign
 Host: https://xn----7sbbi3adkojmfupe8q.xn--p1ai/

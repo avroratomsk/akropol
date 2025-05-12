@@ -147,6 +147,9 @@ class ProductForm(forms.ModelForm):
                 'class': INPUT_CLASS,
                 "id":"name"
             }),
+            'order_by': forms.TextInput(attrs={
+                'class': INPUT_CLASS,
+            }),
             'slug': forms.TextInput(attrs={
                 'class': INPUT_CLASS,
                 "id": "slug"

@@ -39,7 +39,7 @@
             {% endif %}
           </div>
           <div class="grid-item__content">
-            <a href="{{ item.get_absolute_url }}" class="grid-item__title">{{ item.name }} - {{ item.model }} - {{ item.id }}</a>
+            <a href="{{ item.get_absolute_url }}" class="grid-item__title">{{ item.name }} - {{ item.model }} - {{  item.get_absolute_url }}</a>
             <p>{{ item.price }} ₽</p>
             <div class="grid-item__action">
               <a href="{% url 'product_edit' item.pk %}">Изменить</a>

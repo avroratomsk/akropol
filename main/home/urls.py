@@ -14,6 +14,8 @@ urlpatterns = [
     path('contact-form/', views.contact_form, name="contact_form"),
     path('service-form/', views.service_form, name="service_form"),
     path('consultation/', views.consultation, name="consultation"),
+    path('privacy/', views.privacy, name="privacy"),
+    path('cookie/', views.cookie, name="cookie"),
     path('stock-product/', views.stock_product, name="stock_product"),
     path('robots.txt', views.robots_txt),
     # path('uslugi/', views.about, name="about"),

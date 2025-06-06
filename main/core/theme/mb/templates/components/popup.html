@@ -30,6 +30,13 @@
         <input type="text" name="name" class="popup__form-controls" placeholder="Ваше имя" required />
         <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input
           required />
+        <div class="form__row">
+          <input type="checkbox" id="agreement-callback" name="agreement" required>
+          <label for="agreement-callback" class="form__label">
+            Я согласен на обработку моих персональных  данных в соответствии с
+            <a href="{% url 'privacy' %}" style="color: #41a2d0">политикой конфиденциальности</a>
+          </label>
+        </div>
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>
@@ -59,6 +66,13 @@
         <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input
           required />
         <input type="hidden" name="service" class="popup__form-controls" required />
+        <div class="form__row">
+          <input type="checkbox" id="agreement-callback" name="agreement" required>
+          <label for="agreement-callback" class="form__label">
+            Я согласен на обработку моих персональных  данных в соответствии с
+            <a href="{% url 'privacy' %}" style="color: #41a2d0">политикой конфиденциальности</a>
+          </label>
+        </div>
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>
@@ -79,6 +93,13 @@
         <input type="text" name="phone" class="popup__form-controls" placeholder="номер телефона" data-tel-input
           required />
         <input type="hidden" name="service" class="popup__form-controls" required />
+        <div class="form__row">
+          <input type="checkbox" id="agreement-callback" name="agreement" required>
+          <label for="agreement-callback" class="form__label">
+            Я согласен на обработку моих персональных  данных в соответствии с
+            <a href="{% url 'privacy' %}" style="color: #41a2d0">политикой конфиденциальности</a>
+          </label>
+        </div>
         <button type="submit" class="popup__form-submit">Отправить</button>
       </form>
     </div>

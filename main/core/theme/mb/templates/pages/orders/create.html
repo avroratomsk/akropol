@@ -46,6 +46,13 @@
                 <span class="form__help-text">Комментарий к заказу</span>
               </div>
             </div>
+            <div class="form__row">
+              <input type="checkbox" id="agreement-callback" name="agreement" required>
+              <label for="agreement-callback" class="form__label">
+                Я согласен на обработку моих персональных  данных в соответствии с
+                <a href="{% url 'privacy' %}" style="color: #41a2d0">политикой конфиденциальности</a>
+              </label>
+            </div>
             <button type="submit" class="form__submit _btn">Отправить</button>
           </div>
           <div class="order-create__col">

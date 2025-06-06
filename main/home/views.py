@@ -135,6 +135,12 @@ def about(request):
 def contact(request):
     return render(request, "pages/contact.html")
 
+def privacy(request):
+  return render(request, "pages/privacy.html")
+
+def cookie(request):
+  return render(request, "pages/cookie.html")
+
 def stock_product(request):
   page = request.GET.get("page", 1)
   products = Product.objects.filter(status=True, sale_price=True)

@@ -4681,6 +4681,12 @@ body::after {
   }
 }
 
+@media screen and (max-width: 992px) {
+  .cookie-notice {
+    bottom: 80px;
+  }
+}
+
 @media screen and (max-width: 990px) {
   .index-stock__item {
     min-height: 250px;
@@ -4831,7 +4837,6 @@ body::after {
   .cookie-notice {
     width: 100%;
     left: 0;
-    margin: 0px 20px;
   }
 
   .header-under {

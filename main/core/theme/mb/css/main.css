@@ -4996,6 +4996,12 @@ body::after {
   }
 }
 
+@media screen and (max-width: 578px) {
+  .top-main {
+    gap: 0px;
+  }
+}
+
 @media screen and (max-width: 560px) {
   .top-main__cart {
     display: none !important;
@@ -5189,6 +5195,12 @@ body::after {
 @media screen and (max-width: 390px) {
   .top-main__address {
     font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .top-main {
+    flex-wrap: wrap;
   }
 }
 

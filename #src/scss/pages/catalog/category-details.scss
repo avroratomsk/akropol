@@ -49,6 +49,10 @@
 
     .category-details__col:nth-child(1) {
       width: 100%;
+      position: relative;
+      left: 0;
+      top: 0;
+      height: 100%;
     }
   }
 
@@ -57,6 +61,7 @@
   &__col {
     @media screen and (max-width: 1200px) {
       width: 100%;
+
     }
 
     // .category-details__col--last

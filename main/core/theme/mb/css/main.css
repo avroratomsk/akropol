@@ -4588,28 +4588,11 @@ body::after {
   }
 
   .category-details__row-onecol .category-details__col:nth-child(1) {
-    position: fixed;
-    top: 0;
-    left: 0%;
     width: 100%;
-    height: 100%;
   }
 
   .category-details__col {
     width: 100%;
-  }
-
-  .category-details__col:nth-child(1) {
-    position: fixed;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: calc(100vh - 80px);
-    overflow-y: auto;
-    background-color: white;
-    padding: 30px;
-    z-index: 101;
-    transition: 0.5s;
   }
 
   .category-details__col:nth-child(2) {

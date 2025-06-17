@@ -3479,14 +3479,6 @@ body::after {
   width: 100%;
 }
 
-.category-details__row-onecol .category-details__col:nth-child(1) {
-  width: 100%;
-  position: relative;
-  left: 0;
-  top: 0;
-  height: 100%;
-}
-
 .category-details__col {
   position: relative;
 }
@@ -4593,6 +4585,14 @@ body::after {
 
   .category-details__row {
     flex-direction: column;
+  }
+
+  .category-details__row-onecol .category-details__col:nth-child(1) {
+    position: fixed;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
   }
 
   .category-details__col {

@@ -113,20 +113,23 @@
               {% endif %}
             </div>
             <div class="product-card__info info-card">
-              {% for ch_name in char_name %}
+              <div class="info-card__item">
+                <p class="info-card__label">Материал:</p>
+                <p class="info-card__info-char">Гранит</p>
+              </div>
+              {% comment %}{% for ch_name in char_name %}
               <div class="info-card__item">
                 <p class="info-card__label">{{ ch_name.text_name }}:</p>
                 {% for char_value in chars %} {% if char_value.char_name.text_name == ch_name.text_name %}
                 <p class="info-card__info-char">Гранит</p>
-                {% endif %} {% endfor %}
-                {% comment %}<select name="{{ ch_name.filter_name }}" id="{{ ch_name.filter_name }}"
+                {% endif %} {% endfor %}<select name="{{ ch_name.filter_name }}" id="{{ ch_name.filter_name }}"
                   data-name="{{ ch_name.text_name }}">
                   {% for char_value in chars %} {% if char_value.char_name.text_name == ch_name.text_name %}
                   <option value="{{ char_value.char_value }}">{{ char_value.char_value }}</option>
                   {% endif %} {% endfor %}
-                </select>{% endcomment %}
               </div>
               {% endfor %}
+              {% endcomment %}
               <div class="info-card__item">
                 <p class="info-card__label">Выберите количество:</p>
                 <div class="info-card__item-inner">

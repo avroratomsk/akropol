@@ -28,9 +28,204 @@ from django.contrib.auth.decorators import user_passes_test
 
 # @user_passes_test(lambda u: u.is_superuser)
 # from django.core.files.storage import default_storage
+
+path = f"{BASE_DIR}/upload/upload.xlsx"
+
+from pytils.translit import slugify
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
+
+def parse_exсel(path):
+  workbook = openpyxl.load_workbook(path)
+  sheet = workbook.active
+  start_row = 2
+
+  Product.objects.all().delete()
+  CharName.objects.all().delete()
+
+  for row in sheet.iter_rows(min_row=start_row, values_only=True):
+    model = row[0]
+    slug = slugify(model)
+    article = row[1]
+    name = row[2]
+    if row[3]:
+      category_name = row[3]
+    else:
+      pass
+    category_slug = slugify(category_name)
+    try:
+      category = Category.objects.get(slug=category_slug)
+    except ObjectDoesNotExist:
+      if not Category.objects.filter(name=category_name).exists():
+        category = Category.objects.create(
+          name=category_name,
+          slug=category_slug
+        )
+      else:
+        category = Category.objects.filter(name=category_name).first()
+    price = row[4]
+    polished_sides = row[9]
+    quantity = 1
+    description = row[11]
+    delivery = row[12]
+    meta_h1 = ''
+    meta_title = ''
+    meta_description = ''
+    meta_keywords = ''
+    try:
+      name_image = row[13].replace("№","")
+      # print(name_image)
+      name_two = name_image.replace('Э', 'E')
+      image = f"goods/{name_two}"
+    except:
+      pass
+
+    # weight = row[18]
+    status = True
+
+    try:
+      image_list = row[14].split(',')
+    except:
+      pass
+
+
+    # sale_price = 0.0
+
+    # if row[6] == None:
+    #   discount = 0
+    # else:
+    #   discount = int(row[6])
+    #   sale_price = round(price - price * discount / 100, 1)
+
+    # status = True
+  # Получаем строку с материалом и делим по запятой
+    chars = row[5].split(',')
+    char_name = sheet['F1'].value
+    char_eng = slugify(char_name)
+
+    try:
+      char = CharName.objects.get(filter_name=char_eng)
+    except ObjectDoesNotExist:
+      if not CharName.objects.filter(filter_name=char_eng).exists():
+        char = CharName.objects.create(
+          text_name=char_name,
+          filter_add = True,
+          filter_name=char_eng,
+          sort_order=0
+        )
+      else:
+        char = CharName.objects.filter(filter_name=char_eng).first()
+
+#     chars_color = row[6].split(',')
+#     char_color_name = sheet['G1'].value
+#     char_color_eng = slugify(char_color_name)
+#
+#     try:
+#       char_color = CharName.objects.get(filter_name=char_color_eng)
+#     except ObjectDoesNotExist:
+#       if not CharName.objects.filter(filter_name=char_color_eng).exists():
+#         char_color = CharName.objects.create(
+#           text_name=char_color_name,
+#           filter_add = True,
+#           filter_name=char_color_eng,
+#           sort_order=0
+#         )
+#       else:
+#         char_color = CharName.objects.filter(filter_name=char_color_eng).first()
+#
+#     chars_size = row[8].split(',')
+#     char_size_name = sheet['I1'].value
+#     char_size_eng = slugify(char_size_name)
+#
+#     try:
+#       char_size = CharName.objects.get(filter_name=char_size_eng)
+#     except ObjectDoesNotExist:
+#       if not CharName.objects.filter(filter_name=char_size_eng).exists():
+#         char_size = CharName.objects.create(
+#           text_name=char_size_name,
+#           filter_add = True,
+#           filter_name=char_size_eng,
+#           sort_order=0
+#         )
+#       else:
+#         char_size = CharName.objects.filter(filter_name=char_size_eng).first()
+
+    try:
+      new_product = Product.objects.get(slug=slug)
+    except ObjectDoesNotExist:
+      if not Product.objects.filter(name=model).exists():
+        try:
+            new_product = Product.objects.create(
+            model=model,
+            article=article,
+            polished_sides=polished_sides,
+            delivery=delivery,
+            name=name,
+            slug=slug,
+            # weight=weight,
+            description=description,
+            meta_h1=meta_h1,
+            meta_title=meta_title,
+            meta_description=meta_description,
+            meta_keywords=meta_keywords,
+            image=image,
+            price=price,
+            quantity=quantity,
+            category=category,
+            status=status
+          )
+        except Exception as e:
+          print(e)
+
+      else:
+        new_product = Product.objects.filter(name=model).first()
+
+      for ch in chars:
+        try:
+          product_char_create = ProductChar.objects.create(
+            char_name = char,
+            parent = new_product,
+            char_value = ch
+          )
+        except Exception as e:
+          print(e)
+
+#       for ch in chars_color:
+#         try:
+#           product_char_color_create = ProductChar.objects.create(
+#             char_name = char_color,
+#             parent = new_product,
+#             char_value = ch
+#           )
+#         except Exception as e:
+#           print(e)
+#
+#       for ch in chars_size:
+#         try:
+#           product_char_size_create = ProductChar.objects.create(
+#             char_name = char_size,
+#             parent = new_product,
+#             char_value = ch
+#           )
+#         except Exception as e:
+#           print(e)
+
+      for image in image_list:
+        try:
+          image_file = open('media/goods/' + image, 'rb')
+          image_image = ImageFile(image_file)
+          image_create = ProductImage.objects.create(
+              parent=new_product,
+              src=image_image
+          )
+        except Exception as e:
+          pass
+
+
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
-    return render(request, "page/index.html")
+  parse_exсel(path)
+  return render(request, "page/index.html")
 
 def admin_settings(request):
   try:
@@ -380,199 +575,8 @@ def upload_succes(request):
   return render(request, "upload/upload-succes.html")
 
 
-path = f"{BASE_DIR}/upload/upload.xlsx"
 
-from pytils.translit import slugify
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import IntegrityError
 
-def parse_exсel(path):
-  workbook = openpyxl.load_workbook(path)
-  sheet = workbook.active
-  start_row = 2
-    
-  Product.objects.all().delete()
-  CharName.objects.all().delete()
-  
-  for row in sheet.iter_rows(min_row=start_row, values_only=True):
-    model = row[0]
-    slug = slugify(model)
-    article = row[1]
-    name = row[2]
-    if row[3]:
-      category_name = row[3]
-    else:
-      pass
-    category_slug = slugify(category_name)
-    try:
-      category = Category.objects.get(slug=category_slug)
-    except ObjectDoesNotExist:
-      if not Category.objects.filter(name=category_name).exists():
-        category = Category.objects.create(
-          name=category_name,
-          slug=category_slug
-        )
-      else:
-        category = Category.objects.filter(name=category_name).first()
-    price = row[4]
-    polished_sides = row[9]
-    quantity = 1
-    description = row[11]
-    delivery = row[12]
-    meta_h1 = ''
-    meta_title = ''
-    meta_description = ''
-    meta_keywords = ''
-    try:
-      name_image = row[13].replace("№","")
-      # print(name_image)
-      name_two = name_image.replace('Э', 'E')
-      image = f"goods/{name_two}"
-    except:
-      pass
-    
-    # weight = row[18]
-    status = True
-    
-    try:
-      image_list = row[14].split(',')
-    except: 
-      pass
-    
-    
-    # sale_price = 0.0
-    
-    # if row[6] == None:
-    #   discount = 0
-    # else:
-    #   discount = int(row[6])
-    #   sale_price = round(price - price * discount / 100, 1)
-    
-    # status = True
-  # Получаем строку с материалом и делим по запятой
-    chars = row[5].split(',')
-    char_name = sheet['F1'].value
-    char_eng = slugify(char_name)
-    
-    try:
-      char = CharName.objects.get(filter_name=char_eng)
-    except ObjectDoesNotExist:
-      if not CharName.objects.filter(filter_name=char_eng).exists():
-        char = CharName.objects.create(
-          text_name=char_name,
-          filter_add = True,
-          filter_name=char_eng,
-          sort_order=0
-        )
-      else:
-        char = CharName.objects.filter(filter_name=char_eng).first()
-    
-    chars_color = row[6].split(',')
-    char_color_name = sheet['G1'].value
-    char_color_eng = slugify(char_color_name)
-       
-    try:
-      char_color = CharName.objects.get(filter_name=char_color_eng)
-    except ObjectDoesNotExist:
-      if not CharName.objects.filter(filter_name=char_color_eng).exists():
-        char_color = CharName.objects.create(
-          text_name=char_color_name,
-          filter_add = True,
-          filter_name=char_color_eng,
-          sort_order=0
-        )
-      else:
-        char_color = CharName.objects.filter(filter_name=char_color_eng).first()
-        
-    chars_size = row[8].split(',')
-    char_size_name = sheet['I1'].value
-    char_size_eng = slugify(char_size_name)
-    
-    try:
-      char_size = CharName.objects.get(filter_name=char_size_eng)
-    except ObjectDoesNotExist:
-      if not CharName.objects.filter(filter_name=char_size_eng).exists():
-        char_size = CharName.objects.create(
-          text_name=char_size_name,
-          filter_add = True,
-          filter_name=char_size_eng,
-          sort_order=0
-        )
-      else:
-        char_size = CharName.objects.filter(filter_name=char_size_eng).first()
-  
-    try:
-      new_product = Product.objects.get(slug=slug)
-    except ObjectDoesNotExist:
-      if not Product.objects.filter(name=model).exists():
-        try:
-            new_product = Product.objects.create(
-            model=model,
-            article=article,
-            polished_sides=polished_sides,
-            delivery=delivery,
-            name=name,
-            slug=slug,
-            # weight=weight,
-            description=description,
-            meta_h1=meta_h1,
-            meta_title=meta_title,
-            meta_description=meta_description,
-            meta_keywords=meta_keywords,
-            image=image,
-            price=price,
-            quantity=quantity,
-            category=category,
-            status=status
-          )
-        except Exception as e:
-          print(e)
-          
-      else:
-        new_product = Product.objects.filter(name=model).first() 
-      
-      for ch in chars:
-        try:
-          product_char_create = ProductChar.objects.create(
-            char_name = char,
-            parent = new_product,
-            char_value = ch
-          )
-        except Exception as e:
-          print(e)
-      
-      for ch in chars_color:
-        try:
-          product_char_color_create = ProductChar.objects.create(
-            char_name = char_color,
-            parent = new_product,
-            char_value = ch
-          )
-        except Exception as e:
-          print(e)
-          
-      for ch in chars_size:
-        try:
-          product_char_size_create = ProductChar.objects.create(
-            char_name = char_size,
-            parent = new_product,
-            char_value = ch
-          )
-        except Exception as e:
-          print(e)
-        
-      for image in image_list:
-        try:
-          image_file = open('media/goods/' + image, 'rb')
-          image_image = ImageFile(image_file)
-          image_create = ProductImage.objects.create(
-              parent=new_product,
-              src=image_image
-          )
-        except Exception as e: 
-          pass
-        
-# parse_exсel(path)
 
 def admin_category(request):
   categorys = Category.objects.all()

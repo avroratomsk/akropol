@@ -656,9 +656,7 @@ if (navArrowTriggerSubMenu) {
     navArrowTriggerSubMenu.forEach(item => {
         item.addEventListener("click", function (e) {
             let parent = e.target.closest(".nav__item");
-            console.log(parent);
-
-            parent.classList.add("_active");
+            parent.classList.toggle("_active");
         });
     });
 }

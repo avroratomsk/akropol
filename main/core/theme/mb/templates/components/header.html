@@ -4,7 +4,7 @@
     <div class="header__inner">
       <button type="button" class="header__callback" data-popup="callback">
         Заказать звонок
-        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок" title="Заказать звонок" />
+        <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок" title="Заказать звонок"/>
       </button>
       <nav class="nav">
         <ul class="nav__list">
@@ -18,8 +18,12 @@
               {% endfor %}
             </ul>
             {% endif %}
-            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="Иконка открытие меню"
-              title="Иконка открытие меню" />
+            <button type="button" class="nav__chevron">
+              <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}"
+                   alt="Иконка открытие меню"
+                   title="Иконка открытие меню"/>
+            </button>
+
           </li>
           <li class="nav__item">
             <a href="{% url 'service' %}">Услуги</a>
@@ -29,12 +33,18 @@
           <li class="nav__item"><a href="{% url 'delivery' %}">Оплата</a></li>
           <li class="nav__item"><a href="{% url 'gallery' %}">Наши работы</a></li>
           <li class="nav__item">
-            <a href="{% url 'about' %}">О нас</a>
+            <div class="nav__item-inner">
+              <a href="{% url 'about' %}">О нас</a>
+              <button type="button" class="nav__chevron">
+                <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}"
+                     alt="Иконка открытие меню"
+                     title="Иконка открытие меню"/>
+              </button>
+            </div>
             <ul class="nav__submenu submenu">
               <li><a href="{% url 'blog' %}">Статьи</a></li>
             </ul>
-            <img src="{% static 'theme/mb/images/icon/chevron-down_white.svg' %}" alt="Иконка открытие меню"
-              title="Иконка открытие меню" />
+
           </li>
           <li class="nav__item"><a href="{% url 'contact' %}">Контакты</a></li>
         </ul>

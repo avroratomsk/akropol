@@ -110,3 +110,4 @@ def product(request, slug):
     "images": images
   }
   return render(request, "pages/catalog/product.html", context)
+

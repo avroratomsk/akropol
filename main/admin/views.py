@@ -59,9 +59,9 @@ def parse_exсel(path):
     if all(cell is None for cell in row):
       break
 
-    model = row[0] if row[0] else "None"
-    name = row[2] if row[2] else "Названия нет"
-    article= row[1] if row[1] else "Без артикла"
+    model = row[0] if row[0] else ""
+    name = row[2] if row[2] else ""
+    article= row[1] if row[1] else ""
 
     # Сначала пробуем взять slug из колонки, иначе делаем из model или name
     slug_source = row[20] if row[20] else model if model else name
@@ -76,7 +76,7 @@ def parse_exсel(path):
       counter += 1
 
 
-    category_name = row[3] if row[3] else "Без категории"
+    category_name = row[3] if row[3] else ""
     category_slug = slugify(category_name)
 
     try:
@@ -96,7 +96,6 @@ def parse_exсel(path):
     description = row[11] if row[11] else ""
     delivery = row[12] if row[12] else ""
     image = f"goods/{row[13]}" if row[13] else "theme/mb/images/no-image.png"
-    print(image)
     latest = True if row[16] and str(row[16]).strip().lower() == "да" else False
     status = True
     type_image = True if row[17] and str(row[17]).strip().lower() == "да" else False

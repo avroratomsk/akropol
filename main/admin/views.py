@@ -35,7 +35,94 @@ from pytils.translit import slugify
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 
+def generate_slug(base_str, existing_slugs):
+  base_slug = slugify(base_str)
+  slug = base_slug
+  counter = 1
+
+  while slug in existing_slugs:
+    slug = f"{base_slug}-{counter}"
+    counter += 1
+
+  return slug
+
 def parse_exсel(path):
+  workbook = openpyxl.load_workbook(path)
+  sheet = workbook.active
+  start_row = 2
+
+  Product.objects.all().delete()
+  Category.objects.all().delete()
+  CharName.objects.all().delete()
+
+  for row in sheet.iter_rows(min_row=start_row, values_only=True):
+    if all(cell is None for cell in row):
+      break
+
+    model = row[0] if row[0] else "None"
+    name = row[2] if row[2] else "Названия нет"
+    article= row[1] if row[1] else "Без артикла"
+
+    # Сначала пробуем взять slug из колонки, иначе делаем из model или name
+    slug_source = row[20] if row[20] else model if model else name
+    base_slug = slugify(slug_source)
+    slug = base_slug
+    counter = 1
+
+
+    # Проверка на уникальность slug
+    while Product.objects.filter(slug=slug).exists():
+      slug = f"{base_slug}-{counter}"
+      counter += 1
+
+
+    category_name = row[3] if row[3] else "Без категории"
+    category_slug = slugify(category_name)
+
+    try:
+      category = Category.objects.get(slug=category_slug)
+    except ObjectDoesNotExist:
+      if not Category.objects.filter(name=category_name).exists():
+        category = Category.objects.create(
+          name=category_name,
+          slug=category_slug
+        )
+      else:
+        category = Category.objects.filter(name=category_name).first()
+
+    price = row[4] if row[4] else 0
+    sale_price = 0
+    polished_sides = row[9] if row[9] else 0
+    description = row[11] if row[11] else ""
+    delivery = row[12] if row[12] else ""
+    image = f"goods/{row[13]}" if row[13] else ""
+    latest = True if row[16] and str(row[16]).strip().lower() == "да" else False
+    status = True
+    type_image = True if row[17] and str(row[17]).strip().lower() == "да" else False
+    catalog = True if row[18] and str(row[18]).strip().lower() == "да" else False
+    order_by = row[19] if row[19] else 0
+
+    new_product = Product.objects.create(
+      model=model,
+      name=name,
+      article=article,
+      slug=slug,
+      category=category,
+      price=price,
+      sale_price=sale_price,
+      polished_sides=polished_sides,
+      description=description,
+      delivery=delivery,
+      image=image,
+      latest=latest,
+      status=status,
+      type_image=type_image,
+      catalog=catalog,
+      order_by=order_by,
+    )
+
+# parse_exсel(path)
+def parse_exсel_1(path):
   workbook = openpyxl.load_workbook(path)
   sheet = workbook.active
   start_row = 2
@@ -45,13 +132,20 @@ def parse_exсel(path):
 
   for row in sheet.iter_rows(min_row=start_row, values_only=True):
     model = row[0]
-    slug = slugify(model)
-    article = row[1]
     name = row[2]
+    if not model:
+      slug = slugify(name)
+    else:
+      slug = slugify(model)
+
+    article = row[1]
+
+
     if row[3]:
       category_name = row[3]
     else:
       pass
+
     category_slug = slugify(category_name)
     try:
       category = Category.objects.get(slug=category_slug)
@@ -99,22 +193,29 @@ def parse_exсel(path):
 
     # status = True
   # Получаем строку с материалом и делим по запятой
-    chars = row[5].split(',')
-    char_name = sheet['F1'].value
-    char_eng = slugify(char_name)
 
-    try:
-      char = CharName.objects.get(filter_name=char_eng)
-    except ObjectDoesNotExist:
-      if not CharName.objects.filter(filter_name=char_eng).exists():
-        char = CharName.objects.create(
-          text_name=char_name,
-          filter_add = True,
-          filter_name=char_eng,
-          sort_order=0
-        )
-      else:
-        char = CharName.objects.filter(filter_name=char_eng).first()
+
+    latest = row[16]
+    type_image = row[17]
+    catalog = row[18]
+    order_by = row[19]
+
+#     chars = row[5]
+#     char_name = sheet['F1'].value
+#     char_eng = slugify(char_name)
+#
+#     try:
+#       char = CharName.objects.get(filter_name=char_eng)
+#     except ObjectDoesNotExist:
+#       if not CharName.objects.filter(filter_name=char_eng).exists():
+#         char = CharName.objects.create(
+#           text_name=char_name,
+#           filter_add = True,
+#           filter_name=char_eng,
+#           sort_order=0
+#         )
+#       else:
+#         char = CharName.objects.filter(filter_name=char_eng).first()
 
 #     chars_color = row[6].split(',')
 #     char_color_name = sheet['G1'].value
@@ -153,10 +254,11 @@ def parse_exсel(path):
     try:
       new_product = Product.objects.get(slug=slug)
     except ObjectDoesNotExist:
-      if not Product.objects.filter(name=model).exists():
+      model_value = model if model else name
+      if not Product.objects.filter(name=model_value).exists():
         try:
             new_product = Product.objects.create(
-            model=model,
+            model=model_value,
             article=article,
             polished_sides=polished_sides,
             delivery=delivery,
@@ -172,23 +274,27 @@ def parse_exсel(path):
             price=price,
             quantity=quantity,
             category=category,
-            status=status
+            status=status,
+            latest=latest,
+            type_image=type_image,
+            catalog=catalog,
+            order_by=order_by,
           )
         except Exception as e:
-          print(e)
+          print(f'{e} - this')
 
       else:
-        new_product = Product.objects.filter(name=model).first()
+        new_product = Product.objects.filter(name=model_value).first()
 
-      for ch in chars:
-        try:
-          product_char_create = ProductChar.objects.create(
-            char_name = char,
-            parent = new_product,
-            char_value = ch
-          )
-        except Exception as e:
-          print(e)
+#       for ch in chars:
+#         try:
+#           product_char_create = ProductChar.objects.create(
+#             char_name = char,
+#             parent = new_product,
+#             char_value = ch
+#           )
+#         except Exception as e:
+#           print(e)
 
 #       for ch in chars_color:
 #         try:

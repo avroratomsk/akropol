@@ -331,7 +331,7 @@ def parse_exсel_1(path):
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
-#   parse_exсel(path)
+  parse_exсel(path)
   return render(request, "page/index.html")
 
 def admin_settings(request):

@@ -34,12 +34,13 @@
           <div class="grid-item__image">
             {% if item.image %} {% thumbnail item.image "250x250" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% endthumbnail %} {% else%}
+            {% endthumbnail %} {% else %}
             <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
             {% endif %}
           </div>
           <div class="grid-item__content">
-            <a href="{{ item.get_absolute_url }}" class="grid-item__title">{{ item.name }} - {{ item.model }} - {{  item.get_absolute_url }}</a>
+            <a href="{{ item.get_absolute_url }}" class="grid-item__title">{{ item.name }}</a>
+            <p>{{ item.image.url }}</p>
             <p>{{ item.price }} ₽</p>
             <div class="grid-item__action">
               <a href="{% url 'product_edit' item.pk %}">Изменить</a>

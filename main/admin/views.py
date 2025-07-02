@@ -95,7 +95,8 @@ def parse_exсel(path):
     polished_sides = row[9] if row[9] else 0
     description = row[11] if row[11] else ""
     delivery = row[12] if row[12] else ""
-    image = f"goods/{row[13]}" if row[13] else ""
+    image = f"goods/{row[13]}" if row[13] else "theme/mb/images/no-image.png"
+    print(image)
     latest = True if row[16] and str(row[16]).strip().lower() == "да" else False
     status = True
     type_image = True if row[17] and str(row[17]).strip().lower() == "да" else False

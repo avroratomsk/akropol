@@ -66,11 +66,13 @@
           <div class="product__slider swiper">
             <div class="product__wrapper swiper-wrapper">
               <div class="product__slide swiper-slide">
-                {% if product.image %} {% if product.type_image %}
+                {% if product.image %}
+                {% if product.type_image %}
                 <a href="{{ product.image.url }}" data-gall="myGallery" class="product__slide-link">
                   <img src="{{ product.image.url }}" style="object-fit: cover; max-width: 100%" class="index-slider__image" />
                 </a>
-                {% else %} {% thumbnail product.image "409x510" format="WEBP" crop="center" as im %}
+                {% else %}
+                {% thumbnail product.image "409x510" format="WEBP" crop="center" as im %}
                 <a href="{{ im.url }}" data-gall="myGallery" class="product__slide-link">
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="index-slider__image" />
                 </a>
@@ -254,7 +256,7 @@
           <div class="product-related__prev swiper-button-prev index-work__next"></div>
         </div>
       </div>
-      <a href="/category/soputstvuyushchie-tovary/" class="product__related--link">Смотреть все</a>
+      <a href="/category/soputstvuyuschie-tovaryi/" class="product__related--link">Смотреть все</a>
     </div>
   </div>
 </main>

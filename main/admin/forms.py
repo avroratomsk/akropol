@@ -268,18 +268,7 @@ class CategoryForm(forms.ModelForm):
 
   class Meta:
     model = Category
-    fields = [
-      "name",
-      "slug",
-      "add_menu",
-      "description",
-      "image",
-      "meta_h1",
-      "meta_title",
-      "meta_description",
-      "meta_keywords",
-      "related_categories"
-    ]
+    fields = "__all__"
 
     labels = {
       "name": "Назване категории",
@@ -310,10 +299,6 @@ class CategoryForm(forms.ModelForm):
       "description": forms.Textarea(attrs={
         "class":"form__controls",
       }),
-      # 'image': forms.FileInput(attrs={
-      #     'class': 'submit-file',
-      #     'accept': 'image/*'
-      # }),
       "meta_h1": forms.TextInput(attrs={
         "class":"form__controls",
         # "placeholder": "Заголовок H1"
@@ -331,7 +316,8 @@ class CategoryForm(forms.ModelForm):
       "meta_keywords": forms.TextInput(attrs={
         "class":"form__controls",
         # "placeholder": "Meta keywords"
-      }),  
+      }),
+      'related_categories': forms.CheckboxSelectMultiple()
     }
     
 # class DayForm(forms.ModelForm):

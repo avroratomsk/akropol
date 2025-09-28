@@ -10,7 +10,7 @@
   <section class="category-details">
     <div class="category-details__container">
       <div class="category-details__head">
-        <h1 class="category-details__title _title">Каталог памятников</h1>
+        <h1 class="category-details__title _title">{%if shop_setup.meta_h1 %}{{ shop_setup.meta_h1 }}{% else %}Каталог памятников{% endif %}</h1>
         <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
           <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
             class="breadcrumbs__item">

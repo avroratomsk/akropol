@@ -6,13 +6,12 @@ from admin.singleton_model import SingletonModel
 class BaseSettings(SingletonModel):
   logo  = models.ImageField(upload_to="base-settings", blank=True, null=True, verbose_name="Логотип")
   phone = models.CharField(max_length=50, blank=True, null=True, db_index=True, verbose_name="Номер телефона")
+  phone_two = models.CharField(max_length=50, blank=True, null=True, db_index=True, verbose_name="Номер телефона2")
   time_work = models.CharField(max_length=250, blank=True, null=True, db_index=True, verbose_name="Время работы")
+  time_work_two = models.CharField(max_length=250, blank=True, null=True, db_index=True, verbose_name="Выходные")
   email = models.EmailField(max_length=250, blank=True, null=True, db_index=True, verbose_name="Email")
   address = models.CharField(max_length=250, blank=True, null=True, verbose_name="Адрес")
-  meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
-  meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
-  meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
-  meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
+  address_two = models.CharField(max_length=250, blank=True, null=True, verbose_name="Адрес2")
   favicon = models.FileField(upload_to='base-settings/', blank=True, null=True, verbose_name="ФавИконка")
   
 

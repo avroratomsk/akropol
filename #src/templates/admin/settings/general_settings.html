@@ -2,7 +2,7 @@
 <div class="page">
   <div class="page__inner">
     <div class="page__top">
-      <h1 class="page__title">Общие настройки и Сео главной страницы</h1>
+      <h1 class="page__title">Общие настройки</h1>
       <ul class="admin-breadcrumbs">
         <li><a href="{% url 'admin' %}">Панель управления</a></li>
         <li><a href="{% url 'admin_product' %}">Настройки</a></li>
@@ -23,8 +23,12 @@
         <div class="page-content__row">
           <div class="page-content__col">
             <div class="form__group">
-              <label for="{{ form.phone.id_for_label }}" class="form__controls-label"> <span>*</span>Номер телефона: </label>
+              <label for="{{ form.phone.id_for_label }}" class="form__controls-label"> <span>*</span>Номер телефона(Яковлева): </label>
               {{ form.phone }} {{ form.phone.errors }}
+            </div>
+            <div class="form__group">
+              <label for="{{ form.phone_two.id_for_label }}" class="form__controls-label"> <span>*</span>Номер телефона(Демьяна Бедного): </label>
+              {{ form.phone_two }} {{ form.phone_two.errors }}
             </div>
 
             <div class="form__group">
@@ -38,8 +42,17 @@
             </div>
 
             <div class="form__group">
-              <label for="{{ form.address.id_for_label }}" class="form__controls-label">Адрес: </label>
+              <label for="{{ form.time_work_two.id_for_label }}" class="form__controls-label">Выходные: </label>
+              {{ form.time_work_two }} {{ form.time_work_two.errors }}
+            </div>
+
+            <div class="form__group">
+              <label for="{{ form.address.id_for_label }}" class="form__controls-label">Адрес(Яковлева): </label>
               {{ form.address }} {{ form.address.errors }}
+            </div>
+            <div class="form__group">
+              <label for="{{ form.address_two.id_for_label }}" class="form__controls-label">Адрес(Демьяна Бедного): </label>
+              {{ form.address_two }} {{ form.address_two.errors }}
             </div>
           </div>
           <div class="page-content__col">

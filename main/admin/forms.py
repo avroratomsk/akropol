@@ -23,7 +23,7 @@ class GlobalSettingsForm(forms.ModelForm):
     fields = "__all__"
     
     widgets = {
-        'phone_one': forms.TextInput(attrs={
+        'phone_two': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
         'phone': forms.TextInput(attrs={
@@ -38,10 +38,10 @@ class GlobalSettingsForm(forms.ModelForm):
         'address': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
-        'meta_h1': forms.TextInput(attrs={
+        'address_two': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
-        'meta_title': forms.TextInput(attrs={
+        'time_work_two': forms.TextInput(attrs={
             'class': INPUT_CLASS
         }),
         'meta_description': forms.TextInput(attrs={

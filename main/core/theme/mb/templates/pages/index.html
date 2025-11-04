@@ -17,15 +17,17 @@
       <div class="main__top top-main">
         <div class="top-main__left">
           <div class="top-main__item">
-            <div class="top-main__address">Яковлева, 41а</div>
-            <a href="tel:+79009210915" class="top-main__phone">+7(900) 921-09-15
+            <div class="top-main__address">{{ site_settings.address}}</div>
+            <a href="tel:{{ site_settings.phone}}" class="top-main__phone">
+              {{ site_settings.phone}}
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
                    title="Заказать звонок"/>
             </a>
           </div>
           <div class="top-main__item">
-            <div class="top-main__address">Демьяна Бедного, 16а ст1</div>
-            <a href="tel:+79039554018" class="top-main__phone">+7(903) 955-40-18
+            <div class="top-main__address">{{ site_settings.address_two}}</div>
+            <a href="tel:{{ site_settings.phone_two}}" class="top-main__phone">
+              {{ site_settings.phone_two }}
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
                    title="Заказать звонок"/>
             </a>
@@ -33,7 +35,7 @@
         </div>
         <div class="top-main__middle">
           <a href="/" class="top-main__logo">
-            <img src="{% static 'theme/mb/images/logo.png' %}" alt="Логотип" title="Логотип"/>
+            <img src="{{ site_settings.logo.url }}" alt="Логотип" title="Логотип"/>
             <span>Основан в 1989 г.</span>
           </a>
         </div>

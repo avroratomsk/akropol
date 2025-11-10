@@ -4,12 +4,12 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import ArchiveUploadForm, BlogSettingsForm, CategoryForm, CharGroupForm, CharNameForm, ColorProductForm, GalleryCategoryForm, GalleryCategorySettingsForm, GalleryForm, GlobalSettingsForm, HomeTemplateForm, PostForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, RobotsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, SubdomainForm, UploadFileForm
-from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
+from admin.forms import *
+from home.models import *
 from blog.models import BlogSettings, Post
 from main.settings import BASE_DIR
 from subdomain.models import Subdomain
-from service.models import Service, ServicePage
+from service.models import *
 from reviews.models import Reviews
 from shop.models import CharGroup, CharName, ColorProduct, Product,Category, ProductChar, ProductImage, ShopSettings
 from django.core.paginator import Paginator
@@ -829,26 +829,54 @@ def admin_home(request):
   except:
     home_page = HomeTemplate()
     home_page.save()
-    
+
   if request.method == "POST":
     form_new = HomeTemplateForm(request.POST, request.FILES, instance=home_page)
     if form_new.is_valid():
       form_new.save()
-      
+
       # subprocess.call(["touch", RESET_FILE])
       return redirect("admin")
     else:
       return render(request, "static/home_page.html", {"form": form_new})
-  
+
   home_page = HomeTemplate.objects.get()
-  
+
   form = HomeTemplateForm(instance=home_page)
   context = {
     "form": form,
     "home_page":home_page
-  }  
-  
+  }
+
   return render(request, "static/home_page.html", context)
+
+def admin_contact(request):
+  try:
+    settings = PageContact.objects.get()
+  except:
+    settings = PageContact()
+    settings.save()
+
+  if request.method == "POST":
+    form_new = PageContactForm(request.POST, request.FILES, instance=settings)
+    if form_new.is_valid():
+      form_new.save()
+
+#       subprocess.call(["touch", RESET_FILE])
+      return redirect("admin")
+    else:
+      return render(request, "contact-page/contact.html", {"form": form_new})
+
+  settings = PageContact.objects.get()
+
+  form = PageContactForm(instance=settings)
+  context = {
+    "form": form,
+    "settings":settings
+  }
+
+  return render(request, "contact-page/contact.html", context)
+
 
 def admin_service_page(request):
   try:

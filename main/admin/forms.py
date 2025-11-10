@@ -1,10 +1,10 @@
 from django import forms
-from home.models import BaseSettings, Gallery, GalleryCategory, HomeTemplate, RobotsTxt, Stock
-from blog.models import BlogSettings, Post
-from subdomain.models import Subdomain, SubdomainContact
-from service.models import Service, ServicePage
-from reviews.models import Reviews
-from shop.models import Category, CharGroup, CharName, ColorProduct, Product, ProductChar, ProductImage, ShopSettings
+from home.models import *
+from blog.models import *
+from subdomain.models import *
+from service.models import *
+from reviews.models import *
+from shop.models import *
 
 INPUT_CLASS = "form__controls"
 
@@ -49,7 +49,43 @@ class GlobalSettingsForm(forms.ModelForm):
         }),
         'meta_keywords': forms.TextInput(attrs={
             'class': INPUT_CLASS
+        }),
+        'ur_name': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        'iin': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        'kpp': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        'ogrn': forms.TextInput(attrs={
+            'class': INPUT_CLASS
         })
+    }
+
+class PageContactForm(forms.ModelForm):
+  # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+  class Meta:
+    model = PageContact
+    fields = "__all__"
+
+    widgets = {
+        'meta_h1': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        'meta_title': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        'meta_description': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        'meta_keywords': forms.TextInput(attrs={
+            'class': INPUT_CLASS
+        }),
+        "description": forms.Textarea(attrs={
+            "class":"form__controls",
+        }),
     }
     
 class RobotsForm(forms.ModelForm):

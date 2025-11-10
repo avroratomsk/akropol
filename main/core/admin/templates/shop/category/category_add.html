@@ -51,12 +51,12 @@
               {{ form.image }} {{ form.image.errors }}{{ image_path }}
             </div>
             <div class="form__group-checkbox">
-              {{ form.menu_add }} {{ form.menu_add.errors }}
-              <label for="{{ form.menu_add.id_for_label }}" class="form__controls-label"> Отображать в меню ? :</label>
+              {{ form.add_menu }} {{ form.add_menu.errors }}
+              <label for="{{ form.add_menu.id_for_label }}" class="form__controls-label"> Отображать в меню ? :</label>
             </div>
-            <div class="form__group-checkbox">
-              {{ form.first_block_home }} {{ form.first_block_home.errors }}
-              <label for="{{ form.first_block_home.id_for_label }}" class="form__controls-label">Выводить на главной странице ? : </label>
+            <div class="form__group">
+              {{ form.related_categories }} {{ form.related_categories.errors }}
+              <label for="{{ form.related_categories.id_for_label }}" class="form__controls-label">Связанные категории :</label>
             </div>
           </div>
         </div>

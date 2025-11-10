@@ -70,7 +70,8 @@ urlpatterns = [
     
     #URl - Шаблон главной страницы
     path('home/', views.admin_home, name='admin_home'),
-    
+    path('contact/', views.admin_contact, name='admin_contact'),
+
     #URl - Шаблон общих настроек сайта
     path('settings/', views.admin_settings, name='admin_settings'),
     path('robots/', views.robots, name='robots'),

@@ -9,7 +9,7 @@
 <main>
   <div class="banner">
     <div class="banner__container">
-      <img src="{{ article.image.url }}" alt="{{article.name}}" title="{{article.name}}" class="banner__image">
+      <img src="{% if article.image %}{{ article.image.url }}{% endif %}" alt="{{article.name}}" title="{{article.name}}" class="banner__image">
       <div class="banner__inner">
         <div class="banner__content">
 

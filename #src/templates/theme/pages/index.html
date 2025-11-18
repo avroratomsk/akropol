@@ -34,10 +34,12 @@
           </div>
         </div>
         <div class="top-main__middle">
+          {% if site_settings.logo %}
           <a href="/" class="top-main__logo">
             <img src="{{ site_settings.logo.url }}" alt="Логотип" title="Логотип"/>
             <span>Основан в 1989 г.</span>
           </a>
+          {% endif %}
         </div>
         <div class="top-main__right">
           <div class="top-main__right-row">

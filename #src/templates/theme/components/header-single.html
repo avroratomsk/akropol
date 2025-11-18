@@ -2,11 +2,13 @@
 <div class="header-under">
   <div class="header-under__container">
     <div class="header-under__inner">
+      {% if site_settings.logo %}
       <a href="/" class="header-under__logo">
         <img src="{{ site_settings.logo.url }}" alt="Мемориальные услуги в Томске"
              title="Мемориальные услуги в Томске"/>
         <span>Основан в 1989 г.</span>
       </a>
+      {% endif %}
       <div class="header-under__address">
         <p class="header-under__address-title">Адрес:</p>
         <div class="header-under__address-row">

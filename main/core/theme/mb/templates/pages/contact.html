@@ -24,7 +24,9 @@
 					<meta itemprop="position" content="2" />
 				</span>
 			</div>
-			<h1 class="contact__title _title-h2">Контакты комании <span>Акрополь</span></h1>
+			<h1 class="contact__title _title-h2">
+        {% if contact.meta_h1 %}{{  contact.meta_h1 }}{% else %}Контакты компании <span>Акрополь</span>{% endif %}
+      </h1>
 			<div class="contact__note">
         {{ contact.description|safe }}
 

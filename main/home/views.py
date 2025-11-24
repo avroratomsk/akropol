@@ -201,10 +201,16 @@ def stock_detail(request, slug):
   
   
 def gallery(request):
+  try:
+    setup = GallerySettings.objects.get()
+  except:
+    setup = GallerySettings()
+
   gallery_category = GalleryCategory.objects.all().prefetch_related('categories')
   gallery = Gallery.objects.filter(work=True)
   
   context = {
+    "setup": setup,
     "gallery": gallery,
     "gallery_category": gallery_category,
   }

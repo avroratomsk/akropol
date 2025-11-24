@@ -1,14 +1,14 @@
 {% extends 'base.html' %} {% load static %}{% load carts_tag %}{% load thumbnail %}
 {% block title %}
-Галерея наших работ из мрамора и гранита | Акрополь
+{{ setup.meta_title }}
 {% endblock %}
 {% block description %}
-На нашем сайты вы можете ознакомится с примерами оформления памятников, надгробий, мемориальных комплексов. Все работы
-выполнены нашими мастерами.
+{{ setup.meta_description }}
 {% endblock %}
 {% block keywords %}
-наши работы, портфолио памятников на могилу, фотографии памятников на могилу
+{{ setup.meta_keywords }}
 {% endblock %}
+
 {% block content %}
 <main class="page">
   <div class="hero">
@@ -28,8 +28,7 @@
           </span>
         </div>
         <h1 class="hero__title">
-          <span>Наши работы</span><br />
-          из мрамора и гранита
+          {% if setup.meta_h1 %}{{ setup.meta_h1|safe }}{% else %}<span>Наши работы</span><br /> из мрамора и гранита{% endif %}
         </h1>
         <p class="hero__subtitle">
           На нашем сайте собран целый каталог фотографий памятников и надгробий изготовленных нашими мастерами. Вы

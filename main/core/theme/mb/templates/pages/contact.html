@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load static %} 
 {% block title %}
-Контактная информация | Акрополь
+{{ contact.meta_title }}
 {% endblock %}
 {% block description %}
 Контактная информация мастерской Акрополь в городе Томск. Адреса, график работы, почта, номера телефонов, реквизиты. 
@@ -27,11 +27,8 @@
 			</div>
 			<h1 class="contact__title _title-h2">Контакты комании <span>Акрополь</span></h1>
 			<div class="contact__note">
-				<p>
-					​Мастерская по изготовлению памятников и надгробий. Цены на сайте носят ознакомительный характер, точную
-					стоимость уточняйте по телефону. <br>С ценами и товаром вы можете ознакомится на странице
-					<a href="{% url 'category' %}">каталога</a>
-				</p>
+        {{ contact.description|safe }}
+
 			</div>
 			<div class="contact__grid">
 				<div class="contact__item item-contact">
@@ -39,22 +36,22 @@
 					<div class="item-contact__row">
 						<img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Иконка телефона" title="Иконка телефона">
 						<div class="item-contact__row-info">
-							<p class="item-contact__row-big">Яковлева, 41а</p>
-							<a href="tel:+79009210915" class="item-contact__row-small">+7(900) 921-09-15</a>
+							<p class="item-contact__row-big">{{ site_settings.address }}</p>
+							<a href="tel:{{ site_settings.phone }}" class="item-contact__row-small">{{ site_settings.phone }}</a>
 						</div>
 					</div>
 					<div class="item-contact__row">
 						<img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Иконка телефона" title="Иконка телефона">
 						<div class="item-contact__row-info">
-							<p class="item-contact__row-big">Демьяна Бедного, 16а ст1</p>
-							<a href="tel:+79039554018" class="item-contact__row-small">+7(903) 955-40-18</a>
+							<p class="item-contact__row-big">{{ site_settings.address_two }}</p>
+							<a href="tel:{{ site_settings.phone_two }}" class="item-contact__row-small">{{ site_settings.phone_two }}</a>
 						</div>
 					</div>
 					<div class="item-contact__row" id="time-work">
 						<img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Иконка телефона" title="Иконка телефона">
 						<div class="item-contact__row-info">
 							<p class="item-contact__row-big">Сегодня</p>
-							<p class="item-contact__row-small">c 09:00 до 18:00</p>
+							<p class="item-contact__row-small">{{ site_settings.time_work }}/p>
 						</div>
 						<div class="item-contact__hidden">
 							<p>В воскресенье режим работы по догоовренности</p>
@@ -80,25 +77,25 @@
 					<div class="item-contact__row">
 						<div class="item-contact__row-info">
 							<p class="item-contact__row-big">Юридическое название:</p>
-							<p class="item-contact__row-small">ООО "Акрополь"</p>
+							<p class="item-contact__row-small">{{ site_settings.ur_name }}</p>
 						</div>
 					</div>
 					<div class="item-contact__row">
 						<div class="item-contact__row-info">
 							<p class="item-contact__row-big">ИНН:</p>
-							<p class="item-contact__row-small">7000002402</p>
+							<p class="item-contact__row-small">{{ site_settings.iin }}</p>
 						</div>
 					</div>
 					<div class="item-contact__row">
 						<div class="item-contact__row-info">
 							<p class="item-contact__row-big">КПП:</p>
-							<p class="item-contact__row-small">700001001</p>
+							<p class="item-contact__row-small">{{ site_settings.kpp }}</p>
 						</div>
 					</div>
 					<div class="item-contact__row">
 						<div class="item-contact__row-info">
 							<p class="item-contact__row-big">ОГРН:</p>
-							<p class="item-contact__row-small">1227000009785</p>
+							<p class="item-contact__row-small">{{ site_settings.ogrn }}</p>
 						</div>
 					</div>
 				</div>

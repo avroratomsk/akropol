@@ -34,14 +34,14 @@
         <p class="footer__title">Контакты</p>
         <div class="footer__contact-inner">
           <div class="footer__contact-list">
-            <a href="tel:+79009210915">+7(900) 921-09-15</a>
-            <a href="tel:+79039554018">+7(903) 955-40-18</a>
+            <a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a>
+            <a href="tel:{{ site_settings.phone_two }}">{{ site_settings.phone_two }}</a>
             <button type="button">Обратный звонок</button>
           </div>
           <div class="footer__contact-list">
             <p class="footer__contact-city">г.Томск</p>
-            <p class="footer__contact-address">Яковлева, 41а</p>
-            <p class="footer__contact-address">Демьяна Бедного, 16а ст1</p>
+            <p class="footer__contact-address">{{ site_settings.address }}</p>
+            <p class="footer__contact-address">{{ site_settings.address_two }}</p>
           </div>
           <div class="footer__contact-list">
             <p class="footer__contact-city">г.Новосибирск</p>
@@ -50,8 +50,8 @@
           </div>
           <div class="footer__contact-list">
             <p class="footer__contact-city">Время работы:</p>
-            <p class="footer__contact-address">Пн-Пт: 09:00-18:00</p>
-            <p class="footer__contact-address">Сб-Вс: 10:00-17:00</p>
+            <p class="footer__contact-address">{{ site_settings.time_work }}</p>
+            <p class="footer__contact-address">{{ site_settings.time_work_two }}</p>
           </div>
           <div class="footer__contact-list">
             <a href="mailto:{{ site_settings.email }}" class="footer__contact-email">{{ site_settings.email }}</a>

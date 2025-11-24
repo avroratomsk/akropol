@@ -472,7 +472,7 @@ def gallery_settings(request):
     setup = GallerySettings.objects.get()
     form = GallerySettingsForm(instance=setup)
   except:
-    setup = GallerySettingsForm()
+    setup = GallerySettings()
     form = GallerySettingsForm()
     
   if request.method == "POST":

@@ -23,6 +23,10 @@
               {{ form.meta_h1 }} {{ form.meta_h1.errors }}
             </div>
             <div class="form__group">
+              <label for="{{ form.subtitle.id_for_label }}" class="form__controls-label">{{ form.subtitle.label }}:</label>
+              {{ form.subtitle }} {{ form.subtitle.errors }}
+            </div>
+            <div class="form__group">
               <label for="{{ form.meta_title.id_for_label }}" class="form__controls-label"> Мета заголовок : </label>
               {{ form.meta_title }} {{ form.meta_title.errors }}
             </div>

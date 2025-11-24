@@ -19,9 +19,9 @@
         <div class="body-table__row">
           <div class="body-table__image">
             {% if service.image %}
-            <img src="{{ service.image.url }}" alt="{{ service.name }}" title="{{ service.name }}" />
+            <img src="{{ service.image.url }}" alt="{{ service.name }}" title="{{ service.name }}">
             {% else%}
-            <img src="{% static 'admin/images/food.webp' %}" alt="" />
+            <img src="{% static 'admin/images/food.webp' %}" alt="">
             {% endif %}
           </div>
           <div class="body-table__name">

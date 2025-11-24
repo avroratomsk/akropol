@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Мемориальные услуги компании Акрополь
+{{ setup.meta_title }}
 {% endblock %}
+
 {% block description %}
-Заказывайте профессиональные услуги по гравировке на памятниках, установке памятников и благоустройству могил.
-Гарантируем качественное выполнение работ, долговечность и аккуратность. Создайте достойную память о близких с
-"Акрополь"
+{{ setup.meta_description }}
 {% endblock %}
 {% block keywords %}
-ритуальные услуги томск, мемориальные услуги, ритуальные услуги
+{{ setup.meta_keywords }}
 {% endblock %}
 {% block content %}
 
@@ -31,7 +30,7 @@
           </span>
         </div>
         <h1 class="hero__title">
-          <span>Мемориальные улуги</span><br />
+          <span>Мемориальные улуги</span><br>
           компании Акрополь
         </h1>
         <p class="hero__subtitle">Благоустройство могил включает комплекс работ, направленных на создание
@@ -51,7 +50,7 @@
           style="background-image: url({% static 'theme/mb/images/texture.jpg' %})">
           <div class="service-page__icon">
             <img src="{% static 'theme/mb/images/serice-5.png' %}" alt="Установка памятника"
-              title="Установка памятника" />
+              title="Установка памятника">
           </div>
           <p class="service-page__item-text">Установка памятника</p>
         </a>
@@ -59,7 +58,7 @@
           style="background-image: url({% static 'theme/mb/images/texture.jpg' %})">
           <div class="service-page__icon">
             <img src="{% static 'theme/mb/images/service-6.png' %}" alt="Гравировка на памятнике"
-              title="Гравировка на памятнике" />
+              title="Гравировка на памятнике">
           </div>
           <p class="service-page__item-text">Гравировка на памятнике</p>
         </a>

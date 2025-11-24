@@ -3,13 +3,19 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse
 from django.db.models import Q
 
-from service.models import Service
+from service.models import *
 
 def service(request):
+  try:
+    setup = ServicePage.objects.get()
+  except:
+    setup = ServicePage()
+
   services = Service.objects.filter(status=True)
   
   context = {
-    "services": services
+    "services": services,
+    "setup": setup
   }
   return render(request, "pages/service/service.html", context)
 

@@ -29,9 +29,9 @@
           <div class="table-row">
             <div class="table-cell">
               {% if item.avatar %} {% thumbnail item.avatar "50x50" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
               {% endthumbnail %} {% else%}
-              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="">
               {% endif %}
             </div>
             <div class="table-cell">{{ item.name }}</div>

@@ -28,9 +28,9 @@
           <div class="body-table__row">
             <div class="body-table__image">
               {% if category.image %} {% thumbnail category.image "250x250" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
               {% endthumbnail %} {% else%}
-              <img src="{% static 'theme/mb/images/no-image-1.png' %}" alt="" />
+              <img src="{% static 'theme/mb/images/no-image-1.png' %}" alt="">
               {% endif %}
             </div>
             <div class="body-table__name">
@@ -50,7 +50,7 @@
 
             <div class="body-table__action">
               <a href="{% url 'admin_gallery_edit' category.id %}" class="edit" title="Редактировать категорию">
-                <img src="{% static 'theme/mb/images/admin/edit.svg' %}" alt="" />
+                <img src="{% static 'theme/mb/images/admin/edit.svg' %}" alt="">
               </a>
               <a href="{% url 'category_delete' category.id %}" class="remove" title="Удалить категорию">
                 <?xml version="1.0" ?><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">

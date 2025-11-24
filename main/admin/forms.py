@@ -611,25 +611,15 @@ class ServicePageForm(forms.ModelForm):
   # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
   
   class Meta:
-    model = Service
-    fields = [
-        'name',
-        'slug',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
-    ]
-    labels = {
-        'name':'Название',
-        'slug': 'URL',
-        'meta_title':'Meta title',
-        'meta_description':'Мета description',
-        'meta_keywords':'Meta keywords',
-    }
+    model = ServicePage
+    fields = "__all__"
+
     widgets = {
-      'name': forms.TextInput(attrs={
+      'title': forms.TextInput(attrs={
         'class': INPUT_CLASS,
-        'id': 'name'
+      }),
+      'subtitle': forms.Textarea(attrs={
+        'class': INPUT_CLASS,
       }),
       'slug': forms.TextInput(attrs={
         'class':INPUT_CLASS,

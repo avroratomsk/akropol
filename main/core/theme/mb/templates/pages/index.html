@@ -11,7 +11,7 @@
   <section class="main">
     {% thumbnail home_page.banner "1920x1080" format="WEBP" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ home_page.title }}"
-         title="{{ home_page.title }}" class="index-stock__item-img"/>
+         title="{{ home_page.title }}" class="index-stock__item-img">
     {% endthumbnail %}
     <div class="main__container">
       <div class="main__top top-main">
@@ -21,7 +21,7 @@
             <a href="tel:{{ site_settings.phone}}" class="top-main__phone">
               {{ site_settings.phone}}
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
-                   title="Заказать звонок"/>
+                   title="Заказать звонок">
             </a>
           </div>
           <div class="top-main__item">
@@ -29,14 +29,14 @@
             <a href="tel:{{ site_settings.phone_two}}" class="top-main__phone">
               {{ site_settings.phone_two }}
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
-                   title="Заказать звонок"/>
+                   title="Заказать звонок">
             </a>
           </div>
         </div>
         <div class="top-main__middle">
           {% if site_settings.logo %}
           <a href="/" class="top-main__logo">
-            <img src="{{ site_settings.logo.url }}" alt="Логотип" title="Логотип"/>
+            <img src="{{ site_settings.logo.url }}" alt="Логотип" title="Логотип">
             <span>Основан в 1989 г.</span>
           </a>
           {% endif %}
@@ -44,7 +44,7 @@
         <div class="top-main__right">
           <div class="top-main__right-row">
             <button class="subdomain-button" id="subdomain-button" data-popup="subdomain">
-              <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Адрес" title="Адрес"/>
+              <img src="{% static 'theme/mb/images/icon/location.svg' %}" alt="Адрес" title="Адрес">
               <span id="city">Томск</span>
             </button>
           </div>
@@ -52,11 +52,11 @@
             <button type="button" class="top-main__callback" data-popup="callback">
               Заказать звонок
               <img src="{% static 'theme/mb/images/icon/phone-blue.svg' %}" alt="Заказать звонок"
-                   title="Заказать звонок"/>
+                   title="Заказать звонок">
             </button>
             <button type="button" class="top-main__callback show-cart" id="show-cart">
               Корзина
-              <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="Иконка корзины" title="Иконка корзины"/>
+              <img src="{% static 'theme/mb/images/icon/cart.svg' %}" alt="Иконка корзины" title="Иконка корзины">
 
               {% user_carts request as carts %} {% if carts %}
               <span class="count-product-cart" id="count-goods">{{ carts.total_quantity }}</span>
@@ -79,7 +79,7 @@
       <div class="index-stock__grid">
         <a href="{% url 'gallery' %}" class="index-stock__item index-stock__item--first">
           <img src="{% static 'theme/mb/images/1.jpg' %}" alt="Памятники со скидкой" title="Памятники со скидкой"
-               class="index-stock__item-img"/>
+               class="index-stock__item-img">
                     <h2 class="index-stock__item-title">Наши работы</h2>
           <!--          <p class="index-stock__item-discount"></p>-->
         </a>
@@ -89,11 +89,11 @@
           {% if gal_cat.image %}
           {% thumbnail gal_cat.image "680x300" format="WEBP" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ gal_cat.name }}"
-               title="{{ gal_cat.name }}" class="index-stock__item-img"/>
+               title="{{ gal_cat.name }}" class="index-stock__item-img">
           {% endthumbnail %}
           {% else %}
           <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ gal_cat.name }}" title="{{ gal_cat.name }}"
-               class="index-stock__item-img"/>
+               class="index-stock__item-img">
           {% endif %}
           <h2 class="index-stock__item-title">{{ gal_cat.name|safe }}</h2>
         </a>
@@ -115,7 +115,7 @@
                data-gall="{{ image.category.slug }}">
               {% thumbnail image.image "368x350" format="WEBP" crop="center" as im %}
               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.name }}"
-                   title="{{ image.name }}"/>
+                   title="{{ image.name }}">
               {% endthumbnail %}
             </a>
             {% endfor %}
@@ -173,26 +173,26 @@
       <div class="index-service__cards">
         <a href="#" class="index-service__card">
           <img src="{% static 'theme/mb/images/service-1.jpg' %}" alt="Изготовление памятников из гранита и мрамора"
-               title="Изготовление памятников из гранита и мрамора"/>
+               title="Изготовление памятников из гранита и мрамора">
           <span class="index-service__count">01</span>
           <p class="index-service__title">Изготовление памятников из гранита и мрамора</p>
         </a>
         <a href="#" class="index-service__card">
           <span class="index-service__count">02</span>
           <img src="{% static 'theme/mb/images/service-2.jpg' %}" alt="Установка памятников"
-               title="Установка памятников"/>
+               title="Установка памятников">
           <p class="index-service__title">Установка памятников</p>
         </a>
         <a href="#" class="index-service__card">
           <span class="index-service__count">03</span>
           <img src="{% static 'theme/mb/images/service-3.jpg' %}" alt="Гравировка на памятниках"
-               title="Гравировка на памятниках"/>
+               title="Гравировка на памятниках">
           <p class="index-service__title">Гравировка на памятниках</p>
         </a>
         <a href="#" class="index-service__card">
           <span class="index-service__count">04</span>
           <img src="{% static 'theme/mb/images/service-4.jpg' %}" alt="Благоустройство мест захоронения"
-               title="Благоустройство мест захоронения"/>
+               title="Благоустройство мест захоронения">
           <p class="index-service__title">Благоустройство мест захоронения</p>
         </a>
       </div>

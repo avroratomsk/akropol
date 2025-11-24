@@ -49,7 +49,19 @@ class Stock(models.Model):
 
   def get_absolute_url(self):
       return reverse("stock_detail", kwargs={"slug": self.slug})
-    
+
+class GallerySettings(SingletonModel):
+  meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
+  meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
+  meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
+  meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
+  description = models.TextField(null=True, blank=True, verbose_name="Описание на странице")
+
+
+  def __str__(self):
+    return self.name
+
+
 class GalleryCategory(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Наименование")
   meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")

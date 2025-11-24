@@ -469,17 +469,14 @@ def blog_settings(request):
 
 def gallery_settings(request):
   try:
-    setup = GalleryCategory.objects.get()
-    form = GalleryCategorySettingsForm(instance=setup)
+    setup = GallerySettings.objects.get()
+    form = GallerySettingsForm(instance=setup)
   except:
-    form = GalleryCategorySettingsForm()
+    setup = GallerySettingsForm()
+    form = GallerySettingsForm()
     
   if request.method == "POST":
-    try:
-      setup = GalleryCategory.objects.get()
-    except GalleryCategory.DoesNotExist:
-      setup = None
-    form_new = GalleryCategorySettingsForm(request.POST, request.FILES, instance=setup)
+    form_new = GallerySettingsForm(request.POST, request.FILES, instance=setup)
     
     if form_new.is_valid:
       form_new.save()

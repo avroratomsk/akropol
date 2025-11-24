@@ -93,7 +93,7 @@ class RobotsForm(forms.ModelForm):
   class Meta:
     model = RobotsTxt
     fields = "__all__"
-    
+
     widgets = {'content': forms.Textarea(attrs={'class': INPUT_CLASS, 'rows': 30 }),}
 
 class ShopSettingsForm(forms.ModelForm):
@@ -141,7 +141,28 @@ class BlogSettingsForm(forms.ModelForm):
               'class': 'form__controls',
           }),
       }
-      
+
+class GallerySettingsForm(forms.ModelForm):
+
+  class Meta:
+      model = GallerySettings
+      fields = "__all__"
+      widgets = {
+          'meta_h1': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_title': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_description': forms.Textarea(attrs={
+              'class': 'form__controls',
+              "id": "meta_description"
+          }),
+          'meta_keywords': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+      }
+
 class GalleryCategorySettingsForm(forms.ModelForm):
   
   class Meta:

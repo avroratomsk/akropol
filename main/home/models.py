@@ -57,7 +57,7 @@ class GallerySettings(SingletonModel):
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   subtitle = models.TextField(null=True, blank=True, verbose_name="Подзаголовок")
   description = models.TextField(null=True, blank=True, verbose_name="Описание на странице")
-
+  image = models.ImageField(upload_to="gallery/", null=True, blank=True, verbose_name="Изображение")
 
   def __str__(self):
     return self.name

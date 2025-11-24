@@ -13,8 +13,8 @@
 <main class="page">
   <div class="hero">
     <div class="hero__container">
-      <img src="{% static 'theme/mb/images/gallery.png' %}" alt="Наши работы из мрамора и гранита"
-        title="Наши работы из мрамора и гранита" class="hero__image" />
+      {% if setup.image %}<img src="{{ setup.image.url }}" alt="Наши работы из мрамора и гранита"
+        title="Наши работы из мрамора и гранита" class="hero__image" >{% endif %}
       <div class="hero__inner">
         <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
           <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
@@ -69,11 +69,11 @@
       </div>
     </div>
   </section>
-  {% if gallery.description %}
+  {% if setup.description %}
   <div class="category-detail__text">
     <div class="category-detail__container">
       <div class="text">
-        {{gallery.description|safe}}
+        {{setup.description|safe}}
       </div>
     </div>
   </div>

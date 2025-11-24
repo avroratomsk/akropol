@@ -161,6 +161,9 @@ class GallerySettingsForm(forms.ModelForm):
           'meta_keywords': forms.TextInput(attrs={
               'class': 'form__controls',
           }),
+          'subtitle': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
       }
 
 class GalleryCategorySettingsForm(forms.ModelForm):
